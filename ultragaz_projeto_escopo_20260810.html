@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Ultragaz — Escopo, Oportunidades & Tarefas</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root{
+  --purple: #6348e5;
+  --purple-deep: #4a34b8;
+  --purple-glow: rgba(99,72,229,0.16);
+  --ink: #1b1730;
+  --ink-soft: #565170;
+  --paper: #f6f5fb;
+  --card: #ffffff;
+  --line: #e7e4f5;
+  --foco: #17a673;
+  --foco-bg: #e6f7f0;
+  --potencial: #9a94b8;
+  --potencial-bg: #efedf9;
+  --ultragaz: #0089cf;
+  --ultragaz-bg: #e5f3fb;
+  --hubii: #6348e5;
+  --hubii-bg: #efeafd;
+  --amber: #c9820f;
+  --amber-bg: #fdf3e0;
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+
+body{
+  font-family:'Onest', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 40px 24px 80px;
+  line-height: 1.4;
+}
+
+.wrap{
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap: 24px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.eyebrow{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--purple);
+  font-weight: 600;
+  margin-bottom: 6px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.eyebrow::before{
+  content:'';
+  width:7px; height:7px;
+  border-radius:50%;
+  background: var(--purple);
+  display:inline-block;
+  box-shadow: 0 0 0 4px var(--purple-glow);
+}
+
+.title{
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.title span{ color: var(--purple); }
+
+.subtitle{
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-top: 6px;
+  max-width: 480px;
+}
+
+.cadence-card{
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  min-width: 190px;
+  text-align:center;
+  box-shadow: 0 8px 24px -14px rgba(99,72,229,0.35);
+}
+.header-cards{ display:flex; gap:12px; flex-wrap:wrap; }
+.cadence-label{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 10px;
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+}
+.cadence-value{
+  font-size: 15px;
+  font-weight:700;
+  color: var(--purple-deep);
+}
+.meeting-dates{
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  display:grid;
+  grid-template-columns: auto auto;
+  row-gap: 6px;
+  column-gap: 14px;
+}
+.meeting-row{ display:contents; }
+.meeting-row span{ color: var(--ink-soft); text-align:left; font-family:'IBM Plex Mono', monospace; font-size: 12px; }
+.meeting-row b{ color: var(--ink); font-weight:600; text-align:right; font-family:'IBM Plex Mono', monospace; font-size: 12px; }
+.meeting-link{
+  cursor: pointer;
+  color: var(--purple-deep) !important;
+  text-decoration: underline;
+  text-decoration-color: var(--purple-glow);
+  text-underline-offset: 3px;
+  transition: color .15s ease;
+}
+.meeting-link:hover{ color: var(--purple) !important; }
+
+/* MODAL */
+.modal-overlay{
+  display:none;
+  position: fixed;
+  inset: 0;
+  background: rgba(27,23,48,0.45);
+  backdrop-filter: blur(2px);
+  align-items:center;
+  justify-content:center;
+  z-index: 100;
+  padding: 24px;
+}
+.modal-overlay.open{ display:flex; }
+.modal-box{
+  background: var(--card);
+  border-radius: 20px;
+  max-width: 560px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 28px 30px;
+  box-shadow: 0 24px 60px -20px rgba(27,23,48,0.4);
+  animation: modalIn .2s ease;
+}
+@keyframes modalIn{ from{ opacity:0; transform: translateY(8px) scale(.98);} to{ opacity:1; transform:none; } }
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap: 16px;
+  margin-bottom: 6px;
+}
+.modal-eyebrow{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 11px;
+  text-transform:uppercase;
+  letter-spacing: 0.1em;
+  color: var(--purple);
+  font-weight:600;
+}
+.modal-title{
+  font-size: 19px;
+  font-weight: 800;
+  margin-top: 4px;
+  color: var(--ink);
+}
+.modal-close{
+  background: var(--paper);
+  border: none;
+  width: 28px; height:28px;
+  border-radius: 8px;
+  font-size: 15px;
+  color: var(--ink-soft);
+  cursor:pointer;
+  flex:none;
+}
+.modal-close:hover{ background: var(--line); color: var(--ink); }
+.modal-sub{
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+.modal-section{ margin-bottom: 16px; }
+.modal-section:last-of-type{ margin-bottom: 0; }
+.modal-section-label{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 10.5px;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  color: var(--purple-deep);
+  font-weight:700;
+  margin-bottom: 8px;
+}
+.modal-section ul{ list-style:none; }
+.modal-section li{
+  font-size: 13.5px;
+  color: var(--ink);
+  padding-left: 14px;
+  position:relative;
+  margin-bottom: 6px;
+  line-height: 1.45;
+}
+.modal-section li:last-child{ margin-bottom:0; }
+.modal-section li::before{ content:'—'; position:absolute; left:0; color: var(--purple); }
+.modal-footer{
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  display:flex;
+  justify-content:flex-end;
+}
+.modal-link{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight:600;
+  color: var(--purple);
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.modal-link:hover{ text-decoration:underline; }
+
+.progress-block{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  background: var(--card);
+  border:1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 20px;
+  box-shadow: 0 8px 24px -14px rgba(99,72,229,0.35);
+}
+.ring-wrap{ position:relative; width:56px; height:56px; flex:none; }
+.ring-wrap svg{ transform: rotate(-90deg); }
+.ring-bg{ stroke: var(--line); }
+.ring-fg{ stroke: var(--purple); stroke-linecap: round; transition: stroke-dashoffset 0.4s ease; }
+.ring-text{
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'IBM Plex Mono', monospace;
+  font-weight:600;
+  font-size: 13px;
+  color: var(--purple-deep);
+}
+.progress-copy .num{ font-size:13px; font-weight:700; color: var(--ink); }
+.progress-copy .lbl{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 10px;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  color: var(--ink-soft);
+}
+
+/* TABS */
+.tabs{
+  display:flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 24px;
+}
+.tab-btn{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  color: var(--ink-soft);
+  padding: 12px 18px;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease;
+}
+.tab-btn:hover{ color: var(--purple-deep); }
+.tab-btn.active{ color: var(--purple); }
+.tab-btn.active::after{
+  content:'';
+  position:absolute;
+  left:0; right:0; bottom:-1px;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: var(--purple);
+}
+.tab-count{
+  font-size: 10px;
+  background: var(--purple-glow);
+  color: var(--purple-deep);
+  padding: 1px 7px;
+  border-radius: 999px;
+  margin-left: 6px;
+}
+
+.tab-panel{ display:none; animation: fade 0.25s ease; }
+.tab-panel.active{ display:block; }
+@keyframes fade{ from{ opacity:0; transform: translateY(4px);} to{ opacity:1; transform:none; } }
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 820px){
+  .grid{ grid-template-columns: 1fr; }
+  .header{ align-items:flex-start; }
+}
+
+.section-label{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 600;
+  margin: 28px 0 12px;
+}
+.section-label.first{ margin-top:0; }
+
+.panel{
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px;
+}
+
+/* ESCOPO: PRAÇAS */
+.praca-foco{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  margin-bottom: 10px;
+}
+.praca-foco:last-child{ margin-bottom:0; }
+.praca-dot{
+  width:10px; height:10px; border-radius:50%;
+  background: var(--foco);
+  flex:none;
+  box-shadow: 0 0 0 4px var(--foco-bg);
+}
+.praca-dot.pending{ background: var(--amber); box-shadow: 0 0 0 4px var(--amber-bg); }
+.praca-info{ flex:1; }
+.praca-city{ font-weight:700; font-size:15px; }
+.praca-partner{ font-family:'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink-soft); }
+.praca-tag{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight:600;
+  letter-spacing:0.05em;
+  text-transform:uppercase;
+  color: var(--foco);
+  background: var(--foco-bg);
+  padding: 4px 10px;
+  border-radius: 999px;
+  flex:none;
+}
+.praca-tag.pending{ color: var(--amber); background: var(--amber-bg); }
+.potencial-list{ display:flex; flex-wrap:wrap; gap:8px; }
+.potencial-chip{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight:500;
+  color: var(--potencial);
+  background: var(--potencial-bg);
+  border: 1px solid var(--line);
+  padding: 7px 12px;
+  border-radius: 999px;
+}
+.potencial-chip b{ color: var(--ink-soft); font-weight:600; }
+
+.channel-chip{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight:600;
+  color: var(--purple-deep);
+  background: var(--hubii-bg);
+  border: 1px solid var(--purple-glow);
+  padding: 7px 12px;
+  border-radius: 999px;
+}
+.channel-chip.negotiating{
+  color: var(--potencial);
+  background: var(--potencial-bg);
+  border-color: var(--line);
+  font-weight:500;
+}
+
+/* INFO PANEL (App / contexto) */
+.info-block:not(:last-child){ padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
+.info-head{ display:flex; align-items:center; gap:12px; margin-bottom: 10px; }
+.info-icon{
+  width: 34px; height:34px;
+  border-radius: 10px;
+  background: var(--ultragaz-bg);
+  color: var(--ultragaz);
+  display:flex; align-items:center; justify-content:center;
+  font-size:15px; font-weight:700; flex:none;
+}
+.info-name{ font-weight:700; font-size: 14.5px; }
+.info-sub{ font-family:'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-soft); }
+.info-list{ list-style:none; }
+.info-list li{
+  font-size: 13px;
+  color: var(--ink-soft);
+  padding-left: 14px;
+  position: relative;
+  margin-bottom: 6px;
+  line-height: 1.45;
+}
+.info-list li:last-child{ margin-bottom:0; }
+.info-list li::before{ content:'—'; position:absolute; left:0; color: var(--purple); }
+.info-list b{ color: var(--ink); font-weight:600; }
+
+/* TAREFAS */
+.owner-group{ margin-bottom: 18px; }
+.owner-group:last-child{ margin-bottom:0; }
+.owner-header{ display:flex; align-items:center; gap:8px; margin-bottom: 10px; }
+.owner-badge{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight:700;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+.owner-badge.ultragaz{ color: var(--ultragaz); background: var(--ultragaz-bg); }
+.owner-badge.hubii{ color: var(--hubii); background: var(--hubii-bg); }
+
+.task{ display:flex; align-items:flex-start; gap: 10px; padding: 10px 4px; border-bottom: 1px solid var(--line); cursor:pointer; }
+.task:last-child{ border-bottom:none; }
+.check{
+  width:18px; height:18px;
+  border-radius: 5px;
+  border: 1.5px solid #cfc9e8;
+  flex:none;
+  margin-top: 2px;
+  display:flex; align-items:center; justify-content:center;
+  transition: all .15s ease;
+}
+.check svg{ opacity:0; width:12px; height:12px; }
+.task.done .check{ background: var(--purple); border-color: var(--purple); }
+.task.done .check svg{ opacity:1; }
+.task.done .task-text{ color: var(--ink-soft); text-decoration: line-through; }
+.task-text{ font-size: 14px; color: var(--ink); }
+.task-note{ display:block; font-family:'IBM Plex Mono', monospace; font-size: 11px; color: var(--purple); margin-top: 3px; }
+
+/* OPORTUNIDADES */
+.opp-grid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+@media (max-width: 820px){ .opp-grid{ grid-template-columns: 1fr; } }
+
+.opp-card{
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+}
+.opp-card.flag{ border-color: #f0d9a6; background: linear-gradient(180deg, var(--amber-bg), var(--card) 60%); }
+.opp-head{ display:flex; align-items:center; gap:10px; margin-bottom: 10px; }
+.opp-icon{
+  width:30px; height:30px;
+  border-radius:9px;
+  background: var(--hubii-bg);
+  color: var(--purple);
+  display:flex; align-items:center; justify-content:center;
+  font-size:15px; flex:none;
+}
+.opp-card.flag .opp-icon{ background: var(--amber-bg); color: var(--amber); }
+.opp-title{ font-weight:700; font-size:14.5px; }
+.opp-card ul{ list-style:none; }
+.opp-card li{
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  padding-left: 14px;
+  position: relative;
+  margin-bottom: 6px;
+}
+.opp-card li:last-child{ margin-bottom:0; }
+.opp-card li::before{
+  content:'—';
+  position:absolute; left:0;
+  color: var(--purple);
+}
+.opp-card b{ color: var(--ink); font-weight:600; }
+
+.stat-row{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 18px; }
+.stat{
+  flex:1;
+  min-width: 150px;
+  background: var(--card);
+  border:1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+}
+.stat-num{ font-size: 20px; font-weight:800; color: var(--purple-deep); font-family:'IBM Plex Mono', monospace; }
+.stat-lbl{ font-size: 11.5px; color: var(--ink-soft); margin-top:2px; }
+
+/* ESTRATEGIA */
+.strategy-panel{ margin-top: 20px; }
+.strategy-list{ display:grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+@media (max-width: 600px){ .strategy-list{ grid-template-columns: 1fr; } }
+.strategy-item{
+  display:flex; align-items:center; gap:10px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 13.5px;
+}
+.strategy-item b{ color: var(--purple-deep); }
+
+/* ATAS */
+.ata-card{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding: 14px 6px;
+  border-bottom: 1px solid var(--line);
+  cursor:pointer;
+  transition: background .15s ease;
+}
+.ata-card:last-child{ border-bottom:none; }
+.ata-card:hover{ background: var(--paper); }
+.ata-date{
+  font-family:'IBM Plex Mono', monospace;
+  font-weight:700;
+  font-size: 18px;
+  color: var(--purple-deep);
+  text-align:center;
+  min-width: 46px;
+  line-height:1.1;
+}
+.ata-date span{
+  display:block;
+  font-size: 10px;
+  font-weight:600;
+  letter-spacing:0.05em;
+  color: var(--ink-soft);
+  text-transform:uppercase;
+}
+.ata-info{ flex:1; }
+.ata-title{ font-weight:700; font-size:14px; }
+.ata-teaser{ font-size:12.5px; color: var(--ink-soft); margin-top:2px; }
+.ata-arrow{ color: var(--purple); font-size:16px; flex:none; }
+
+.footer-note{
+  margin-top: 40px;
+  text-align:center;
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--potencial);
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <div>
+      <div class="eyebrow">Hubii · Comercial</div>
+      <div class="title">Projeto <span>Ultragaz</span></div>
+      <div class="subtitle">Resumo executivo e acompanhamento das atividades e conversas entre Ultragaz e Hubii.</div>
+    </div>
+    <div class="header-cards">
+      <div class="cadence-card">
+        <div class="cadence-label">Pipeline</div>
+        <div class="cadence-value">Contracting</div>
+        <div class="meeting-dates">
+          <div class="meeting-row"><span>Última</span><b class="meeting-link" data-meeting="m1">10/ago ↗</b></div>
+          <div class="meeting-row"><span>Início</span><b>set/25</b></div>
+        </div>
+      </div>
+      <div class="progress-block">
+        <div class="ring-wrap">
+          <svg width="56" height="56" viewBox="0 0 56 56">
+            <circle class="ring-bg" cx="28" cy="28" r="24" fill="none" stroke-width="5"/>
+            <circle id="ringFg" class="ring-fg" cx="28" cy="28" r="24" fill="none" stroke-width="5"
+              stroke-dasharray="150.8" stroke-dashoffset="150.8"/>
+          </svg>
+          <div class="ring-text" id="ringText">0/4</div>
+        </div>
+        <div class="progress-copy">
+          <div class="num" id="progressNum">0 de 4 concluídas</div>
+          <div class="lbl">Itens em aberto</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="escopo">Escopo</button>
+    <button class="tab-btn" data-tab="oportunidades">Oportunidades</button>
+    <button class="tab-btn" data-tab="tarefas">Tarefas <span class="tab-count" id="tabCount">0/4</span></button>
+    <button class="tab-btn" data-tab="atas">Atas</button>
+  </div>
+
+  <!-- ESCOPO -->
+  <div class="tab-panel active" id="panel-escopo">
+    <div class="grid">
+      <div>
+        <div class="section-label first">Praça foco</div>
+        <div class="panel">
+          <div class="praca-foco">
+            <div class="praca-dot pending"></div>
+            <div class="praca-info">
+              <div class="praca-city">Grande São Paulo</div>
+              <div class="praca-partner">Ainda em definição</div>
+            </div>
+            <div class="praca-tag pending">A confirmar</div>
+          </div>
+          <div class="praca-foco">
+            <div class="praca-dot"></div>
+            <div class="praca-info">
+              <div class="praca-city">ABC Paulista</div>
+              <div class="praca-partner">Confirmado</div>
+            </div>
+            <div class="praca-tag">Confirmado</div>
+          </div>
+        </div>
+
+        <div class="section-label">Responsável pelo projeto</div>
+        <div class="panel">
+          <div class="praca-foco">
+            <div class="praca-dot"></div>
+            <div class="praca-info">
+              <div class="praca-city">Mateus</div>
+              <div class="praca-partner">Lidera o projeto pela Hubii</div>
+            </div>
+            <div class="praca-tag">Líder</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label first">Canal do projeto</div>
+        <div class="panel">
+          <div class="potencial-list">
+            <div class="channel-chip negotiating">WhatsApp · custo com agent.shop em orçamento</div>
+          </div>
+        </div>
+
+        <div class="section-label">App Ultragaz — contexto</div>
+        <div class="panel">
+          <div class="info-block">
+            <div class="info-head">
+              <div class="info-icon">▣</div>
+              <div>
+                <div class="info-name">App Ultragaz</div>
+                <div class="info-sub">Powered by VTEX</div>
+              </div>
+            </div>
+            <ul class="info-list">
+              <li>Melhor <b>NPS do Grupo Ultra</b>; clientes acostumados a entrega pontual/programada</li>
+              <li>Time do app: <b>Thais Guzzardi</b> e <b>Ramonn Maes Adami</b></li>
+              <li>Necessária avaliação de <b>Segurança da Informação</b> e <b>Compatibilidade Comercial</b></li>
+            </ul>
+          </div>
+          <div class="info-block">
+            <div class="info-head">
+              <div class="info-icon">◎</div>
+              <div>
+                <div class="info-name">Revendedores</div>
+                <div class="info-sub">Base atual</div>
+              </div>
+            </div>
+            <ul class="info-list">
+              <li><b>6 mil revendedores</b> no total, dos quais <b>2 mil participam do app</b></li>
+              <li>Ultragaz possui perfis de revendedores mapeados, mas poucos dados do consumidor final</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPORTUNIDADES -->
+  <div class="tab-panel" id="panel-oportunidades">
+
+    <div class="stat-row">
+      <div class="stat"><div class="stat-num">6.000</div><div class="stat-lbl">Revendedores no total</div></div>
+      <div class="stat"><div class="stat-num">2.000</div><div class="stat-lbl">Participam do app</div></div>
+      <div class="stat"><div class="stat-num">R$8,2mi</div><div class="stat-lbl">Faturamento SP · jul</div></div>
+      <div class="stat"><div class="stat-num">10%</div><div class="stat-lbl">Share WhatsApp em SP · jul</div></div>
+      <div class="stat"><div class="stat-num">389k</div><div class="stat-lbl">Mensagens WhatsApp · jul (total)</div></div>
+    </div>
+
+    <div class="opp-grid">
+      <div class="opp-card">
+        <div class="opp-head"><div class="opp-icon">▣</div><div class="opp-title">App Ultragaz</div></div>
+        <ul>
+          <li>Powered by <b>VTEX</b>; melhor NPS do Grupo Ultra</li>
+          <li>Base fiel, acostumada a entrega pontual/programada</li>
+        </ul>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-head"><div class="opp-icon">⇄</div><div class="opp-title">Revenda do futuro</div></div>
+        <ul>
+          <li>Modernização do ciclo do revendedor</li>
+          <li>Jornada de maquinha POS: taxa de <b>1,9% para 1,4%</b>, com cashback e carteira digital</li>
+        </ul>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-head"><div class="opp-icon">$</div><div class="opp-title">Parcerias em avaliação</div></div>
+        <ul>
+          <li><b>Nerdmonster</b> × Harmo + Livelo + iFood</li>
+        </ul>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-head"><div class="opp-icon">⚙</div><div class="opp-title">Piloto WhatsApp (Salvador, 2021)</div></div>
+        <ul>
+          <li>Já rodou um piloto de venda via WhatsApp em Salvador</li>
+          <li>Hoje o canal representa <b>6%</b> do total (jul: 389 mil mensagens)</li>
+        </ul>
+      </div>
+
+      <div class="opp-card flag">
+        <div class="opp-head"><div class="opp-icon">⚑</div><div class="opp-title">Poucos dados do consumidor</div></div>
+        <ul>
+          <li>Ultragaz possui dado rico dos <b>revendedores</b>, mas quase nada do consumidor final</li>
+        </ul>
+      </div>
+
+      <div class="opp-card flag">
+        <div class="opp-head"><div class="opp-icon">⚑</div><div class="opp-title">Contrato travado — ponto em aberto</div></div>
+        <ul>
+          <li>Negociação em curso desde set/25 sobre <b>exclusividade</b>, <b>take rate</b> e novos custos</li>
+          <li>Mudança de interlocutor (Cristina → Gustavo/Vivian) gerou atraso no avanço</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-label">Estratégia — Ultragaz</div>
+    <div class="panel strategy-panel">
+      <div class="strategy-list">
+        <div class="strategy-item"><b>Liderança</b> Mateus lidera o projeto pela Hubii</div>
+        <div class="strategy-item"><b>Praça</b> Grande São Paulo (a confirmar)</div>
+        <div class="strategy-item"><b>Canal</b> WhatsApp como porta de entrada</div>
+        <div class="strategy-item"><b>Modelo</b> price zone, orçamento via agent.shop</div>
+        <div class="strategy-item"><b>Pipeline</b> Contracting</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAREFAS -->
+  <div class="tab-panel" id="panel-tarefas">
+    <div class="panel">
+
+      <div class="owner-group">
+        <div class="owner-header"><span class="owner-badge ultragaz">ULTRAGAZ</span></div>
+        <div class="task" data-task>
+          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
+          <div class="task-text">Enviar price zone</div>
+        </div>
+        <div class="task" data-task>
+          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
+          <div class="task-text">Assinatura do contrato</div>
+        </div>
+      </div>
+
+      <div class="owner-group">
+        <div class="owner-header"><span class="owner-badge hubii">HUBII</span></div>
+        <div class="task" data-task>
+          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
+          <div class="task-text">Realizar orçamento com agent.shop</div>
+        </div>
+        <div class="task" data-task>
+          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
+          <div class="task-text">Estruturar BP</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ATAS -->
+  <div class="tab-panel" id="panel-atas">
+    <div class="section-label first">Histórico de reuniões</div>
+    <div class="panel">
+      <div class="ata-card" data-meeting="m1">
+        <div class="ata-date">10<span>AGO</span></div>
+        <div class="ata-info">
+          <div class="ata-title">Alinhamento Hubii</div>
+          <div class="ata-teaser">Reunião realizada — ata automática não registrou pauta nem decisões</div>
+        </div>
+        <div class="ata-arrow">→</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-note">Atualizado a partir do Notion · <b>Hubii</b> × Ultragaz</div>
+
+</div>
+
+<!-- MODAL: RESUMO DA REUNIÃO -->
+<div class="modal-overlay" id="meetingModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <div class="modal-eyebrow">Notion · Companies</div>
+        <div class="modal-title" id="modalTitle">—</div>
+      </div>
+      <button class="modal-close" data-close>✕</button>
+    </div>
+    <div class="modal-sub" id="modalSub">—</div>
+    <div id="modalBody"></div>
+    <div class="modal-footer">
+      <a class="modal-link" id="modalLink" href="#" target="_blank" rel="noopener">Abrir no Notion ↗</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Tabs
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.tab-panel');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  // Checklist + progress ring
+  const tasks = document.querySelectorAll('[data-task]');
+  const total = tasks.length;
+  const ringFg = document.getElementById('ringFg');
+  const ringText = document.getElementById('ringText');
+  const progressNum = document.getElementById('progressNum');
+  const tabCount = document.getElementById('tabCount');
+  const circumference = 2 * Math.PI * 24;
+
+  function updateProgress(){
+    const done = document.querySelectorAll('[data-task].done').length;
+    const pct = done / total;
+    ringFg.style.strokeDashoffset = circumference * (1 - pct);
+    ringText.textContent = done + '/' + total;
+    progressNum.textContent = done + ' de ' + total + ' concluídas';
+    tabCount.textContent = done + '/' + total;
+  }
+
+  tasks.forEach(t => {
+    t.addEventListener('click', () => {
+      t.classList.toggle('done');
+      updateProgress();
+    });
+  });
+
+  updateProgress();
+
+  // Meeting / milestone summaries
+  const COMPANY_URL = "https://app.notion.com/p/24def5854ef38079a874d02c63bdb656";
+  const MEETINGS = {
+    m1: {
+      title: "Alinhamento Hubii",
+      sub: "10/ago · Reunião de acompanhamento do projeto",
+      url: "https://app.notion.com/p/3b8ef5854ef380d880fdef6cbe99c9c2",
+      sections: [
+        { label: "Registro", items: [
+          "Reunião com Matheus, Leonardo e Pat, transcrita automaticamente",
+          "A ata automática cobriu apenas os cumprimentos iniciais, sem detalhamento de pauta, decisões ou encaminhamentos"
+        ]}
+      ]
+    },
+  };
+
+  const modal = document.getElementById('meetingModal');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalSub = document.getElementById('modalSub');
+  const modalBody = document.getElementById('modalBody');
+  const modalLink = document.getElementById('modalLink');
+
+  function openMeeting(key){
+    const m = MEETINGS[key];
+    if(!m) return;
+    modalTitle.textContent = m.title;
+    modalSub.textContent = m.sub;
+    modalLink.href = m.url;
+    modalBody.innerHTML = m.sections.map(sec => `
+      <div class="modal-section">
+        <div class="modal-section-label">${sec.label}</div>
+        <ul>${sec.items.map(it => `<li>${it}</li>`).join('')}</ul>
+      </div>
+    `).join('');
+    modal.classList.add('open');
+  }
+
+  document.querySelectorAll('[data-meeting]').forEach(el => {
+    el.addEventListener('click', () => openMeeting(el.dataset.meeting));
+  });
+  modal.addEventListener('click', (e) => {
+    if(e.target === modal || e.target.hasAttribute('data-close')) modal.classList.remove('open');
+  });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') modal.classList.remove('open');
+  });
+</script>
+</body>
+</html>
