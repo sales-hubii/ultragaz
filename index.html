@@ -25,6 +25,8 @@
   --hubii-bg: #efeafd;
   --amber: #c9820f;
   --amber-bg: #fdf3e0;
+  --brasil: #128a76;
+  --brasil-bg: #e3f5f1;
   --radius: 16px;
   --radius-sm: 10px;
 }
@@ -575,6 +577,55 @@ body{
   font-size: 11px;
   color: var(--potencial);
 }
+
+/* BUSINESS PLAN */
+.bp-legend{ display:flex; gap:22px; flex-wrap:wrap; margin-bottom: 18px; }
+.bp-legend-item{ display:flex; align-items:center; gap:8px; font-family:'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink-soft); }
+.bp-legend-dot{ width:10px; height:10px; border-radius:50%; flex:none; }
+.bp-legend-line{ width:16px; height:2px; border-radius:2px; flex:none; }
+.bp-chart-wrap{ width:100%; overflow-x:auto; }
+.bp-axis-label{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; fill: var(--ink-soft); }
+.bp-value-label{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; font-weight:600; }
+.bp-phase-row{ display:flex; gap:10px; margin-top: 18px; }
+.bp-phase{
+  flex:1; padding: 10px 14px; border-radius: var(--radius-sm);
+  font-family:'IBM Plex Mono', monospace; font-size: 12px; text-align:center;
+}
+.bp-phase.pilot{ background: var(--amber-bg); color: var(--amber); }
+.bp-phase.official{ background: var(--hubii-bg); color: var(--purple-deep); }
+.bp-milestone-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+@media (max-width: 820px){ .bp-milestone-grid{ grid-template-columns: 1fr; } }
+.bp-milestone-card{
+  background: var(--card); border:1px solid var(--line); border-radius: var(--radius-sm);
+  padding: 16px 18px;
+}
+.bp-milestone-month{
+  font-family:'IBM Plex Mono', monospace; font-size: 11px; color: var(--purple);
+  text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; font-weight:700;
+}
+.bp-milestone-value{ font-size: 21px; font-weight:800; color: var(--ink); font-family:'IBM Plex Mono', monospace; }
+.bp-milestone-sub{ font-size: 12px; color: var(--ink-soft); margin-top: 3px; }
+.bp-note-list{ margin-top: 18px; }
+.bp-callout{
+  background: var(--paper);
+  border: 1px dashed var(--purple-glow);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 13.5px;
+  color: var(--ink);
+}
+.bp-callout b{ color: var(--purple-deep); }
+.bp-callout .ph{ color: var(--ink-soft); }
+.bp-point{ cursor: pointer; }
+.bp-track-row{ margin-top: 14px; }
+.bp-track-label{
+  font-family:'IBM Plex Mono', monospace; font-size: 10.5px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.06em; color: var(--ink-soft); margin-bottom:6px;
+}
+.bp-phase-row.small{ margin-top:0; }
+.bp-phase.br{ background: var(--brasil-bg); color: var(--brasil); }
+.bp-phase.neutral{ background: var(--paper); color: var(--ink-soft); border:1px solid var(--line); }
 </style>
 </head>
 <body>
@@ -617,6 +668,7 @@ body{
     <button class="tab-btn" data-tab="oportunidades">Oportunidades</button>
     <button class="tab-btn" data-tab="tarefas">Tarefas <span class="tab-count" id="tabCount">0/4</span></button>
     <button class="tab-btn" data-tab="atas">Atas</button>
+    <button class="tab-btn" data-tab="bp">Business Plan</button>
   </div>
 
   <!-- ESCOPO -->
@@ -815,6 +867,114 @@ body{
     </div>
   </div>
 
+  <!-- BUSINESS PLAN -->
+  <div class="tab-panel" id="panel-bp">
+
+    <div class="stat-row">
+      <div class="stat"><div class="stat-num">R$1mi</div><div class="stat-lbl">Pote digital SP+GSP hoje (meta: R$1,8mi)</div></div>
+      <div class="stat"><div class="stat-num">R$2,7mi</div><div class="stat-lbl">Pote digital Brasil hoje (meta: R$4,4mi)</div></div>
+      <div class="stat"><div class="stat-num">R$200mil</div><div class="stat-lbl">Meta mês 6: 20% do pote SP+GSP</div></div>
+      <div class="stat"><div class="stat-num">M9 / M15</div><div class="stat-lbl">Mês em que SP+GSP / Brasil atingem 100% do pote atual</div></div>
+    </div>
+
+    <div class="section-label first">Projeção 18 meses — GMV capturado pelo novo WhatsApp</div>
+    <div class="panel">
+      <div class="bp-legend">
+        <div class="bp-legend-item"><span class="bp-legend-line" style="background:var(--purple)"></span>SP + Grande SP — capturado</div>
+        <div class="bp-legend-item"><span class="bp-legend-line" style="background:var(--brasil)"></span>Brasil — capturado (expansão nacional)</div>
+        <div class="bp-legend-item"><span class="bp-legend-dot" style="background:var(--amber)"></span>Transição piloto → escala</div>
+      </div>
+      <div class="bp-callout" id="bpCallout">Clique em um ponto da curva para ver o potencial de vendas daquele mês.</div>
+      <div class="bp-chart-wrap">
+        <svg id="bpChart" viewBox="0 0 1000 440" width="100%" style="min-width:680px; display:block;"></svg>
+      </div>
+
+      <div class="bp-track-row">
+        <div class="bp-track-label">SP + Grande SP</div>
+        <div class="bp-phase-row small">
+          <div class="bp-phase pilot">M1–6 · piloto até 20% do pote (200mil)</div>
+          <div class="bp-phase official">M7–9 · escala até 100% do pote (1mi)</div>
+          <div class="bp-phase official" style="background:var(--purple-glow); color:var(--purple-deep);">M10–18 · pote cresce até 1,8mi, captura acompanha</div>
+        </div>
+      </div>
+      <div class="bp-track-row">
+        <div class="bp-track-label">Brasil</div>
+        <div class="bp-phase-row small">
+          <div class="bp-phase neutral">M1–6 · sem captura nacional ainda</div>
+          <div class="bp-phase br">M7–15 · expansão até 100% do pote (2,7mi)</div>
+          <div class="bp-phase br" style="background:#d4efe9;">M16–18 · pote cresce até 4,4mi, captura acompanha</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">Marcos da curva</div>
+    <div class="bp-milestone-grid">
+      <div class="bp-milestone-card">
+        <div class="bp-milestone-month">Mês 6 · fim do piloto</div>
+        <div class="bp-milestone-value" id="bpM6">—</div>
+        <div class="bp-milestone-sub" id="bpM6sub">—</div>
+      </div>
+      <div class="bp-milestone-card">
+        <div class="bp-milestone-month">Mês 12</div>
+        <div class="bp-milestone-value" id="bpM12">—</div>
+        <div class="bp-milestone-sub" id="bpM12sub">—</div>
+      </div>
+      <div class="bp-milestone-card">
+        <div class="bp-milestone-month">Mês 18</div>
+        <div class="bp-milestone-value" id="bpM18">—</div>
+        <div class="bp-milestone-sub" id="bpM18sub">—</div>
+      </div>
+    </div>
+
+    <div class="panel bp-note-list">
+      <div class="modal-section-label" style="margin-bottom:14px;">Resumo Executivo das Premissas</div>
+
+      <div class="info-block">
+        <div class="info-head">
+          <div class="info-icon">◆</div>
+          <div>
+            <div class="info-name">SP + Grande SP</div>
+            <div class="info-sub">Pote digital atual: R$1mi/mês</div>
+          </div>
+        </div>
+        <ul class="info-list">
+          <li><b>Meses 1–6 (piloto):</b> captura gradual da demanda digital local, atingindo <b>20% do pote (R$200mil/mês)</b> ao final do período</li>
+          <li><b>Meses 7–9 (escala):</b> validado o piloto, a captura avança até <b>100% do pote atual (R$1mi/mês)</b></li>
+          <li><b>Meses 10–18 (expansão):</b> o pote total da praça cresce para <b>R$1,8mi/mês</b>, com a captura acompanhando essa expansão</li>
+        </ul>
+      </div>
+
+      <div class="info-block">
+        <div class="info-head">
+          <div class="info-icon">◆</div>
+          <div>
+            <div class="info-name">Brasil</div>
+            <div class="info-sub">Pote digital atual: R$2,7mi/mês</div>
+          </div>
+        </div>
+        <ul class="info-list">
+          <li><b>Meses 1–6:</b> operação concentrada em São Paulo; expansão nacional ainda não iniciada</li>
+          <li><b>Meses 7–15 (expansão nacional):</b> captura avança progressivamente até <b>100% do pote atual (R$2,7mi/mês)</b></li>
+          <li><b>Meses 16–18 (novo teto):</b> o pote nacional cresce para <b>R$4,4mi/mês</b>, com a captura acompanhando esse novo patamar</li>
+        </ul>
+      </div>
+
+      <div class="info-block">
+        <div class="info-head">
+          <div class="info-icon">◆</div>
+          <div>
+            <div class="info-name">Metodologia</div>
+            <div class="info-sub">Curva de adoção</div>
+          </div>
+        </div>
+        <ul class="info-list">
+          <li>As curvas de captura seguem um padrão de adoção progressiva — crescimento mais lento no início de cada fase e aceleração à medida que o canal se consolida</li>
+          <li>As trilhas SP+GSP e Brasil são apresentadas em paralelo, sem sobreposição de valores, já que a segunda contempla a primeira</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
   <div class="footer-note">Atualizado a partir do Notion · <b>Hubii</b> × Ultragaz</div>
 
 </div>
@@ -923,6 +1083,169 @@ body{
   document.addEventListener('keydown', (e) => {
     if(e.key === 'Escape') modal.classList.remove('open');
   });
+
+  // ===== BUSINESS PLAN — projeção 18 meses (duas trilhas: SP+GSP e Brasil) =====
+  (function(){
+    const months = 18;
+
+    // ---- Trilha SP + Grande SP ----
+    // M1-6: captura cresce (começando baixo) até 20% do pote atual (200k)
+    // M7-9: captura escala até 100% do pote atual (1mi)
+    // M10-18: o pote cresce de 1mi pra 1,8mi, e a captura acompanha (~100% do pote)
+    const spGMV = [];
+    const spPool = []; // pote de referência naquele mês
+    for(let t=1;t<=6;t++){
+      spGMV.push(200000*Math.pow(t/6,2));
+      spPool.push(1000000);
+    }
+    for(let t=1;t<=3;t++){
+      spGMV.push(200000 + 800000*Math.pow(t/3,1.3));
+      spPool.push(1000000);
+    }
+    for(let t=1;t<=9;t++){
+      const pool = 1000000 + 800000*Math.pow(t/9,1.5);
+      spPool.push(pool);
+      spGMV.push(pool);
+    }
+
+    // ---- Trilha Brasil ----
+    // M1-6: nenhuma captura nacional ainda (piloto restrito a SP)
+    // M7-15: captura cresce até 100% do pote atual (2,7mi)
+    // M16-18: o pote cresce de 2,7mi pra 4,4mi, captura acompanha
+    const brGMV = [];
+    const brPool = [];
+    for(let t=1;t<=6;t++){
+      brGMV.push(0);
+      brPool.push(2700000);
+    }
+    for(let t=1;t<=9;t++){
+      brGMV.push(2700000*Math.pow(t/9,1.5));
+      brPool.push(2700000);
+    }
+    for(let t=1;t<=3;t++){
+      const pool = 2700000 + 1700000*Math.pow(t/3,1.3);
+      brPool.push(pool);
+      brGMV.push(pool);
+    }
+
+    const fmtCompact = (v) => v >= 1000000 ? 'R$' + (v/1000000).toFixed(2).replace('.', ',') + 'mi' : 'R$' + Math.round(v/1000).toLocaleString('pt-BR') + 'mil';
+
+    document.getElementById('bpM6').textContent = fmtCompact(spGMV[5]) + ' / ' + fmtCompact(brGMV[5]);
+    document.getElementById('bpM6sub').textContent = 'SP+GSP / Brasil';
+    document.getElementById('bpM12').textContent = fmtCompact(spGMV[11]) + ' / ' + fmtCompact(brGMV[11]);
+    document.getElementById('bpM12sub').textContent = 'SP+GSP / Brasil';
+    document.getElementById('bpM18').textContent = fmtCompact(spGMV[17]) + ' / ' + fmtCompact(brGMV[17]);
+    document.getElementById('bpM18sub').textContent = 'SP+GSP / Brasil';
+
+    // ---- SVG chart ----
+    const svg = document.getElementById('bpChart');
+    const W = 1000, H = 440;
+    const padL = 70, padR = 20, padT = 24, padB = 36;
+    const plotW = W - padL - padR;
+    const plotH = H - padT - padB;
+    const yMax = 5000000;
+
+    const x = (i) => padL + (i/(months-1)) * plotW;
+    const y = (v) => padT + plotH - (v/yMax)*plotH;
+
+    function smoothPath(pts){
+      let d = `M ${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
+      for(let i=0;i<pts.length-1;i++){
+        const p0 = pts[i>0?i-1:i];
+        const p1 = pts[i];
+        const p2 = pts[i+1];
+        const p3 = pts[i+2>pts.length-1?i+1:i+2];
+        const cp1x = p1.x + (p2.x-p0.x)/6;
+        const cp1y = p1.y + (p2.y-p0.y)/6;
+        const cp2x = p2.x - (p3.x-p1.x)/6;
+        const cp2y = p2.y - (p3.y-p1.y)/6;
+        d += ` C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+      }
+      return d;
+    }
+
+    const ptsSP = spGMV.map((v,i) => ({x:x(i), y:y(v)}));
+    const ptsBR = brGMV.map((v,i) => ({x:x(i), y:y(v)}));
+    const pathSP = smoothPath(ptsSP);
+    const pathBR = smoothPath(ptsBR);
+    const areaSP = pathSP + ` L ${ptsSP[ptsSP.length-1].x.toFixed(1)} ${padT+plotH} L ${ptsSP[0].x.toFixed(1)} ${padT+plotH} Z`;
+
+    let svgHTML = '';
+
+    // gridlines + y labels
+    [0,1000000,2000000,3000000,4000000,5000000].forEach(v => {
+      const gy = y(v);
+      svgHTML += `<line x1="${padL}" y1="${gy}" x2="${W-padR}" y2="${gy}" stroke="var(--line)" stroke-width="1"/>`;
+      svgHTML += `<text x="${padL-10}" y="${gy+4}" text-anchor="end" class="bp-axis-label">${v===0?'0':(v/1000000).toFixed(0)+'mi'}</text>`;
+    });
+
+    // x labels — todos os meses
+    for(let i=0;i<months;i++){
+      svgHTML += `<text x="${x(i)}" y="${H-12}" text-anchor="middle" class="bp-axis-label">M${i+1}</text>`;
+    }
+
+    // pote SP (flat 1mi) enquanto ainda não começou a crescer (meses 1-9)
+    svgHTML += `<line x1="${x(0)}" y1="${y(1000000)}" x2="${x(8)}" y2="${y(1000000)}" stroke="var(--purple-glow)" stroke-width="1.5" stroke-dasharray="3 4"/>`;
+    svgHTML += `<text x="${x(0)}" y="${y(1000000)-8}" class="bp-axis-label" style="fill:var(--purple);">pote SP+GSP hoje · 1mi</text>`;
+
+    // pote Brasil (flat 2,7mi) enquanto ainda não começou a crescer (meses 1-15)
+    svgHTML += `<line x1="${x(0)}" y1="${y(2700000)}" x2="${x(14)}" y2="${y(2700000)}" stroke="var(--brasil)" stroke-width="1.5" stroke-dasharray="3 4" opacity="0.55"/>`;
+    svgHTML += `<text x="${x(0)}" y="${y(2700000)-8}" class="bp-axis-label" style="fill:var(--brasil);">pote Brasil hoje · 2,7mi</text>`;
+
+    // marco: transição piloto → escala (SP), entre mês 6 e 7
+    const mx = (x(5)+x(6))/2;
+    svgHTML += `<line x1="${mx}" y1="${padT}" x2="${mx}" y2="${padT+plotH}" stroke="var(--amber)" stroke-width="1.5" stroke-dasharray="4 4"/>`;
+    svgHTML += `<text x="${mx}" y="${padT-8}" text-anchor="middle" class="bp-axis-label" style="fill:var(--amber);">piloto → escala</text>`;
+
+    // gradient
+    svgHTML += `<defs>
+      <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="var(--purple)" stop-opacity="0.25"/>
+        <stop offset="100%" stop-color="var(--purple)" stop-opacity="0"/>
+      </linearGradient>
+    </defs>`;
+
+    // área + linha SP (hero)
+    svgHTML += `<path d="${areaSP}" fill="url(#areaGrad)" stroke="none"/>`;
+    svgHTML += `<path d="${pathSP}" fill="none" stroke="var(--purple)" stroke-width="3" stroke-linecap="round"/>`;
+    // linha Brasil (secundária)
+    svgHTML += `<path d="${pathBR}" fill="none" stroke="var(--brasil)" stroke-width="2.5" stroke-linecap="round"/>`;
+
+    // pontos clicáveis em cada mês (as duas trilhas)
+    ptsSP.forEach((p,i) => {
+      svgHTML += `<circle class="bp-point" data-i="${i}" data-track="sp" cx="${p.x}" cy="${p.y}" r="4.5" fill="var(--card)" stroke="var(--purple)" stroke-width="2.5"/>`;
+    });
+    ptsBR.forEach((p,i) => {
+      svgHTML += `<circle class="bp-point" data-i="${i}" data-track="br" cx="${p.x}" cy="${p.y}" r="4" fill="var(--card)" stroke="var(--brasil)" stroke-width="2.5"/>`;
+    });
+
+    svg.innerHTML = svgHTML;
+
+    // callout ao clicar em um ponto — mostra as duas trilhas naquele mês
+    const callout = document.getElementById('bpCallout');
+    function selectMonth(i){
+      svg.querySelectorAll('.bp-point').forEach(c => {
+        const isSP = c.dataset.track === 'sp';
+        c.setAttribute('fill', 'var(--card)');
+        c.setAttribute('r', isSP ? 4.5 : 4);
+      });
+      svg.querySelectorAll(`.bp-point[data-i="${i}"]`).forEach(c => {
+        const isSP = c.dataset.track === 'sp';
+        c.setAttribute('fill', isSP ? 'var(--purple)' : 'var(--brasil)');
+        c.setAttribute('r', 7);
+      });
+
+      const spPct = (spGMV[i]/spPool[i]*100).toFixed(0);
+      const brPct = brPool[i] > 0 ? (brGMV[i]/brPool[i]*100).toFixed(0) : 0;
+
+      callout.innerHTML = `<b>Mês ${i+1}</b> · potencial de vendas: `
+        + `SP+GSP <b>${fmtCompact(spGMV[i])}</b>/mês (${spPct}% do pote) `
+        + `<span class="ph">·</span> Brasil <b>${fmtCompact(brGMV[i])}</b>/mês (${brPct}% do pote)`;
+    }
+    svg.querySelectorAll('.bp-point').forEach(c => {
+      c.addEventListener('click', () => selectMonth(+c.dataset.i));
+    });
+  })();
 </script>
 </body>
 </html>
