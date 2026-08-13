@@ -637,30 +637,6 @@ body{
       <div class="title">Projeto <span>Ultragaz</span></div>
       <div class="subtitle">Resumo executivo e acompanhamento das atividades e conversas entre Ultragaz e Hubii.</div>
     </div>
-    <div class="header-cards">
-      <div class="cadence-card">
-        <div class="cadence-label">Pipeline</div>
-        <div class="cadence-value">Contracting</div>
-        <div class="meeting-dates">
-          <div class="meeting-row"><span>Última</span><b class="meeting-link" data-meeting="m1">10/ago ↗</b></div>
-          <div class="meeting-row"><span>Início</span><b>set/25</b></div>
-        </div>
-      </div>
-      <div class="progress-block">
-        <div class="ring-wrap">
-          <svg width="56" height="56" viewBox="0 0 56 56">
-            <circle class="ring-bg" cx="28" cy="28" r="24" fill="none" stroke-width="5"/>
-            <circle id="ringFg" class="ring-fg" cx="28" cy="28" r="24" fill="none" stroke-width="5"
-              stroke-dasharray="150.8" stroke-dashoffset="150.8"/>
-          </svg>
-          <div class="ring-text" id="ringText">0/4</div>
-        </div>
-        <div class="progress-copy">
-          <div class="num" id="progressNum">0 de 4 concluídas</div>
-          <div class="lbl">Itens em aberto</div>
-        </div>
-      </div>
-    </div>
   </div>
 
   <div class="tabs">
@@ -1010,21 +986,13 @@ body{
     });
   });
 
-  // Checklist + progress ring
+  // Checklist + contador da aba Tarefas
   const tasks = document.querySelectorAll('[data-task]');
   const total = tasks.length;
-  const ringFg = document.getElementById('ringFg');
-  const ringText = document.getElementById('ringText');
-  const progressNum = document.getElementById('progressNum');
   const tabCount = document.getElementById('tabCount');
-  const circumference = 2 * Math.PI * 24;
 
   function updateProgress(){
     const done = document.querySelectorAll('[data-task].done').length;
-    const pct = done / total;
-    ringFg.style.strokeDashoffset = circumference * (1 - pct);
-    ringText.textContent = done + '/' + total;
-    progressNum.textContent = done + ' de ' + total + ' concluídas';
     tabCount.textContent = done + '/' + total;
   }
 
