@@ -668,9 +668,11 @@ body{
   <div class="tabs">
     <button class="tab-btn active" data-tab="escopo">Escopo</button>
     <button class="tab-btn" data-tab="oportunidades">Oportunidades</button>
-    <button class="tab-btn" data-tab="tarefas">Tarefas <span class="tab-count" id="tabCount">0/4</span></button>
-    <button class="tab-btn" data-tab="atas">Atas</button>
+    <button class="tab-btn" data-tab="portfolio">Portfólio</button>
+    <button class="tab-btn" data-tab="resultados">Resultados</button>
+    <button class="tab-btn" data-tab="revendas">Rede de Revendas</button>
     <button class="tab-btn" data-tab="bp">Business Plan</button>
+    <button class="tab-btn" data-tab="tarefas">Tarefas <span class="tab-count" id="tabCount">0/9</span></button>
   </div>
 
   <!-- ESCOPO -->
@@ -857,48 +859,131 @@ body{
     </div>
   </div>
 
-  <!-- TAREFAS -->
-  <div class="tab-panel" id="panel-tarefas">
+  <!-- PORTFÓLIO -->
+  <div class="tab-panel" id="panel-portfolio">
+    <div class="stat-row">
+      <div class="stat"><div class="stat-num">P13</div><div class="stat-lbl">SKU inicial — botijão 13kg (foco exclusivo por ora)</div></div>
+      <div class="stat"><div class="stat-num">R$117</div><div class="stat-lbl">Ticket médio, com frete grátis incluso</div></div>
+      <div class="stat"><div class="stat-num">6%→8%</div><div class="stat-lbl">Take rate — reenquadramento em avaliação</div></div>
+    </div>
+
+    <div class="section-label first">Price zones (referência iFood)</div>
     <div class="panel">
-
-      <div class="owner-group">
-        <div class="owner-header"><span class="owner-badge ultragaz">ULTRAGAZ</span></div>
-        <div class="task" data-task>
-          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
-          <div class="task-text">Confirmar responsável e prazo do piloto</div>
+      <div class="praca-foco">
+        <div class="praca-dot"></div>
+        <div class="praca-info">
+          <div class="praca-city">Zona Leste</div>
+          <div class="praca-partner">Preço de referência do território</div>
         </div>
-        <div class="task" data-task>
-          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
-          <div class="task-text">Selecionar demais cidades do GSP para a 2ª fase (backlog)</div>
-        </div>
+        <div class="praca-tag">R$ 129</div>
       </div>
-
-      <div class="owner-group">
-        <div class="owner-header"><span class="owner-badge hubii">HUBII</span></div>
-        <div class="task" data-task>
-          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
-          <div class="task-text">Fechar estratégia de negociação de taxa com a 99</div>
+      <div class="praca-foco">
+        <div class="praca-dot"></div>
+        <div class="praca-info">
+          <div class="praca-city">Zona Sul</div>
+          <div class="praca-partner">Preço de referência do território</div>
         </div>
-        <div class="task" data-task>
-          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
-          <div class="task-text">Concluir integração com Magalu + Aiqfome (Raiz)</div>
-        </div>
+        <div class="praca-tag">R$ 140</div>
       </div>
+    </div>
 
+    <div class="section-label">Estratégia territorial</div>
+    <div class="panel">
+      <div class="info-block">
+        <ul class="info-list">
+          <li>O iFood opera com <b>price zones</b>: o preço do P13 varia por região dentro do próprio Mercado GSP</li>
+          <li>Será necessário criar <b>múltiplas lojas por território</b>, com raios distintos de atuação, para preservar o valor agregado</li>
+          <li>Definição dos sites e raios de cada loja ainda em desenho — etapa considerada complexa, mas essencial para o modelo funcionar</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-label">Modelo de take rate</div>
+    <div class="panel">
+      <div class="info-block">
+        <ul class="info-list">
+          <li>Take rate atual acordado com o iFood: <b>6%</b>, sendo 2% reinvestidos como frete grátis permanente ao consumidor</li>
+          <li>Em avaliação: repassar o frete ao consumidor e reenquadrar o take rate para <b>8%</b></li>
+          <li>Receita líquida do iFood hoje: <b>9,4% do GMV</b></li>
+          <li>Modelo de subsídio governamental ("gás do povo") tem margens muito apertadas e <b>não será usado como base</b> da arquitetura de precificação</li>
+        </ul>
+      </div>
     </div>
   </div>
 
-  <!-- ATAS -->
-  <div class="tab-panel" id="panel-atas">
-    <div class="section-label first">Histórico de reuniões</div>
+  <!-- RESULTADOS -->
+  <div class="tab-panel" id="panel-resultados">
+    <div class="panel" style="text-align:center; padding:48px 24px;">
+      <div style="font-size:32px; margin-bottom:12px;">◷</div>
+      <div style="font-weight:700; font-size:16px; color:var(--ink); margin-bottom:8px;">Piloto ainda não iniciado</div>
+      <p style="font-size:13.5px; color:var(--ink-soft); max-width:480px; margin:0 auto; line-height:1.6;">O responsável e o prazo de início do piloto ainda estão em definição (ver aba Escopo). Os resultados reais — GMV realizado vs. projetado, pedidos, volume e EBITDA por mês — passam a ser exibidos aqui assim que o piloto for lançado.</p>
+    </div>
+    <div class="section-label">O que será acompanhado aqui</div>
+    <div class="opp-grid">
+      <div class="opp-card">
+        <div class="opp-head"><div class="opp-icon">$</div><div class="opp-title">GMV real vs. projetado</div></div>
+        <ul><li>Comparativo mês a mês com a curva da aba Business Plan</li></ul>
+      </div>
+      <div class="opp-card">
+        <div class="opp-head"><div class="opp-icon">▣</div><div class="opp-title">Pedidos e volume</div></div>
+        <ul><li>Pedidos/mês e volume em toneladas, por canal</li></ul>
+      </div>
+      <div class="opp-card">
+        <div class="opp-head"><div class="opp-icon">◎</div><div class="opp-title">EBITDA realizado</div></div>
+        <ul><li>EBITDA do mês e acumulado (R$/Ton), comparado à meta do P&amp;L</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- REDE DE REVENDAS -->
+  <div class="tab-panel" id="panel-revendas">
+    <div class="stat-row">
+      <div class="stat"><div class="stat-num">6.000</div><div class="stat-lbl">Revendas exclusivas Ultragaz (foco do piloto)</div></div>
+      <div class="stat"><div class="stat-num">2.000</div><div class="stat-lbl">Participam do app hoje</div></div>
+      <div class="stat"><div class="stat-num">3.400</div><div class="stat-lbl">Municípios — potencial de expansão</div></div>
+      <div class="stat"><div class="stat-num">5–6mil</div><div class="stat-lbl">Revendas Ultragaz no Brasil (total)</div></div>
+    </div>
+
+    <div class="section-label first">Escopo da rede no piloto</div>
     <div class="panel">
-      <div class="ata-card" data-meeting="m1">
-        <div class="ata-date">10<span>AGO</span></div>
-        <div class="ata-info">
-          <div class="ata-title">Alinhamento Hubii</div>
-          <div class="ata-teaser">Reunião realizada — ata automática não registrou pauta nem decisões</div>
+      <div class="info-block">
+        <ul class="info-list">
+          <li>Foco exclusivo nas <b>6.000 revendas exclusivas Ultragaz</b> — bandeiras brancas que vendem outros produtos além do gás ficam de fora do piloto</li>
+          <li>Das revendas totais, <b>2.000 já participam do App Ultragaz</b> (powered by VTEX)</li>
+          <li>Potencial de expansão de longo prazo: rede presente em mais de <b>3.400 municípios</b>, com 5.000 a 6.000 revendas no Brasil</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-label">Onboarding das revendas</div>
+    <div class="panel">
+      <div class="praca-foco">
+        <div class="praca-dot pending"></div>
+        <div class="praca-info">
+          <div class="praca-city">Adesão automática</div>
+          <div class="praca-partner">Todas as revendas elegíveis entram de uma vez</div>
         </div>
-        <div class="ata-arrow">→</div>
+        <div class="praca-tag pending">Em avaliação</div>
+      </div>
+      <div class="praca-foco">
+        <div class="praca-dot pending"></div>
+        <div class="praca-info">
+          <div class="praca-city">Aceite individual — painel Rubi</div>
+          <div class="praca-partner">Revenda opta por participar, uma a uma</div>
+        </div>
+        <div class="praca-tag pending">Em avaliação</div>
+      </div>
+    </div>
+
+    <div class="section-label">Logística e entrega</div>
+    <div class="panel">
+      <div class="info-block">
+        <ul class="info-list">
+          <li>Entrega feita pelas <b>próprias revendas</b> no primeiro momento (não por motoboy do canal)</li>
+          <li>Tempo médio atual de entrega via app/Televendas/WhatsApp: <b>17 minutos</b></li>
+          <li>Lead time sugerido para exibir no app: <b>20–25 minutos</b></li>
+          <li>Uso do LAS (last mile do iFood) é uma possibilidade futura, não prevista para a fase inicial</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -1026,6 +1111,77 @@ body{
 
   </div>
 
+  <!-- TAREFAS -->
+  <div class="tab-panel" id="panel-tarefas">
+    <div class="panel">
+
+      <div class="owner-group">
+        <div class="owner-header"><span class="owner-badge ultragaz">ULTRAGAZ</span></div>
+        <div class="task" data-task>
+          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
+          <div class="task-text">Confirmar responsável e prazo do piloto</div>
+        </div>
+        <div class="task" data-task>
+          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
+          <div class="task-text">Selecionar demais cidades do GSP para a 2ª fase (backlog)</div>
+        </div>
+        <div class="task" data-task>
+          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
+          <div class="task-text">Avaliar repasse do frete ao consumidor e reenquadramento do take rate para 8%</div>
+        </div>
+        <div class="task" data-task>
+          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
+          <div class="task-text">Compartilhar volume de vendas com o time do iFood para referência de projeção</div>
+        </div>
+      </div>
+
+      <div class="owner-group">
+        <div class="owner-header"><span class="owner-badge hubii">HUBII</span></div>
+        <div class="task" data-task>
+          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
+          <div class="task-text">Fechar estratégia de negociação de taxa com a 99</div>
+        </div>
+        <div class="task" data-task>
+          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
+          <div class="task-text">Concluir integração com Magalu + Aiqfome (Raiz)</div>
+        </div>
+        <div class="task" data-task>
+          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
+          <div class="task-text">Consultar Matheus sobre tempo máximo tolerável de pedidos atrasados</div>
+        </div>
+        <div class="task" data-task>
+          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
+          <div class="task-text">Realizar projeções de GMV e share de mercado digital vs. offline</div>
+        </div>
+        <div class="task" data-task>
+          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
+          <div class="task-text">Definir modelo de onboarding de revendas (adesão automática vs. painel Rubi)</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label">Atas</div>
+    <div class="panel">
+      <div class="ata-card" data-meeting="m1">
+        <div class="ata-date">10<span>AGO</span></div>
+        <div class="ata-info">
+          <div class="ata-title">Alinhamento Hubii</div>
+          <div class="ata-teaser">Reunião realizada — ata automática não registrou pauta nem decisões</div>
+        </div>
+        <div class="ata-arrow">→</div>
+      </div>
+      <div class="ata-card" data-meeting="m2">
+        <div class="ata-date">10<span>SET</span></div>
+        <div class="ata-info">
+          <div class="ata-title">iFood + Ultragaz</div>
+          <div class="ata-teaser">Reunião de parceria — modelo de negócio, price zones e go-to-market</div>
+        </div>
+        <div class="ata-arrow">→</div>
+      </div>
+    </div>
+  </div>
+
   <div class="footer-note">Atualizado a partir do Notion · <b>Hubii</b> × Ultragaz</div>
 
 </div>
@@ -1091,6 +1247,36 @@ body{
         { label: "Registro", items: [
           "Reunião com Matheus, Leonardo e Pat, transcrita automaticamente",
           "A ata automática cobriu apenas os cumprimentos iniciais, sem detalhamento de pauta, decisões ou encaminhamentos"
+        ]}
+      ]
+    },
+    m2: {
+      title: "iFood + Ultragaz",
+      sub: "10/set · Reunião de parceria — venda de gás via iFood",
+      url: "https://app.notion.com/p/3d7ef5854ef380c288e6eb41f920683b",
+      sections: [
+        { label: "Contexto", items: [
+          "Encontro entre iFood Shopping (Pascucci, Luiz) e Ultragaz (Paty, Matheus) para explorar a parceria",
+          "Já existe parceria anterior no projeto Revenda do Futuro, incluindo integração de pagamento nas maquininhas",
+          "Em 2018 houve um teste em Salvador de venda de gás via iFood, com bons resultados, mas desmobilizado na época"
+        ]},
+        { label: "Modelo de negócio", items: [
+          "Take rate acordado: 6%, com 2% reinvestidos em frete grátis permanente ao consumidor",
+          "Ticket médio de R$117 com frete grátis incluso; receita líquida do iFood é 9,4% do GMV",
+          "Em discussão: repassar o frete e reenquadrar a taxa para 8%"
+        ]},
+        { label: "Go-to-market", items: [
+          "Praça inicial: São Paulo e ABC (Mercado GSP); SKU inicial apenas P13",
+          "Potencial de expansão: 3.400 municípios, 5.000–6.000 revendas no Brasil",
+          "Foco exclusivo nas 6.000 revendas exclusivas Ultragaz (bandeiras brancas ficam de fora)",
+          "Dois modelos de onboarding em avaliação: adesão automática vs. aceite individual pelo painel Rubi"
+        ]},
+        { label: "Itens de ação", items: [
+          "Consultar Matheus sobre tempo máximo tolerável de pedidos atrasados",
+          "Avaliar repasse do frete ao consumidor e reenquadramento do take rate para 8%",
+          "Paty e Matheus compartilharem volume de vendas com o time do iFood",
+          "Luizão realizar projeções de GMV e share de mercado digital vs. offline",
+          "Definir modelo de onboarding de revendas (adesão automática vs. painel Rubi)"
         ]}
       ]
     },
