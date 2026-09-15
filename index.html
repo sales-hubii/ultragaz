@@ -606,6 +606,32 @@ body{
 .bp-milestone-value{ font-size: 21px; font-weight:800; color: var(--ink); font-family:'IBM Plex Mono', monospace; }
 .bp-milestone-sub{ font-size: 12px; color: var(--ink-soft); margin-top: 3px; }
 .bp-note-list{ margin-top: 18px; }
+
+/* TICKET BAR + P&L TABLE */
+.ticket-bar{
+  display:flex; width:100%; height:28px; border-radius:8px; overflow:hidden;
+  border:1px solid var(--line);
+}
+.ticket-seg{ height:100%; }
+.ticket-legend{ margin-top:14px; display:flex; flex-direction:column; gap:8px; }
+.ticket-legend-item{
+  font-size:13px; color:var(--ink); display:flex; align-items:center; gap:8px;
+}
+.ticket-legend-item .dot{ width:10px; height:10px; border-radius:50%; flex:none; }
+.ticket-legend-item b{ color:var(--purple-deep); }
+
+.pl-table{ width:100%; border-collapse:collapse; font-size:13px; }
+.pl-table th, .pl-table td{
+  padding:10px 12px; text-align:right; border-bottom:1px solid var(--line);
+}
+.pl-table th:first-child, .pl-table td:first-child{ text-align:left; color:var(--ink-soft); }
+.pl-table th{
+  font-family:'IBM Plex Mono', monospace; font-size:11px; text-transform:uppercase;
+  letter-spacing:.06em; color:var(--purple-deep); font-weight:700;
+}
+.pl-table td{ font-family:'IBM Plex Mono', monospace; color:var(--ink); }
+.pl-table tr:last-child td{ border-bottom:none; }
+.pl-highlight td{ background:var(--purple-glow); font-weight:700; color:var(--purple-deep); }
 .bp-callout{
   background: var(--paper);
   border: 1px dashed var(--purple-glow);
@@ -649,25 +675,38 @@ body{
 
   <!-- ESCOPO -->
   <div class="tab-panel active" id="panel-escopo">
+    <div class="panel" style="margin-bottom:20px;">
+      <p style="font-size:14px; color:var(--ink); line-height:1.6; margin:0;">Piloto de venda digital de botijão <b>P13</b> através de marketplaces (<b>iFood</b>, <b>99</b> e <b>Magalu + Aiqfome/Raiz</b>), com foco inicial no Mercado GSP (Grande São Paulo). Cada pedido é repassado a um revendedor da rede Ultragaz, que recebe o valor líquido após as comissões de canal, Hubii e Ultragaz.</p>
+      <div class="channel-chip negotiating" style="margin-top:14px; display:inline-block;">Responsável / prazo do piloto — a confirmar</div>
+    </div>
+
     <div class="grid">
       <div>
-        <div class="section-label first">Praça foco</div>
+        <div class="section-label first">Mercado GSP — Grande São Paulo</div>
         <div class="panel">
           <div class="praca-foco">
-            <div class="praca-dot pending"></div>
+            <div class="praca-dot"></div>
             <div class="praca-info">
-              <div class="praca-city">Grande São Paulo</div>
-              <div class="praca-partner">Ainda em definição</div>
+              <div class="praca-city">São Paulo (capital)</div>
+              <div class="praca-partner">Piloto — fase 1</div>
             </div>
-            <div class="praca-tag pending">A confirmar</div>
+            <div class="praca-tag">Confirmado</div>
           </div>
           <div class="praca-foco">
             <div class="praca-dot"></div>
             <div class="praca-info">
               <div class="praca-city">ABC Paulista</div>
-              <div class="praca-partner">Confirmado</div>
+              <div class="praca-partner">Piloto — fase 1</div>
             </div>
             <div class="praca-tag">Confirmado</div>
+          </div>
+          <div class="praca-foco">
+            <div class="praca-dot pending"></div>
+            <div class="praca-info">
+              <div class="praca-city">Demais cidades do GSP</div>
+              <div class="praca-partner">Expansão — a selecionar em uma 2ª fase</div>
+            </div>
+            <div class="praca-tag pending">Backlog</div>
           </div>
         </div>
 
@@ -685,10 +724,31 @@ body{
       </div>
 
       <div>
-        <div class="section-label first">Canal do projeto</div>
+        <div class="section-label first">Canais (marketplaces)</div>
         <div class="panel">
-          <div class="potencial-list">
-            <div class="channel-chip negotiating">WhatsApp · custo com agent.shop em orçamento</div>
+          <div class="praca-foco">
+            <div class="praca-dot"></div>
+            <div class="praca-info">
+              <div class="praca-city">iFood <span style="color:var(--ink-soft); font-weight:500;">· 6,5%</span></div>
+              <div class="praca-partner">Taxa negociada · integrado na Hubii</div>
+            </div>
+            <div class="praca-tag">Integrado</div>
+          </div>
+          <div class="praca-foco">
+            <div class="praca-dot"></div>
+            <div class="praca-info">
+              <div class="praca-city">99 <span style="color:var(--ink-soft); font-weight:500;">· 6%</span></div>
+              <div class="praca-partner">Taxa OK · estratégia em negociação</div>
+            </div>
+            <div class="praca-tag">Integrado</div>
+          </div>
+          <div class="praca-foco">
+            <div class="praca-dot pending"></div>
+            <div class="praca-info">
+              <div class="praca-city">Magalu + Aiqfome (Raiz) <span style="color:var(--ink-soft); font-weight:500;">· 6%</span></div>
+              <div class="praca-partner">Taxa e estratégia em negociação</div>
+            </div>
+            <div class="praca-tag pending">Em integração</div>
           </div>
         </div>
 
@@ -730,11 +790,11 @@ body{
   <div class="tab-panel" id="panel-oportunidades">
 
     <div class="stat-row">
-      <div class="stat"><div class="stat-num">6.000</div><div class="stat-lbl">Revendedores no total</div></div>
-      <div class="stat"><div class="stat-num">2.000</div><div class="stat-lbl">Participam do app</div></div>
-      <div class="stat"><div class="stat-num">R$8,2mi</div><div class="stat-lbl">Faturamento SP · jul</div></div>
-      <div class="stat"><div class="stat-num">10%</div><div class="stat-lbl">Share WhatsApp em SP · jul</div></div>
-      <div class="stat"><div class="stat-num">389k</div><div class="stat-lbl">Mensagens WhatsApp · jul (total)</div></div>
+      <div class="stat"><div class="stat-num">R$9mi</div><div class="stat-lbl">Potencial digital/mês · Mercado GSP</div></div>
+      <div class="stat"><div class="stat-num">~1%</div><div class="stat-lbl">Captura inicial da demanda (mês 1)</div></div>
+      <div class="stat"><div class="stat-num">R$85mil</div><div class="stat-lbl">GMV mês 1 (≈1% de R$9mi)</div></div>
+      <div class="stat"><div class="stat-num">R$117</div><div class="stat-lbl">Ticket médio (P13)</div></div>
+      <div class="stat"><div class="stat-num">R$150mil</div><div class="stat-lbl">Investimento total · 12 meses</div></div>
     </div>
 
     <div class="opp-grid">
@@ -747,40 +807,40 @@ body{
       </div>
 
       <div class="opp-card">
-        <div class="opp-head"><div class="opp-icon">⇄</div><div class="opp-title">Revenda do futuro</div></div>
+        <div class="opp-head"><div class="opp-icon">$</div><div class="opp-title">EBITDA positivo desde o mês 1</div></div>
         <ul>
-          <li>Modernização do ciclo do revendedor</li>
-          <li>Jornada de maquinha POS: taxa de <b>1,9% para 1,4%</b>, com cashback e carteira digital</li>
+          <li>Margem bruta combinada de <b>34%</b> (R$3.060/Ton) já garante EBITDA acima de <b>R$2.000/Ton</b> no mês 1</li>
+          <li>Cresce de forma consistente até <b>R$2.784/Ton</b> no mês 12, sem recuos</li>
         </ul>
       </div>
 
       <div class="opp-card">
-        <div class="opp-head"><div class="opp-icon">$</div><div class="opp-title">Parcerias em avaliação</div></div>
+        <div class="opp-head"><div class="opp-icon">⚙</div><div class="opp-title">Licenciamento em rampa</div></div>
         <ul>
-          <li><b>Nerdmonster</b> × Harmo + Livelo + iFood</li>
+          <li><b>R$10.000/mês</b> nos meses 1–6, subindo para <b>R$15.000/mês</b> a partir do mês 7</li>
+          <li>Estrutura desenhada para proteger o Grupo Ultra durante a fase de validação</li>
         </ul>
       </div>
 
       <div class="opp-card">
-        <div class="opp-head"><div class="opp-icon">⚙</div><div class="opp-title">Piloto WhatsApp (Salvador, 2021)</div></div>
+        <div class="opp-head"><div class="opp-icon">⇄</div><div class="opp-title">Modelo preserva o revendedor</div></div>
         <ul>
-          <li>Já rodou um piloto de venda via WhatsApp em Salvador</li>
-          <li>Hoje o canal representa <b>6%</b> do total (jul: 389 mil mensagens)</li>
+          <li><b>90% do ticket</b> (R$105,30/pedido) continua indo para o revendedor</li>
+          <li>Ultragaz ganha <b>+2% incremental</b> (R$180/Ton) sobre a margem que já existe hoje</li>
         </ul>
       </div>
 
       <div class="opp-card flag">
-        <div class="opp-head"><div class="opp-icon">⚑</div><div class="opp-title">Poucos dados do consumidor</div></div>
+        <div class="opp-head"><div class="opp-icon">⚑</div><div class="opp-title">99 — estratégia em negociação</div></div>
         <ul>
-          <li>Ultragaz possui dado rico dos <b>revendedores</b>, mas quase nada do consumidor final</li>
+          <li>Taxa de <b>6%</b> já está OK, mas a estratégia comercial do canal ainda está em negociação</li>
         </ul>
       </div>
 
       <div class="opp-card flag">
-        <div class="opp-head"><div class="opp-icon">⚑</div><div class="opp-title">Contrato travado — ponto em aberto</div></div>
+        <div class="opp-head"><div class="opp-icon">⚑</div><div class="opp-title">Magalu + Aiqfome — em integração</div></div>
         <ul>
-          <li>Negociação em curso desde set/25 sobre <b>exclusividade</b>, <b>take rate</b> e novos custos</li>
-          <li>Mudança de interlocutor (Cristina → Gustavo/Vivian) gerou atraso no avanço</li>
+          <li>Taxa (6%) e estratégia ainda em negociação; integração técnica (Raiz) em andamento</li>
         </ul>
       </div>
     </div>
@@ -789,10 +849,10 @@ body{
     <div class="panel strategy-panel">
       <div class="strategy-list">
         <div class="strategy-item"><b>Liderança</b> Mateus lidera o projeto pela Hubii</div>
-        <div class="strategy-item"><b>Praça</b> Grande São Paulo (a confirmar)</div>
-        <div class="strategy-item"><b>Canal</b> WhatsApp como porta de entrada</div>
-        <div class="strategy-item"><b>Modelo</b> price zone, orçamento via agent.shop</div>
-        <div class="strategy-item"><b>Pipeline</b> Contracting</div>
+        <div class="strategy-item"><b>Mercado</b> GSP — Grande São Paulo (SP capital + ABC Paulista)</div>
+        <div class="strategy-item"><b>Canais</b> iFood, 99 e Magalu + Aiqfome (Raiz)</div>
+        <div class="strategy-item"><b>Modelo</b> repasse ao revendedor + take rate incremental Ultragaz (2%) + fee Hubii (2%)</div>
+        <div class="strategy-item"><b>Licenciamento</b> R$10mil/mês (m1–6) → R$15mil/mês (m7+)</div>
       </div>
     </div>
   </div>
@@ -805,11 +865,11 @@ body{
         <div class="owner-header"><span class="owner-badge ultragaz">ULTRAGAZ</span></div>
         <div class="task" data-task>
           <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
-          <div class="task-text">Enviar price zone</div>
+          <div class="task-text">Confirmar responsável e prazo do piloto</div>
         </div>
         <div class="task" data-task>
           <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
-          <div class="task-text">Assinatura do contrato</div>
+          <div class="task-text">Selecionar demais cidades do GSP para a 2ª fase (backlog)</div>
         </div>
       </div>
 
@@ -817,11 +877,11 @@ body{
         <div class="owner-header"><span class="owner-badge hubii">HUBII</span></div>
         <div class="task" data-task>
           <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
-          <div class="task-text">Realizar orçamento com agent.shop</div>
+          <div class="task-text">Fechar estratégia de negociação de taxa com a 99</div>
         </div>
         <div class="task" data-task>
           <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
-          <div class="task-text">Estruturar BP</div>
+          <div class="task-text">Concluir integração com Magalu + Aiqfome (Raiz)</div>
         </div>
       </div>
 
@@ -846,109 +906,124 @@ body{
   <!-- BUSINESS PLAN -->
   <div class="tab-panel" id="panel-bp">
 
+    <div class="section-label first">Investimentos</div>
     <div class="stat-row">
-      <div class="stat"><div class="stat-num">R$1mi</div><div class="stat-lbl">Pote digital SP+GSP hoje (meta: R$1,8mi)</div></div>
-      <div class="stat"><div class="stat-num">R$2,7mi</div><div class="stat-lbl">Pote digital Brasil hoje (meta: R$4,4mi)</div></div>
-      <div class="stat"><div class="stat-num">R$200mil</div><div class="stat-lbl">Meta mês 6: 20% do pote SP+GSP</div></div>
-      <div class="stat"><div class="stat-num">M9 / M15</div><div class="stat-lbl">Mês em que SP+GSP / Brasil atingem 100% do pote atual</div></div>
+      <div class="stat"><div class="stat-num">R$10.000</div><div class="stat-lbl">Licenciamento Hubii/mês — meses 1 a 6 (rampup)</div></div>
+      <div class="stat"><div class="stat-num">R$15.000</div><div class="stat-lbl">Licenciamento Hubii/mês — a partir do mês 7</div></div>
+      <div class="stat"><div class="stat-num">R$150.000</div><div class="stat-lbl">Total em 12 meses (6×10k + 6×15k)</div></div>
+    </div>
+    <div class="panel" style="margin-bottom:8px;">
+      <p style="font-size:13px; color:var(--ink-soft); margin:0; line-height:1.5;">Esse valor entra como despesa operacional (opex), descontado antes do EBITDA — ver detalhamento na seção P&amp;L.</p>
     </div>
 
-    <div class="section-label first">Projeção 18 meses — GMV capturado pelo novo WhatsApp</div>
+    <div class="section-label">Projeção (12 meses)</div>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-num">R$9mi</div><div class="stat-lbl">Potencial digital/mês · Mercado GSP</div></div>
+      <div class="stat"><div class="stat-num">~1%</div><div class="stat-lbl">Captura inicial da demanda reprimida (mês 1)</div></div>
+      <div class="stat"><div class="stat-num">R$85mil</div><div class="stat-lbl">GMV mês 1 (≈1% de R$9mi)</div></div>
+      <div class="stat"><div class="stat-num">R$117</div><div class="stat-lbl">Ticket médio (P13)</div></div>
+    </div>
+
     <div class="panel">
       <div class="bp-legend">
-        <div class="bp-legend-item"><span class="bp-legend-line" style="background:var(--purple)"></span>SP + Grande SP — capturado</div>
-        <div class="bp-legend-item"><span class="bp-legend-line" style="background:var(--brasil)"></span>Brasil — capturado (expansão nacional)</div>
-        <div class="bp-legend-item"><span class="bp-legend-dot" style="background:var(--amber)"></span>Transição piloto → escala</div>
+        <div class="bp-legend-item"><span class="bp-legend-line" style="background:var(--purple)"></span>Receita mensal (GMV) — Mercado GSP</div>
+        <div class="bp-legend-item"><span class="bp-legend-dot" style="background:var(--amber)"></span>Licenciamento sobe p/ R$15mil (mês 7)</div>
       </div>
-      <div class="bp-callout" id="bpCallout">Clique em um ponto da curva para ver o potencial de vendas daquele mês.</div>
+      <div class="bp-callout" id="bpCallout">Clique em um ponto da curva para ver o detalhamento do mês.</div>
       <div class="bp-chart-wrap">
-        <svg id="bpChart" viewBox="0 0 1000 440" width="100%" style="min-width:680px; display:block;"></svg>
-      </div>
-
-      <div class="bp-track-row">
-        <div class="bp-track-label">SP + Grande SP</div>
-        <div class="bp-phase-row small">
-          <div class="bp-phase pilot">M1–6 · piloto até 20% do pote (200mil)</div>
-          <div class="bp-phase official">M7–9 · escala até 100% do pote (1mi)</div>
-          <div class="bp-phase official" style="background:var(--purple-glow); color:var(--purple-deep);">M10–18 · pote cresce até 1,8mi, captura acompanha</div>
-        </div>
-      </div>
-      <div class="bp-track-row">
-        <div class="bp-track-label">Brasil</div>
-        <div class="bp-phase-row small">
-          <div class="bp-phase neutral">M1–6 · sem captura nacional ainda</div>
-          <div class="bp-phase br">M7–15 · expansão até 100% do pote (2,7mi)</div>
-          <div class="bp-phase br" style="background:#d4efe9;">M16–18 · pote cresce até 4,4mi, captura acompanha</div>
-        </div>
+        <svg id="bpChart" viewBox="0 0 1000 420" width="100%" style="min-width:680px; display:block;"></svg>
       </div>
     </div>
 
     <div class="section-label">Marcos da curva</div>
     <div class="bp-milestone-grid">
       <div class="bp-milestone-card">
-        <div class="bp-milestone-month">Mês 6 · fim do piloto</div>
-        <div class="bp-milestone-value" id="bpM6">—</div>
-        <div class="bp-milestone-sub" id="bpM6sub">—</div>
+        <div class="bp-milestone-month">Mês 1 · meta batida de cara</div>
+        <div class="bp-milestone-value">R$ 85.000</div>
+        <div class="bp-milestone-sub">~726 pedidos · 9,44 Ton · acumulado R$2.001/Ton</div>
       </div>
       <div class="bp-milestone-card">
-        <div class="bp-milestone-month">Mês 12</div>
-        <div class="bp-milestone-value" id="bpM12">—</div>
-        <div class="bp-milestone-sub" id="bpM12sub">—</div>
+        <div class="bp-milestone-month">Mês 6 · fim do ramp-up</div>
+        <div class="bp-milestone-value">R$ 199.350</div>
+        <div class="bp-milestone-sub">~1.704 pedidos · 22,15 Ton · acumulado R$2.376/Ton</div>
       </div>
       <div class="bp-milestone-card">
-        <div class="bp-milestone-month">Mês 18</div>
-        <div class="bp-milestone-value" id="bpM18">—</div>
-        <div class="bp-milestone-sub" id="bpM18sub">—</div>
+        <div class="bp-milestone-month">Mês 12 · fim do horizonte</div>
+        <div class="bp-milestone-value">R$ 488.750</div>
+        <div class="bp-milestone-sub">~4.177 pedidos · 54,31 Ton · acumulado R$2.600/Ton</div>
       </div>
     </div>
 
     <div class="panel bp-note-list">
       <div class="modal-section-label" style="margin-bottom:14px;">Resumo Executivo das Premissas</div>
-
       <div class="info-block">
-        <div class="info-head">
-          <div class="info-icon">◆</div>
-          <div>
-            <div class="info-name">SP + Grande SP</div>
-            <div class="info-sub">Pote digital atual: R$1mi/mês</div>
-          </div>
-        </div>
         <ul class="info-list">
-          <li><b>Meses 1–6 (piloto):</b> captura gradual da demanda digital local, atingindo <b>20% do pote (R$200mil/mês)</b> ao final do período</li>
-          <li><b>Meses 7–9 (escala):</b> validado o piloto, a captura avança até <b>100% do pote atual (R$1mi/mês)</b></li>
-          <li><b>Meses 10–18 (expansão):</b> o pote total da praça cresce para <b>R$1,8mi/mês</b>, com a captura acompanhando essa expansão</li>
-        </ul>
-      </div>
-
-      <div class="info-block">
-        <div class="info-head">
-          <div class="info-icon">◆</div>
-          <div>
-            <div class="info-name">Brasil</div>
-            <div class="info-sub">Pote digital atual: R$2,7mi/mês</div>
-          </div>
-        </div>
-        <ul class="info-list">
-          <li><b>Meses 1–6:</b> operação concentrada em São Paulo; expansão nacional ainda não iniciada</li>
-          <li><b>Meses 7–15 (expansão nacional):</b> captura avança progressivamente até <b>100% do pote atual (R$2,7mi/mês)</b></li>
-          <li><b>Meses 16–18 (novo teto):</b> o pote nacional cresce para <b>R$4,4mi/mês</b>, com a captura acompanhando esse novo patamar</li>
-        </ul>
-      </div>
-
-      <div class="info-block">
-        <div class="info-head">
-          <div class="info-icon">◆</div>
-          <div>
-            <div class="info-name">Metodologia</div>
-            <div class="info-sub">Curva de adoção</div>
-          </div>
-        </div>
-        <ul class="info-list">
-          <li>As curvas de captura seguem um padrão de adoção progressiva — crescimento mais lento no início de cada fase e aceleração à medida que o canal se consolida</li>
-          <li>As trilhas SP+GSP e Brasil são apresentadas em paralelo, sem sobreposição de valores, já que a segunda contempla a primeira</li>
+          <li>O potencial de vendas do digital hoje na região selecionada (Mercado GSP) é estimado em <b>R$9 milhões/mês</b></li>
+          <li>A captura inicial parte de <b>~1% dessa demanda reprimida</b> (R$85–90 mil/mês) no mês 1, crescendo em curva de adoção não linear ao longo de 12 meses</li>
+          <li>O licenciamento Hubii segue em rampa: <b>R$10.000/mês</b> nos meses 1–6, subindo para <b>R$15.000/mês</b> a partir do mês 7 — desenhado para proteger o Grupo Ultra durante a validação</li>
+          <li>Com a margem combinada de <b>34% (R$3.060/Ton)</b>, o EBITDA acumulado já nasce acima de R$2.000/Ton no mês 1 e cresce de forma consistente até <b>R$2.600/Ton</b> no mês 12, sem recuos ao longo da curva</li>
+          <li>A partir do mês 6, com o ramp-up concluído, o foco passa a ser o crescimento contínuo de volume no Mercado GSP e, se necessário, a avaliação de expansão territorial</li>
         </ul>
       </div>
     </div>
+
+    <div class="section-label">P&amp;L</div>
+    <div class="panel" style="margin-bottom:20px;">
+      <p style="font-size:13.5px; color:var(--ink); line-height:1.6; margin:0;"><b>Lógica do modelo:</b> a rota de mercado atual (Ultragaz → Revendedor) continua existindo do jeito que é hoje, com a mesma margem — o piloto não a substitui. O que o projeto adiciona são três coisas: <b>(1)</b> volume incremental via os canais digitais, <b>(2)</b> receita incremental do take rate de 2% da Ultragaz sobre cada pedido digital, e <b>(3)</b> o custo adicional do licenciamento (SaaS) da Hubii.</p>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat"><div class="stat-num">R$117</div><div class="stat-lbl">Ticket médio (P13, 13kg)</div></div>
+      <div class="stat"><div class="stat-num">76,92</div><div class="stat-lbl">SKUs por Ton (1 SKU = 13kg)</div></div>
+      <div class="stat"><div class="stat-num">R$9.000</div><div class="stat-lbl">Receita / Ton</div></div>
+      <div class="stat"><div class="stat-num">R$180</div><div class="stat-lbl">Margem incremental Ultragaz / Ton</div></div>
+    </div>
+
+    <div class="panel">
+      <div class="modal-section-label" style="margin-bottom:12px;">Divisão do ticket médio</div>
+      <div class="ticket-bar">
+        <div class="ticket-seg" style="width:6%; background:var(--potencial);" title="Comissão do canal — 6%"></div>
+        <div class="ticket-seg" style="width:2%; background:var(--amber);" title="Fee Hubii — 2%"></div>
+        <div class="ticket-seg" style="width:2%; background:var(--purple);" title="Margem adicional Ultragaz — 2%"></div>
+        <div class="ticket-seg" style="width:90%; background:var(--foco);" title="Repasse ao revendedor — 90%"></div>
+      </div>
+      <div class="ticket-legend">
+        <div class="ticket-legend-item"><span class="dot" style="background:var(--potencial);"></span>Comissão do canal (iFood/99/Magalu+Aiqfome) <b>6%</b> · R$7,02/pedido · R$540/Ton</div>
+        <div class="ticket-legend-item"><span class="dot" style="background:var(--amber);"></span>Fee Hubii <b>2%</b> · R$2,34/pedido · R$180/Ton</div>
+        <div class="ticket-legend-item"><span class="dot" style="background:var(--purple);"></span>Margem adicional Ultragaz <b>2%</b> · R$2,34/pedido · R$180/Ton</div>
+        <div class="ticket-legend-item"><span class="dot" style="background:var(--foco);"></span>Repasse ao revendedor <b>90%</b> · R$105,30/pedido · R$8.100/Ton</div>
+      </div>
+      <p style="font-size:12.5px; color:var(--ink-soft); margin:14px 0 0; line-height:1.5;">Os 2% da Ultragaz representam margem <b>incremental</b> (R$180/Ton) — somam-se à margem bruta já existente do revendedor sobre o P13, e não a substituem.</p>
+    </div>
+
+    <div class="section-label">Margem combinada</div>
+    <div class="panel">
+      <div class="strategy-list">
+        <div class="strategy-item"><b>Margem padrão digital Ultragaz</b> 32% · R$2.880/Ton</div>
+        <div class="strategy-item"><b>+ Margem incremental Hubii</b> 2% · R$180/Ton</div>
+        <div class="strategy-item"><b>= Margem combinada</b> 34% · R$3.060/Ton</div>
+      </div>
+      <p style="font-size:12.5px; color:var(--ink-soft); margin:14px 0 0; line-height:1.5;">A margem padrão de 32% é a mesma margem bruta/receita já praticada hoje pela Ultragaz nos canais digitais (referência informada pela Ultragaz). O projeto Hubii soma mais 2% de receita incremental sobre isso — já acima de R$2.000/Ton independentemente do mês, por ser uma proporção fixa sobre o ticket.</p>
+    </div>
+
+    <div class="section-label">EBITDA do piloto (após licenciamento Hubii)</div>
+    <div class="panel">
+      <table class="pl-table">
+        <thead>
+          <tr><th></th><th>Mês 1</th><th>Mês 6</th><th>Mês 12</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Margem bruta combinada (R$/Ton)</td><td>3.060</td><td>3.060</td><td>3.060</td></tr>
+          <tr><td>Volume (Ton)</td><td>9,44</td><td>22,15</td><td>54,31</td></tr>
+          <tr><td>Margem bruta total (R$)</td><td>R$28.886</td><td>R$67.779</td><td>R$166.189</td></tr>
+          <tr><td>(–) Licenciamento Hubii</td><td>R$10.000</td><td>R$10.000</td><td>R$15.000</td></tr>
+          <tr class="pl-highlight"><td>EBITDA do mês (R$)</td><td>R$18.886</td><td>R$57.779</td><td>R$151.189</td></tr>
+          <tr><td>EBITDA do mês (R$/Ton)</td><td>R$2.001</td><td>R$2.609</td><td>R$2.784</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12.5px; color:var(--ink-soft); margin:14px 0 0; line-height:1.5;">Com o licenciamento ajustado para R$10.000/mês nos meses 1–6 (mantendo a mesma meta de receita), o EBITDA já nasce acima de R$2.000/Ton no mês 1 e cresce de forma consistente, sem recuos, até <b>R$2.784/Ton</b> no mês 12.</p>
+    </div>
+
   </div>
 
   <div class="footer-note">Atualizado a partir do Notion · <b>Hubii</b> × Ultragaz</div>
@@ -1052,66 +1127,26 @@ body{
     if(e.key === 'Escape') modal.classList.remove('open');
   });
 
-  // ===== BUSINESS PLAN — projeção 18 meses (duas trilhas: SP+GSP e Brasil) =====
+  // ===== BUSINESS PLAN — projeção 12 meses (Piloto Digital P13, Mercado GSP) =====
   (function(){
-    const months = 18;
-
-    // ---- Trilha SP + Grande SP ----
-    // M1-6: captura cresce (começando baixo) até 20% do pote atual (200k)
-    // M7-9: captura escala até 100% do pote atual (1mi)
-    // M10-18: o pote cresce de 1mi pra 1,8mi, e a captura acompanha (~100% do pote)
-    const spGMV = [];
-    const spPool = []; // pote de referência naquele mês
-    for(let t=1;t<=6;t++){
-      spGMV.push(200000*Math.pow(t/6,2));
-      spPool.push(1000000);
-    }
-    for(let t=1;t<=3;t++){
-      spGMV.push(200000 + 800000*Math.pow(t/3,1.3));
-      spPool.push(1000000);
-    }
-    for(let t=1;t<=9;t++){
-      const pool = 1000000 + 800000*Math.pow(t/9,1.5);
-      spPool.push(pool);
-      spGMV.push(pool);
-    }
-
-    // ---- Trilha Brasil ----
-    // M1-6: nenhuma captura nacional ainda (piloto restrito a SP)
-    // M7-15: captura cresce até 100% do pote atual (2,7mi)
-    // M16-18: o pote cresce de 2,7mi pra 4,4mi, captura acompanha
-    const brGMV = [];
-    const brPool = [];
-    for(let t=1;t<=6;t++){
-      brGMV.push(0);
-      brPool.push(2700000);
-    }
-    for(let t=1;t<=9;t++){
-      brGMV.push(2700000*Math.pow(t/9,1.5));
-      brPool.push(2700000);
-    }
-    for(let t=1;t<=3;t++){
-      const pool = 2700000 + 1700000*Math.pow(t/3,1.3);
-      brPool.push(pool);
-      brGMV.push(pool);
-    }
+    const months = 12;
+    // Dados exatos do plano (Hubii x Ultragaz GTM v3)
+    const gmv       = [85000,94000,111000,135000,165000,199350,238000,281000,328000,378000,432000,488750];
+    const pedidos   = [726,801,952,1158,1410,1704,2035,2401,2800,3230,3689,4177];
+    const volumeTon = [9.44,10.41,12.38,15.06,18.34,22.15,26.45,31.21,36.40,41.99,47.96,54.31];
+    const licenciamento = [10000,10000,10000,10000,10000,10000,15000,15000,15000,15000,15000,15000];
+    const ebitdaMes = [2001,2099,2252,2396,2515,2609,2493,2579,2648,2703,2747,2784];
+    const ebitdaAcum = [2001,2052,2129,2214,2298,2376,2403,2441,2483,2524,2563,2600];
 
     const fmtCompact = (v) => v >= 1000000 ? 'R$' + (v/1000000).toFixed(2).replace('.', ',') + 'mi' : 'R$' + Math.round(v/1000).toLocaleString('pt-BR') + 'mil';
 
-    document.getElementById('bpM6').textContent = fmtCompact(spGMV[5]) + ' / ' + fmtCompact(brGMV[5]);
-    document.getElementById('bpM6sub').textContent = 'SP+GSP / Brasil';
-    document.getElementById('bpM12').textContent = fmtCompact(spGMV[11]) + ' / ' + fmtCompact(brGMV[11]);
-    document.getElementById('bpM12sub').textContent = 'SP+GSP / Brasil';
-    document.getElementById('bpM18').textContent = fmtCompact(spGMV[17]) + ' / ' + fmtCompact(brGMV[17]);
-    document.getElementById('bpM18sub').textContent = 'SP+GSP / Brasil';
-
     // ---- SVG chart ----
     const svg = document.getElementById('bpChart');
-    const W = 1000, H = 440;
+    const W = 1000, H = 420;
     const padL = 70, padR = 20, padT = 24, padB = 36;
     const plotW = W - padL - padR;
     const plotH = H - padT - padB;
-    const yMax = 5000000;
+    const yMax = 550000;
 
     const x = (i) => padL + (i/(months-1)) * plotW;
     const y = (v) => padT + plotH - (v/yMax)*plotH;
@@ -1132,19 +1167,18 @@ body{
       return d;
     }
 
-    const ptsSP = spGMV.map((v,i) => ({x:x(i), y:y(v)}));
-    const ptsBR = brGMV.map((v,i) => ({x:x(i), y:y(v)}));
-    const pathSP = smoothPath(ptsSP);
-    const pathBR = smoothPath(ptsBR);
-    const areaSP = pathSP + ` L ${ptsSP[ptsSP.length-1].x.toFixed(1)} ${padT+plotH} L ${ptsSP[0].x.toFixed(1)} ${padT+plotH} Z`;
+    const pts = gmv.map((v,i) => ({x:x(i), y:y(v)}));
+    const path = smoothPath(pts);
+    const area = path + ` L ${pts[pts.length-1].x.toFixed(1)} ${padT+plotH} L ${pts[0].x.toFixed(1)} ${padT+plotH} Z`;
 
     let svgHTML = '';
 
     // gridlines + y labels
-    [0,1000000,2000000,3000000,4000000,5000000].forEach(v => {
+    [0,100000,200000,300000,400000,500000].forEach(v => {
       const gy = y(v);
       svgHTML += `<line x1="${padL}" y1="${gy}" x2="${W-padR}" y2="${gy}" stroke="var(--line)" stroke-width="1"/>`;
-      svgHTML += `<text x="${padL-10}" y="${gy+4}" text-anchor="end" class="bp-axis-label">${v===0?'0':(v/1000000).toFixed(0)+'mi'}</text>`;
+      const label = v===0 ? '0' : 'R$' + (v/1000).toFixed(0) + 'mil';
+      svgHTML += `<text x="${padL-10}" y="${gy+4}" text-anchor="end" class="bp-axis-label">${label}</text>`;
     });
 
     // x labels — todos os meses
@@ -1152,63 +1186,44 @@ body{
       svgHTML += `<text x="${x(i)}" y="${H-12}" text-anchor="middle" class="bp-axis-label">M${i+1}</text>`;
     }
 
-    // pote SP (flat 1mi) enquanto ainda não começou a crescer (meses 1-9)
-    svgHTML += `<line x1="${x(0)}" y1="${y(1000000)}" x2="${x(8)}" y2="${y(1000000)}" stroke="var(--purple-glow)" stroke-width="1.5" stroke-dasharray="3 4"/>`;
-    svgHTML += `<text x="${x(0)}" y="${y(1000000)-8}" class="bp-axis-label" style="fill:var(--purple);">pote SP+GSP hoje · 1mi</text>`;
-
-    // pote Brasil (flat 2,7mi) enquanto ainda não começou a crescer (meses 1-15)
-    svgHTML += `<line x1="${x(0)}" y1="${y(2700000)}" x2="${x(14)}" y2="${y(2700000)}" stroke="var(--brasil)" stroke-width="1.5" stroke-dasharray="3 4" opacity="0.55"/>`;
-    svgHTML += `<text x="${x(0)}" y="${y(2700000)-8}" class="bp-axis-label" style="fill:var(--brasil);">pote Brasil hoje · 2,7mi</text>`;
-
-    // marco: transição piloto → escala (SP), entre mês 6 e 7
+    // marco: licenciamento sobe pra R$15mil (entre mês 6 e 7)
     const mx = (x(5)+x(6))/2;
     svgHTML += `<line x1="${mx}" y1="${padT}" x2="${mx}" y2="${padT+plotH}" stroke="var(--amber)" stroke-width="1.5" stroke-dasharray="4 4"/>`;
-    svgHTML += `<text x="${mx}" y="${padT-8}" text-anchor="middle" class="bp-axis-label" style="fill:var(--amber);">piloto → escala</text>`;
+    svgHTML += `<text x="${mx}" y="${padT-8}" text-anchor="middle" class="bp-axis-label" style="fill:var(--amber);">licenciamento sobe p/ R$15mil</text>`;
 
     // gradient
     svgHTML += `<defs>
       <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="var(--purple)" stop-opacity="0.25"/>
+        <stop offset="0%" stop-color="var(--purple)" stop-opacity="0.28"/>
         <stop offset="100%" stop-color="var(--purple)" stop-opacity="0"/>
       </linearGradient>
     </defs>`;
 
-    // área + linha SP (hero)
-    svgHTML += `<path d="${areaSP}" fill="url(#areaGrad)" stroke="none"/>`;
-    svgHTML += `<path d="${pathSP}" fill="none" stroke="var(--purple)" stroke-width="3" stroke-linecap="round"/>`;
-    // linha Brasil (secundária)
-    svgHTML += `<path d="${pathBR}" fill="none" stroke="var(--brasil)" stroke-width="2.5" stroke-linecap="round"/>`;
+    svgHTML += `<path d="${area}" fill="url(#areaGrad)" stroke="none"/>`;
+    svgHTML += `<path d="${path}" fill="none" stroke="var(--purple)" stroke-width="3" stroke-linecap="round"/>`;
 
-    // pontos clicáveis em cada mês (as duas trilhas)
-    ptsSP.forEach((p,i) => {
-      svgHTML += `<circle class="bp-point" data-i="${i}" data-track="sp" cx="${p.x}" cy="${p.y}" r="4.5" fill="var(--card)" stroke="var(--purple)" stroke-width="2.5"/>`;
-    });
-    ptsBR.forEach((p,i) => {
-      svgHTML += `<circle class="bp-point" data-i="${i}" data-track="br" cx="${p.x}" cy="${p.y}" r="4" fill="var(--card)" stroke="var(--brasil)" stroke-width="2.5"/>`;
+    // pontos clicáveis em cada mês
+    pts.forEach((p,i) => {
+      const big = [0,5,11].includes(i);
+      svgHTML += `<circle class="bp-point" data-i="${i}" cx="${p.x}" cy="${p.y}" r="${big?6:4.5}" fill="var(--card)" stroke="var(--purple)" stroke-width="2.5"/>`;
     });
 
     svg.innerHTML = svgHTML;
 
-    // callout ao clicar em um ponto — mostra as duas trilhas naquele mês
+    // callout ao clicar em um ponto
     const callout = document.getElementById('bpCallout');
     function selectMonth(i){
       svg.querySelectorAll('.bp-point').forEach(c => {
-        const isSP = c.dataset.track === 'sp';
         c.setAttribute('fill', 'var(--card)');
-        c.setAttribute('r', isSP ? 4.5 : 4);
+        c.setAttribute('r', [0,5,11].includes(+c.dataset.i) ? 6 : 4.5);
       });
-      svg.querySelectorAll(`.bp-point[data-i="${i}"]`).forEach(c => {
-        const isSP = c.dataset.track === 'sp';
-        c.setAttribute('fill', isSP ? 'var(--purple)' : 'var(--brasil)');
-        c.setAttribute('r', 7);
-      });
+      const el = svg.querySelector(`.bp-point[data-i="${i}"]`);
+      el.setAttribute('fill', 'var(--purple)');
+      el.setAttribute('r', 7.5);
 
-      const spPct = (spGMV[i]/spPool[i]*100).toFixed(0);
-      const brPct = brPool[i] > 0 ? (brGMV[i]/brPool[i]*100).toFixed(0) : 0;
-
-      callout.innerHTML = `<b>Mês ${i+1}</b> · potencial de vendas: `
-        + `SP+GSP <b>${fmtCompact(spGMV[i])}</b>/mês (${spPct}% do pote) `
-        + `<span class="ph">·</span> Brasil <b>${fmtCompact(brGMV[i])}</b>/mês (${brPct}% do pote)`;
+      callout.innerHTML = `<b>Mês ${i+1}</b> · GMV: <b>${fmtCompact(gmv[i])}</b>`
+        + `<span class="ph"> · ${pedidos[i].toLocaleString('pt-BR')} pedidos · ${volumeTon[i].toFixed(2).replace('.',',')} Ton`
+        + ` · licenciamento R$${(licenciamento[i]/1000)}mil · EBITDA do mês R$${ebitdaMes[i]}/Ton · acumulado R$${ebitdaAcum[i]}/Ton</span>`;
     }
     svg.querySelectorAll('.bp-point').forEach(c => {
       c.addEventListener('click', () => selectMonth(+c.dataset.i));
