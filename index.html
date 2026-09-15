@@ -242,6 +242,53 @@ body{
 }
 .modal-link:hover{ text-decoration:underline; }
 
+.modal-add-update{
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.modal-update-input{
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-family: 'Onest', sans-serif;
+  font-size: 13.5px;
+  color: var(--ink);
+  background: var(--paper);
+  resize: vertical;
+  box-sizing: border-box;
+}
+.modal-update-input:focus{ outline: none; border-color: var(--purple); }
+.modal-update-row{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  margin-top: 10px;
+}
+.modal-update-btn{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--purple);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .15s ease;
+}
+.modal-update-btn:hover{ background: var(--purple-deep); }
+.modal-update-btn:disabled{ background: var(--potencial); cursor: default; }
+.modal-update-feedback{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 11.5px;
+  color: var(--ink-soft);
+}
+.modal-update-feedback.error{ color: #c0392b; }
+.modal-update-feedback.success{ color: var(--foco); }
+
 .progress-block{
   display:flex;
   align-items:center;
@@ -501,6 +548,17 @@ body{
 .task.done .check svg{ opacity:1; }
 .task.done .task-text{ color: var(--ink-soft); text-decoration: line-through; }
 .task-text{ font-size: 14px; color: var(--ink); }
+.task-text::after{
+  content: '· ver histórico';
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--purple);
+  margin-left: 8px;
+  opacity: 0.7;
+  display: inline-block;
+}
+.task.done .task-text::after{ color: var(--potencial); }
 .task-note{ display:block; font-family:'IBM Plex Mono', monospace; font-size: 11px; color: var(--purple); margin-top: 3px; }
 
 /* OPORTUNIDADES */
@@ -1153,25 +1211,17 @@ body{
 
       <div class="owner-group">
         <div class="owner-header"><span class="owner-badge ambos">AMBOS</span></div>
-        <div class="task-row2">
-          <div class="task-check"></div>
-          <div class="task-content">
-            <span class="task-text2">assinatura do contrato</span>
-            <span class="task-sep">·</span>
-            <a class="task-history" href="https://app.notion.com/p/3dcef5854ef380b6867fe416dd3ba7ca" target="_blank" rel="noopener">ver histórico</a>
-          </div>
+        <div class="task" data-task data-status="t_contrato">
+          <div class="check" data-check><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
+          <div class="task-text">assinatura do contrato</div>
         </div>
       </div>
 
       <div class="owner-group">
         <div class="owner-header"><span class="owner-badge parceiro">PARCEIRO</span></div>
-        <div class="task-row2">
-          <div class="task-check"></div>
-          <div class="task-content">
-            <span class="task-text2">aprovação do BP</span>
-            <span class="task-sep">·</span>
-            <a class="task-history" href="https://app.notion.com/p/3dcef5854ef38036a29ae308f77d20dd" target="_blank" rel="noopener">ver histórico</a>
-          </div>
+        <div class="task" data-task data-status="t_bp">
+          <div class="check" data-check><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
+          <div class="task-text">aprovação do BP</div>
         </div>
       </div>
 
@@ -1207,13 +1257,21 @@ body{
   <div class="modal-box">
     <div class="modal-head">
       <div>
-        <div class="modal-eyebrow">Notion · Companies</div>
+        <div class="modal-eyebrow" id="modalEyebrow">Notion · Companies</div>
         <div class="modal-title" id="modalTitle">—</div>
       </div>
       <button class="modal-close" data-close>✕</button>
     </div>
     <div class="modal-sub" id="modalSub">—</div>
     <div id="modalBody"></div>
+    <div class="modal-add-update" id="modalAddUpdate" style="display:none;">
+      <div class="modal-section-label">Adicionar atualização</div>
+      <textarea id="modalUpdateText" class="modal-update-input" rows="2" placeholder="Ex: cliente confirmou reunião para sexta-feira"></textarea>
+      <div class="modal-update-row">
+        <button id="modalUpdateSave" class="modal-update-btn">Salvar no Notion</button>
+        <span id="modalUpdateFeedback" class="modal-update-feedback"></span>
+      </div>
+    </div>
     <div class="modal-footer">
       <a class="modal-link" id="modalLink" href="#" target="_blank" rel="noopener">Abrir no Notion ↗</a>
     </div>
@@ -1233,15 +1291,66 @@ body{
     });
   });
 
-  // Contador da aba Tarefas — baseado no Status real de cada tarefa (Notion)
-  const statusBadges = document.querySelectorAll('.task-row2');
-  const total = statusBadges.length;
+  // Checklist + status modal (mesma arquitetura da Iconic)
+  const tasks = document.querySelectorAll('[data-task]');
+  const total = tasks.length;
   const tabCount = document.getElementById('tabCount');
 
   function updateProgress(){
-    const done = document.querySelectorAll('.task-row2.done').length;
+    const done = document.querySelectorAll('[data-task].done').length;
     tabCount.textContent = done + '/' + total;
   }
+
+  function notionPageIdFromUrl(url){
+    const match = url.match(/([a-f0-9]{32})/i);
+    if(!match) return null;
+    const hex = match[1];
+    return `${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20)}`;
+  }
+
+  const TASKS = {
+    t_contrato: { title:"assinatura do contrato", owner:"Ambos", done:false, originalStatus:"To-Do", url:"https://app.notion.com/p/3dcef5854ef380b6867fe416dd3ba7ca", updates:[] },
+    t_bp: { title:"aprovação do BP", owner:"Parceiro", done:false, originalStatus:"Waiting", url:"https://app.notion.com/p/3dcef5854ef38036a29ae308f77d20dd", updates:[] },
+  };
+
+  tasks.forEach(t => {
+    const checkEl = t.querySelector('[data-check]');
+    checkEl.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      const wasDone = t.classList.contains('done');
+      const nowDone = !wasDone;
+      t.classList.toggle('done', nowDone);
+      updateProgress();
+
+      const key = t.dataset.status;
+      const taskData = TASKS[key];
+      if(taskData){
+        taskData.done = nowDone;
+        // Ao marcar, vai para "Done". Ao desmarcar, volta para o status ORIGINAL
+        // que a tarefa tinha no Notion (não um valor fixo) — To-Do ou Waiting, conforme o caso.
+        const targetStatus = nowDone ? 'Done' : taskData.originalStatus;
+        const pageId = notionPageIdFromUrl(taskData.url);
+        if(pageId){
+          try{
+            const resp = await fetch('/api/complete-task', {
+              method: 'POST',
+              credentials: 'same-origin',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ pageId, status: targetStatus }),
+            });
+            if(!resp.ok){
+              console.error('Falha ao atualizar status no Notion:', resp.status, await resp.text());
+            }
+          }catch(err){
+            console.error('Falha ao atualizar status no Notion:', err);
+          }
+        }
+      }
+    });
+    t.addEventListener('click', () => {
+      openTaskStatus(t.dataset.status);
+    });
+  });
 
   updateProgress();
 
@@ -1292,14 +1401,29 @@ body{
   };
 
   const modal = document.getElementById('meetingModal');
+  const modalEyebrow = document.getElementById('modalEyebrow');
   const modalTitle = document.getElementById('modalTitle');
   const modalSub = document.getElementById('modalSub');
   const modalBody = document.getElementById('modalBody');
   const modalLink = document.getElementById('modalLink');
+  const modalAddUpdate = document.getElementById('modalAddUpdate');
+  const modalUpdateText = document.getElementById('modalUpdateText');
+  const modalUpdateSave = document.getElementById('modalUpdateSave');
+  const modalUpdateFeedback = document.getElementById('modalUpdateFeedback');
+  let currentTaskKey = null;
+
+  function todayLabel(){
+    const meses = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+    const now = new Date();
+    return String(now.getDate()).padStart(2,'0') + '-' + meses[now.getMonth()];
+  }
 
   function openMeeting(key){
     const m = MEETINGS[key];
     if(!m) return;
+    currentTaskKey = null;
+    modalAddUpdate.style.display = 'none';
+    modalEyebrow.textContent = 'Meeting Notes · Notion';
     modalTitle.textContent = m.title;
     modalSub.textContent = m.sub;
     modalLink.href = m.url;
@@ -1312,6 +1436,86 @@ body{
     modal.classList.add('open');
   }
 
+  function renderTaskHistory(t){
+    if(t.updates.length === 0){
+      modalBody.innerHTML = '<div class="modal-section"><div class="modal-section-label">Histórico</div><ul><li>Nenhuma atualização registrada ainda.</li></ul></div>';
+    } else {
+      const items = t.updates.slice().reverse().map(u => `<li><b>${u.date}:</b> ${u.text}</li>`).join('');
+      modalBody.innerHTML = `<div class="modal-section"><div class="modal-section-label">Histórico</div><ul>${items}</ul></div>`;
+    }
+  }
+
+  function openTaskStatus(key){
+    const t = TASKS[key];
+    if(!t) return;
+    currentTaskKey = key;
+    modalEyebrow.textContent = 'Tarefa · Notion';
+    modalTitle.textContent = t.title;
+    const statusLabel = t.done ? 'Concluída' : 'Em aberto';
+    modalSub.textContent = t.owner + ' · ' + statusLabel;
+    modalLink.href = t.url;
+    renderTaskHistory(t);
+    modalAddUpdate.style.display = 'block';
+    modalUpdateText.value = '';
+    modalUpdateFeedback.textContent = '';
+    modalUpdateFeedback.className = 'modal-update-feedback';
+    modalUpdateSave.disabled = false;
+    modalUpdateSave.textContent = 'Salvar no Notion';
+    modal.classList.add('open');
+  }
+
+  modalUpdateSave.addEventListener('click', async () => {
+    const key = currentTaskKey;
+    const t = TASKS[key];
+    if(!t) return;
+    const text = modalUpdateText.value.trim();
+    if(!text){
+      modalUpdateFeedback.textContent = 'Escreva algo antes de salvar.';
+      modalUpdateFeedback.className = 'modal-update-feedback error';
+      return;
+    }
+    const pageId = notionPageIdFromUrl(t.url);
+    if(!pageId){
+      modalUpdateFeedback.textContent = 'Não foi possível identificar a página no Notion.';
+      modalUpdateFeedback.className = 'modal-update-feedback error';
+      return;
+    }
+    const date = todayLabel();
+    modalUpdateSave.disabled = true;
+    modalUpdateSave.textContent = 'Salvando...';
+    modalUpdateFeedback.textContent = '';
+    try{
+      const resp = await fetch('/api/add-update', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pageId, date, text }),
+      });
+      const ct = resp.headers.get('content-type') || '';
+      let data;
+      if(ct.includes('application/json')){
+        data = await resp.json();
+      } else {
+        const raw = await resp.text();
+        throw new Error(`resposta inesperada do servidor (HTTP ${resp.status}): ${raw.slice(0,150)}`);
+      }
+      if(!resp.ok){
+        throw new Error((data && data.error && (data.error.message || JSON.stringify(data.error))) || 'Erro desconhecido');
+      }
+      t.updates.push({ date, text });
+      modalUpdateFeedback.textContent = 'Salvo com sucesso!';
+      modalUpdateFeedback.className = 'modal-update-feedback success';
+      modalUpdateText.value = '';
+      renderTaskHistory(t);
+    }catch(err){
+      modalUpdateFeedback.textContent = 'Falha ao salvar: ' + err.message;
+      modalUpdateFeedback.className = 'modal-update-feedback error';
+    }finally{
+      modalUpdateSave.disabled = false;
+      modalUpdateSave.textContent = 'Salvar no Notion';
+    }
+  });
+
   document.querySelectorAll('[data-meeting]').forEach(el => {
     el.addEventListener('click', () => openMeeting(el.dataset.meeting));
   });
@@ -1320,6 +1524,8 @@ body{
   });
   document.addEventListener('keydown', (e) => {
     if(e.key === 'Escape') modal.classList.remove('open');
+  });
+
   });
 
   // ===== BUSINESS PLAN — projeção 12 meses (Piloto Digital P13, Mercado GSP) =====
