@@ -462,6 +462,28 @@ body{
 .status-badge.waiting{ color: var(--amber); background: var(--amber-bg); }
 .status-badge.done{ color: var(--foco); background: var(--foco-bg); }
 
+.task-row2{ display:flex; align-items:center; gap: 12px; padding: 11px 4px; border-bottom: 1px solid var(--line); }
+.owner-group:last-child .task-row2:last-child{ border-bottom:none; }
+.task-check{
+  width:17px; height:17px; border-radius:5px; border:1.5px solid #cfc9e8;
+  flex:none; margin-top:1px;
+}
+.task-row2.done .task-check{
+  background: var(--purple); border-color: var(--purple);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5'%3E%3Cpath d='M4 12l5 5L20 6'/%3E%3C/svg%3E");
+  background-size: 11px 11px; background-repeat:no-repeat; background-position:center;
+}
+.task-content{ font-size: 14px; }
+.task-text2{ color: var(--ink); }
+.task-row2.done .task-text2{ color: var(--ink-soft); text-decoration: line-through; }
+.task-sep{ color: var(--line); margin: 0 6px; }
+.task-history{
+  font-family:'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--ink-soft);
+  text-decoration: none; border-bottom: 1px dotted var(--ink-soft);
+}
+.task-history:hover{ color: var(--purple); border-color: var(--purple); }
+.task-row2.done .task-history{ color: var(--potencial); }
+
 
 .task{ display:flex; align-items:flex-start; gap: 10px; padding: 10px 4px; border-bottom: 1px solid var(--line); cursor:pointer; }
 .task:last-child{ border-bottom:none; }
@@ -1126,21 +1148,30 @@ body{
 
   <!-- TAREFAS -->
   <div class="tab-panel" id="panel-tarefas">
+    <div class="section-label first">Pendências</div>
     <div class="panel">
 
       <div class="owner-group">
         <div class="owner-header"><span class="owner-badge ambos">AMBOS</span></div>
-        <div class="task-row">
-          <div class="task-text">assinatura do contrato</div>
-          <div class="status-badge todo">To-Do</div>
+        <div class="task-row2">
+          <div class="task-check"></div>
+          <div class="task-content">
+            <span class="task-text2">assinatura do contrato</span>
+            <span class="task-sep">·</span>
+            <a class="task-history" href="https://app.notion.com/p/3dcef5854ef380b6867fe416dd3ba7ca" target="_blank" rel="noopener">ver histórico</a>
+          </div>
         </div>
       </div>
 
       <div class="owner-group">
         <div class="owner-header"><span class="owner-badge parceiro">PARCEIRO</span></div>
-        <div class="task-row">
-          <div class="task-text">aprovação do BP</div>
-          <div class="status-badge waiting">Waiting</div>
+        <div class="task-row2">
+          <div class="task-check"></div>
+          <div class="task-content">
+            <span class="task-text2">aprovação do BP</span>
+            <span class="task-sep">·</span>
+            <a class="task-history" href="https://app.notion.com/p/3dcef5854ef38036a29ae308f77d20dd" target="_blank" rel="noopener">ver histórico</a>
+          </div>
         </div>
       </div>
 
@@ -1203,12 +1234,12 @@ body{
   });
 
   // Contador da aba Tarefas — baseado no Status real de cada tarefa (Notion)
-  const statusBadges = document.querySelectorAll('.status-badge');
+  const statusBadges = document.querySelectorAll('.task-row2');
   const total = statusBadges.length;
   const tabCount = document.getElementById('tabCount');
 
   function updateProgress(){
-    const done = document.querySelectorAll('.status-badge.done').length;
+    const done = document.querySelectorAll('.task-row2.done').length;
     tabCount.textContent = done + '/' + total;
   }
 
