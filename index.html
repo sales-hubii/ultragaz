@@ -765,7 +765,7 @@ body{
     <button class="tab-btn" data-tab="resultados">Resultados</button>
     <button class="tab-btn" data-tab="revendas">Revendas</button>
     <button class="tab-btn" data-tab="bp">Business Plan</button>
-    <button class="tab-btn" data-tab="tarefas">Tarefas <span class="tab-count" id="tabCount">0/2</span></button>
+    <button class="tab-btn" data-tab="tarefas">Tarefas <span class="tab-count" id="tabCount">0/5</span></button>
   </div>
 
   <!-- ESCOPO -->
@@ -1210,10 +1210,26 @@ body{
     <div class="panel">
 
       <div class="owner-group">
+        <div class="owner-header"><span class="owner-badge hubii">HUBII</span></div>
+        <div class="task" data-task data-status="t_magalu">
+          <div class="check" data-check><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
+          <div class="task-text">negociação com Magalu</div>
+        </div>
+        <div class="task" data-task data-status="t_99">
+          <div class="check" data-check><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
+          <div class="task-text">negociação com 99</div>
+        </div>
+      </div>
+
+      <div class="owner-group">
         <div class="owner-header"><span class="owner-badge ambos">AMBOS</span></div>
         <div class="task" data-task data-status="t_contrato">
           <div class="check" data-check><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
           <div class="task-text">assinatura do contrato</div>
+        </div>
+        <div class="task" data-task data-status="t_ifood">
+          <div class="check" data-check><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
+          <div class="task-text">ok comercial por iFood</div>
         </div>
       </div>
 
@@ -1309,7 +1325,10 @@ body{
   }
 
   const TASKS = {
+    t_magalu: { title:"negociação com Magalu", owner:"Hubii", done:false, originalStatus:"Backlog", url:"https://app.notion.com/p/3dcef5854ef380a6b97fd6ad009d3f42", updates:[] },
+    t_99: { title:"negociação com 99", owner:"Hubii", done:false, originalStatus:"Backlog", url:"https://app.notion.com/p/3dcef5854ef380de8cfcf7313f09f527", updates:[] },
     t_contrato: { title:"assinatura do contrato", owner:"Ambos", done:false, originalStatus:"To-Do", url:"https://app.notion.com/p/3dcef5854ef380b6867fe416dd3ba7ca", updates:[] },
+    t_ifood: { title:"ok comercial por iFood", owner:"Ambos", done:false, originalStatus:"Waiting", url:"https://app.notion.com/p/3dcef5854ef380d092c7e5ac44d06b57", updates:[] },
     t_bp: { title:"aprovação do BP", owner:"Parceiro", done:false, originalStatus:"Waiting", url:"https://app.notion.com/p/3dcef5854ef38036a29ae308f77d20dd", updates:[] },
   };
 
