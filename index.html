@@ -698,6 +698,40 @@ body{
 .bp-milestone-sub{ font-size: 12px; color: var(--ink-soft); margin-top: 3px; }
 .bp-note-list{ margin-top: 18px; }
 
+/* SCENARIO TOOL */
+.scenario-inputs{
+  display:flex; flex-wrap:wrap; gap: 16px; margin-bottom: 20px;
+}
+.scenario-input-group{ flex: 1 1 200px; }
+.scenario-input-group label{
+  display:block; font-family:'IBM Plex Mono', monospace; font-size: 10.5px;
+  text-transform:uppercase; letter-spacing:.06em; color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+.scenario-input-group input{
+  width:100%; padding: 9px 12px; border:1px solid var(--line); border-radius: var(--radius-sm);
+  font-family:'IBM Plex Mono', monospace; font-size: 14px; color: var(--ink);
+  background: var(--paper); box-sizing:border-box;
+}
+.scenario-input-group input:focus{ outline:none; border-color: var(--purple); }
+.scenario-results{ display:flex; flex-wrap:wrap; gap: 16px; }
+.scenario-result-card{
+  flex: 1 1 320px; background: var(--paper); border:1px solid var(--line);
+  border-radius: var(--radius-sm); padding: 16px 18px;
+}
+.scenario-result-title{ font-weight:700; font-size: 14px; color: var(--ink); margin-bottom:2px; }
+.scenario-result-sub{ font-size: 11.5px; color: var(--ink-soft); margin-bottom: 12px; }
+.scenario-result-row{
+  display:flex; justify-content:space-between; align-items:center;
+  padding: 7px 0; border-bottom: 1px solid var(--line); font-size: 13px; color: var(--ink);
+}
+.scenario-result-row:last-child{ border-bottom:none; }
+.scenario-result-row b{ font-family:'IBM Plex Mono', monospace; }
+.scenario-result-row.highlight{
+  background: var(--purple-glow); margin: 4px -8px; padding: 8px 8px; border-radius:6px; border-bottom:none;
+}
+.scenario-result-row.highlight b{ color: var(--purple-deep); }
+
 /* TICKET BAR + P&L TABLE */
 .ticket-bar{
   display:flex; width:100%; height:28px; border-radius:8px; overflow:hidden;
@@ -1082,7 +1116,49 @@ body{
   <!-- BUSINESS PLAN -->
   <div class="tab-panel" id="panel-bp">
 
-    <div class="section-label first">Investimentos</div>
+    <div class="section-label first">Modelagem de cenários — preço × margem <span style="color:var(--amber); font-weight:600;">· em construção, call de alinhamento com a Ultragaz</span></div>
+    <div class="panel scenario-tool">
+      <p style="font-size:13px; color:var(--ink-soft); margin:0 0 16px; line-height:1.5;">Preencher com os números reais durante a call: dado o volume e a margem atual, quanto de gap a nova margem incremental abre — e se esse gap é absorvido ou repassado ao preço.</p>
+      <div class="scenario-inputs">
+        <div class="scenario-input-group">
+          <label>Ticket médio atual (R$)</label>
+          <input type="number" id="scTicket" value="117" step="0.01">
+        </div>
+        <div class="scenario-input-group">
+          <label>Margem atual sobre o ticket (%)</label>
+          <input type="number" id="scMargemAtual" value="32" step="0.1">
+        </div>
+        <div class="scenario-input-group">
+          <label>Margem incremental a cobrir (%)</label>
+          <input type="number" id="scIncremental" value="" step="0.1" placeholder="preencher na call">
+        </div>
+        <div class="scenario-input-group">
+          <label>Volume mensal estimado (pedidos)</label>
+          <input type="number" id="scVolume" value="" step="1" placeholder="opcional">
+        </div>
+      </div>
+
+      <div class="scenario-results">
+        <div class="scenario-result-card">
+          <div class="scenario-result-title">Cenário A — absorver o gap</div>
+          <div class="scenario-result-sub">preço não muda; o gap sai da margem existente</div>
+          <div class="scenario-result-row"><span>Margem atual</span><b id="scA_margemAtual">—</b></div>
+          <div class="scenario-result-row"><span>Gap de margem / pedido</span><b id="scA_gap">—</b></div>
+          <div class="scenario-result-row highlight"><span>Nova margem líquida / pedido</span><b id="scA_novaMargem">—</b></div>
+          <div class="scenario-result-row"><span>Impacto mensal (se volume informado)</span><b id="scA_impacto">—</b></div>
+        </div>
+        <div class="scenario-result-card">
+          <div class="scenario-result-title">Cenário B — repassar ao preço</div>
+          <div class="scenario-result-sub">preço sobe; margem líquida atual é preservada</div>
+          <div class="scenario-result-row"><span>Novo preço sugerido</span><b id="scB_novoPreco">—</b></div>
+          <div class="scenario-result-row"><span>Aumento de preço necessário</span><b id="scB_aumento">—</b></div>
+          <div class="scenario-result-row highlight"><span>Margem líquida / pedido (mantida)</span><b id="scB_margem">—</b></div>
+          <div class="scenario-result-row"><span>Receita extra mensal (se volume informado)</span><b id="scB_receitaExtra">—</b></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">Investimentos</div>
     <div class="stat-row">
       <div class="stat"><div class="stat-num">R$10.000</div><div class="stat-lbl">Licenciamento Hubii/mês — meses 1 a 6 (rampup)</div></div>
       <div class="stat"><div class="stat-num">R$15.000</div><div class="stat-lbl">Licenciamento Hubii/mês — a partir do mês 7</div></div>
@@ -1542,6 +1618,67 @@ body{
   document.addEventListener('keydown', (e) => {
     if(e.key === 'Escape') modal.classList.remove('open');
   });
+
+  // ===== Modelagem de cenários — preço x margem (ferramenta viva para a call) =====
+  (function(){
+    const fmtR = (v) => 'R$' + v.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+    const fmtPct = (v) => v.toLocaleString('pt-BR', {minimumFractionDigits:1, maximumFractionDigits:1}) + '%';
+
+    const elTicket = document.getElementById('scTicket');
+    const elMargemAtual = document.getElementById('scMargemAtual');
+    const elIncremental = document.getElementById('scIncremental');
+    const elVolume = document.getElementById('scVolume');
+
+    function recalc(){
+      const ticket = parseFloat(elTicket.value);
+      const margemAtualPct = parseFloat(elMargemAtual.value);
+      const incrementalPct = parseFloat(elIncremental.value);
+      const volume = parseFloat(elVolume.value);
+
+      const dash = '—';
+      const out = {
+        scA_margemAtual: dash, scA_gap: dash, scA_novaMargem: dash, scA_impacto: dash,
+        scB_novoPreco: dash, scB_aumento: dash, scB_margem: dash, scB_receitaExtra: dash,
+      };
+
+      if(!isNaN(ticket) && !isNaN(margemAtualPct)){
+        const margemAtualR = ticket * margemAtualPct/100;
+        out.scA_margemAtual = fmtR(margemAtualR);
+        out.scB_margem = fmtR(margemAtualR);
+
+        if(!isNaN(incrementalPct) && incrementalPct > 0){
+          const gap = ticket * incrementalPct/100;
+          out.scA_gap = fmtR(gap);
+          out.scA_novaMargem = fmtR(margemAtualR - gap);
+
+          if(incrementalPct < 100){
+            const novoPreco = ticket / (1 - incrementalPct/100);
+            const aumentoPct = (novoPreco/ticket - 1) * 100;
+            out.scB_novoPreco = fmtR(novoPreco);
+            out.scB_aumento = fmtPct(aumentoPct);
+          }
+
+          if(!isNaN(volume) && volume > 0){
+            out.scA_impacto = fmtR(gap * volume) + '/mês';
+            if(incrementalPct < 100){
+              const novoPreco = ticket / (1 - incrementalPct/100);
+              out.scB_receitaExtra = fmtR((novoPreco - ticket) * volume) + '/mês';
+            }
+          }
+        }
+      }
+
+      Object.keys(out).forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.textContent = out[id];
+      });
+    }
+
+    [elTicket, elMargemAtual, elIncremental, elVolume].forEach(el => {
+      el.addEventListener('input', recalc);
+    });
+    recalc();
+  })();
 
   // ===== BUSINESS PLAN — projeção 12 meses (Piloto Digital P13, Mercado GSP) =====
   (function(){
