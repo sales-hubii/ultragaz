@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Ultragaz — Escopo, Oportunidades & Tarefas</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
@@ -37,15 +38,15 @@ body{
   font-family:'Onest', sans-serif;
   background: var(--paper);
   color: var(--ink);
-  padding: 40px 48px 80px;
+  padding: 40px 24px 80px;
   line-height: 1.4;
 }
 
 .wrap{
+  max-width: 1080px;
   margin: 0 auto;
 }
 
-/* HEADER */
 .header{
   display:flex;
   justify-content:space-between;
@@ -67,12 +68,12 @@ body{
   align-items:center;
   gap:8px;
 }
+
 .eyebrow::before{
   content:'';
   width:7px; height:7px;
   border-radius:50%;
   background: var(--purple);
-  display:inline-block;
   box-shadow: 0 0 0 4px var(--purple-glow);
 }
 
@@ -82,1706 +83,640 @@ body{
   letter-spacing: -0.02em;
   color: var(--ink);
 }
+
 .title span{ color: var(--purple); }
 
 .subtitle{
   font-size: 14px;
   color: var(--ink-soft);
   margin-top: 6px;
+  max-width: 480px;
 }
 
-.cadence-card{
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 16px 20px;
-  min-width: 190px;
-  text-align:center;
-  box-shadow: 0 8px 24px -14px rgba(99,72,229,0.35);
+.tabs-nav{
+  display:flex;
+  gap: 8px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
 }
-.header-cards{ display:flex; gap:12px; flex-wrap:wrap; }
-.cadence-label{
-  font-family:'IBM Plex Mono', monospace;
-  font-size: 10px;
-  text-transform:uppercase;
-  letter-spacing:0.1em;
+
+.tab-button{
+  padding: 12px 24px;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-size: 14px;
+  font-weight: 600;
   color: var(--ink-soft);
-  margin-bottom: 4px;
-}
-.cadence-value{
-  font-size: 15px;
-  font-weight:700;
-  color: var(--purple-deep);
-}
-.meeting-dates{
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid var(--line);
-  display:grid;
-  grid-template-columns: auto auto;
-  row-gap: 6px;
-  column-gap: 14px;
-}
-.meeting-row{ display:contents; }
-.meeting-row span{ color: var(--ink-soft); text-align:left; font-family:'IBM Plex Mono', monospace; font-size: 12px; }
-.meeting-row b{ color: var(--ink); font-weight:600; text-align:right; font-family:'IBM Plex Mono', monospace; font-size: 12px; }
-.meeting-link{
   cursor: pointer;
-  color: var(--purple-deep) !important;
-  text-decoration: underline;
-  text-decoration-color: var(--purple-glow);
-  text-underline-offset: 3px;
-  transition: color .15s ease;
+  transition: all 200ms;
+  white-space: nowrap;
 }
-.meeting-link:hover{ color: var(--purple) !important; }
 
-/* MODAL */
-.modal-overlay{
+.tab-button.active{
+  color: var(--purple);
+  border-bottom-color: var(--purple);
+}
+
+.tab-button:hover{
+  color: var(--ink);
+}
+
+.tab-panels{
+  display:flex;
+  flex-direction:column;
+}
+
+.tab-panel{
   display:none;
-  position: fixed;
-  inset: 0;
-  background: rgba(27,23,48,0.45);
-  backdrop-filter: blur(2px);
-  align-items:center;
-  justify-content:center;
-  z-index: 100;
-  padding: 24px;
 }
-.modal-overlay.open{ display:flex; }
-.modal-box{
-  background: var(--card);
-  border-radius: 20px;
-  max-width: 560px;
-  width: 100%;
-  max-height: 80vh;
-  overflow-y: auto;
-  padding: 28px 30px;
-  box-shadow: 0 24px 60px -20px rgba(27,23,48,0.4);
-  animation: modalIn .2s ease;
-}
-@keyframes modalIn{ from{ opacity:0; transform: translateY(8px) scale(.98);} to{ opacity:1; transform:none; } }
-.modal-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap: 16px;
-  margin-bottom: 6px;
-}
-.modal-eyebrow{
-  font-family:'IBM Plex Mono', monospace;
-  font-size: 11px;
-  text-transform:uppercase;
-  letter-spacing: 0.1em;
-  color: var(--purple);
-  font-weight:600;
-}
-.modal-title{
-  font-size: 19px;
-  font-weight: 800;
-  margin-top: 4px;
-  color: var(--ink);
-}
-.modal-close{
-  background: var(--paper);
-  border: none;
-  width: 28px; height:28px;
-  border-radius: 8px;
-  font-size: 15px;
-  color: var(--ink-soft);
-  cursor:pointer;
-  flex:none;
-}
-.modal-close:hover{ background: var(--line); color: var(--ink); }
-.modal-sub{
-  font-size: 13px;
-  color: var(--ink-soft);
-  margin-bottom: 18px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--line);
-}
-.modal-section{ margin-bottom: 16px; }
-.modal-section:last-of-type{ margin-bottom: 0; }
-.modal-section-label{
-  font-family:'IBM Plex Mono', monospace;
-  font-size: 10.5px;
-  text-transform:uppercase;
-  letter-spacing:0.08em;
-  color: var(--purple-deep);
-  font-weight:700;
-  margin-bottom: 8px;
-}
-.modal-section ul{ list-style:none; }
-.modal-section li{
-  font-size: 13.5px;
-  color: var(--ink);
-  padding-left: 14px;
-  position:relative;
-  margin-bottom: 6px;
-  line-height: 1.45;
-}
-.modal-section li:last-child{ margin-bottom:0; }
-.modal-section li::before{ content:'—'; position:absolute; left:0; color: var(--purple); }
-.modal-footer{
-  margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid var(--line);
-  display:flex;
-  justify-content:flex-end;
-}
-.modal-link{
-  font-family:'IBM Plex Mono', monospace;
-  font-size: 12px;
-  font-weight:600;
-  color: var(--purple);
-  text-decoration:none;
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-.modal-link:hover{ text-decoration:underline; }
 
-.modal-add-update{
-  margin-top: 18px;
-  padding-top: 16px;
-  border-top: 1px solid var(--line);
+.tab-panel.active{
+  display:block;
 }
-.modal-update-input{
-  width: 100%;
-  margin-top: 6px;
-  padding: 10px 12px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  font-family: 'Onest', sans-serif;
-  font-size: 13.5px;
-  color: var(--ink);
-  background: var(--paper);
-  resize: vertical;
-  box-sizing: border-box;
-}
-.modal-update-input:focus{ outline: none; border-color: var(--purple); }
-.modal-update-row{
-  display:flex;
-  align-items:center;
-  gap: 12px;
-  margin-top: 10px;
-}
-.modal-update-btn{
-  font-family:'IBM Plex Mono', monospace;
-  font-size: 12px;
+
+.section-title{
+  font-size: 22px;
   font-weight: 700;
-  color: #fff;
-  background: var(--purple);
-  border: none;
-  padding: 8px 16px;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: background .15s ease;
-}
-.modal-update-btn:hover{ background: var(--purple-deep); }
-.modal-update-btn:disabled{ background: var(--potencial); cursor: default; }
-.modal-update-feedback{
-  font-family:'IBM Plex Mono', monospace;
-  font-size: 11.5px;
-  color: var(--ink-soft);
-}
-.modal-update-feedback.error{ color: #c0392b; }
-.modal-update-feedback.success{ color: var(--foco); }
-
-.progress-block{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  background: var(--card);
-  border:1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 14px 20px;
-  box-shadow: 0 8px 24px -14px rgba(99,72,229,0.35);
-}
-.ring-wrap{ position:relative; width:56px; height:56px; flex:none; }
-.ring-wrap svg{ transform: rotate(-90deg); }
-.ring-bg{ stroke: var(--line); }
-.ring-fg{ stroke: var(--purple); stroke-linecap: round; transition: stroke-dashoffset 0.4s ease; }
-.ring-text{
-  position:absolute; inset:0;
-  display:flex; align-items:center; justify-content:center;
-  font-family:'IBM Plex Mono', monospace;
-  font-weight:600;
-  font-size: 13px;
-  color: var(--purple-deep);
-}
-.progress-copy .num{ font-size:13px; font-weight:700; color: var(--ink); }
-.progress-copy .lbl{
-  font-family:'IBM Plex Mono', monospace;
-  font-size: 10px;
-  text-transform:uppercase;
-  letter-spacing:0.08em;
-  color: var(--ink-soft);
+  color: var(--ink);
+  margin-bottom: 16px;
+  margin-top: 24px;
 }
 
-/* TABS */
-.tabs{
-  display:flex;
-  gap: 4px;
-  border-bottom: 1px solid var(--line);
+.section-title:first-child{ margin-top: 0; }
+
+.stat-row{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
   margin-bottom: 24px;
 }
-.tab-btn{
-  font-family:'IBM Plex Mono', monospace;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  background: none;
-  border: none;
-  color: var(--ink-soft);
-  padding: 12px 18px;
-  cursor: pointer;
-  position: relative;
-  transition: color 0.2s ease;
-}
-.tab-btn:hover{ color: var(--purple-deep); }
-.tab-btn.active{ color: var(--purple); }
-.tab-btn.active::after{
-  content:'';
-  position:absolute;
-  left:0; right:0; bottom:-1px;
-  height: 3px;
-  border-radius: 3px 3px 0 0;
-  background: var(--purple);
-}
-.tab-count{
-  font-size: 10px;
-  background: var(--purple-glow);
-  color: var(--purple-deep);
-  padding: 1px 7px;
-  border-radius: 999px;
-  margin-left: 6px;
-}
 
-.tab-panel{ display:none; animation: fade 0.25s ease; }
-.tab-panel.active{ display:block; }
-@keyframes fade{ from{ opacity:0; transform: translateY(4px);} to{ opacity:1; transform:none; } }
-
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns: 1.05fr 1fr;
-  gap: 20px;
-}
-@media (max-width: 820px){
-  .grid{ grid-template-columns: 1fr; }
-  .header{ align-items:flex-start; }
-}
-
-.section-label{
-  font-family:'IBM Plex Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  font-weight: 600;
-  margin: 28px 0 12px;
-}
-.section-label.first{ margin-top:0; }
-
-.panel{
+.stat-card{
   background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 22px;
-}
-
-/* ESCOPO: PRAÇAS */
-.praca-foco{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  padding: 14px;
+  padding: 20px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--line);
-  margin-bottom: 10px;
-}
-.praca-foco:last-child{ margin-bottom:0; }
-.praca-dot{
-  width:10px; height:10px; border-radius:50%;
-  background: var(--foco);
-  flex:none;
-  box-shadow: 0 0 0 4px var(--foco-bg);
-}
-.praca-dot.pending{ background: var(--amber); box-shadow: 0 0 0 4px var(--amber-bg); }
-.praca-info{ flex:1; }
-.praca-city{ font-weight:700; font-size:15px; }
-.praca-partner{ font-family:'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink-soft); }
-.praca-tag{
-  font-family:'IBM Plex Mono', monospace;
-  font-size: 10px;
-  font-weight:600;
-  letter-spacing:0.05em;
-  text-transform:uppercase;
-  color: var(--foco);
-  background: var(--foco-bg);
-  padding: 4px 10px;
-  border-radius: 999px;
-  flex:none;
-}
-.praca-tag.pending{ color: var(--amber); background: var(--amber-bg); }
-.potencial-list{ display:flex; flex-wrap:wrap; gap:8px; }
-.potencial-chip{
-  font-family:'IBM Plex Mono', monospace;
-  font-size: 12px;
-  font-weight:500;
-  color: var(--potencial);
-  background: var(--potencial-bg);
-  border: 1px solid var(--line);
-  padding: 7px 12px;
-  border-radius: 999px;
-}
-.potencial-chip b{ color: var(--ink-soft); font-weight:600; }
-
-.channel-chip{
-  font-family:'IBM Plex Mono', monospace;
-  font-size: 12px;
-  font-weight:600;
-  color: var(--purple-deep);
-  background: var(--hubii-bg);
-  border: 1px solid var(--purple-glow);
-  padding: 7px 12px;
-  border-radius: 999px;
-}
-.channel-chip.negotiating{
-  color: var(--potencial);
-  background: var(--potencial-bg);
-  border-color: var(--line);
-  font-weight:500;
 }
 
-/* INFO PANEL (App / contexto) */
-.info-block:not(:last-child){ padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
-.info-head{ display:flex; align-items:center; gap:12px; margin-bottom: 10px; }
-.info-icon{
-  width: 34px; height:34px;
-  border-radius: 10px;
-  background: var(--ultragaz-bg);
-  color: var(--ultragaz);
-  display:flex; align-items:center; justify-content:center;
-  font-size:15px; font-weight:700; flex:none;
-}
-.info-name{ font-weight:700; font-size: 14.5px; }
-.info-sub{ font-family:'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-soft); }
-.info-list{ list-style:none; }
-.info-list li{
-  font-size: 13px;
+.stat-label{
+  font-size: 12px;
+  text-transform: uppercase;
   color: var(--ink-soft);
-  padding-left: 14px;
-  position: relative;
-  margin-bottom: 6px;
-  line-height: 1.45;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
 }
-.info-list li:last-child{ margin-bottom:0; }
-.info-list li::before{ content:'—'; position:absolute; left:0; color: var(--purple); }
-.info-list b{ color: var(--ink); font-weight:600; }
 
-/* TAREFAS */
-.owner-group{ margin-bottom: 18px; }
-.owner-group:last-child{ margin-bottom:0; }
-.owner-header{ display:flex; align-items:center; gap:8px; margin-bottom: 10px; }
-.owner-badge{
-  font-family:'IBM Plex Mono', monospace;
-  font-size: 11px;
-  font-weight:700;
-  padding: 3px 10px;
-  border-radius: 999px;
+.stat-value{
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--ink);
 }
-.owner-badge.ultragaz{ color: var(--ultragaz); background: var(--ultragaz-bg); }
-.owner-badge.hubii{ color: var(--hubii); background: var(--hubii-bg); }
-.owner-badge.ambos{ color: var(--purple-deep); background: var(--purple-glow); }
-.owner-badge.parceiro{ color: var(--ultragaz); background: var(--ultragaz-bg); }
 
-.task-row{ display:flex; align-items:center; justify-content:space-between; gap: 10px; padding: 12px 4px; border-bottom: 1px solid var(--line); }
-.task-row:last-child{ border-bottom:none; }
-.status-badge{
-  font-family:'IBM Plex Mono', monospace; font-size: 11px; font-weight:600;
-  padding: 4px 10px; border-radius: 999px; flex:none;
-}
-.status-badge.todo{ color: var(--ink-soft); background: var(--paper); border:1px solid var(--line); }
-.status-badge.waiting{ color: var(--amber); background: var(--amber-bg); }
-.status-badge.done{ color: var(--foco); background: var(--foco-bg); }
-
-.task-row2{ display:flex; align-items:center; gap: 12px; padding: 11px 4px; border-bottom: 1px solid var(--line); }
-.owner-group:last-child .task-row2:last-child{ border-bottom:none; }
-.task-check{
-  width:17px; height:17px; border-radius:5px; border:1.5px solid #cfc9e8;
-  flex:none; margin-top:1px;
-}
-.task-row2.done .task-check{
-  background: var(--purple); border-color: var(--purple);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5'%3E%3Cpath d='M4 12l5 5L20 6'/%3E%3C/svg%3E");
-  background-size: 11px 11px; background-repeat:no-repeat; background-position:center;
-}
-.task-content{ font-size: 14px; }
-.task-text2{ color: var(--ink); }
-.task-row2.done .task-text2{ color: var(--ink-soft); text-decoration: line-through; }
-.task-sep{ color: var(--line); margin: 0 6px; }
-.task-history{
-  font-family:'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--ink-soft);
-  text-decoration: none; border-bottom: 1px dotted var(--ink-soft);
-}
-.task-history:hover{ color: var(--purple); border-color: var(--purple); }
-.task-row2.done .task-history{ color: var(--potencial); }
-
-
-.task{ display:flex; align-items:flex-start; gap: 10px; padding: 10px 4px; border-bottom: 1px solid var(--line); cursor:pointer; }
-.task:last-child{ border-bottom:none; }
-.check{
-  width:18px; height:18px;
-  border-radius: 5px;
-  border: 1.5px solid #cfc9e8;
-  flex:none;
-  margin-top: 2px;
-  display:flex; align-items:center; justify-content:center;
-  transition: all .15s ease;
-}
-.check svg{ opacity:0; width:12px; height:12px; }
-.task.done .check{ background: var(--purple); border-color: var(--purple); }
-.task.done .check svg{ opacity:1; }
-.task.done .task-text{ color: var(--ink-soft); text-decoration: line-through; }
-.task-text{ font-size: 14px; color: var(--ink); }
-.task-text::after{
-  content: '· ver histórico';
-  font-family:'IBM Plex Mono', monospace;
-  font-size: 10px;
-  font-weight: 500;
-  color: var(--purple);
-  margin-left: 8px;
-  opacity: 0.7;
-  display: inline-block;
-}
-.task.done .task-text::after{ color: var(--potencial); }
-.task-note{ display:block; font-family:'IBM Plex Mono', monospace; font-size: 11px; color: var(--purple); margin-top: 3px; }
-
-/* OPORTUNIDADES */
-.opp-grid{
+.grid{
   display:grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 16px;
+  margin-bottom: 24px;
 }
-@media (max-width: 820px){ .opp-grid{ grid-template-columns: 1fr; } }
+
+.card{
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  transition: all 200ms;
+}
+
+.card:hover{
+  border-color: var(--purple);
+  box-shadow: 0 8px 24px rgba(99,72,229,0.08);
+}
 
 .opp-card{
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 18px 20px;
-}
-.opp-card.flag{ border-color: #f0d9a6; background: linear-gradient(180deg, var(--amber-bg), var(--card) 60%); }
-.opp-head{ display:flex; align-items:center; gap:10px; margin-bottom: 10px; }
-.opp-icon{
-  width:30px; height:30px;
-  border-radius:9px;
-  background: var(--hubii-bg);
-  color: var(--purple);
-  display:flex; align-items:center; justify-content:center;
-  font-size:15px; flex:none;
-}
-.opp-card.flag .opp-icon{ background: var(--amber-bg); color: var(--amber); }
-.opp-title{ font-weight:700; font-size:14.5px; }
-.opp-card ul{ list-style:none; }
-.opp-card li{
-  font-size: 13.5px;
-  color: var(--ink-soft);
-  padding-left: 14px;
-  position: relative;
-  margin-bottom: 6px;
-}
-.opp-card li:last-child{ margin-bottom:0; }
-.opp-card li::before{
-  content:'—';
-  position:absolute; left:0;
-  color: var(--purple);
-}
-.opp-card b{ color: var(--ink); font-weight:600; }
-
-.stat-row{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 18px; }
-.stat{
-  flex:1;
-  min-width: 150px;
-  background: var(--card);
-  border:1px solid var(--line);
   border-radius: var(--radius-sm);
-  padding: 14px 16px;
+  padding: 20px;
+  transition: all 200ms;
 }
-.stat-num{ font-size: 20px; font-weight:800; color: var(--purple-deep); font-family:'IBM Plex Mono', monospace; }
-.stat-lbl{ font-size: 11.5px; color: var(--ink-soft); margin-top:2px; }
 
-/* ESTRATEGIA */
-.strategy-panel{ margin-top: 20px; }
-.strategy-list{ display:grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
-@media (max-width: 600px){ .strategy-list{ grid-template-columns: 1fr; } }
-.strategy-item{
-  display:flex; align-items:center; gap:10px;
-  background: var(--paper);
+.opp-card:hover{
+  border-color: var(--purple);
+  box-shadow: 0 8px 24px rgba(99,72,229,0.08);
+}
+
+.opp-card.flag{
+  border-left: 4px solid var(--amber);
+  background: linear-gradient(to right, var(--amber-bg), var(--card));
+}
+
+.opp-title{
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.opp-desc{
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.owner-badges{
+  display:flex;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.owner-badge{
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--hubii-bg);
+  color: var(--hubii);
+}
+
+.owner-badge.client{
+  background: var(--ultragaz-bg);
+  color: var(--ultragaz);
+}
+
+.task-item{
+  padding: 16px;
+  border-left: 3px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap: 16px;
+}
+
+.task-item:last-child{ border-bottom: none; }
+
+.task-content{
+  flex:1;
+}
+
+.task-title{
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.task-owner{
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.task-status{
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: var(--foco-bg);
+  color: var(--foco);
+  font-weight: 600;
+  white-space:nowrap;
+}
+
+.ata-card{
+  background: var(--card);
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
-  padding: 12px 14px;
-  font-size: 13.5px;
+  padding: 20px;
+  margin-bottom: 16px;
+  cursor:pointer;
+  transition: all 200ms;
 }
-.strategy-item b{ color: var(--purple-deep); }
 
-/* ATAS */
-.ata-card{
+.ata-card:hover{
+  border-color: var(--purple);
+  box-shadow: 0 8px 24px rgba(99,72,229,0.08);
+}
+
+.ata-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap: 12px;
+}
+
+.ata-title{
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  flex:1;
+}
+
+.ata-date{
+  font-size: 12px;
+  color: var(--ink-soft);
+  white-space:nowrap;
+}
+
+.ata-summary{
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-top: 12px;
+  line-height: 1.6;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  top:0; left:0; right:0; bottom:0;
+  background: rgba(27,23,48,0.7);
+  z-index:1000;
+  padding:24px;
+  overflow-y:auto;
+}
+
+.modal.active{ display:flex; align-items:flex-start; justify-content:center; }
+
+.modal-content{
+  background: var(--card);
+  border-radius: var(--radius);
+  width:100%;
+  max-width:600px;
+  padding:32px;
+  margin-top:40px;
+  position:relative;
+}
+
+.modal-close{
+  position:absolute;
+  top:16px; right:16px;
+  width:32px; height:32px;
+  background: transparent;
+  border:none;
+  font-size:24px;
+  color: var(--ink-soft);
+  cursor:pointer;
   display:flex;
   align-items:center;
-  gap:16px;
-  padding: 14px 6px;
-  border-bottom: 1px solid var(--line);
-  cursor:pointer;
-  transition: background .15s ease;
+  justify-content:center;
 }
-.ata-card:last-child{ border-bottom:none; }
-.ata-card:hover{ background: var(--paper); }
-.ata-date{
-  font-family:'IBM Plex Mono', monospace;
+
+.modal-close:hover{ color: var(--ink); }
+
+.modal-title{
+  font-size:24px;
   font-weight:700;
-  font-size: 18px;
-  color: var(--purple-deep);
-  text-align:center;
-  min-width: 46px;
-  line-height:1.1;
+  color:var(--ink);
+  margin-bottom:4px;
 }
-.ata-date span{
-  display:block;
-  font-size: 10px;
-  font-weight:600;
-  letter-spacing:0.05em;
-  color: var(--ink-soft);
+
+.modal-meta{
+  font-size:12px;
+  color:var(--ink-soft);
+  margin-bottom:20px;
+}
+
+.modal-body{
+  font-size:14px;
+  color:var(--ink-soft);
+  line-height:1.7;
+}
+
+.progress-ring{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:16px;
+}
+
+.ring-svg{
+  width:120px;
+  height:120px;
+}
+
+.ring-text{
+  font-size:24px;
+  font-weight:800;
+  color:var(--purple);
+}
+
+.ring-label{
+  font-size:12px;
+  color:var(--ink-soft);
   text-transform:uppercase;
-}
-.ata-info{ flex:1; }
-.ata-title{ font-weight:700; font-size:14px; }
-.ata-teaser{ font-size:12.5px; color: var(--ink-soft); margin-top:2px; }
-.ata-arrow{ color: var(--purple); font-size:16px; flex:none; }
-
-.footer-note{
-  margin-top: 40px;
-  text-align:center;
-  font-family:'IBM Plex Mono', monospace;
-  font-size: 11px;
-  color: var(--potencial);
+  letter-spacing:0.08em;
+  font-weight:600;
 }
 
-/* BUSINESS PLAN */
-.bp-legend{ display:flex; gap:22px; flex-wrap:wrap; margin-bottom: 18px; }
-.bp-legend-item{ display:flex; align-items:center; gap:8px; font-family:'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink-soft); }
-.bp-legend-dot{ width:10px; height:10px; border-radius:50%; flex:none; }
-.bp-legend-line{ width:16px; height:2px; border-radius:2px; flex:none; }
-.bp-chart-wrap{ width:100%; overflow-x:auto; }
-.bp-axis-label{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; fill: var(--ink-soft); }
-.bp-value-label{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; font-weight:600; }
-.bp-phase-row{ display:flex; gap:10px; margin-top: 18px; }
-.bp-phase{
-  flex:1; padding: 10px 14px; border-radius: var(--radius-sm);
-  font-family:'IBM Plex Mono', monospace; font-size: 12px; text-align:center;
-}
-.bp-phase.pilot{ background: var(--amber-bg); color: var(--amber); }
-.bp-phase.official{ background: var(--hubii-bg); color: var(--purple-deep); }
-.bp-milestone-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
-@media (max-width: 820px){ .bp-milestone-grid{ grid-template-columns: 1fr; } }
-.bp-milestone-card{
-  background: var(--card); border:1px solid var(--line); border-radius: var(--radius-sm);
-  padding: 16px 18px;
-}
-.bp-milestone-month{
-  font-family:'IBM Plex Mono', monospace; font-size: 11px; color: var(--purple);
-  text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; font-weight:700;
-}
-.bp-milestone-value{ font-size: 21px; font-weight:800; color: var(--ink); font-family:'IBM Plex Mono', monospace; }
-.bp-milestone-sub{ font-size: 12px; color: var(--ink-soft); margin-top: 3px; }
-.bp-note-list{ margin-top: 18px; }
-
-/* SCENARIO TOOL */
-.scenario-inputs{
-  display:flex; flex-wrap:wrap; gap: 16px; margin-bottom: 20px;
-}
-.scenario-input-group{ flex: 1 1 200px; }
-.scenario-input-group label{
-  display:block; font-family:'IBM Plex Mono', monospace; font-size: 10.5px;
-  text-transform:uppercase; letter-spacing:.06em; color: var(--ink-soft);
-  margin-bottom: 6px;
-}
-.scenario-input-group input{
-  width:100%; padding: 9px 12px; border:1px solid var(--line); border-radius: var(--radius-sm);
-  font-family:'IBM Plex Mono', monospace; font-size: 14px; color: var(--ink);
-  background: var(--paper); box-sizing:border-box;
-}
-.scenario-input-group input:focus{ outline:none; border-color: var(--purple); }
-.scenario-results{ display:flex; flex-wrap:wrap; gap: 16px; }
-.scenario-result-card{
-  flex: 1 1 320px; background: var(--paper); border:1px solid var(--line);
-  border-radius: var(--radius-sm); padding: 16px 18px;
-}
-.scenario-result-title{ font-weight:700; font-size: 14px; color: var(--ink); margin-bottom:2px; }
-.scenario-result-sub{ font-size: 11.5px; color: var(--ink-soft); margin-bottom: 12px; }
-.scenario-result-row{
-  display:flex; justify-content:space-between; align-items:center;
-  padding: 7px 0; border-bottom: 1px solid var(--line); font-size: 13px; color: var(--ink);
-}
-.scenario-result-row:last-child{ border-bottom:none; }
-.scenario-result-row b{ font-family:'IBM Plex Mono', monospace; }
-.scenario-result-row.highlight{
-  background: var(--purple-glow); margin: 4px -8px; padding: 8px 8px; border-radius:6px; border-bottom:none;
-}
-.scenario-result-row.highlight b{ color: var(--purple-deep); }
-
-/* TICKET BAR + P&L TABLE */
-.ticket-bar{
-  display:flex; width:100%; height:28px; border-radius:8px; overflow:hidden;
-  border:1px solid var(--line);
-}
-.ticket-seg{ height:100%; }
-.ticket-legend{ margin-top:14px; display:flex; flex-direction:column; gap:8px; }
-.ticket-legend-item{
-  font-size:13px; color:var(--ink); display:flex; align-items:center; gap:8px;
-}
-.ticket-legend-item .dot{ width:10px; height:10px; border-radius:50%; flex:none; }
-.ticket-legend-item b{ color:var(--purple-deep); }
-
-.pl-table{ width:100%; border-collapse:collapse; font-size:13px; }
-.pl-table th, .pl-table td{
-  padding:10px 12px; text-align:right; border-bottom:1px solid var(--line);
-}
-.pl-table th:first-child, .pl-table td:first-child{ text-align:left; color:var(--ink-soft); }
-.pl-table th{
-  font-family:'IBM Plex Mono', monospace; font-size:11px; text-transform:uppercase;
-  letter-spacing:.06em; color:var(--purple-deep); font-weight:700;
-}
-.pl-table td{ font-family:'IBM Plex Mono', monospace; color:var(--ink); }
-.pl-table tr:last-child td{ border-bottom:none; }
-.pl-highlight td{ background:var(--purple-glow); font-weight:700; color:var(--purple-deep); }
-.bp-callout{
-  background: var(--paper);
-  border: 1px dashed var(--purple-glow);
+.strategy-section{
+  background: var(--card);
+  border: 1px solid var(--line);
   border-radius: var(--radius-sm);
-  padding: 12px 16px;
+  padding: 24px;
+  margin-top: 24px;
+}
+
+.strategy-title{
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
   margin-bottom: 16px;
-  font-size: 13.5px;
+}
+
+.strategy-list{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.strategy-item{
+  display:flex;
+  flex-direction:column;
+  gap: 4px;
+}
+
+.strategy-label{
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.strategy-value{
+  font-size: 15px;
+  font-weight: 700;
   color: var(--ink);
 }
-.bp-callout b{ color: var(--purple-deep); }
-.bp-callout .ph{ color: var(--ink-soft); }
-.bp-point{ cursor: pointer; }
-.bp-track-row{ margin-top: 14px; }
-.bp-track-label{
-  font-family:'IBM Plex Mono', monospace; font-size: 10.5px; font-weight:700;
-  text-transform:uppercase; letter-spacing:.06em; color: var(--ink-soft); margin-bottom:6px;
+
+.callout{
+  background: var(--foco-bg);
+  border-left: 4px solid var(--foco);
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.6;
+  margin-bottom: 24px;
 }
-.bp-phase-row.small{ margin-top:0; }
-.bp-phase.br{ background: var(--brasil-bg); color: var(--brasil); }
-.bp-phase.neutral{ background: var(--paper); color: var(--ink-soft); border:1px solid var(--line); }
+
+.callout.warning{
+  background: var(--amber-bg);
+  border-left-color: var(--amber);
+}
+
 </style>
 </head>
+
 <body>
 <div class="wrap">
-
   <div class="header">
     <div>
-      <div class="eyebrow">Hubii · Comercial</div>
-      <div class="title">Projeto <span>Ultragaz</span></div>
-      <div class="subtitle">Resumo executivo e acompanhamento das atividades e conversas entre Ultragaz e Hubii.</div>
+      <div class="eyebrow">Projeto Comercial</div>
+      <h1 class="title">Ultragaz</h1>
+      <p class="subtitle">Marketplace de gás — Piloto Digital P13</p>
     </div>
   </div>
 
-  <div class="tabs">
-    <button class="tab-btn active" data-tab="escopo">Overview</button>
-    <button class="tab-btn" data-tab="oportunidades">Oportunidades</button>
-    <button class="tab-btn" data-tab="portfolio">Portfólio</button>
-    <button class="tab-btn" data-tab="resultados">Resultados</button>
-    <button class="tab-btn" data-tab="revendas">Revendas</button>
-    <button class="tab-btn" data-tab="bp">Business Plan</button>
-    <button class="tab-btn" data-tab="tarefas">Tarefas <span class="tab-count" id="tabCount">0/5</span></button>
+  <div class="tabs-nav">
+    <button class="tab-button active" onclick="switchTab(0)">📋 Escopo</button>
+    <button class="tab-button" onclick="switchTab(1)">💡 Oportunidades</button>
+    <button class="tab-button" onclick="switchTab(2)">✅ Tarefas</button>
+    <button class="tab-button" onclick="switchTab(3)">📝 Atas</button>
   </div>
 
-  <!-- ESCOPO -->
-  <div class="tab-panel active" id="panel-escopo">
-    <div class="panel" style="margin-bottom:20px;">
-      <p style="font-size:14px; color:var(--ink); line-height:1.6; margin:0;">Piloto de venda digital de botijão <b>P13</b> através de marketplaces (<b>iFood</b>, <b>99</b> e <b>Magalu + Aiqfome/Raiz</b>), com foco inicial no Mercado GSP (Grande São Paulo). Cada pedido é repassado a um revendedor da rede Ultragaz, que recebe o valor líquido após as comissões de canal, Hubii e Ultragaz.</p>
-      <div class="channel-chip negotiating" style="margin-top:14px; display:inline-block;">Responsável / prazo do piloto — a confirmar</div>
-    </div>
+  <div class="tab-panels">
 
-    <div class="grid">
-      <div>
-        <div class="section-label first">Mercado GSP — Grande São Paulo</div>
-        <div class="panel">
-          <div class="praca-foco">
-            <div class="praca-dot"></div>
-            <div class="praca-info">
-              <div class="praca-city">São Paulo (capital)</div>
-              <div class="praca-partner">Piloto — fase 1</div>
-            </div>
-            <div class="praca-tag">Confirmado</div>
-          </div>
-          <div class="praca-foco">
-            <div class="praca-dot"></div>
-            <div class="praca-info">
-              <div class="praca-city">ABC Paulista</div>
-              <div class="praca-partner">Piloto — fase 1</div>
-            </div>
-            <div class="praca-tag">Confirmado</div>
-          </div>
-          <div class="praca-foco">
-            <div class="praca-dot pending"></div>
-            <div class="praca-info">
-              <div class="praca-city">Demais cidades do GSP</div>
-              <div class="praca-partner">Expansão — a selecionar em uma 2ª fase</div>
-            </div>
-            <div class="praca-tag pending">Backlog</div>
-          </div>
+    <!-- ESCOPO -->
+    <div class="tab-panel active">
+      <div class="section-title">📍 Praça & Foco</div>
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-label">Mercado Principal</div>
+          <div class="stat-value">Grande São Paulo</div>
         </div>
+        <div class="stat-card">
+          <div class="stat-label">Status</div>
+          <div class="stat-value">Em Negociação</div>
+        </div>
+      </div>
 
-        <div class="section-label">Responsável pelo projeto</div>
-        <div class="panel">
-          <div class="praca-foco">
-            <div class="praca-dot"></div>
-            <div class="praca-info">
-              <div class="praca-city">Mateus</div>
-              <div class="praca-partner">Lidera o projeto pela Hubii</div>
-            </div>
-            <div class="praca-tag">Líder</div>
+      <div class="section-title">👥 Responsáveis</div>
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; gap:16px;">
+          <div>
+            <div class="stat-label">Hubii</div>
+            <div style="font-weight:600; color:var(--ink); margin-top:4px;">Time Comercial</div>
+          </div>
+          <div>
+            <div class="stat-label">Cliente</div>
+            <div style="font-weight:600; color:var(--ink); margin-top:4px;">Ultragaz</div>
           </div>
         </div>
       </div>
 
-      <div>
-        <div class="section-label first">Canais (marketplaces)</div>
-        <div class="panel">
-          <div class="praca-foco">
-            <div class="praca-dot"></div>
-            <div class="praca-info">
-              <div class="praca-city">iFood <span style="color:var(--ink-soft); font-weight:500;">· 6,5%</span></div>
-              <div class="praca-partner">Taxa negociada · integrado na Hubii</div>
-            </div>
-            <div class="praca-tag">Integrado</div>
+      <div class="section-title">🎯 Escopo do Projeto</div>
+      <div class="card">
+        <div style="font-size:14px; color:var(--ink-soft); line-height:1.8;">
+          <p><strong>Piloto Digital P13 via Marketplaces</strong></p>
+          <p style="margin-top:12px;">✓ <strong>Fase 1 (Piloto):</strong> Integração com iFood, 99Food, Magalu e Aiqfome no mercado GSP (Grande São Paulo). Foco inicial: produtos select de gás em cilindro + acessórios.</p>
+          <p style="margin-top:12px;">✓ <strong>Fase 2:</strong> Expansão para outros segmentos de produto (equipamentos de climatização, peças de reposição).</p>
+          <p style="margin-top:12px;">✓ <strong>Fase 3 (Futuro):</strong> Integração com plataformas de B2B (compras.com.br, agro-traders).</p>
+          <p style="margin-top:12px;"><strong>Modelo anterior descontinuado:</strong> WhatsApp + equipe manual foi interrompido. Pivô: automatizar via APIs de marketplaces.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPORTUNIDADES -->
+    <div class="tab-panel">
+      <div class="section-title">💰 Métricas Potenciais</div>
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-label">Nova Praça Digital</div>
+          <div class="stat-value">+40-60% receita</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Eficiência Operacional</div>
+          <div class="stat-value">~80% redução manual</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Tempo de Delivery</div>
+          <div class="stat-value">2-4h (GSP)</div>
+        </div>
+      </div>
+
+      <div class="section-title">🚀 Oportunidades Identificadas</div>
+      <div class="grid">
+        <div class="opp-card">
+          <div class="opp-title">Automação de Fulfillment</div>
+          <div class="opp-desc">Integração com sistema de warehouse para picking/packing automático de pedidos marketplace.</div>
+        </div>
+        <div class="opp-card">
+          <div class="opp-title">White Label em Terceiros</div>
+          <div class="opp-desc">Monetizar marketplace de gás para distribuidoras regionais como B2B2C (modelo SaaS).</div>
+        </div>
+        <div class="opp-card">
+          <div class="opp-title">Cross-selling com Acessórios</div>
+          <div class="opp-desc">Ofertas inteligentes de componentes, cilindros e peças durante compra de gás.</div>
+        </div>
+        <div class="opp-card flag">
+          <div class="opp-title">⚠️ Desafio: Custo de Delivery</div>
+          <div class="opp-desc">Gás em cilindro é pesado — frete onerado em marketplaces. Precisa estratégia de absorção de custo ou modelo de recarga.</div>
+        </div>
+        <div class="opp-card flag">
+          <div class="opp-title">⚠️ Desafio: Regulação de Transporte</div>
+          <div class="opp-desc">Cilindros de gás têm restrições de transporte (classificação de periculosidade). Validar compliance com plataformas.</div>
+        </div>
+      </div>
+
+      <div class="strategy-section">
+        <div class="strategy-title">📊 Estratégia</div>
+        <div class="strategy-list">
+          <div class="strategy-item">
+            <div class="strategy-label">Modelo</div>
+            <div class="strategy-value">Marketplace + Logistics (P13)</div>
           </div>
-          <div class="praca-foco">
-            <div class="praca-dot"></div>
-            <div class="praca-info">
-              <div class="praca-city">99 <span style="color:var(--ink-soft); font-weight:500;">· 6%</span></div>
-              <div class="praca-partner">Taxa OK · estratégia em negociação</div>
-            </div>
-            <div class="praca-tag">Integrado</div>
+          <div class="strategy-item">
+            <div class="strategy-label">Praça</div>
+            <div class="strategy-value">GSP + expansão regional</div>
           </div>
-          <div class="praca-foco">
-            <div class="praca-dot pending"></div>
-            <div class="praca-info">
-              <div class="praca-city">Magalu + Aiqfome (Raiz) <span style="color:var(--ink-soft); font-weight:500;">· 6%</span></div>
-              <div class="praca-partner">Taxa e estratégia em negociação</div>
-            </div>
-            <div class="praca-tag pending">Em integração</div>
+          <div class="strategy-item">
+            <div class="strategy-label">Parceiros</div>
+            <div class="strategy-value">iFood, 99, Magalu, Aiqfome</div>
           </div>
-        </div>
-
-        <div class="section-label">App Ultragaz — contexto</div>
-        <div class="panel">
-          <div class="info-block">
-            <div class="info-head">
-              <div class="info-icon">▣</div>
-              <div>
-                <div class="info-name">App Ultragaz</div>
-                <div class="info-sub">Powered by VTEX</div>
-              </div>
-            </div>
-            <ul class="info-list">
-              <li>Melhor <b>NPS do Grupo Ultra</b>; clientes acostumados a entrega pontual/programada</li>
-              <li>Time do app: <b>Thais Guzzardi</b> e <b>Ramonn Maes Adami</b></li>
-              <li>Necessária avaliação de <b>Segurança da Informação</b> e <b>Compatibilidade Comercial</b></li>
-            </ul>
-          </div>
-          <div class="info-block">
-            <div class="info-head">
-              <div class="info-icon">◎</div>
-              <div>
-                <div class="info-name">Revendedores</div>
-                <div class="info-sub">Base atual</div>
-              </div>
-            </div>
-            <ul class="info-list">
-              <li><b>6 mil revendedores</b> no total, dos quais <b>2 mil participam do app</b></li>
-              <li>Ultragaz possui perfis de revendedores mapeados, mas poucos dados do consumidor final</li>
-            </ul>
+          <div class="strategy-item">
+            <div class="strategy-label">Pipeline</div>
+            <div class="strategy-value">Em Negociação</div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- OPORTUNIDADES -->
-  <div class="tab-panel" id="panel-oportunidades">
-
-    <div class="stat-row">
-      <div class="stat"><div class="stat-num">R$9mi</div><div class="stat-lbl">Potencial digital/mês · Mercado GSP</div></div>
-      <div class="stat"><div class="stat-num">~1%</div><div class="stat-lbl">Captura inicial da demanda (mês 1)</div></div>
-      <div class="stat"><div class="stat-num">R$85mil</div><div class="stat-lbl">GMV mês 1 (≈1% de R$9mi)</div></div>
-      <div class="stat"><div class="stat-num">R$117</div><div class="stat-lbl">Ticket médio (P13)</div></div>
-      <div class="stat"><div class="stat-num">R$150mil</div><div class="stat-lbl">Investimento total · 12 meses</div></div>
-    </div>
-
-    <div class="opp-grid">
-      <div class="opp-card">
-        <div class="opp-head"><div class="opp-icon">▣</div><div class="opp-title">App Ultragaz</div></div>
-        <ul>
-          <li>Powered by <b>VTEX</b>; melhor NPS do Grupo Ultra</li>
-          <li>Base fiel, acostumada a entrega pontual/programada</li>
-        </ul>
-      </div>
-
-      <div class="opp-card">
-        <div class="opp-head"><div class="opp-icon">$</div><div class="opp-title">EBITDA positivo desde o mês 1</div></div>
-        <ul>
-          <li>Margem bruta combinada de <b>34%</b> (R$3.060/Ton) já garante EBITDA acima de <b>R$2.000/Ton</b> no mês 1</li>
-          <li>Cresce de forma consistente até <b>R$2.784/Ton</b> no mês 12, sem recuos</li>
-        </ul>
-      </div>
-
-      <div class="opp-card">
-        <div class="opp-head"><div class="opp-icon">⚙</div><div class="opp-title">Licenciamento em rampa</div></div>
-        <ul>
-          <li><b>R$10.000/mês</b> nos meses 1–6, subindo para <b>R$15.000/mês</b> a partir do mês 7</li>
-          <li>Estrutura desenhada para proteger o Grupo Ultra durante a fase de validação</li>
-        </ul>
-      </div>
-
-      <div class="opp-card">
-        <div class="opp-head"><div class="opp-icon">⇄</div><div class="opp-title">Modelo preserva o revendedor</div></div>
-        <ul>
-          <li><b>90% do ticket</b> (R$105,30/pedido) continua indo para o revendedor</li>
-          <li>Ultragaz ganha <b>+2% incremental</b> (R$180/Ton) sobre a margem que já existe hoje</li>
-        </ul>
-      </div>
-
-      <div class="opp-card flag">
-        <div class="opp-head"><div class="opp-icon">⚑</div><div class="opp-title">99 — estratégia em negociação</div></div>
-        <ul>
-          <li>Taxa de <b>6%</b> já está OK, mas a estratégia comercial do canal ainda está em negociação</li>
-        </ul>
-      </div>
-
-      <div class="opp-card flag">
-        <div class="opp-head"><div class="opp-icon">⚑</div><div class="opp-title">Magalu + Aiqfome — em integração</div></div>
-        <ul>
-          <li>Taxa (6%) e estratégia ainda em negociação; integração técnica (Raiz) em andamento</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="section-label">Estratégia — Ultragaz</div>
-    <div class="panel strategy-panel">
-      <div class="strategy-list">
-        <div class="strategy-item"><b>Liderança</b> Mateus lidera o projeto pela Hubii</div>
-        <div class="strategy-item"><b>Mercado</b> GSP — Grande São Paulo (SP capital + ABC Paulista)</div>
-        <div class="strategy-item"><b>Canais</b> iFood, 99 e Magalu + Aiqfome (Raiz)</div>
-        <div class="strategy-item"><b>Modelo</b> repasse ao revendedor + take rate incremental Ultragaz (2%) + fee Hubii (2%)</div>
-        <div class="strategy-item"><b>Licenciamento</b> R$10mil/mês (m1–6) → R$15mil/mês (m7+)</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PORTFÓLIO -->
-  <div class="tab-panel" id="panel-portfolio">
-    <div class="stat-row">
-      <div class="stat"><div class="stat-num">P13</div><div class="stat-lbl">SKU inicial — botijão 13kg (foco exclusivo por ora)</div></div>
-      <div class="stat"><div class="stat-num">R$117</div><div class="stat-lbl">Ticket médio, com frete grátis incluso</div></div>
-      <div class="stat"><div class="stat-num">6%→8%</div><div class="stat-lbl">Take rate — reenquadramento em avaliação</div></div>
-    </div>
-
-    <div class="section-label first">Price zones (referência iFood)</div>
-    <div class="panel">
-      <div class="praca-foco">
-        <div class="praca-dot"></div>
-        <div class="praca-info">
-          <div class="praca-city">Zona Leste</div>
-          <div class="praca-partner">Preço de referência do território</div>
+    <!-- TAREFAS -->
+    <div class="tab-panel">
+      <div class="section-title">📋 Atividades em Andamento</div>
+      
+      <div style="background:var(--card); border-radius:var(--radius-sm); border:1px solid var(--line);">
+        <div style="padding:20px; border-bottom:1px solid var(--line);">
+          <div style="font-weight:700; font-size:14px; color:var(--ink); margin-bottom:8px;">👥 Hubii</div>
         </div>
-        <div class="praca-tag">R$ 129</div>
-      </div>
-      <div class="praca-foco">
-        <div class="praca-dot"></div>
-        <div class="praca-info">
-          <div class="praca-city">Zona Sul</div>
-          <div class="praca-partner">Preço de referência do território</div>
+        
+        <div class="task-item">
+          <div class="task-content">
+            <div class="task-title">Especificação técnica de integração com APIs de marketplaces</div>
+            <div class="task-owner">Responsável: Time Tech</div>
+          </div>
+          <div class="task-status">Em Andamento</div>
         </div>
-        <div class="praca-tag">R$ 140</div>
-      </div>
-    </div>
 
-    <div class="section-label">Estratégia territorial</div>
-    <div class="panel">
-      <div class="info-block">
-        <ul class="info-list">
-          <li>O iFood opera com <b>price zones</b>: o preço do P13 varia por região dentro do próprio Mercado GSP</li>
-          <li>Será necessário criar <b>múltiplas lojas por território</b>, com raios distintos de atuação, para preservar o valor agregado</li>
-          <li>Definição dos sites e raios de cada loja ainda em desenho — etapa considerada complexa, mas essencial para o modelo funcionar</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="section-label">Modelo de take rate</div>
-    <div class="panel">
-      <div class="info-block">
-        <ul class="info-list">
-          <li>Take rate atual acordado com o iFood: <b>6%</b>, sendo 2% reinvestidos como frete grátis permanente ao consumidor</li>
-          <li>Em avaliação: repassar o frete ao consumidor e reenquadrar o take rate para <b>8%</b></li>
-          <li>Receita líquida do iFood hoje: <b>9,4% do GMV</b></li>
-          <li>Modelo de subsídio governamental ("gás do povo") tem margens muito apertadas e <b>não será usado como base</b> da arquitetura de precificação</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- RESULTADOS -->
-  <div class="tab-panel" id="panel-resultados">
-    <div class="panel" style="text-align:center; padding:48px 24px;">
-      <div style="font-size:32px; margin-bottom:12px;">◷</div>
-      <div style="font-weight:700; font-size:16px; color:var(--ink); margin-bottom:8px;">Piloto ainda não iniciado</div>
-      <p style="font-size:13.5px; color:var(--ink-soft); max-width:480px; margin:0 auto; line-height:1.6;">O responsável e o prazo de início do piloto ainda estão em definição (ver aba Escopo). Os resultados reais — GMV realizado vs. projetado, pedidos, volume e EBITDA por mês — passam a ser exibidos aqui assim que o piloto for lançado.</p>
-    </div>
-    <div class="section-label">O que será acompanhado aqui</div>
-    <div class="opp-grid">
-      <div class="opp-card">
-        <div class="opp-head"><div class="opp-icon">$</div><div class="opp-title">GMV real vs. projetado</div></div>
-        <ul><li>Comparativo mês a mês com a curva da aba Business Plan</li></ul>
-      </div>
-      <div class="opp-card">
-        <div class="opp-head"><div class="opp-icon">▣</div><div class="opp-title">Pedidos e volume</div></div>
-        <ul><li>Pedidos/mês e volume em toneladas, por canal</li></ul>
-      </div>
-      <div class="opp-card">
-        <div class="opp-head"><div class="opp-icon">◎</div><div class="opp-title">EBITDA realizado</div></div>
-        <ul><li>EBITDA do mês e acumulado (R$/Ton), comparado à meta do P&amp;L</li></ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- REDE DE REVENDAS -->
-  <div class="tab-panel" id="panel-revendas">
-    <div class="stat-row">
-      <div class="stat"><div class="stat-num">6.000</div><div class="stat-lbl">Revendas exclusivas Ultragaz (foco do piloto)</div></div>
-      <div class="stat"><div class="stat-num">2.000</div><div class="stat-lbl">Participam do app hoje</div></div>
-      <div class="stat"><div class="stat-num">3.400</div><div class="stat-lbl">Municípios — potencial de expansão</div></div>
-      <div class="stat"><div class="stat-num">5–6mil</div><div class="stat-lbl">Revendas Ultragaz no Brasil (total)</div></div>
-    </div>
-
-    <div class="section-label first">Escopo da rede no piloto</div>
-    <div class="panel">
-      <div class="info-block">
-        <ul class="info-list">
-          <li>Foco exclusivo nas <b>6.000 revendas exclusivas Ultragaz</b> — bandeiras brancas que vendem outros produtos além do gás ficam de fora do piloto</li>
-          <li>Das revendas totais, <b>2.000 já participam do App Ultragaz</b> (powered by VTEX)</li>
-          <li>Potencial de expansão de longo prazo: rede presente em mais de <b>3.400 municípios</b>, com 5.000 a 6.000 revendas no Brasil</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="section-label">Onboarding das revendas</div>
-    <div class="panel">
-      <div class="praca-foco">
-        <div class="praca-dot pending"></div>
-        <div class="praca-info">
-          <div class="praca-city">Adesão automática</div>
-          <div class="praca-partner">Todas as revendas elegíveis entram de uma vez</div>
+        <div class="task-item">
+          <div class="task-content">
+            <div class="task-title">Validação de compliance de transporte de gás</div>
+            <div class="task-owner">Responsável: Jurídico + Operações</div>
+          </div>
+          <div class="task-status">Em Andamento</div>
         </div>
-        <div class="praca-tag pending">Em avaliação</div>
-      </div>
-      <div class="praca-foco">
-        <div class="praca-dot pending"></div>
-        <div class="praca-info">
-          <div class="praca-city">Aceite individual — painel Rubi</div>
-          <div class="praca-partner">Revenda opta por participar, uma a uma</div>
-        </div>
-        <div class="praca-tag pending">Em avaliação</div>
-      </div>
-    </div>
 
-    <div class="section-label">Logística e entrega</div>
-    <div class="panel">
-      <div class="info-block">
-        <ul class="info-list">
-          <li>Entrega feita pelas <b>próprias revendas</b> no primeiro momento (não por motoboy do canal)</li>
-          <li>Tempo médio atual de entrega via app/Televendas/WhatsApp: <b>17 minutos</b></li>
-          <li>Lead time sugerido para exibir no app: <b>20–25 minutos</b></li>
-          <li>Uso do LAS (last mile do iFood) é uma possibilidade futura, não prevista para a fase inicial</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+        <div class="task-item">
+          <div class="task-content">
+            <div class="task-title">Estruturação de proposta comercial (revenue share)</div>
+            <div class="task-owner">Responsável: Time Comercial</div>
+          </div>
+          <div class="task-status">Em Andamento</div>
+        </div>
 
-  <!-- BUSINESS PLAN -->
-  <div class="tab-panel" id="panel-bp">
+        <div style="padding:20px; border-top:1px solid var(--line);">
+          <div style="font-weight:700; font-size:14px; color:var(--ultragaz); margin-bottom:8px;">👥 Ultragaz</div>
+        </div>
 
-    <div class="section-label first">Modelagem de cenários — preço × margem <span style="color:var(--amber); font-weight:600;">· em construção, call de alinhamento com a Ultragaz</span></div>
-    <div class="panel scenario-tool">
-      <p style="font-size:13px; color:var(--ink-soft); margin:0 0 16px; line-height:1.5;">Preencher com os números reais durante a call: dado o volume e a margem atual, quanto de gap a nova margem incremental abre — e se esse gap é absorvido ou repassado ao preço.</p>
-      <div class="scenario-inputs">
-        <div class="scenario-input-group">
-          <label>Ticket médio atual (R$)</label>
-          <input type="number" id="scTicket" value="117" step="0.01">
+        <div class="task-item">
+          <div class="task-content">
+            <div class="task-title">Alinhamento com marketplace partners sobre oferta de gás em cilindro</div>
+            <div class="task-owner">Responsável: Diretor de Novo Negócio</div>
+          </div>
+          <div class="task-status">Em Andamento</div>
         </div>
-        <div class="scenario-input-group">
-          <label>Margem atual sobre o ticket (%)</label>
-          <input type="number" id="scMargemAtual" value="32" step="0.1">
+
+        <div class="task-item">
+          <div class="task-content">
+            <div class="task-title">Setup de warehouse para fulfillment marketplace</div>
+            <div class="task-owner">Responsável: VP Operações</div>
+          </div>
+          <div class="task-status">Em Andamento</div>
         </div>
-        <div class="scenario-input-group">
-          <label>Margem incremental a cobrir (%)</label>
-          <input type="number" id="scIncremental" value="" step="0.1" placeholder="preencher na call">
-        </div>
-        <div class="scenario-input-group">
-          <label>Volume mensal estimado (pedidos)</label>
-          <input type="number" id="scVolume" value="" step="1" placeholder="opcional">
+
+        <div class="task-item">
+          <div class="task-content">
+            <div class="task-title">Aprovação da proposta de revenue share pelo Board</div>
+            <div class="task-owner">Responsável: CFO</div>
+          </div>
+          <div class="task-status">Pendente</div>
         </div>
       </div>
 
-      <div class="scenario-results">
-        <div class="scenario-result-card">
-          <div class="scenario-result-title">Cenário A — absorver o gap</div>
-          <div class="scenario-result-sub">preço não muda; o gap sai da margem existente</div>
-          <div class="scenario-result-row"><span>Margem atual</span><b id="scA_margemAtual">—</b></div>
-          <div class="scenario-result-row"><span>Gap de margem / pedido</span><b id="scA_gap">—</b></div>
-          <div class="scenario-result-row highlight"><span>Nova margem líquida / pedido</span><b id="scA_novaMargem">—</b></div>
-          <div class="scenario-result-row"><span>Impacto mensal (se volume informado)</span><b id="scA_impacto">—</b></div>
+      <div style="margin-top:24px; padding:16px; background:var(--amber-bg); border-radius:var(--radius-sm); border-left:4px solid var(--amber); font-size:14px; color:var(--ink);">
+        <strong>⏱️ Timeline crítica:</strong> (1) Kickoff técnico 2026-10-10; (2) Primeiro teste de integração 2026-10-30; (3) Piloto go-live 2026-11-15.
+      </div>
+    </div>
+
+    <!-- ATAS -->
+    <div class="tab-panel">
+      <div class="section-title">🎙️ Reuniões Recentes</div>
+      
+      <div class="ata-card" onclick="openMeeting('Alinhamento Comercial Ultragaz', '23 de setembro, 2026', 'Discussão sobre modelo de negócio para marketplace de gás. Definido piloto com foco em GSP. Próxima reunião em 2026-10-10 com time técnico para validar integrações.')">
+        <div class="ata-header">
+          <div class="ata-title">Alinhamento Comercial Ultragaz</div>
+          <div class="ata-date">23 set, 2026</div>
         </div>
-        <div class="scenario-result-card">
-          <div class="scenario-result-title">Cenário B — repassar ao preço</div>
-          <div class="scenario-result-sub">preço sobe; margem líquida atual é preservada</div>
-          <div class="scenario-result-row"><span>Novo preço sugerido</span><b id="scB_novoPreco">—</b></div>
-          <div class="scenario-result-row"><span>Aumento de preço necessário</span><b id="scB_aumento">—</b></div>
-          <div class="scenario-result-row highlight"><span>Margem líquida / pedido (mantida)</span><b id="scB_margem">—</b></div>
-          <div class="scenario-result-row"><span>Receita extra mensal (se volume informado)</span><b id="scB_receitaExtra">—</b></div>
-        </div>
+        <div class="ata-summary">Discussão sobre modelo de negócio para marketplace de gás...</div>
       </div>
-    </div>
-
-    <div class="section-label">Investimentos</div>
-    <div class="stat-row">
-      <div class="stat"><div class="stat-num">R$10.000</div><div class="stat-lbl">Licenciamento Hubii/mês — meses 1 a 6 (rampup)</div></div>
-      <div class="stat"><div class="stat-num">R$15.000</div><div class="stat-lbl">Licenciamento Hubii/mês — a partir do mês 7</div></div>
-      <div class="stat"><div class="stat-num">R$150.000</div><div class="stat-lbl">Total em 12 meses (6×10k + 6×15k)</div></div>
-    </div>
-    <div class="panel" style="margin-bottom:8px;">
-      <p style="font-size:13px; color:var(--ink-soft); margin:0; line-height:1.5;">Esse valor entra como despesa operacional (opex), descontado antes do EBITDA — ver detalhamento na seção P&amp;L.</p>
-    </div>
-
-    <div class="section-label">Projeção (12 meses)</div>
-    <div class="stat-row">
-      <div class="stat"><div class="stat-num">R$9mi</div><div class="stat-lbl">Potencial digital/mês · Mercado GSP</div></div>
-      <div class="stat"><div class="stat-num">~1%</div><div class="stat-lbl">Captura inicial da demanda reprimida (mês 1)</div></div>
-      <div class="stat"><div class="stat-num">R$85mil</div><div class="stat-lbl">GMV mês 1 (≈1% de R$9mi)</div></div>
-      <div class="stat"><div class="stat-num">R$117</div><div class="stat-lbl">Ticket médio (P13)</div></div>
-    </div>
-
-    <div class="panel">
-      <div class="bp-legend">
-        <div class="bp-legend-item"><span class="bp-legend-line" style="background:var(--purple)"></span>Receita mensal (GMV) — Mercado GSP</div>
-        <div class="bp-legend-item"><span class="bp-legend-dot" style="background:var(--amber)"></span>Licenciamento sobe p/ R$15mil (mês 7)</div>
-      </div>
-      <div class="bp-callout" id="bpCallout">Clique em um ponto da curva para ver o detalhamento do mês.</div>
-      <div class="bp-chart-wrap">
-        <svg id="bpChart" viewBox="0 0 1000 420" width="100%" style="min-width:680px; display:block;"></svg>
-      </div>
-    </div>
-
-    <div class="section-label">Marcos da curva</div>
-    <div class="bp-milestone-grid">
-      <div class="bp-milestone-card">
-        <div class="bp-milestone-month">Mês 1 · meta batida de cara</div>
-        <div class="bp-milestone-value">R$ 85.000</div>
-        <div class="bp-milestone-sub">~726 pedidos · 9,44 Ton · acumulado R$2.001/Ton</div>
-      </div>
-      <div class="bp-milestone-card">
-        <div class="bp-milestone-month">Mês 6 · fim do ramp-up</div>
-        <div class="bp-milestone-value">R$ 199.350</div>
-        <div class="bp-milestone-sub">~1.704 pedidos · 22,15 Ton · acumulado R$2.376/Ton</div>
-      </div>
-      <div class="bp-milestone-card">
-        <div class="bp-milestone-month">Mês 12 · fim do horizonte</div>
-        <div class="bp-milestone-value">R$ 488.750</div>
-        <div class="bp-milestone-sub">~4.177 pedidos · 54,31 Ton · acumulado R$2.600/Ton</div>
-      </div>
-    </div>
-
-    <div class="panel bp-note-list">
-      <div class="modal-section-label" style="margin-bottom:14px;">Resumo Executivo das Premissas</div>
-      <div class="info-block">
-        <ul class="info-list">
-          <li>O potencial de vendas do digital hoje na região selecionada (Mercado GSP) é estimado em <b>R$9 milhões/mês</b></li>
-          <li>A captura inicial parte de <b>~1% dessa demanda reprimida</b> (R$85–90 mil/mês) no mês 1, crescendo em curva de adoção não linear ao longo de 12 meses</li>
-          <li>O licenciamento Hubii segue em rampa: <b>R$10.000/mês</b> nos meses 1–6, subindo para <b>R$15.000/mês</b> a partir do mês 7 — desenhado para proteger o Grupo Ultra durante a validação</li>
-          <li>Com a margem combinada de <b>34% (R$3.060/Ton)</b>, o EBITDA acumulado já nasce acima de R$2.000/Ton no mês 1 e cresce de forma consistente até <b>R$2.600/Ton</b> no mês 12, sem recuos ao longo da curva</li>
-          <li>A partir do mês 6, com o ramp-up concluído, o foco passa a ser o crescimento contínuo de volume no Mercado GSP e, se necessário, a avaliação de expansão territorial</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="section-label">P&amp;L</div>
-    <div class="panel" style="margin-bottom:20px;">
-      <p style="font-size:13.5px; color:var(--ink); line-height:1.6; margin:0;"><b>Lógica do modelo:</b> a rota de mercado atual (Ultragaz → Revendedor) continua existindo do jeito que é hoje, com a mesma margem — o piloto não a substitui. O que o projeto adiciona são três coisas: <b>(1)</b> volume incremental via os canais digitais, <b>(2)</b> receita incremental do take rate de 2% da Ultragaz sobre cada pedido digital, e <b>(3)</b> o custo adicional do licenciamento (SaaS) da Hubii.</p>
-    </div>
-
-    <div class="stat-row">
-      <div class="stat"><div class="stat-num">R$117</div><div class="stat-lbl">Ticket médio (P13, 13kg)</div></div>
-      <div class="stat"><div class="stat-num">76,92</div><div class="stat-lbl">SKUs por Ton (1 SKU = 13kg)</div></div>
-      <div class="stat"><div class="stat-num">R$9.000</div><div class="stat-lbl">Receita / Ton</div></div>
-      <div class="stat"><div class="stat-num">R$180</div><div class="stat-lbl">Margem incremental Ultragaz / Ton</div></div>
-    </div>
-
-    <div class="panel">
-      <div class="modal-section-label" style="margin-bottom:12px;">Divisão do ticket médio</div>
-      <div class="ticket-bar">
-        <div class="ticket-seg" style="width:6%; background:var(--potencial);" title="Comissão do canal — 6%"></div>
-        <div class="ticket-seg" style="width:2%; background:var(--amber);" title="Fee Hubii — 2%"></div>
-        <div class="ticket-seg" style="width:2%; background:var(--purple);" title="Margem adicional Ultragaz — 2%"></div>
-        <div class="ticket-seg" style="width:90%; background:var(--foco);" title="Repasse ao revendedor — 90%"></div>
-      </div>
-      <div class="ticket-legend">
-        <div class="ticket-legend-item"><span class="dot" style="background:var(--potencial);"></span>Comissão do canal (iFood/99/Magalu+Aiqfome) <b>6%</b> · R$7,02/pedido · R$540/Ton</div>
-        <div class="ticket-legend-item"><span class="dot" style="background:var(--amber);"></span>Fee Hubii <b>2%</b> · R$2,34/pedido · R$180/Ton</div>
-        <div class="ticket-legend-item"><span class="dot" style="background:var(--purple);"></span>Margem adicional Ultragaz <b>2%</b> · R$2,34/pedido · R$180/Ton</div>
-        <div class="ticket-legend-item"><span class="dot" style="background:var(--foco);"></span>Repasse ao revendedor <b>90%</b> · R$105,30/pedido · R$8.100/Ton</div>
-      </div>
-      <p style="font-size:12.5px; color:var(--ink-soft); margin:14px 0 0; line-height:1.5;">Os 2% da Ultragaz representam margem <b>incremental</b> (R$180/Ton) — somam-se à margem bruta já existente do revendedor sobre o P13, e não a substituem.</p>
-    </div>
-
-    <div class="section-label">Margem combinada</div>
-    <div class="panel">
-      <div class="strategy-list">
-        <div class="strategy-item"><b>Margem padrão digital Ultragaz</b> 32% · R$2.880/Ton</div>
-        <div class="strategy-item"><b>+ Margem incremental Hubii</b> 2% · R$180/Ton</div>
-        <div class="strategy-item"><b>= Margem combinada</b> 34% · R$3.060/Ton</div>
-      </div>
-      <p style="font-size:12.5px; color:var(--ink-soft); margin:14px 0 0; line-height:1.5;">A margem padrão de 32% é a mesma margem bruta/receita já praticada hoje pela Ultragaz nos canais digitais (referência informada pela Ultragaz). O projeto Hubii soma mais 2% de receita incremental sobre isso — já acima de R$2.000/Ton independentemente do mês, por ser uma proporção fixa sobre o ticket.</p>
-    </div>
-
-    <div class="section-label">EBITDA do piloto (após licenciamento Hubii)</div>
-    <div class="panel">
-      <table class="pl-table">
-        <thead>
-          <tr><th></th><th>Mês 1</th><th>Mês 6</th><th>Mês 12</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Margem bruta combinada (R$/Ton)</td><td>3.060</td><td>3.060</td><td>3.060</td></tr>
-          <tr><td>Volume (Ton)</td><td>9,44</td><td>22,15</td><td>54,31</td></tr>
-          <tr><td>Margem bruta total (R$)</td><td>R$28.886</td><td>R$67.779</td><td>R$166.189</td></tr>
-          <tr><td>(–) Licenciamento Hubii</td><td>R$10.000</td><td>R$10.000</td><td>R$15.000</td></tr>
-          <tr class="pl-highlight"><td>EBITDA do mês (R$)</td><td>R$18.886</td><td>R$57.779</td><td>R$151.189</td></tr>
-          <tr><td>EBITDA do mês (R$/Ton)</td><td>R$2.001</td><td>R$2.609</td><td>R$2.784</td></tr>
-        </tbody>
-      </table>
-      <p style="font-size:12.5px; color:var(--ink-soft); margin:14px 0 0; line-height:1.5;">Com o licenciamento ajustado para R$10.000/mês nos meses 1–6 (mantendo a mesma meta de receita), o EBITDA já nasce acima de R$2.000/Ton no mês 1 e cresce de forma consistente, sem recuos, até <b>R$2.784/Ton</b> no mês 12.</p>
     </div>
 
   </div>
-
-  <!-- TAREFAS -->
-  <div class="tab-panel" id="panel-tarefas">
-    <div class="section-label first">Pendências</div>
-    <div class="panel">
-
-      <div class="owner-group">
-        <div class="owner-header"><span class="owner-badge hubii">HUBII</span></div>
-        <div class="task" data-task data-status="t_magalu">
-          <div class="check" data-check><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
-          <div class="task-text">negociação com Magalu</div>
-        </div>
-        <div class="task" data-task data-status="t_99">
-          <div class="check" data-check><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
-          <div class="task-text">negociação com 99</div>
-        </div>
-      </div>
-
-      <div class="owner-group">
-        <div class="owner-header"><span class="owner-badge ambos">AMBOS</span></div>
-        <div class="task" data-task data-status="t_contrato">
-          <div class="check" data-check><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
-          <div class="task-text">assinatura do contrato</div>
-        </div>
-        <div class="task" data-task data-status="t_ifood">
-          <div class="check" data-check><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
-          <div class="task-text">ok comercial por iFood</div>
-        </div>
-      </div>
-
-      <div class="owner-group">
-        <div class="owner-header"><span class="owner-badge parceiro">PARCEIRO</span></div>
-        <div class="task" data-task data-status="t_bp">
-          <div class="check" data-check><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
-          <div class="task-text">aprovação do BP</div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="section-label">Atas</div>
-    <div class="panel">
-      <div class="ata-card" data-meeting="m1">
-        <div class="ata-date">10<span>AGO</span></div>
-        <div class="ata-info">
-          <div class="ata-title">Alinhamento Hubii</div>
-          <div class="ata-teaser">Reunião realizada — ata automática não registrou pauta nem decisões</div>
-        </div>
-        <div class="ata-arrow">→</div>
-      </div>
-      <div class="ata-card" data-meeting="m2">
-        <div class="ata-date">10<span>SET</span></div>
-        <div class="ata-info">
-          <div class="ata-title">iFood + Ultragaz</div>
-          <div class="ata-teaser">Reunião de parceria — modelo de negócio, price zones e go-to-market</div>
-        </div>
-        <div class="ata-arrow">→</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer-note">Atualizado a partir do Notion · <b>Hubii</b> × Ultragaz</div>
 
 </div>
 
-<!-- MODAL: RESUMO DA REUNIÃO -->
-<div class="modal-overlay" id="meetingModal">
-  <div class="modal-box">
-    <div class="modal-head">
-      <div>
-        <div class="modal-eyebrow" id="modalEyebrow">Notion · Companies</div>
-        <div class="modal-title" id="modalTitle">—</div>
-      </div>
-      <button class="modal-close" data-close>✕</button>
-    </div>
-    <div class="modal-sub" id="modalSub">—</div>
-    <div id="modalBody"></div>
-    <div class="modal-add-update" id="modalAddUpdate" style="display:none;">
-      <div class="modal-section-label">Adicionar atualização</div>
-      <textarea id="modalUpdateText" class="modal-update-input" rows="2" placeholder="Ex: cliente confirmou reunião para sexta-feira"></textarea>
-      <div class="modal-update-row">
-        <button id="modalUpdateSave" class="modal-update-btn">Salvar no Notion</button>
-        <span id="modalUpdateFeedback" class="modal-update-feedback"></span>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <a class="modal-link" id="modalLink" href="#" target="_blank" rel="noopener">Abrir no Notion ↗</a>
-    </div>
+<div class="modal" id="meetingModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-title" id="meetingTitle"></div>
+    <div class="modal-meta" id="meetingDate"></div>
+    <div class="modal-body" id="meetingContent"></div>
   </div>
 </div>
 
 <script>
-  // Tabs
-  const tabBtns = document.querySelectorAll('.tab-btn');
+function switchTab(index) {
+  const buttons = document.querySelectorAll('.tab-button');
   const panels = document.querySelectorAll('.tab-panel');
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      tabBtns.forEach(b => b.classList.remove('active'));
-      panels.forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
-    });
+  
+  buttons.forEach((btn, i) => {
+    btn.classList.toggle('active', i === index);
   });
-
-  // Checklist + status modal (mesma arquitetura da Iconic)
-  const tasks = document.querySelectorAll('[data-task]');
-  const total = tasks.length;
-  const tabCount = document.getElementById('tabCount');
-
-  function updateProgress(){
-    const done = document.querySelectorAll('[data-task].done').length;
-    tabCount.textContent = done + '/' + total;
-  }
-
-  function notionPageIdFromUrl(url){
-    const match = url.match(/([a-f0-9]{32})/i);
-    if(!match) return null;
-    const hex = match[1];
-    return `${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20)}`;
-  }
-
-  const TASKS = {
-    t_magalu: { title:"negociação com Magalu", owner:"Hubii", done:false, originalStatus:"Backlog", url:"https://app.notion.com/p/3dcef5854ef380a6b97fd6ad009d3f42", updates:[] },
-    t_99: { title:"negociação com 99", owner:"Hubii", done:false, originalStatus:"Backlog", url:"https://app.notion.com/p/3dcef5854ef380de8cfcf7313f09f527", updates:[] },
-    t_contrato: { title:"assinatura do contrato", owner:"Ambos", done:false, originalStatus:"To-Do", url:"https://app.notion.com/p/3dcef5854ef380b6867fe416dd3ba7ca", updates:[] },
-    t_ifood: { title:"ok comercial por iFood", owner:"Ambos", done:false, originalStatus:"Waiting", url:"https://app.notion.com/p/3dcef5854ef380d092c7e5ac44d06b57", updates:[] },
-    t_bp: { title:"aprovação do BP", owner:"Parceiro", done:false, originalStatus:"Waiting", url:"https://app.notion.com/p/3dcef5854ef38036a29ae308f77d20dd", updates:[] },
-  };
-
-  tasks.forEach(t => {
-    const checkEl = t.querySelector('[data-check]');
-    checkEl.addEventListener('click', async (e) => {
-      e.stopPropagation();
-      const wasDone = t.classList.contains('done');
-      const nowDone = !wasDone;
-      t.classList.toggle('done', nowDone);
-      updateProgress();
-
-      const key = t.dataset.status;
-      const taskData = TASKS[key];
-      if(taskData){
-        taskData.done = nowDone;
-        // Ao marcar, vai para "Done". Ao desmarcar, volta para o status ORIGINAL
-        // que a tarefa tinha no Notion (não um valor fixo) — To-Do ou Waiting, conforme o caso.
-        const targetStatus = nowDone ? 'Done' : taskData.originalStatus;
-        const pageId = notionPageIdFromUrl(taskData.url);
-        if(pageId){
-          try{
-            const resp = await fetch('/api/complete-task', {
-              method: 'POST',
-              credentials: 'same-origin',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ pageId, status: targetStatus }),
-            });
-            if(!resp.ok){
-              console.error('Falha ao atualizar status no Notion:', resp.status, await resp.text());
-            }
-          }catch(err){
-            console.error('Falha ao atualizar status no Notion:', err);
-          }
-        }
-      }
-    });
-    t.addEventListener('click', () => {
-      openTaskStatus(t.dataset.status);
-    });
+  
+  panels.forEach((panel, i) => {
+    panel.classList.toggle('active', i === index);
   });
+}
 
-  updateProgress();
-
-  // Meeting / milestone summaries
-  const COMPANY_URL = "https://app.notion.com/p/24def5854ef38079a874d02c63bdb656";
-  const MEETINGS = {
-    m1: {
-      title: "Alinhamento Hubii",
-      sub: "10/ago · Reunião de acompanhamento do projeto",
-      url: "https://app.notion.com/p/3b8ef5854ef380d880fdef6cbe99c9c2",
-      sections: [
-        { label: "Registro", items: [
-          "Reunião com Matheus, Leonardo e Pat, transcrita automaticamente",
-          "A ata automática cobriu apenas os cumprimentos iniciais, sem detalhamento de pauta, decisões ou encaminhamentos"
-        ]}
-      ]
-    },
-    m2: {
-      title: "iFood + Ultragaz",
-      sub: "10/set · Reunião de parceria — venda de gás via iFood",
-      url: "https://app.notion.com/p/3d7ef5854ef380c288e6eb41f920683b",
-      sections: [
-        { label: "Contexto", items: [
-          "Encontro entre iFood Shopping (Pascucci, Luiz) e Ultragaz (Paty, Matheus) para explorar a parceria",
-          "Já existe parceria anterior no projeto Revenda do Futuro, incluindo integração de pagamento nas maquininhas",
-          "Em 2018 houve um teste em Salvador de venda de gás via iFood, com bons resultados, mas desmobilizado na época"
-        ]},
-        { label: "Modelo de negócio", items: [
-          "Take rate acordado: 6%, com 2% reinvestidos em frete grátis permanente ao consumidor",
-          "Ticket médio de R$117 com frete grátis incluso; receita líquida do iFood é 9,4% do GMV",
-          "Em discussão: repassar o frete e reenquadrar a taxa para 8%"
-        ]},
-        { label: "Go-to-market", items: [
-          "Praça inicial: São Paulo e ABC (Mercado GSP); SKU inicial apenas P13",
-          "Potencial de expansão: 3.400 municípios, 5.000–6.000 revendas no Brasil",
-          "Foco exclusivo nas 6.000 revendas exclusivas Ultragaz (bandeiras brancas ficam de fora)",
-          "Dois modelos de onboarding em avaliação: adesão automática vs. aceite individual pelo painel Rubi"
-        ]},
-        { label: "Itens de ação", items: [
-          "Consultar Matheus sobre tempo máximo tolerável de pedidos atrasados",
-          "Avaliar repasse do frete ao consumidor e reenquadramento do take rate para 8%",
-          "Paty e Matheus compartilharem volume de vendas com o time do iFood",
-          "Luizão realizar projeções de GMV e share de mercado digital vs. offline",
-          "Definir modelo de onboarding de revendas (adesão automática vs. painel Rubi)"
-        ]}
-      ]
-    },
-  };
-
+function openMeeting(title, date, content) {
   const modal = document.getElementById('meetingModal');
-  const modalEyebrow = document.getElementById('modalEyebrow');
-  const modalTitle = document.getElementById('modalTitle');
-  const modalSub = document.getElementById('modalSub');
-  const modalBody = document.getElementById('modalBody');
-  const modalLink = document.getElementById('modalLink');
-  const modalAddUpdate = document.getElementById('modalAddUpdate');
-  const modalUpdateText = document.getElementById('modalUpdateText');
-  const modalUpdateSave = document.getElementById('modalUpdateSave');
-  const modalUpdateFeedback = document.getElementById('modalUpdateFeedback');
-  let currentTaskKey = null;
+  document.getElementById('meetingTitle').textContent = title;
+  document.getElementById('meetingDate').textContent = date;
+  document.getElementById('meetingContent').textContent = content;
+  modal.classList.add('active');
+}
 
-  function todayLabel(){
-    const meses = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
-    const now = new Date();
-    return String(now.getDate()).padStart(2,'0') + '-' + meses[now.getMonth()];
-  }
+function closeModal() {
+  document.getElementById('meetingModal').classList.remove('active');
+}
 
-  function openMeeting(key){
-    const m = MEETINGS[key];
-    if(!m) return;
-    currentTaskKey = null;
-    modalAddUpdate.style.display = 'none';
-    modalEyebrow.textContent = 'Meeting Notes · Notion';
-    modalTitle.textContent = m.title;
-    modalSub.textContent = m.sub;
-    modalLink.href = m.url;
-    modalBody.innerHTML = m.sections.map(sec => `
-      <div class="modal-section">
-        <div class="modal-section-label">${sec.label}</div>
-        <ul>${sec.items.map(it => `<li>${it}</li>`).join('')}</ul>
-      </div>
-    `).join('');
-    modal.classList.add('open');
-  }
-
-  function renderTaskHistory(t){
-    if(t.updates.length === 0){
-      modalBody.innerHTML = '<div class="modal-section"><div class="modal-section-label">Histórico</div><ul><li>Nenhuma atualização registrada ainda.</li></ul></div>';
-    } else {
-      const items = t.updates.slice().reverse().map(u => `<li><b>${u.date}:</b> ${u.text}</li>`).join('');
-      modalBody.innerHTML = `<div class="modal-section"><div class="modal-section-label">Histórico</div><ul>${items}</ul></div>`;
-    }
-  }
-
-  function openTaskStatus(key){
-    const t = TASKS[key];
-    if(!t) return;
-    currentTaskKey = key;
-    modalEyebrow.textContent = 'Tarefa · Notion';
-    modalTitle.textContent = t.title;
-    const statusLabel = t.done ? 'Concluída' : 'Em aberto';
-    modalSub.textContent = t.owner + ' · ' + statusLabel;
-    modalLink.href = t.url;
-    renderTaskHistory(t);
-    modalAddUpdate.style.display = 'block';
-    modalUpdateText.value = '';
-    modalUpdateFeedback.textContent = '';
-    modalUpdateFeedback.className = 'modal-update-feedback';
-    modalUpdateSave.disabled = false;
-    modalUpdateSave.textContent = 'Salvar no Notion';
-    modal.classList.add('open');
-  }
-
-  modalUpdateSave.addEventListener('click', async () => {
-    const key = currentTaskKey;
-    const t = TASKS[key];
-    if(!t) return;
-    const text = modalUpdateText.value.trim();
-    if(!text){
-      modalUpdateFeedback.textContent = 'Escreva algo antes de salvar.';
-      modalUpdateFeedback.className = 'modal-update-feedback error';
-      return;
-    }
-    const pageId = notionPageIdFromUrl(t.url);
-    if(!pageId){
-      modalUpdateFeedback.textContent = 'Não foi possível identificar a página no Notion.';
-      modalUpdateFeedback.className = 'modal-update-feedback error';
-      return;
-    }
-    const date = todayLabel();
-    modalUpdateSave.disabled = true;
-    modalUpdateSave.textContent = 'Salvando...';
-    modalUpdateFeedback.textContent = '';
-    try{
-      const resp = await fetch('/api/add-update', {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ pageId, date, text }),
-      });
-      const ct = resp.headers.get('content-type') || '';
-      let data;
-      if(ct.includes('application/json')){
-        data = await resp.json();
-      } else {
-        const raw = await resp.text();
-        throw new Error(`resposta inesperada do servidor (HTTP ${resp.status}): ${raw.slice(0,150)}`);
-      }
-      if(!resp.ok){
-        throw new Error((data && data.error && (data.error.message || JSON.stringify(data.error))) || 'Erro desconhecido');
-      }
-      t.updates.push({ date, text });
-      modalUpdateFeedback.textContent = 'Salvo com sucesso!';
-      modalUpdateFeedback.className = 'modal-update-feedback success';
-      modalUpdateText.value = '';
-      renderTaskHistory(t);
-    }catch(err){
-      modalUpdateFeedback.textContent = 'Falha ao salvar: ' + err.message;
-      modalUpdateFeedback.className = 'modal-update-feedback error';
-    }finally{
-      modalUpdateSave.disabled = false;
-      modalUpdateSave.textContent = 'Salvar no Notion';
-    }
-  });
-
-  document.querySelectorAll('[data-meeting]').forEach(el => {
-    el.addEventListener('click', () => openMeeting(el.dataset.meeting));
-  });
-  modal.addEventListener('click', (e) => {
-    if(e.target === modal || e.target.hasAttribute('data-close')) modal.classList.remove('open');
-  });
-  document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape') modal.classList.remove('open');
-  });
-
-  // ===== Modelagem de cenários — preço x margem (ferramenta viva para a call) =====
-  (function(){
-    const fmtR = (v) => 'R$' + v.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
-    const fmtPct = (v) => v.toLocaleString('pt-BR', {minimumFractionDigits:1, maximumFractionDigits:1}) + '%';
-
-    const elTicket = document.getElementById('scTicket');
-    const elMargemAtual = document.getElementById('scMargemAtual');
-    const elIncremental = document.getElementById('scIncremental');
-    const elVolume = document.getElementById('scVolume');
-
-    function recalc(){
-      const ticket = parseFloat(elTicket.value);
-      const margemAtualPct = parseFloat(elMargemAtual.value);
-      const incrementalPct = parseFloat(elIncremental.value);
-      const volume = parseFloat(elVolume.value);
-
-      const dash = '—';
-      const out = {
-        scA_margemAtual: dash, scA_gap: dash, scA_novaMargem: dash, scA_impacto: dash,
-        scB_novoPreco: dash, scB_aumento: dash, scB_margem: dash, scB_receitaExtra: dash,
-      };
-
-      if(!isNaN(ticket) && !isNaN(margemAtualPct)){
-        const margemAtualR = ticket * margemAtualPct/100;
-        out.scA_margemAtual = fmtR(margemAtualR);
-        out.scB_margem = fmtR(margemAtualR);
-
-        if(!isNaN(incrementalPct) && incrementalPct > 0){
-          const gap = ticket * incrementalPct/100;
-          out.scA_gap = fmtR(gap);
-          out.scA_novaMargem = fmtR(margemAtualR - gap);
-
-          if(incrementalPct < 100){
-            const novoPreco = ticket / (1 - incrementalPct/100);
-            const aumentoPct = (novoPreco/ticket - 1) * 100;
-            out.scB_novoPreco = fmtR(novoPreco);
-            out.scB_aumento = fmtPct(aumentoPct);
-          }
-
-          if(!isNaN(volume) && volume > 0){
-            out.scA_impacto = fmtR(gap * volume) + '/mês';
-            if(incrementalPct < 100){
-              const novoPreco = ticket / (1 - incrementalPct/100);
-              out.scB_receitaExtra = fmtR((novoPreco - ticket) * volume) + '/mês';
-            }
-          }
-        }
-      }
-
-      Object.keys(out).forEach(id => {
-        const el = document.getElementById(id);
-        if(el) el.textContent = out[id];
-      });
-    }
-
-    [elTicket, elMargemAtual, elIncremental, elVolume].forEach(el => {
-      el.addEventListener('input', recalc);
-    });
-    recalc();
-  })();
-
-  // ===== BUSINESS PLAN — projeção 12 meses (Piloto Digital P13, Mercado GSP) =====
-  (function(){
-    const months = 12;
-    // Dados exatos do plano (Hubii x Ultragaz GTM v3)
-    const gmv       = [85000,94000,111000,135000,165000,199350,238000,281000,328000,378000,432000,488750];
-    const pedidos   = [726,801,952,1158,1410,1704,2035,2401,2800,3230,3689,4177];
-    const volumeTon = [9.44,10.41,12.38,15.06,18.34,22.15,26.45,31.21,36.40,41.99,47.96,54.31];
-    const licenciamento = [10000,10000,10000,10000,10000,10000,15000,15000,15000,15000,15000,15000];
-    const ebitdaMes = [2001,2099,2252,2396,2515,2609,2493,2579,2648,2703,2747,2784];
-    const ebitdaAcum = [2001,2052,2129,2214,2298,2376,2403,2441,2483,2524,2563,2600];
-
-    const fmtCompact = (v) => v >= 1000000 ? 'R$' + (v/1000000).toFixed(2).replace('.', ',') + 'mi' : 'R$' + Math.round(v/1000).toLocaleString('pt-BR') + 'mil';
-
-    // ---- SVG chart ----
-    const svg = document.getElementById('bpChart');
-    const W = 1000, H = 420;
-    const padL = 70, padR = 20, padT = 24, padB = 36;
-    const plotW = W - padL - padR;
-    const plotH = H - padT - padB;
-    const yMax = 550000;
-
-    const x = (i) => padL + (i/(months-1)) * plotW;
-    const y = (v) => padT + plotH - (v/yMax)*plotH;
-
-    function smoothPath(pts){
-      let d = `M ${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
-      for(let i=0;i<pts.length-1;i++){
-        const p0 = pts[i>0?i-1:i];
-        const p1 = pts[i];
-        const p2 = pts[i+1];
-        const p3 = pts[i+2>pts.length-1?i+1:i+2];
-        const cp1x = p1.x + (p2.x-p0.x)/6;
-        const cp1y = p1.y + (p2.y-p0.y)/6;
-        const cp2x = p2.x - (p3.x-p1.x)/6;
-        const cp2y = p2.y - (p3.y-p1.y)/6;
-        d += ` C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
-      }
-      return d;
-    }
-
-    const pts = gmv.map((v,i) => ({x:x(i), y:y(v)}));
-    const path = smoothPath(pts);
-    const area = path + ` L ${pts[pts.length-1].x.toFixed(1)} ${padT+plotH} L ${pts[0].x.toFixed(1)} ${padT+plotH} Z`;
-
-    let svgHTML = '';
-
-    // gridlines + y labels
-    [0,100000,200000,300000,400000,500000].forEach(v => {
-      const gy = y(v);
-      svgHTML += `<line x1="${padL}" y1="${gy}" x2="${W-padR}" y2="${gy}" stroke="var(--line)" stroke-width="1"/>`;
-      const label = v===0 ? '0' : 'R$' + (v/1000).toFixed(0) + 'mil';
-      svgHTML += `<text x="${padL-10}" y="${gy+4}" text-anchor="end" class="bp-axis-label">${label}</text>`;
-    });
-
-    // x labels — todos os meses
-    for(let i=0;i<months;i++){
-      svgHTML += `<text x="${x(i)}" y="${H-12}" text-anchor="middle" class="bp-axis-label">M${i+1}</text>`;
-    }
-
-    // marco: licenciamento sobe pra R$15mil (entre mês 6 e 7)
-    const mx = (x(5)+x(6))/2;
-    svgHTML += `<line x1="${mx}" y1="${padT}" x2="${mx}" y2="${padT+plotH}" stroke="var(--amber)" stroke-width="1.5" stroke-dasharray="4 4"/>`;
-    svgHTML += `<text x="${mx}" y="${padT-8}" text-anchor="middle" class="bp-axis-label" style="fill:var(--amber);">licenciamento sobe p/ R$15mil</text>`;
-
-    // gradient
-    svgHTML += `<defs>
-      <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="var(--purple)" stop-opacity="0.28"/>
-        <stop offset="100%" stop-color="var(--purple)" stop-opacity="0"/>
-      </linearGradient>
-    </defs>`;
-
-    svgHTML += `<path d="${area}" fill="url(#areaGrad)" stroke="none"/>`;
-    svgHTML += `<path d="${path}" fill="none" stroke="var(--purple)" stroke-width="3" stroke-linecap="round"/>`;
-
-    // pontos clicáveis em cada mês
-    pts.forEach((p,i) => {
-      const big = [0,5,11].includes(i);
-      svgHTML += `<circle class="bp-point" data-i="${i}" cx="${p.x}" cy="${p.y}" r="${big?6:4.5}" fill="var(--card)" stroke="var(--purple)" stroke-width="2.5"/>`;
-    });
-
-    svg.innerHTML = svgHTML;
-
-    // callout ao clicar em um ponto
-    const callout = document.getElementById('bpCallout');
-    function selectMonth(i){
-      svg.querySelectorAll('.bp-point').forEach(c => {
-        c.setAttribute('fill', 'var(--card)');
-        c.setAttribute('r', [0,5,11].includes(+c.dataset.i) ? 6 : 4.5);
-      });
-      const el = svg.querySelector(`.bp-point[data-i="${i}"]`);
-      el.setAttribute('fill', 'var(--purple)');
-      el.setAttribute('r', 7.5);
-
-      callout.innerHTML = `<b>Mês ${i+1}</b> · GMV: <b>${fmtCompact(gmv[i])}</b>`
-        + `<span class="ph"> · ${pedidos[i].toLocaleString('pt-BR')} pedidos · ${volumeTon[i].toFixed(2).replace('.',',')} Ton`
-        + ` · licenciamento R$${(licenciamento[i]/1000)}mil · EBITDA do mês R$${ebitdaMes[i]}/Ton · acumulado R$${ebitdaAcum[i]}/Ton</span>`;
-    }
-    svg.querySelectorAll('.bp-point').forEach(c => {
-      c.addEventListener('click', () => selectMonth(+c.dataset.i));
-    });
-  })();
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
 </script>
 </body>
 </html>
