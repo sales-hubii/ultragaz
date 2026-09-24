@@ -1194,6 +1194,31 @@ body{
           <input type="number" id="vmPct2" value="0.10" step="0.01">
         </div>
       </div>
+
+      <p style="font-size:12.5px; color:var(--ink-soft); margin:4px 0 12px; line-height:1.5;">O P&amp;L abaixo soma <b>três pernas</b>: a margem que a Ultragaz já ganha vendendo pra revenda (ela continua vendendo, o canal não a substitui), o royalty incremental do piloto, e os savings operacionais de trabalhar no digital (ex: back-office) — descontados o marketing e o licenciamento fixo da Hubii.</p>
+      <div class="scenario-inputs">
+        <div class="scenario-input-group">
+          <label>Margem base Ultragaz na venda à revenda (%)</label>
+          <input type="number" id="vmMargemBase" value="12" step="0.1">
+        </div>
+        <div class="scenario-input-group">
+          <label>Savings operacionais no digital (%)</label>
+          <input type="number" id="vmSavings" value="4" step="0.1">
+        </div>
+        <div class="scenario-input-group">
+          <label>Royalty incremental (%)</label>
+          <input type="number" id="vmRoyaltyPct" value="2" step="0.1">
+        </div>
+        <div class="scenario-input-group">
+          <label>Marketing (%)</label>
+          <input type="number" id="vmMktPct" value="6" step="0.1">
+        </div>
+        <div class="scenario-input-group">
+          <label>Licenciamento Hubii (R$/mês, fixo)</label>
+          <input type="number" id="vmLicenciamento" value="15000" step="100">
+        </div>
+      </div>
+
       <div class="scenario-results">
         <div class="scenario-result-card">
           <div class="scenario-result-title">Expectativa de GMV Hubii</div>
@@ -1204,9 +1229,11 @@ body{
         </div>
         <div class="scenario-result-card">
           <div class="scenario-result-title">P&amp;L no volume simulado</div>
-          <div class="scenario-result-sub">licenciamento R$15mil/mês + royalty 2% + marketing 6%</div>
-          <div class="scenario-result-row"><span>Royalty (2%)</span><b id="vm_royalty">—</b></div>
-          <div class="scenario-result-row"><span>Marketing (6%)</span><b id="vm_mkt">—</b></div>
+          <div class="scenario-result-sub">margem base + savings + royalty − marketing − licenciamento</div>
+          <div class="scenario-result-row"><span>Margem base (venda à revenda)</span><b id="vm_margemBase">—</b></div>
+          <div class="scenario-result-row"><span>Savings operacionais</span><b id="vm_savings">—</b></div>
+          <div class="scenario-result-row"><span>Royalty incremental</span><b id="vm_royalty">—</b></div>
+          <div class="scenario-result-row"><span>Marketing</span><b id="vm_mkt">—</b></div>
           <div class="scenario-result-row"><span>Licenciamento Hubii</span><b id="vm_licenciamento">—</b></div>
           <div class="scenario-result-row highlight"><span>Resultado do mês</span><b id="vm_resultado">—</b></div>
         </div>
@@ -1738,17 +1765,27 @@ body{
     const p1 = document.getElementById('vmPct1');
     const b2 = document.getElementById('vmBase2');
     const p2 = document.getElementById('vmPct2');
+    const mMargemBase = document.getElementById('vmMargemBase');
+    const mSavings = document.getElementById('vmSavings');
+    const mRoyaltyPct = document.getElementById('vmRoyaltyPct');
+    const mMktPct = document.getElementById('vmMktPct');
+    const mLicenciamento = document.getElementById('vmLicenciamento');
+
+    const allIds = ['vm_via1','vm_via2','vm_total','vm_margemBase','vm_savings','vm_royalty','vm_mkt','vm_licenciamento','vm_resultado'];
 
     function recalc(){
       const base1 = parseFloat(b1.value);
       const pct1 = parseFloat(p1.value);
       const base2 = parseFloat(b2.value);
       const pct2 = parseFloat(p2.value);
+      const margemBasePct = parseFloat(mMargemBase.value);
+      const savingsPct = parseFloat(mSavings.value);
+      const royaltyPct = parseFloat(mRoyaltyPct.value);
+      const mktPct = parseFloat(mMktPct.value);
+      const licenciamento = parseFloat(mLicenciamento.value);
 
-      if([base1,pct1,base2,pct2].some(v => isNaN(v))){
-        ['vm_via1','vm_via2','vm_total','vm_royalty','vm_mkt','vm_licenciamento','vm_resultado'].forEach(id=>{
-          document.getElementById(id).textContent = '—';
-        });
+      if([base1,pct1,base2,pct2,margemBasePct,savingsPct,royaltyPct,mktPct,licenciamento].some(v => isNaN(v))){
+        allIds.forEach(id => { document.getElementById(id).textContent = '—'; });
         return;
       }
 
@@ -1760,23 +1797,28 @@ body{
       document.getElementById('vm_via2').textContent = fmtR(via2) + '/mês';
       document.getElementById('vm_total').textContent = fmtR(total) + '/mês';
 
-      // Resultado incremental do canal (não é o P&L cheio sobre o GMV): royalty é
-      // margem que a Ultragaz ganha (soma), marketing e licenciamento são custo (subtraem).
-      // Com os valores-padrão da reunião (GMV ~R$701,8mil), bate exatamente com a
-      // planilha: resultado = -R$43.071,43 (6,14% do GMV, negativo neste volume —
-      // o licenciamento fixo ainda pesa; dilui conforme o volume cresce).
-      const royalty = total * 0.02;
-      const mkt = total * 0.06;
-      const licenciamento = 15000;
-      const resultado = royalty - mkt - licenciamento;
+      // P&L completo: a Ultragaz continua vendendo pra revenda (margem base) — o
+      // canal Hubii não a substitui, soma mais 3 pernas: royalty incremental e
+      // savings operacionais do digital, descontados marketing e o licenciamento
+      // fixo da Hubii. Com os valores-padrão da reunião (GMV ~R$701,8mil, margem
+      // base 12%, savings 4%, royalty 2%, marketing 6%), dá +R$69.214,29/mês
+      // (9,86% do GMV) — já perto do 10,2% do canal próprio, mesmo com o
+      // licenciamento fixo ainda pesando nesse volume inicial.
+      const margemBase = total * margemBasePct/100;
+      const savings = total * savingsPct/100;
+      const royalty = total * royaltyPct/100;
+      const mkt = total * mktPct/100;
+      const resultado = margemBase + savings + royalty - mkt - licenciamento;
 
+      document.getElementById('vm_margemBase').textContent = '+' + fmtR(margemBase);
+      document.getElementById('vm_savings').textContent = '+' + fmtR(savings);
       document.getElementById('vm_royalty').textContent = '+' + fmtR(royalty);
       document.getElementById('vm_mkt').textContent = '-' + fmtR(mkt);
       document.getElementById('vm_licenciamento').textContent = '-' + fmtR(licenciamento);
       document.getElementById('vm_resultado').textContent = (resultado>=0?'+':'-') + fmtR(Math.abs(resultado)) + ' (' + (resultado/total*100).toFixed(2).replace('.',',') + '% do GMV)';
     }
 
-    [b1,p1,b2,p2].forEach(el => el.addEventListener('input', recalc));
+    [b1,p1,b2,p2,mMargemBase,mSavings,mRoyaltyPct,mMktPct,mLicenciamento].forEach(el => el.addEventListener('input', recalc));
     recalc();
   })();
 
