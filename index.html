@@ -756,10 +756,16 @@ body{
   display:flex; flex-wrap:wrap; gap: 16px; margin-bottom: 20px;
 }
 .scenario-inputs.compact{
-  gap: 10px; margin: 0 0 14px; padding-bottom: 14px; border-bottom: 1px dashed var(--line);
+  gap: 12px 10px; margin: 0 0 16px; padding-bottom: 16px; border-bottom: 1px dashed var(--line);
+  align-items: flex-end;
 }
-.scenario-inputs.compact .scenario-input-group{ flex: 1 1 130px; }
-.scenario-inputs.compact label{ font-size: 9.5px; margin-bottom: 4px; }
+.scenario-inputs.compact .scenario-input-group{
+  flex: 1 1 130px; display:flex; flex-direction:column; justify-content:flex-end;
+}
+.scenario-inputs.compact label{
+  font-size: 9.5px; margin-bottom: 4px; line-height:1.35; min-height: 2.7em;
+  display:flex; align-items:flex-end;
+}
 .scenario-inputs.compact input{ padding: 7px 9px; font-size: 12.5px; }
 .scenario-input-group{ flex: 1 1 200px; }
 .scenario-input-group label{
@@ -1289,28 +1295,28 @@ body{
           <div class="scenario-result-card">
             <div class="scenario-result-title">Expectativa de GMV Hubii</div>
             <div class="scenario-result-sub">soma das duas alavancas de volume</div>
-            <div class="scenario-result-row"><span>Offline UG em GSP <i>(calculado)</i></span><b id="vm_base1_display">—</b></div>
-            <div class="scenario-result-row"><span>TAM GSP c/ concorrentes <i>(calculado)</i></span><b id="vm_base2_display">—</b></div>
             <div class="scenario-inputs compact">
               <div class="scenario-input-group">
-                <label>% canibalização do offline UG</label>
+                <label>% canibalização offline UG</label>
                 <input type="text" inputmode="decimal" id="vmPct1" value="0,10">
               </div>
               <div class="scenario-input-group">
-                <label>% captura do TAM concorrentes</label>
+                <label>% captura concorrentes</label>
                 <input type="text" inputmode="decimal" id="vmPct2" value="0,10">
               </div>
             </div>
+            <div class="scenario-result-row"><span>Offline UG em GSP <i>(calculado)</i></span><b id="vm_base1_display">—</b></div>
+            <div class="scenario-result-row"><span>TAM GSP c/ concorrentes <i>(calculado)</i></span><b id="vm_base2_display">—</b></div>
             <div class="scenario-result-row"><span>Via canibalização do offline UG</span><b id="vm_via1">—</b></div>
             <div class="scenario-result-row"><span>Via captura de concorrentes</span><b id="vm_via2">—</b></div>
             <div class="scenario-result-row highlight"><span>Expectativa Hubii — GMV/mês</span><b id="vm_total">—</b></div>
           </div>
           <div class="scenario-result-card">
             <div class="scenario-result-title">P&amp;L no volume simulado</div>
-            <div class="scenario-result-sub">margem base − back office + royalty − marketing − licenciamento</div>
+            <div class="scenario-result-sub">margem base − back office + royalty − marketing − licenciamento <i>(back office: quanto menor, melhor)</i></div>
             <div class="scenario-inputs compact">
               <div class="scenario-input-group">
-                <label>Back office no digital (%) <i style="font-weight:400;">— custo, quanto menor melhor</i></label>
+                <label>Back office (%)</label>
                 <input type="text" inputmode="decimal" id="vmBackoffice" value="4,00">
               </div>
               <div class="scenario-input-group">
@@ -1322,7 +1328,7 @@ body{
                 <input type="text" inputmode="decimal" id="vmMktPct" value="6,00">
               </div>
               <div class="scenario-input-group">
-                <label>Licenciamento Hubii (R$/mês, fixo)</label>
+                <label>Licenciamento (R$/mês)</label>
                 <input type="text" inputmode="decimal" id="vmLicenciamento" value="15.000,00">
               </div>
             </div>
