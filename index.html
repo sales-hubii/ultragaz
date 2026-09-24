@@ -737,6 +737,16 @@ body{
   background: var(--purple-glow); margin: 4px -8px; padding: 8px 8px; border-radius:6px; border-bottom:none;
 }
 .scenario-result-row.highlight b{ color: var(--purple-deep); }
+.inline-input-wrap{
+  display:flex; align-items:center; gap:5px; flex:none;
+  font-family:'IBM Plex Mono', monospace; font-weight:700; color: var(--ink);
+}
+.inline-input{
+  width: 56px; text-align:right; border:1px solid var(--line); border-radius:6px;
+  padding: 5px 7px; font-family:'IBM Plex Mono', monospace; font-size: 13px;
+  color: var(--ink); background: var(--paper);
+}
+.inline-input:focus{ outline:none; border-color: var(--purple); }
 
 .breakeven-panel{ margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
 .breakeven-header{
@@ -1179,7 +1189,7 @@ body{
         <div class="scenario-result-sub">exercício sobre a expectativa de volume inicial</div>
         <div class="scenario-result-row"><span>Licenciamento Hubii + marketing</span><b>6,0%</b></div>
         <div class="scenario-result-row"><span>Royalty (margem incremental)</span><b>2,0%</b></div>
-        <div class="scenario-result-row"><span>Back-office</span><b>parcial · a mensurar (&lt;4%)</b></div>
+        <div class="scenario-result-row"><span>Back-office <i style="font-weight:400; color:var(--ink-soft);">(reduzido vs. canal próprio · referência, pode mudar)</i></span><span class="inline-input-wrap"><input type="text" inputmode="decimal" id="cmpBackoffice" value="4,00" class="inline-input">%</span></div>
         <div class="scenario-result-row highlight"><span>Lucro líquido preliminar</span><b>~6,14%</b></div>
       </div>
     </div>
@@ -1836,7 +1846,7 @@ body{
       });
     });
   }
-  setupBRInputs(['vmPct1','vmPct2','vmMargemBase','vmSavings','vmRoyaltyPct','vmMktPct','vmLicenciamento','scTicket','scMargemAtual','scIncremental','scVolume']);
+  setupBRInputs(['vmPct1','vmPct2','vmMargemBase','vmSavings','vmRoyaltyPct','vmMktPct','vmLicenciamento','scTicket','scMargemAtual','scIncremental','scVolume','cmpBackoffice']);
 
   // ===== Simulador de volume — canibalização + captura de concorrentes =====
   (function(){
