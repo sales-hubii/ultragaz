@@ -2009,7 +2009,10 @@ body{
       // Ponto de virada: volume em que a margem % do projeto (que cresce à medida
       // que o licenciamento fixo se dilui) alcança a margem do canal próprio (10,20%).
       // margem%(GMV) = (margemBase-backoffice+royalty-mkt) - licenciamento/GMV*100
-      const targetMarginPct = 10.2;
+      // Mesma fórmula da margem do canal próprio no card "Comparativo de margem"
+      // acima: margem base - back office - marketing - taxa de adquirência.
+      const targetMarginPct = MARGEM_BASE_PCT - COMPARATIVO_BACKOFFICE_FIXO_PCT - 6 - 0.2;
+      document.getElementById('vm_target_label').textContent = formatBR(targetMarginPct);
       const marginSemFixo = margemBasePct - backofficePct + royaltyPct - mktPct;
       const track = document.getElementById('vm_breakeven_value');
       const fillBelow = document.getElementById('vm_fill_below');
