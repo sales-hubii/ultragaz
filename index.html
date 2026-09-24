@@ -1307,11 +1307,11 @@ body{
           </div>
           <div class="scenario-result-card">
             <div class="scenario-result-title">P&amp;L no volume simulado</div>
-            <div class="scenario-result-sub">margem base + savings + royalty − marketing − licenciamento</div>
+            <div class="scenario-result-sub">margem base − back office + royalty − marketing − licenciamento</div>
             <div class="scenario-inputs compact">
               <div class="scenario-input-group">
-                <label>Margem base Ultragaz na venda à revenda (%)</label>
-                <input type="text" inputmode="decimal" id="vmMargemBase" value="12,00">
+                <label>Back office no digital (%) <i style="font-weight:400;">— custo, quanto menor melhor</i></label>
+                <input type="text" inputmode="decimal" id="vmBackoffice" value="4,00">
               </div>
               <div class="scenario-input-group">
                 <label>Royalty incremental (%)</label>
@@ -1326,8 +1326,8 @@ body{
                 <input type="text" inputmode="decimal" id="vmLicenciamento" value="15.000,00">
               </div>
             </div>
-            <div class="scenario-result-row"><span>Margem base (venda à revenda)</span><b id="vm_margemBase">—</b></div>
-            <div class="scenario-result-row"><span>Savings operacionais</span><b id="vm_savings">—</b></div>
+            <div class="scenario-result-row"><span>Margem base <i style="font-weight:400; color:var(--ink-soft);">(venda à revenda · não se altera)</i></span><b id="vm_margemBase">—</b></div>
+            <div class="scenario-result-row"><span>Back office</span><b id="vm_savings">—</b></div>
             <div class="scenario-result-row"><span>Royalty incremental</span><b id="vm_royalty">—</b></div>
             <div class="scenario-result-row"><span>Marketing</span><b id="vm_mkt">—</b></div>
             <div class="scenario-result-row"><span>Licenciamento Hubii</span><b id="vm_licenciamento">—</b></div>
@@ -1938,7 +1938,7 @@ body{
       });
     });
   }
-  setupBRInputs(['vmPct1','vmPct2','vmMargemBase','vmRoyaltyPct','vmMktPct','vmLicenciamento','scTicket','scMargemAtual','scIncremental','scVolume']);
+  setupBRInputs(['vmPct1','vmPct2','vmBackoffice','vmRoyaltyPct','vmMktPct','vmLicenciamento','scTicket','scMargemAtual','scIncremental','scVolume']);
 
   // ===== Simulador de volume — canibalização + captura de concorrentes =====
   (function(){
@@ -1949,13 +1949,13 @@ body{
     // OUTPUTS derivados dessa base + os shares já informados (7% e 24%),
     // não premissas próprias — por isso não são mais campos editáveis aqui.
     const BASE_ONLINE_GSP = 9000000;
-    const BACKOFFICE_FIXO_PCT = 4; // back-office/savings — referência fixa, não editável
+    const MARGEM_BASE_PCT = 12; // margem que a Ultragaz já ganha vendendo pra revenda — não se altera
     const SHARE_ON_OFF_PCT = 7;      // online representa 7% do offline UG
     const MARKET_SHARE_UG_PCT = 24;  // UG detém 24% do TAM GSP (on+off, todos os players)
 
     const p1 = document.getElementById('vmPct1');
     const p2 = document.getElementById('vmPct2');
-    const mMargemBase = document.getElementById('vmMargemBase');
+    const mBackoffice = document.getElementById('vmBackoffice');
     const mRoyaltyPct = document.getElementById('vmRoyaltyPct');
     const mMktPct = document.getElementById('vmMktPct');
     const mLicenciamento = document.getElementById('vmLicenciamento');
@@ -1970,13 +1970,13 @@ body{
 
       const pct1 = parseBR(p1.value);
       const pct2 = parseBR(p2.value);
-      const margemBasePct = parseBR(mMargemBase.value);
-      const savingsPct = BACKOFFICE_FIXO_PCT;
+      const margemBasePct = MARGEM_BASE_PCT;
+      const backofficePct = parseBR(mBackoffice.value);
       const royaltyPct = parseBR(mRoyaltyPct.value);
       const mktPct = parseBR(mMktPct.value);
       const licenciamento = parseBR(mLicenciamento.value);
 
-      if([pct1,pct2,margemBasePct,savingsPct,royaltyPct,mktPct,licenciamento].some(v => isNaN(v))){
+      if([pct1,pct2,backofficePct,royaltyPct,mktPct,licenciamento].some(v => isNaN(v))){
         allIds.forEach(id => { document.getElementById(id).textContent = '—'; });
         return;
       }
@@ -1989,21 +1989,18 @@ body{
       document.getElementById('vm_via2').textContent = fmtR(via2) + '/mês';
       document.getElementById('vm_total').textContent = fmtR(total) + '/mês';
 
-      // P&L completo: a Ultragaz continua vendendo pra revenda (margem base) — o
-      // canal Hubii não a substitui, soma mais 3 pernas: royalty incremental e
-      // savings operacionais do digital, descontados marketing e o licenciamento
-      // fixo da Hubii. Com os valores-padrão da reunião (GMV ~R$701,8mil, margem
-      // base 12%, savings 4%, royalty 2%, marketing 6%), dá +R$69.214,29/mês
-      // (9,86% do GMV) — já perto do 10,20% do canal próprio, mesmo com o
-      // licenciamento fixo ainda pesando nesse volume inicial.
+      // P&L completo: a Ultragaz continua vendendo pra revenda (margem base,
+      // fixa — não se altera) — o canal Hubii não a substitui. Soma o royalty
+      // incremental, desconta o back office (custo real do canal digital:
+      // quanto MENOR, MAIOR a margem), o marketing e o licenciamento fixo da Hubii.
       const margemBase = total * margemBasePct/100;
-      const savings = total * savingsPct/100;
+      const backoffice = total * backofficePct/100;
       const royalty = total * royaltyPct/100;
       const mkt = total * mktPct/100;
-      const resultado = margemBase + savings + royalty - mkt - licenciamento;
+      const resultado = margemBase - backoffice + royalty - mkt - licenciamento;
 
       document.getElementById('vm_margemBase').textContent = '+' + fmtR(margemBase);
-      document.getElementById('vm_savings').textContent = '+' + fmtR(savings);
+      document.getElementById('vm_savings').textContent = '-' + fmtR(backoffice);
       document.getElementById('vm_royalty').textContent = '+' + fmtR(royalty);
       document.getElementById('vm_mkt').textContent = '-' + fmtR(mkt);
       document.getElementById('vm_licenciamento').textContent = '-' + fmtR(licenciamento);
@@ -2011,9 +2008,9 @@ body{
 
       // Ponto de virada: volume em que a margem % do projeto (que cresce à medida
       // que o licenciamento fixo se dilui) alcança a margem do canal próprio (10,20%).
-      // margem%(GMV) = (margemBase+savings+royalty-mkt) - licenciamento/GMV*100
+      // margem%(GMV) = (margemBase-backoffice+royalty-mkt) - licenciamento/GMV*100
       const targetMarginPct = 10.2;
-      const marginSemFixo = margemBasePct + savingsPct + royaltyPct - mktPct;
+      const marginSemFixo = margemBasePct - backofficePct + royaltyPct - mktPct;
       const track = document.getElementById('vm_breakeven_value');
       const fillBelow = document.getElementById('vm_fill_below');
       const fillAbove = document.getElementById('vm_fill_above');
@@ -2048,35 +2045,29 @@ body{
       }
     }
 
-    [p1,p2,mMargemBase,mRoyaltyPct,mMktPct,mLicenciamento].forEach(el => el.addEventListener('input', recalc));
+    [p1,p2,mBackoffice,mRoyaltyPct,mMktPct,mLicenciamento].forEach(el => el.addEventListener('input', recalc));
 
-    // Margem base é o mesmo dado real nos dois lugares (a margem que a
-    // Ultragaz já ganha vendendo pra revenda) — aqui sim faz sentido espelhar.
-    // Back-office/savings deixou de ser editável: fica fixo em 4% (referência
-    // atual), mesmo valor usado nas duas contas abaixo.
+    // Card "Comparativo de margem": margem base e back-office fixos (não são
+    // os mesmos inputs editáveis do Simulador de volume acima — lá o back
+    // office pode ser testado; aqui é a referência estática de contexto).
+    const COMPARATIVO_BACKOFFICE_FIXO_PCT = 4;
     const cmpMargemBaseDisplay = document.getElementById('cmp_margemBase_display');
     const cmpLucroEstimado = document.getElementById('cmp_lucro_preliminar');
     const cmpMargemPropria = document.getElementById('cmp_margem_propria');
 
     function recalcComparativo(){
-      const margemBasePct = parseBR(mMargemBase.value);
-      if(isNaN(margemBasePct)){
-        cmpLucroEstimado.textContent = '—';
-        cmpMargemPropria.textContent = '—';
-        return;
-      }
+      const margemBasePct = MARGEM_BASE_PCT;
       cmpMargemBaseDisplay.textContent = formatBR(margemBasePct) + '%';
 
       // Canal próprio: margem base - back office(4%) - marketing(6%) - taxa adquirência(0,2%)
-      const margemPropria = margemBasePct - BACKOFFICE_FIXO_PCT - 6 - 0.2;
+      const margemPropria = margemBasePct - COMPARATIVO_BACKOFFICE_FIXO_PCT - 6 - 0.2;
       cmpMargemPropria.textContent = (margemPropria>=0?'~':'-') + formatBR(Math.abs(margemPropria)) + '%';
 
       // Canal Hubii: margem base + royalty(2%) - licenciamento/mkt(6%) - back-office(4%, fixo)
-      const lucro = margemBasePct + 2 - 6 - BACKOFFICE_FIXO_PCT;
+      const lucro = margemBasePct + 2 - 6 - COMPARATIVO_BACKOFFICE_FIXO_PCT;
       cmpLucroEstimado.textContent = (lucro>=0?'~':'-') + formatBR(Math.abs(lucro)) + '%';
     }
 
-    mMargemBase.addEventListener('input', recalcComparativo);
     recalcComparativo();
     recalc();
   })();
