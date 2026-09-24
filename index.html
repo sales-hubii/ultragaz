@@ -1190,7 +1190,7 @@ body{
         <div class="scenario-result-row"><span>Licenciamento Hubii + marketing</span><b>6,0%</b></div>
         <div class="scenario-result-row"><span>Royalty (margem incremental)</span><b>2,0%</b></div>
         <div class="scenario-result-row"><span>Back-office <i style="font-weight:400; color:var(--ink-soft);">(reduzido vs. canal próprio · referência, pode mudar)</i></span><span class="inline-input-wrap"><input type="text" inputmode="decimal" id="cmpBackoffice" value="4,00" class="inline-input">%</span></div>
-        <div class="scenario-result-row highlight"><span>Lucro líquido preliminar</span><b>~6,14%</b></div>
+        <div class="scenario-result-row highlight"><span>Lucro líquido preliminar</span><b id="cmp_lucro_preliminar">~6,14%</b></div>
       </div>
     </div>
     <div class="panel" style="margin-top:14px;">
@@ -1864,6 +1864,7 @@ body{
     const p2 = document.getElementById('vmPct2');
     const mMargemBase = document.getElementById('vmMargemBase');
     const mSavings = document.getElementById('vmSavings');
+    const cmpBackoffice = document.getElementById('cmpBackoffice');
     const mRoyaltyPct = document.getElementById('vmRoyaltyPct');
     const mMktPct = document.getElementById('vmMktPct');
     const mLicenciamento = document.getElementById('vmLicenciamento');
@@ -1917,6 +1918,13 @@ body{
       document.getElementById('vm_licenciamento').textContent = '-' + fmtR(licenciamento);
       document.getElementById('vm_resultado').textContent = (resultado>=0?'+':'-') + fmtR(Math.abs(resultado)) + ' (' + (resultado/total*100).toFixed(2).replace('.',',') + '% do GMV)';
 
+      // Espelha o mesmo resultado no card "Comparativo de margem" acima —
+      // é o mesmo modelo, só outro lugar de exibição.
+      const cmpLucro = document.getElementById('cmp_lucro_preliminar');
+      if(cmpLucro){
+        cmpLucro.textContent = (resultado>=0?'~':'-') + Math.abs(resultado/total*100).toFixed(2).replace('.',',') + '%';
+      }
+
       // Ponto de virada: volume em que a margem % do projeto (que cresce à medida
       // que o licenciamento fixo se dilui) alcança a margem do canal próprio (10,20%).
       // margem%(GMV) = (margemBase+savings+royalty-mkt) - licenciamento/GMV*100
@@ -1957,6 +1965,15 @@ body{
     }
 
     [p1,p2,mMargemBase,mSavings,mRoyaltyPct,mMktPct,mLicenciamento].forEach(el => el.addEventListener('input', recalc));
+
+    // Back-office (card Comparativo de margem) e Savings operacionais (Simulador)
+    // são a mesma premissa mostrada em dois lugares — mantidos sincronizados.
+    if(cmpBackoffice){
+      mSavings.addEventListener('input', () => { cmpBackoffice.value = mSavings.value; });
+      cmpBackoffice.addEventListener('input', () => { mSavings.value = cmpBackoffice.value; recalc(); });
+      mSavings.addEventListener('blur', () => { cmpBackoffice.value = mSavings.value; });
+      cmpBackoffice.addEventListener('blur', () => { mSavings.value = cmpBackoffice.value; });
+    }
     recalc();
   })();
 
