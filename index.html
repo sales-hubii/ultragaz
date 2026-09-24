@@ -1260,7 +1260,7 @@ body{
           <div class="scenario-result-row"><span>Taxa de adquirência</span><b>-0,2%</b></div>
           <div class="scenario-result-row"><span>Licenciamento <i style="font-weight:400; color:var(--ink-soft);">(não se aplica)</i></span><b>—</b></div>
           <div class="scenario-result-row"><span>Royalty <i style="font-weight:400; color:var(--ink-soft);">(não se aplica)</i></span><b>—</b></div>
-          <div class="scenario-result-row highlight"><span>Lucro líquido sobre GMV <i style="font-weight:400; color:var(--purple-deep); opacity:.75;">(reportado)</i></span><b>~10,20% (R$918mil/R$9mi)</b></div>
+          <div class="scenario-result-row highlight"><span>Margem <i style="font-weight:400; color:var(--purple-deep); opacity:.75;">(calculada)</i></span><b id="cmp_margem_propria">—</b></div>
         </div>
         <div class="scenario-result-card">
           <div class="scenario-result-title">Canal Hubii (piloto)</div>
@@ -1269,9 +1269,9 @@ body{
           <div class="scenario-result-row"><span>Back-office <i style="font-weight:400; color:var(--ink-soft);">(reduzido vs. canal próprio)</i></span><b>-4,00%</b></div>
           <div class="scenario-result-row"><span>Marketing</span><b>-6,0%</b></div>
           <div class="scenario-result-row"><span>Taxa de adquirência <i style="font-weight:400; color:var(--ink-soft);">(não se aplica)</i></span><b>—</b></div>
-          <div class="scenario-result-row"><span>Licenciamento Hubii <i style="font-weight:400; color:var(--ink-soft);">(fixo, à parte — dilui com volume, ver Resolução)</i></span><b>R$15.000,00/mês</b></div>
+          <div class="scenario-result-row"><span>Licenciamento Hubii <i style="font-weight:400; color:var(--ink-soft);">(tem impacto real no resultado — detalhado na Resolução, abaixo)</i></span><b>R$15.000,00/mês</b></div>
           <div class="scenario-result-row"><span>Royalty <i style="font-weight:400; color:var(--ink-soft);">(margem incremental)</i></span><b>+2,0%</b></div>
-          <div class="scenario-result-row highlight"><span>Lucro líquido estimado <i style="font-weight:400; color:var(--purple-deep); opacity:.75;">(calculado)</i></span><b id="cmp_lucro_preliminar">—</b></div>
+          <div class="scenario-result-row highlight"><span>Margem <i style="font-weight:400; color:var(--purple-deep); opacity:.75;">(calculada)</i></span><b id="cmp_lucro_preliminar">—</b></div>
         </div>
       </div>
       <div class="panel" style="margin-top:14px;">
@@ -2056,15 +2056,22 @@ body{
     // atual), mesmo valor usado nas duas contas abaixo.
     const cmpMargemBaseDisplay = document.getElementById('cmp_margemBase_display');
     const cmpLucroEstimado = document.getElementById('cmp_lucro_preliminar');
+    const cmpMargemPropria = document.getElementById('cmp_margem_propria');
 
     function recalcComparativo(){
       const margemBasePct = parseBR(mMargemBase.value);
       if(isNaN(margemBasePct)){
         cmpLucroEstimado.textContent = '—';
+        cmpMargemPropria.textContent = '—';
         return;
       }
       cmpMargemBaseDisplay.textContent = formatBR(margemBasePct) + '%';
-      // Lucro (% da receita) = margem base + royalty (2%) - licenciamento/mkt (6%) - back-office (4%, fixo)
+
+      // Canal próprio: margem base - back office(4%) - marketing(6%) - taxa adquirência(0,2%)
+      const margemPropria = margemBasePct - BACKOFFICE_FIXO_PCT - 6 - 0.2;
+      cmpMargemPropria.textContent = (margemPropria>=0?'~':'-') + formatBR(Math.abs(margemPropria)) + '%';
+
+      // Canal Hubii: margem base + royalty(2%) - licenciamento/mkt(6%) - back-office(4%, fixo)
       const lucro = margemBasePct + 2 - 6 - BACKOFFICE_FIXO_PCT;
       cmpLucroEstimado.textContent = (lucro>=0?'~':'-') + formatBR(Math.abs(lucro)) + '%';
     }
