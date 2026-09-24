@@ -1187,10 +1187,11 @@ body{
       <div class="scenario-result-card">
         <div class="scenario-result-title">Canal Hubii (piloto)</div>
         <div class="scenario-result-sub">exercício sobre a expectativa de volume inicial</div>
-        <div class="scenario-result-row"><span>Licenciamento Hubii + marketing</span><b>6,0%</b></div>
+        <div class="scenario-result-row"><span>Margem base <i style="font-weight:400; color:var(--ink-soft);">(venda à revenda · mesma do Simulador abaixo)</i></span><b id="cmp_margemBase_display">12,00%</b></div>
         <div class="scenario-result-row"><span>Royalty (margem incremental)</span><b>2,0%</b></div>
-        <div class="scenario-result-row"><span>Back-office <i style="font-weight:400; color:var(--ink-soft);">(reduzido vs. canal próprio · referência, pode mudar)</i></span><span class="inline-input-wrap"><input type="text" inputmode="decimal" id="cmpBackoffice" value="4,00" class="inline-input">%</span></div>
-        <div class="scenario-result-row highlight"><span>Lucro líquido preliminar</span><b id="cmp_lucro_preliminar">~6,14%</b></div>
+        <div class="scenario-result-row"><span>Licenciamento Hubii + marketing</span><b>-6,0%</b></div>
+        <div class="scenario-result-row"><span>Back-office <i style="font-weight:400; color:var(--ink-soft);">(reduzido vs. canal próprio · referência, pode mudar)</i></span><span class="inline-input-wrap">-<input type="text" inputmode="decimal" id="cmpBackoffice" value="4,00" class="inline-input">%</span></div>
+        <div class="scenario-result-row highlight"><span>Lucro líquido estimado</span><b id="cmp_lucro_preliminar">—</b></div>
       </div>
     </div>
     <div class="panel" style="margin-top:14px;">
@@ -1918,13 +1919,6 @@ body{
       document.getElementById('vm_licenciamento').textContent = '-' + fmtR(licenciamento);
       document.getElementById('vm_resultado').textContent = (resultado>=0?'+':'-') + fmtR(Math.abs(resultado)) + ' (' + (resultado/total*100).toFixed(2).replace('.',',') + '% do GMV)';
 
-      // Espelha o mesmo resultado no card "Comparativo de margem" acima —
-      // é o mesmo modelo, só outro lugar de exibição.
-      const cmpLucro = document.getElementById('cmp_lucro_preliminar');
-      if(cmpLucro){
-        cmpLucro.textContent = (resultado>=0?'~':'-') + Math.abs(resultado/total*100).toFixed(2).replace('.',',') + '%';
-      }
-
       // Ponto de virada: volume em que a margem % do projeto (que cresce à medida
       // que o licenciamento fixo se dilui) alcança a margem do canal próprio (10,20%).
       // margem%(GMV) = (margemBase+savings+royalty-mkt) - licenciamento/GMV*100
@@ -1968,11 +1962,30 @@ body{
 
     // Back-office (card Comparativo de margem) e Savings operacionais (Simulador)
     // são a mesma premissa mostrada em dois lugares — mantidos sincronizados.
+    // Margem base é o mesmo dado real nos dois lugares (a margem que a
+    // Ultragaz já ganha vendendo pra revenda) — aqui sim faz sentido espelhar.
     if(cmpBackoffice){
-      mSavings.addEventListener('input', () => { cmpBackoffice.value = mSavings.value; });
-      cmpBackoffice.addEventListener('input', () => { mSavings.value = cmpBackoffice.value; recalc(); });
-      mSavings.addEventListener('blur', () => { cmpBackoffice.value = mSavings.value; });
-      cmpBackoffice.addEventListener('blur', () => { mSavings.value = cmpBackoffice.value; });
+      const cmpMargemBaseDisplay = document.getElementById('cmp_margemBase_display');
+      const cmpLucroEstimado = document.getElementById('cmp_lucro_preliminar');
+
+      function recalcComparativo(){
+        const margemBasePct = parseBR(mMargemBase.value);
+        const backofficePct = parseBR(cmpBackoffice.value);
+        if(isNaN(margemBasePct) || isNaN(backofficePct)){
+          cmpLucroEstimado.textContent = '—';
+          return;
+        }
+        cmpMargemBaseDisplay.textContent = formatBR(margemBasePct) + '%';
+        // Lucro (% da receita) = margem base + royalty (2%) - licenciamento/mkt (6%) - back-office
+        // Back-office é custo: quanto MENOR, MAIOR a margem (sinal correto, ao contrário
+        // da tentativa anterior que somava em vez de subtrair).
+        const lucro = margemBasePct + 2 - 6 - backofficePct;
+        cmpLucroEstimado.textContent = (lucro>=0?'~':'-') + formatBR(Math.abs(lucro)) + '%';
+      }
+
+      mMargemBase.addEventListener('input', recalcComparativo);
+      cmpBackoffice.addEventListener('input', recalcComparativo);
+      recalcComparativo();
     }
     recalc();
   })();
