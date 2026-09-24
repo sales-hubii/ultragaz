@@ -1116,7 +1116,118 @@ body{
   <!-- BUSINESS PLAN -->
   <div class="tab-panel" id="panel-bp">
 
-    <div class="section-label first">Modelagem de cenários — preço × margem <span style="color:var(--amber); font-weight:600;">· em construção, call de alinhamento com a Ultragaz</span></div>
+    <div class="section-label first">Racional para aprovação <span style="color:var(--ink-soft); font-weight:500;">· reunião com a Ultragaz, 21/set</span></div>
+    <div class="panel" style="margin-bottom:20px;">
+      <p style="font-size:13.5px; color:var(--ink); line-height:1.65; margin:0;">A Ultragaz detém <b>24% de market share domiciliar em Grande São Paulo</b>, num TAM de ~R$600mi/mês (online + offline, todos os players). Hoje o canal digital próprio representa apenas <b>7% do total UG na praça</b> — um espaço grande para crescer. O piloto com a Hubii testa duas alavancas de volume ainda não validadas (quanto se puxa do offline da própria UG, e quanto se captura dos concorrentes), com uma margem inicialmente <b>abaixo</b> do canal digital próprio (6,14% vs. 10,2%) — explicada pelo custo fixo de licenciamento, que se dilui à medida que o volume escala, com upside claro frente à referência de margem offline (12%).</p>
+    </div>
+
+    <div class="section-label">Contexto de mercado — Grande São Paulo</div>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-num">24%</div><div class="stat-lbl">Market share UG em GSP (domiciliar) · 22% no Brasil</div></div>
+      <div class="stat"><div class="stat-num">~R$600mi</div><div class="stat-lbl">TAM GSP/mês — online + offline, todos os players</div></div>
+      <div class="stat"><div class="stat-num">7%</div><div class="stat-lbl">Canal online sobre o total UG na praça</div></div>
+      <div class="stat"><div class="stat-num">R$126–127</div><div class="stat-lbl">Ticket médio GSP online</div></div>
+    </div>
+    <div class="panel">
+      <div class="info-block">
+        <ul class="info-list">
+          <li>Volume online de referência (ago/26): <b>R$9mi/mês</b>; volume offline UG implícito: <b>~R$128,6mi/mês</b></li>
+          <li>Concorrentes no offline em GSP: <b>~R$168mi/mês</b></li>
+          <li>CAC online UG: <b>R$22</b> · CAC offline (revenda arca o custo): <b>R$12</b></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-label">Comparativo de margem — canal próprio vs. piloto Hubii</div>
+    <div class="scenario-results">
+      <div class="scenario-result-card">
+        <div class="scenario-result-title">Canal digital próprio (site + WhatsApp)</div>
+        <div class="scenario-result-sub">estrutura de custo atual sobre a receita</div>
+        <div class="scenario-result-row"><span>Marketing, tecnologia, back-office</span><b>4,0%</b></div>
+        <div class="scenario-result-row"><span>Desconto com coparticipação</span><b>~6,0%</b></div>
+        <div class="scenario-result-row"><span>Taxa de adquirência</span><b>~0,2%</b></div>
+        <div class="scenario-result-row highlight"><span>Lucro líquido sobre GMV</span><b>~10,2% (R$918mil/R$9mi)</b></div>
+      </div>
+      <div class="scenario-result-card">
+        <div class="scenario-result-title">Canal Hubii (piloto)</div>
+        <div class="scenario-result-sub">exercício sobre a expectativa de volume inicial</div>
+        <div class="scenario-result-row"><span>Licenciamento Hubii + marketing</span><b>6,0%</b></div>
+        <div class="scenario-result-row"><span>Royalty (margem incremental)</span><b>2,0%</b></div>
+        <div class="scenario-result-row"><span>Back-office</span><b>parcial · a mensurar (&lt;4%)</b></div>
+        <div class="scenario-result-row highlight"><span>Lucro líquido preliminar</span><b>~6,14%</b></div>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:14px;">
+      <p style="font-size:12.5px; color:var(--ink-soft); margin:0; line-height:1.5;">A diferença (6,14% vs. 10,2%) é explicada pelo <b>custo fixo do licenciamento Hubii</b>, ainda não diluído pela escala. Conforme o volume cresce, esse gap se fecha — ver referência abaixo.</p>
+    </div>
+
+    <div class="section-label">Referência — P&amp;L domiciliar UG</div>
+    <div class="panel">
+      <div class="info-block">
+        <ul class="info-list">
+          <li>EBITDA / lucro líquido sobre a receita domiciliar até agosto: <b>12%</b></li>
+          <li>Lucro líquido por tonelada: <b>R$951</b> — métrica de go/no-go do projeto</li>
+          <li>Custos variáveis que deixam de existir no modelo Hubii/marketplace (taxa de adquirência, desconto vale-gás, marketing/tecnologia/terceiros): <b>~4% da receita</b>, ~R$5.235 (~15% da receita do recorte analisado)</li>
+          <li><b>Conclusão:</b> a margem líquida com Hubii pode superar os 10,2% atuais, com ~4% de margem de erro positiva</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-label">Simulador de volume — canibalização + captura de concorrentes</div>
+    <div class="panel scenario-tool">
+      <p style="font-size:13px; color:var(--ink-soft); margin:0 0 16px; line-height:1.5;">As duas premissas centrais a validar no piloto: quanto do volume Hubii <b>canibaliza o offline da UG</b>, e quanto vem de <b>captura de share dos concorrentes</b>. Ajuste os % abaixo para simular a expectativa de GMV mensal.</p>
+      <div class="scenario-inputs">
+        <div class="scenario-input-group">
+          <label>Offline UG em GSP (R$/mês)</label>
+          <input type="number" id="vmBase1" value="128571428.57" step="1">
+        </div>
+        <div class="scenario-input-group">
+          <label>% canibalização do offline UG</label>
+          <input type="number" id="vmPct1" value="0.10" step="0.01">
+        </div>
+        <div class="scenario-input-group">
+          <label>TAM GSP c/ concorrentes (R$/mês)</label>
+          <input type="number" id="vmBase2" value="573214285.71" step="1">
+        </div>
+        <div class="scenario-input-group">
+          <label>% captura do TAM concorrentes</label>
+          <input type="number" id="vmPct2" value="0.10" step="0.01">
+        </div>
+      </div>
+      <div class="scenario-results">
+        <div class="scenario-result-card">
+          <div class="scenario-result-title">Expectativa de GMV Hubii</div>
+          <div class="scenario-result-sub">soma das duas alavancas de volume</div>
+          <div class="scenario-result-row"><span>Via canibalização do offline UG</span><b id="vm_via1">—</b></div>
+          <div class="scenario-result-row"><span>Via captura de concorrentes</span><b id="vm_via2">—</b></div>
+          <div class="scenario-result-row highlight"><span>Expectativa Hubii — GMV/mês</span><b id="vm_total">—</b></div>
+        </div>
+        <div class="scenario-result-card">
+          <div class="scenario-result-title">P&amp;L no volume simulado</div>
+          <div class="scenario-result-sub">licenciamento R$15mil/mês + royalty 2% + marketing 6%</div>
+          <div class="scenario-result-row"><span>Royalty (2%)</span><b id="vm_royalty">—</b></div>
+          <div class="scenario-result-row"><span>Marketing (6%)</span><b id="vm_mkt">—</b></div>
+          <div class="scenario-result-row"><span>Licenciamento Hubii</span><b id="vm_licenciamento">—</b></div>
+          <div class="scenario-result-row highlight"><span>Resultado do mês</span><b id="vm_resultado">—</b></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">Próximos passos <span style="color:var(--ink-soft); font-weight:500;">· combinados na reunião</span></div>
+    <div class="panel">
+      <div class="info-block">
+        <ul class="info-list">
+          <li>Refinar o business plan com as premissas discutidas (Leonardo) — incluir camada de canibalização offline e captura de share de concorrentes; modelar curva de diluição do custo fixo Hubii com o crescimento de volume; deixar simulador para o Mateus testar cenários</li>
+          <li>Patricia compartilha o link da tabela interna com os números do P&amp;L domiciliar</li>
+          <li>Mateus envia o dado de fechamento de agosto (volume GSP) para calibrar a premissa dos R$9mi</li>
+          <li>Alinhar o modelo de remuneração do revendedor no canal marketplace (porcentagem fixa já praticada no online como referência)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-label">Detalhamento operacional — piloto P13 (marketplaces) <span style="color:var(--ink-soft); font-weight:500;">· suporte</span></div>
+
+    <div class="section-label" style="margin-top:8px;">Modelagem de cenários — preço × margem <span style="color:var(--foco); font-weight:600;">· resolvido em 21/set: preço não muda, ganho vem só da margem incremental</span></div>
     <div class="panel scenario-tool">
       <p style="font-size:13px; color:var(--ink-soft); margin:0 0 16px; line-height:1.5;">Preencher com os números reais durante a call: dado o volume e a margem atual, quanto de gap a nova margem incremental abre — e se esse gap é absorvido ou repassado ao preço.</p>
       <div class="scenario-inputs">
@@ -1618,6 +1729,56 @@ body{
   document.addEventListener('keydown', (e) => {
     if(e.key === 'Escape') modal.classList.remove('open');
   });
+
+  // ===== Simulador de volume — canibalização + captura de concorrentes =====
+  (function(){
+    const fmtR = (v) => 'R$' + v.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+
+    const b1 = document.getElementById('vmBase1');
+    const p1 = document.getElementById('vmPct1');
+    const b2 = document.getElementById('vmBase2');
+    const p2 = document.getElementById('vmPct2');
+
+    function recalc(){
+      const base1 = parseFloat(b1.value);
+      const pct1 = parseFloat(p1.value);
+      const base2 = parseFloat(b2.value);
+      const pct2 = parseFloat(p2.value);
+
+      if([base1,pct1,base2,pct2].some(v => isNaN(v))){
+        ['vm_via1','vm_via2','vm_total','vm_royalty','vm_mkt','vm_licenciamento','vm_resultado'].forEach(id=>{
+          document.getElementById(id).textContent = '—';
+        });
+        return;
+      }
+
+      const via1 = base1 * pct1/100;
+      const via2 = base2 * pct2/100;
+      const total = via1 + via2;
+
+      document.getElementById('vm_via1').textContent = fmtR(via1) + '/mês';
+      document.getElementById('vm_via2').textContent = fmtR(via2) + '/mês';
+      document.getElementById('vm_total').textContent = fmtR(total) + '/mês';
+
+      // Resultado incremental do canal (não é o P&L cheio sobre o GMV): royalty é
+      // margem que a Ultragaz ganha (soma), marketing e licenciamento são custo (subtraem).
+      // Com os valores-padrão da reunião (GMV ~R$701,8mil), bate exatamente com a
+      // planilha: resultado = -R$43.071,43 (6,14% do GMV, negativo neste volume —
+      // o licenciamento fixo ainda pesa; dilui conforme o volume cresce).
+      const royalty = total * 0.02;
+      const mkt = total * 0.06;
+      const licenciamento = 15000;
+      const resultado = royalty - mkt - licenciamento;
+
+      document.getElementById('vm_royalty').textContent = '+' + fmtR(royalty);
+      document.getElementById('vm_mkt').textContent = '-' + fmtR(mkt);
+      document.getElementById('vm_licenciamento').textContent = '-' + fmtR(licenciamento);
+      document.getElementById('vm_resultado').textContent = (resultado>=0?'+':'-') + fmtR(Math.abs(resultado)) + ' (' + (resultado/total*100).toFixed(2).replace('.',',') + '% do GMV)';
+    }
+
+    [b1,p1,b2,p2].forEach(el => el.addEventListener('input', recalc));
+    recalc();
+  })();
 
   // ===== Modelagem de cenários — preço x margem (ferramenta viva para a call) =====
   (function(){
