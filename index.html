@@ -1164,23 +1164,6 @@ body{
       <p style="font-size:13.5px; color:var(--ink); line-height:1.65; margin:0;">A Ultragaz detém <b>24% de market share domiciliar em Grande São Paulo</b>, num TAM de ~R$600mi/mês (online + offline, todos os players). Hoje o canal digital próprio representa apenas <b>7% do total UG na praça</b> — um espaço grande para crescer. O piloto com a Hubii testa duas alavancas de volume ainda não validadas (quanto se puxa do offline da própria UG, e quanto se captura dos concorrentes), com uma margem inicialmente <b>abaixo</b> do canal digital próprio (6,14% vs. 10,20%) — explicada pelo custo fixo de licenciamento, que se dilui à medida que o volume escala, com upside claro frente à referência de margem offline (12%).</p>
     </div>
 
-    <div class="section-label">Contexto de mercado — Grande São Paulo</div>
-    <div class="stat-row">
-      <div class="stat"><div class="stat-num">24%</div><div class="stat-lbl">Market share UG em GSP (domiciliar) · 22% no Brasil</div></div>
-      <div class="stat"><div class="stat-num">~R$600mi</div><div class="stat-lbl">TAM GSP/mês — online + offline, todos os players</div></div>
-      <div class="stat"><div class="stat-num">7%</div><div class="stat-lbl">Canal online sobre o total UG na praça</div></div>
-      <div class="stat"><div class="stat-num">R$126–127</div><div class="stat-lbl">Ticket médio GSP online</div></div>
-    </div>
-    <div class="panel">
-      <div class="info-block">
-        <ul class="info-list">
-          <li>Volume online de referência (ago/26): <b>R$9mi/mês</b>; volume offline UG implícito: <b>~R$128,6mi/mês</b></li>
-          <li>Concorrentes no offline em GSP: <b>~R$168mi/mês</b></li>
-          <li>CAC online UG: <b>R$22</b> · CAC offline (revenda arca o custo): <b>R$12</b></li>
-        </ul>
-      </div>
-    </div>
-
     <div class="section-label">Comparativo de margem — canal próprio vs. piloto Hubii</div>
     <div class="scenario-results">
       <div class="scenario-result-card">
@@ -1216,6 +1199,23 @@ body{
       </div>
     </div>
 
+    <div class="section-label">Contexto de mercado — Grande São Paulo</div>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-num">24%</div><div class="stat-lbl">Market share UG em GSP (domiciliar) · 22% no Brasil</div></div>
+      <div class="stat"><div class="stat-num">~R$600mi</div><div class="stat-lbl">TAM GSP/mês — online + offline, todos os players</div></div>
+      <div class="stat"><div class="stat-num">7%</div><div class="stat-lbl">Canal online sobre o total UG na praça</div></div>
+      <div class="stat"><div class="stat-num">R$126–127</div><div class="stat-lbl">Ticket médio GSP online</div></div>
+    </div>
+    <div class="panel">
+      <div class="info-block">
+        <ul class="info-list">
+          <li>Volume online de referência (ago/26), sinalizado pelo time de UG digital: <b>R$9mi/mês</b> — é a base de todo o cálculo abaixo; volume offline UG implícito: <b>~R$128,6mi/mês</b></li>
+          <li>Concorrentes no offline em GSP: <b>~R$168mi/mês</b></li>
+          <li>CAC online UG: <b>R$22</b> · CAC offline (revenda arca o custo): <b>R$12</b></li>
+        </ul>
+      </div>
+    </div>
+
     <div class="section-label">Simulador de volume — canibalização + captura de concorrentes</div>
     <div class="panel scenario-tool">
       <p style="font-size:13px; color:var(--ink-soft); margin:0 0 16px; line-height:1.5;">As duas premissas centrais a validar no piloto: quanto do volume Hubii <b>canibaliza o offline da UG</b>, e quanto vem de <b>captura de share dos concorrentes</b>. Ajuste os campos em cada card — as informações se recalculam juntas.</p>
@@ -1224,18 +1224,12 @@ body{
         <div class="scenario-result-card">
           <div class="scenario-result-title">Expectativa de GMV Hubii</div>
           <div class="scenario-result-sub">soma das duas alavancas de volume</div>
+          <div class="scenario-result-row"><span>Offline UG em GSP <i>(calculado)</i></span><b id="vm_base1_display">—</b></div>
+          <div class="scenario-result-row"><span>TAM GSP c/ concorrentes <i>(calculado)</i></span><b id="vm_base2_display">—</b></div>
           <div class="scenario-inputs compact">
-            <div class="scenario-input-group">
-              <label>Offline UG em GSP (R$/mês)</label>
-              <input type="text" inputmode="decimal" id="vmBase1" value="128.571.428,57">
-            </div>
             <div class="scenario-input-group">
               <label>% canibalização do offline UG</label>
               <input type="text" inputmode="decimal" id="vmPct1" value="0,10">
-            </div>
-            <div class="scenario-input-group">
-              <label>TAM GSP c/ concorrentes (R$/mês)</label>
-              <input type="text" inputmode="decimal" id="vmBase2" value="573.214.285,71">
             </div>
             <div class="scenario-input-group">
               <label>% captura do TAM concorrentes</label>
@@ -1842,15 +1836,21 @@ body{
       });
     });
   }
-  setupBRInputs(['vmBase1','vmPct1','vmBase2','vmPct2','vmMargemBase','vmSavings','vmRoyaltyPct','vmMktPct','vmLicenciamento','scTicket','scMargemAtual','scIncremental','scVolume']);
+  setupBRInputs(['vmPct1','vmPct2','vmMargemBase','vmSavings','vmRoyaltyPct','vmMktPct','vmLicenciamento','scTicket','scMargemAtual','scIncremental','scVolume']);
 
   // ===== Simulador de volume — canibalização + captura de concorrentes =====
   (function(){
     const fmtR = (v) => 'R$' + v.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
 
-    const b1 = document.getElementById('vmBase1');
+    // Referência base: R$9mi/mês sinalizados pelo time de UG digital (seção
+    // "Contexto de mercado" acima). Offline UG e TAM c/ concorrentes são
+    // OUTPUTS derivados dessa base + os shares já informados (7% e 24%),
+    // não premissas próprias — por isso não são mais campos editáveis aqui.
+    const BASE_ONLINE_GSP = 9000000;
+    const SHARE_ON_OFF_PCT = 7;      // online representa 7% do offline UG
+    const MARKET_SHARE_UG_PCT = 24;  // UG detém 24% do TAM GSP (on+off, todos os players)
+
     const p1 = document.getElementById('vmPct1');
-    const b2 = document.getElementById('vmBase2');
     const p2 = document.getElementById('vmPct2');
     const mMargemBase = document.getElementById('vmMargemBase');
     const mSavings = document.getElementById('vmSavings');
@@ -1861,9 +1861,12 @@ body{
     const allIds = ['vm_via1','vm_via2','vm_total','vm_margemBase','vm_savings','vm_royalty','vm_mkt','vm_licenciamento','vm_resultado'];
 
     function recalc(){
-      const base1 = parseBR(b1.value);
+      const base1 = BASE_ONLINE_GSP / (SHARE_ON_OFF_PCT/100);
+      const base2 = (BASE_ONLINE_GSP + base1) / (MARKET_SHARE_UG_PCT/100);
+      document.getElementById('vm_base1_display').textContent = fmtR(base1) + '/mês';
+      document.getElementById('vm_base2_display').textContent = fmtR(base2) + '/mês';
+
       const pct1 = parseBR(p1.value);
-      const base2 = parseBR(b2.value);
       const pct2 = parseBR(p2.value);
       const margemBasePct = parseBR(mMargemBase.value);
       const savingsPct = parseBR(mSavings.value);
@@ -1871,7 +1874,7 @@ body{
       const mktPct = parseBR(mMktPct.value);
       const licenciamento = parseBR(mLicenciamento.value);
 
-      if([base1,pct1,base2,pct2,margemBasePct,savingsPct,royaltyPct,mktPct,licenciamento].some(v => isNaN(v))){
+      if([pct1,pct2,margemBasePct,savingsPct,royaltyPct,mktPct,licenciamento].some(v => isNaN(v))){
         allIds.forEach(id => { document.getElementById(id).textContent = '—'; });
         return;
       }
@@ -1943,7 +1946,7 @@ body{
       }
     }
 
-    [b1,p1,b2,p2,mMargemBase,mSavings,mRoyaltyPct,mMktPct,mLicenciamento].forEach(el => el.addEventListener('input', recalc));
+    [p1,p2,mMargemBase,mSavings,mRoyaltyPct,mMktPct,mLicenciamento].forEach(el => el.addEventListener('input', recalc));
     recalc();
   })();
 
