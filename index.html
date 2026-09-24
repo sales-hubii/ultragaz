@@ -1161,7 +1161,7 @@ body{
 
     <div class="section-label first">Racional para aprovação <span style="color:var(--ink-soft); font-weight:500;">· reunião com a Ultragaz, 21/set</span></div>
     <div class="panel" style="margin-bottom:20px;">
-      <p style="font-size:13.5px; color:var(--ink); line-height:1.65; margin:0;">A Ultragaz detém <b>24% de market share domiciliar em Grande São Paulo</b>, num TAM de ~R$600mi/mês (online + offline, todos os players). Hoje o canal digital próprio representa apenas <b>7% do total UG na praça</b> — um espaço grande para crescer. O piloto com a Hubii testa duas alavancas de volume ainda não validadas (quanto se puxa do offline da própria UG, e quanto se captura dos concorrentes), com uma margem inicialmente <b>abaixo</b> do canal digital próprio (6,14% vs. 10,2%) — explicada pelo custo fixo de licenciamento, que se dilui à medida que o volume escala, com upside claro frente à referência de margem offline (12%).</p>
+      <p style="font-size:13.5px; color:var(--ink); line-height:1.65; margin:0;">A Ultragaz detém <b>24% de market share domiciliar em Grande São Paulo</b>, num TAM de ~R$600mi/mês (online + offline, todos os players). Hoje o canal digital próprio representa apenas <b>7% do total UG na praça</b> — um espaço grande para crescer. O piloto com a Hubii testa duas alavancas de volume ainda não validadas (quanto se puxa do offline da própria UG, e quanto se captura dos concorrentes), com uma margem inicialmente <b>abaixo</b> do canal digital próprio (6,14% vs. 10,20%) — explicada pelo custo fixo de licenciamento, que se dilui à medida que o volume escala, com upside claro frente à referência de margem offline (12%).</p>
     </div>
 
     <div class="section-label">Contexto de mercado — Grande São Paulo</div>
@@ -1189,7 +1189,7 @@ body{
         <div class="scenario-result-row"><span>Marketing, tecnologia, back-office</span><b>4,0%</b></div>
         <div class="scenario-result-row"><span>Desconto com coparticipação</span><b>~6,0%</b></div>
         <div class="scenario-result-row"><span>Taxa de adquirência</span><b>~0,2%</b></div>
-        <div class="scenario-result-row highlight"><span>Lucro líquido sobre GMV</span><b>~10,2% (R$918mil/R$9mi)</b></div>
+        <div class="scenario-result-row highlight"><span>Lucro líquido sobre GMV</span><b>~10,20% (R$918mil/R$9mi)</b></div>
       </div>
       <div class="scenario-result-card">
         <div class="scenario-result-title">Canal Hubii (piloto)</div>
@@ -1201,7 +1201,7 @@ body{
       </div>
     </div>
     <div class="panel" style="margin-top:14px;">
-      <p style="font-size:12.5px; color:var(--ink-soft); margin:0; line-height:1.5;">A diferença (6,14% vs. 10,2%) é explicada pelo <b>custo fixo do licenciamento Hubii</b>, ainda não diluído pela escala. Conforme o volume cresce, esse gap se fecha — ver referência abaixo.</p>
+      <p style="font-size:12.5px; color:var(--ink-soft); margin:0; line-height:1.5;">A diferença (6,14% vs. 10,20%) é explicada pelo <b>custo fixo do licenciamento Hubii</b>, ainda não diluído pela escala. Conforme o volume cresce, esse gap se fecha — ver referência abaixo.</p>
     </div>
 
     <div class="section-label">Referência — P&amp;L domiciliar UG</div>
@@ -1211,7 +1211,7 @@ body{
           <li>EBITDA / lucro líquido sobre a receita domiciliar até agosto: <b>12%</b></li>
           <li>Lucro líquido por tonelada: <b>R$951</b> — métrica de go/no-go do projeto</li>
           <li>Custos variáveis que deixam de existir no modelo Hubii/marketplace (taxa de adquirência, desconto vale-gás, marketing/tecnologia/terceiros): <b>~4% da receita</b>, ~R$5.235 (~15% da receita do recorte analisado)</li>
-          <li><b>Conclusão:</b> a margem líquida com Hubii pode superar os 10,2% atuais, com ~4% de margem de erro positiva</li>
+          <li><b>Conclusão:</b> a margem líquida com Hubii pode superar os 10,20% atuais, com ~4% de margem de erro positiva</li>
         </ul>
       </div>
     </div>
@@ -1227,19 +1227,19 @@ body{
           <div class="scenario-inputs compact">
             <div class="scenario-input-group">
               <label>Offline UG em GSP (R$/mês)</label>
-              <input type="number" id="vmBase1" value="128571428.57" step="1">
+              <input type="text" inputmode="decimal" id="vmBase1" value="128.571.428,57">
             </div>
             <div class="scenario-input-group">
               <label>% canibalização do offline UG</label>
-              <input type="number" id="vmPct1" value="0.10" step="0.01">
+              <input type="text" inputmode="decimal" id="vmPct1" value="0,10">
             </div>
             <div class="scenario-input-group">
               <label>TAM GSP c/ concorrentes (R$/mês)</label>
-              <input type="number" id="vmBase2" value="573214285.71" step="1">
+              <input type="text" inputmode="decimal" id="vmBase2" value="573.214.285,71">
             </div>
             <div class="scenario-input-group">
               <label>% captura do TAM concorrentes</label>
-              <input type="number" id="vmPct2" value="0.10" step="0.01">
+              <input type="text" inputmode="decimal" id="vmPct2" value="0,10">
             </div>
           </div>
           <div class="scenario-result-row"><span>Via canibalização do offline UG</span><b id="vm_via1">—</b></div>
@@ -1252,23 +1252,23 @@ body{
           <div class="scenario-inputs compact">
             <div class="scenario-input-group">
               <label>Margem base Ultragaz na venda à revenda (%)</label>
-              <input type="number" id="vmMargemBase" value="12" step="0.1">
+              <input type="text" inputmode="decimal" id="vmMargemBase" value="12,00">
             </div>
             <div class="scenario-input-group">
               <label>Savings operacionais no digital (%)</label>
-              <input type="number" id="vmSavings" value="4" step="0.1">
+              <input type="text" inputmode="decimal" id="vmSavings" value="4,00">
             </div>
             <div class="scenario-input-group">
               <label>Royalty incremental (%)</label>
-              <input type="number" id="vmRoyaltyPct" value="2" step="0.1">
+              <input type="text" inputmode="decimal" id="vmRoyaltyPct" value="2,00">
             </div>
             <div class="scenario-input-group">
               <label>Marketing (%)</label>
-              <input type="number" id="vmMktPct" value="6" step="0.1">
+              <input type="text" inputmode="decimal" id="vmMktPct" value="6,00">
             </div>
             <div class="scenario-input-group">
               <label>Licenciamento Hubii (R$/mês, fixo)</label>
-              <input type="number" id="vmLicenciamento" value="15000" step="100">
+              <input type="text" inputmode="decimal" id="vmLicenciamento" value="15.000,00">
             </div>
           </div>
           <div class="scenario-result-row"><span>Margem base (venda à revenda)</span><b id="vm_margemBase">—</b></div>
@@ -1282,7 +1282,7 @@ body{
 
       <div class="breakeven-panel">
         <div class="breakeven-header">
-          <span>Ponto de virada — volume em que a margem do projeto supera o canal próprio (<span id="vm_target_label">10,2</span>%)</span>
+          <span>Ponto de virada — volume em que a margem do projeto supera o canal próprio (<span id="vm_target_label">10,20</span>%)</span>
           <b id="vm_breakeven_value">—</b>
         </div>
         <div class="breakeven-track">
@@ -1318,19 +1318,19 @@ body{
       <div class="scenario-inputs">
         <div class="scenario-input-group">
           <label>Ticket médio atual (R$)</label>
-          <input type="number" id="scTicket" value="117" step="0.01">
+          <input type="text" inputmode="decimal" id="scTicket" value="117,00">
         </div>
         <div class="scenario-input-group">
           <label>Margem atual sobre o ticket (%)</label>
-          <input type="number" id="scMargemAtual" value="32" step="0.1">
+          <input type="text" inputmode="decimal" id="scMargemAtual" value="32,00">
         </div>
         <div class="scenario-input-group">
           <label>Margem incremental a cobrir (%)</label>
-          <input type="number" id="scIncremental" value="" step="0.1" placeholder="preencher na call">
+          <input type="text" inputmode="decimal" id="scIncremental" value="" placeholder="preencher na call">
         </div>
         <div class="scenario-input-group">
           <label>Volume mensal estimado (pedidos)</label>
-          <input type="number" id="scVolume" value="" step="1" placeholder="opcional">
+          <input type="text" inputmode="decimal" id="scVolume" value="" placeholder="opcional">
         </div>
       </div>
 
@@ -1815,6 +1815,35 @@ body{
     if(e.key === 'Escape') modal.classList.remove('open');
   });
 
+  // ===== Utilitários de formatação BR (milhar com ponto, decimal com vírgula) =====
+  // Interpreta tanto "15.000,00" (BR) quanto "15000" ou "0.10" (digitado sem vírgula).
+  function parseBR(str){
+    if(str === null || str === undefined) return NaN;
+    str = String(str).trim();
+    if(str === '') return NaN;
+    if(str.includes(',')){
+      str = str.replace(/\./g, '').replace(',', '.');
+    } else if(!/\.\d{1,2}$/.test(str)){
+      str = str.replace(/\./g, '');
+    }
+    return parseFloat(str);
+  }
+  function formatBR(num, decimals){
+    if(decimals === undefined) decimals = 2;
+    return num.toLocaleString('pt-BR', {minimumFractionDigits:decimals, maximumFractionDigits:decimals});
+  }
+  function setupBRInputs(ids){
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.addEventListener('blur', () => {
+        const v = parseBR(el.value);
+        if(!isNaN(v)) el.value = formatBR(v);
+      });
+    });
+  }
+  setupBRInputs(['vmBase1','vmPct1','vmBase2','vmPct2','vmMargemBase','vmSavings','vmRoyaltyPct','vmMktPct','vmLicenciamento','scTicket','scMargemAtual','scIncremental','scVolume']);
+
   // ===== Simulador de volume — canibalização + captura de concorrentes =====
   (function(){
     const fmtR = (v) => 'R$' + v.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
@@ -1832,15 +1861,15 @@ body{
     const allIds = ['vm_via1','vm_via2','vm_total','vm_margemBase','vm_savings','vm_royalty','vm_mkt','vm_licenciamento','vm_resultado'];
 
     function recalc(){
-      const base1 = parseFloat(b1.value);
-      const pct1 = parseFloat(p1.value);
-      const base2 = parseFloat(b2.value);
-      const pct2 = parseFloat(p2.value);
-      const margemBasePct = parseFloat(mMargemBase.value);
-      const savingsPct = parseFloat(mSavings.value);
-      const royaltyPct = parseFloat(mRoyaltyPct.value);
-      const mktPct = parseFloat(mMktPct.value);
-      const licenciamento = parseFloat(mLicenciamento.value);
+      const base1 = parseBR(b1.value);
+      const pct1 = parseBR(p1.value);
+      const base2 = parseBR(b2.value);
+      const pct2 = parseBR(p2.value);
+      const margemBasePct = parseBR(mMargemBase.value);
+      const savingsPct = parseBR(mSavings.value);
+      const royaltyPct = parseBR(mRoyaltyPct.value);
+      const mktPct = parseBR(mMktPct.value);
+      const licenciamento = parseBR(mLicenciamento.value);
 
       if([base1,pct1,base2,pct2,margemBasePct,savingsPct,royaltyPct,mktPct,licenciamento].some(v => isNaN(v))){
         allIds.forEach(id => { document.getElementById(id).textContent = '—'; });
@@ -1860,7 +1889,7 @@ body{
       // savings operacionais do digital, descontados marketing e o licenciamento
       // fixo da Hubii. Com os valores-padrão da reunião (GMV ~R$701,8mil, margem
       // base 12%, savings 4%, royalty 2%, marketing 6%), dá +R$69.214,29/mês
-      // (9,86% do GMV) — já perto do 10,2% do canal próprio, mesmo com o
+      // (9,86% do GMV) — já perto do 10,20% do canal próprio, mesmo com o
       // licenciamento fixo ainda pesando nesse volume inicial.
       const margemBase = total * margemBasePct/100;
       const savings = total * savingsPct/100;
@@ -1876,7 +1905,7 @@ body{
       document.getElementById('vm_resultado').textContent = (resultado>=0?'+':'-') + fmtR(Math.abs(resultado)) + ' (' + (resultado/total*100).toFixed(2).replace('.',',') + '% do GMV)';
 
       // Ponto de virada: volume em que a margem % do projeto (que cresce à medida
-      // que o licenciamento fixo se dilui) alcança a margem do canal próprio (10,2%).
+      // que o licenciamento fixo se dilui) alcança a margem do canal próprio (10,20%).
       // margem%(GMV) = (margemBase+savings+royalty-mkt) - licenciamento/GMV*100
       const targetMarginPct = 10.2;
       const marginSemFixo = margemBasePct + savingsPct + royaltyPct - mktPct;
@@ -1921,7 +1950,7 @@ body{
   // ===== Modelagem de cenários — preço x margem (ferramenta viva para a call) =====
   (function(){
     const fmtR = (v) => 'R$' + v.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
-    const fmtPct = (v) => v.toLocaleString('pt-BR', {minimumFractionDigits:1, maximumFractionDigits:1}) + '%';
+    const fmtPct = (v) => v.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}) + '%';
 
     const elTicket = document.getElementById('scTicket');
     const elMargemAtual = document.getElementById('scMargemAtual');
@@ -1929,10 +1958,10 @@ body{
     const elVolume = document.getElementById('scVolume');
 
     function recalc(){
-      const ticket = parseFloat(elTicket.value);
-      const margemAtualPct = parseFloat(elMargemAtual.value);
-      const incrementalPct = parseFloat(elIncremental.value);
-      const volume = parseFloat(elVolume.value);
+      const ticket = parseBR(elTicket.value);
+      const margemAtualPct = parseBR(elMargemAtual.value);
+      const incrementalPct = parseBR(elIncremental.value);
+      const volume = parseBR(elVolume.value);
 
       const dash = '—';
       const out = {
