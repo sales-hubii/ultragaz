@@ -1266,7 +1266,7 @@ body{
           <div class="scenario-result-title">Canal Hubii (piloto)</div>
           <div class="scenario-result-sub">exercício sobre a expectativa de volume inicial</div>
           <div class="scenario-result-row"><span>Margem base <i style="font-weight:400; color:var(--ink-soft);">(venda à revenda · mesma do Simulador abaixo)</i></span><b id="cmp_margemBase_display">12,00%</b></div>
-          <div class="scenario-result-row"><span>Back-office <i style="font-weight:400; color:var(--ink-soft);">(reduzido vs. canal próprio · referência, pode mudar)</i></span><span class="inline-input-wrap">-<input type="text" inputmode="decimal" id="cmpBackoffice" value="4,00" class="inline-input">%</span></div>
+          <div class="scenario-result-row"><span>Back-office <i style="font-weight:400; color:var(--ink-soft);">(reduzido vs. canal próprio)</i></span><b>-4,00%</b></div>
           <div class="scenario-result-row"><span>Marketing</span><b>-6,0%</b></div>
           <div class="scenario-result-row"><span>Taxa de adquirência <i style="font-weight:400; color:var(--ink-soft);">(não se aplica)</i></span><b>—</b></div>
           <div class="scenario-result-row"><span>Licenciamento Hubii <i style="font-weight:400; color:var(--ink-soft);">(fixo, à parte — dilui com volume, ver Resolução)</i></span><b>R$15.000,00/mês</b></div>
@@ -1312,10 +1312,6 @@ body{
               <div class="scenario-input-group">
                 <label>Margem base Ultragaz na venda à revenda (%)</label>
                 <input type="text" inputmode="decimal" id="vmMargemBase" value="12,00">
-              </div>
-              <div class="scenario-input-group">
-                <label>Savings operacionais no digital (%)</label>
-                <input type="text" inputmode="decimal" id="vmSavings" value="4,00">
               </div>
               <div class="scenario-input-group">
                 <label>Royalty incremental (%)</label>
@@ -1942,7 +1938,7 @@ body{
       });
     });
   }
-  setupBRInputs(['vmPct1','vmPct2','vmMargemBase','vmSavings','vmRoyaltyPct','vmMktPct','vmLicenciamento','scTicket','scMargemAtual','scIncremental','scVolume','cmpBackoffice']);
+  setupBRInputs(['vmPct1','vmPct2','vmMargemBase','vmRoyaltyPct','vmMktPct','vmLicenciamento','scTicket','scMargemAtual','scIncremental','scVolume']);
 
   // ===== Simulador de volume — canibalização + captura de concorrentes =====
   (function(){
@@ -1953,14 +1949,13 @@ body{
     // OUTPUTS derivados dessa base + os shares já informados (7% e 24%),
     // não premissas próprias — por isso não são mais campos editáveis aqui.
     const BASE_ONLINE_GSP = 9000000;
+    const BACKOFFICE_FIXO_PCT = 4; // back-office/savings — referência fixa, não editável
     const SHARE_ON_OFF_PCT = 7;      // online representa 7% do offline UG
     const MARKET_SHARE_UG_PCT = 24;  // UG detém 24% do TAM GSP (on+off, todos os players)
 
     const p1 = document.getElementById('vmPct1');
     const p2 = document.getElementById('vmPct2');
     const mMargemBase = document.getElementById('vmMargemBase');
-    const mSavings = document.getElementById('vmSavings');
-    const cmpBackoffice = document.getElementById('cmpBackoffice');
     const mRoyaltyPct = document.getElementById('vmRoyaltyPct');
     const mMktPct = document.getElementById('vmMktPct');
     const mLicenciamento = document.getElementById('vmLicenciamento');
@@ -1976,7 +1971,7 @@ body{
       const pct1 = parseBR(p1.value);
       const pct2 = parseBR(p2.value);
       const margemBasePct = parseBR(mMargemBase.value);
-      const savingsPct = parseBR(mSavings.value);
+      const savingsPct = BACKOFFICE_FIXO_PCT;
       const royaltyPct = parseBR(mRoyaltyPct.value);
       const mktPct = parseBR(mMktPct.value);
       const licenciamento = parseBR(mLicenciamento.value);
@@ -2053,35 +2048,29 @@ body{
       }
     }
 
-    [p1,p2,mMargemBase,mSavings,mRoyaltyPct,mMktPct,mLicenciamento].forEach(el => el.addEventListener('input', recalc));
+    [p1,p2,mMargemBase,mRoyaltyPct,mMktPct,mLicenciamento].forEach(el => el.addEventListener('input', recalc));
 
-    // Back-office (card Comparativo de margem) e Savings operacionais (Simulador)
-    // são a mesma premissa mostrada em dois lugares — mantidos sincronizados.
     // Margem base é o mesmo dado real nos dois lugares (a margem que a
     // Ultragaz já ganha vendendo pra revenda) — aqui sim faz sentido espelhar.
-    if(cmpBackoffice){
-      const cmpMargemBaseDisplay = document.getElementById('cmp_margemBase_display');
-      const cmpLucroEstimado = document.getElementById('cmp_lucro_preliminar');
+    // Back-office/savings deixou de ser editável: fica fixo em 4% (referência
+    // atual), mesmo valor usado nas duas contas abaixo.
+    const cmpMargemBaseDisplay = document.getElementById('cmp_margemBase_display');
+    const cmpLucroEstimado = document.getElementById('cmp_lucro_preliminar');
 
-      function recalcComparativo(){
-        const margemBasePct = parseBR(mMargemBase.value);
-        const backofficePct = parseBR(cmpBackoffice.value);
-        if(isNaN(margemBasePct) || isNaN(backofficePct)){
-          cmpLucroEstimado.textContent = '—';
-          return;
-        }
-        cmpMargemBaseDisplay.textContent = formatBR(margemBasePct) + '%';
-        // Lucro (% da receita) = margem base + royalty (2%) - licenciamento/mkt (6%) - back-office
-        // Back-office é custo: quanto MENOR, MAIOR a margem (sinal correto, ao contrário
-        // da tentativa anterior que somava em vez de subtrair).
-        const lucro = margemBasePct + 2 - 6 - backofficePct;
-        cmpLucroEstimado.textContent = (lucro>=0?'~':'-') + formatBR(Math.abs(lucro)) + '%';
+    function recalcComparativo(){
+      const margemBasePct = parseBR(mMargemBase.value);
+      if(isNaN(margemBasePct)){
+        cmpLucroEstimado.textContent = '—';
+        return;
       }
-
-      mMargemBase.addEventListener('input', recalcComparativo);
-      cmpBackoffice.addEventListener('input', recalcComparativo);
-      recalcComparativo();
+      cmpMargemBaseDisplay.textContent = formatBR(margemBasePct) + '%';
+      // Lucro (% da receita) = margem base + royalty (2%) - licenciamento/mkt (6%) - back-office (4%, fixo)
+      const lucro = margemBasePct + 2 - 6 - BACKOFFICE_FIXO_PCT;
+      cmpLucroEstimado.textContent = (lucro>=0?'~':'-') + formatBR(Math.abs(lucro)) + '%';
     }
+
+    mMargemBase.addEventListener('input', recalcComparativo);
+    recalcComparativo();
     recalc();
   })();
 
