@@ -702,6 +702,12 @@ body{
 .scenario-inputs{
   display:flex; flex-wrap:wrap; gap: 16px; margin-bottom: 20px;
 }
+.scenario-inputs.compact{
+  gap: 10px; margin: 0 0 14px; padding-bottom: 14px; border-bottom: 1px dashed var(--line);
+}
+.scenario-inputs.compact .scenario-input-group{ flex: 1 1 130px; }
+.scenario-inputs.compact label{ font-size: 9.5px; margin-bottom: 4px; }
+.scenario-inputs.compact input{ padding: 7px 9px; font-size: 12.5px; }
 .scenario-input-group{ flex: 1 1 200px; }
 .scenario-input-group label{
   display:block; font-family:'IBM Plex Mono', monospace; font-size: 10.5px;
@@ -1212,54 +1218,30 @@ body{
 
     <div class="section-label">Simulador de volume — canibalização + captura de concorrentes</div>
     <div class="panel scenario-tool">
-      <p style="font-size:13px; color:var(--ink-soft); margin:0 0 16px; line-height:1.5;">As duas premissas centrais a validar no piloto: quanto do volume Hubii <b>canibaliza o offline da UG</b>, e quanto vem de <b>captura de share dos concorrentes</b>. Ajuste os % abaixo para simular a expectativa de GMV mensal.</p>
-      <div class="scenario-inputs">
-        <div class="scenario-input-group">
-          <label>Offline UG em GSP (R$/mês)</label>
-          <input type="number" id="vmBase1" value="128571428.57" step="1">
-        </div>
-        <div class="scenario-input-group">
-          <label>% canibalização do offline UG</label>
-          <input type="number" id="vmPct1" value="0.10" step="0.01">
-        </div>
-        <div class="scenario-input-group">
-          <label>TAM GSP c/ concorrentes (R$/mês)</label>
-          <input type="number" id="vmBase2" value="573214285.71" step="1">
-        </div>
-        <div class="scenario-input-group">
-          <label>% captura do TAM concorrentes</label>
-          <input type="number" id="vmPct2" value="0.10" step="0.01">
-        </div>
-      </div>
-
-      <p style="font-size:12.5px; color:var(--ink-soft); margin:4px 0 12px; line-height:1.5;">O P&amp;L abaixo soma <b>três pernas</b>: a margem que a Ultragaz já ganha vendendo pra revenda (ela continua vendendo, o canal não a substitui), o royalty incremental do piloto, e os savings operacionais de trabalhar no digital (ex: back-office) — descontados o marketing e o licenciamento fixo da Hubii.</p>
-      <div class="scenario-inputs">
-        <div class="scenario-input-group">
-          <label>Margem base Ultragaz na venda à revenda (%)</label>
-          <input type="number" id="vmMargemBase" value="12" step="0.1">
-        </div>
-        <div class="scenario-input-group">
-          <label>Savings operacionais no digital (%)</label>
-          <input type="number" id="vmSavings" value="4" step="0.1">
-        </div>
-        <div class="scenario-input-group">
-          <label>Royalty incremental (%)</label>
-          <input type="number" id="vmRoyaltyPct" value="2" step="0.1">
-        </div>
-        <div class="scenario-input-group">
-          <label>Marketing (%)</label>
-          <input type="number" id="vmMktPct" value="6" step="0.1">
-        </div>
-        <div class="scenario-input-group">
-          <label>Licenciamento Hubii (R$/mês, fixo)</label>
-          <input type="number" id="vmLicenciamento" value="15000" step="100">
-        </div>
-      </div>
+      <p style="font-size:13px; color:var(--ink-soft); margin:0 0 16px; line-height:1.5;">As duas premissas centrais a validar no piloto: quanto do volume Hubii <b>canibaliza o offline da UG</b>, e quanto vem de <b>captura de share dos concorrentes</b>. Ajuste os campos em cada card — as informações se recalculam juntas.</p>
 
       <div class="scenario-results">
         <div class="scenario-result-card">
           <div class="scenario-result-title">Expectativa de GMV Hubii</div>
           <div class="scenario-result-sub">soma das duas alavancas de volume</div>
+          <div class="scenario-inputs compact">
+            <div class="scenario-input-group">
+              <label>Offline UG em GSP (R$/mês)</label>
+              <input type="number" id="vmBase1" value="128571428.57" step="1">
+            </div>
+            <div class="scenario-input-group">
+              <label>% canibalização do offline UG</label>
+              <input type="number" id="vmPct1" value="0.10" step="0.01">
+            </div>
+            <div class="scenario-input-group">
+              <label>TAM GSP c/ concorrentes (R$/mês)</label>
+              <input type="number" id="vmBase2" value="573214285.71" step="1">
+            </div>
+            <div class="scenario-input-group">
+              <label>% captura do TAM concorrentes</label>
+              <input type="number" id="vmPct2" value="0.10" step="0.01">
+            </div>
+          </div>
           <div class="scenario-result-row"><span>Via canibalização do offline UG</span><b id="vm_via1">—</b></div>
           <div class="scenario-result-row"><span>Via captura de concorrentes</span><b id="vm_via2">—</b></div>
           <div class="scenario-result-row highlight"><span>Expectativa Hubii — GMV/mês</span><b id="vm_total">—</b></div>
@@ -1267,6 +1249,28 @@ body{
         <div class="scenario-result-card">
           <div class="scenario-result-title">P&amp;L no volume simulado</div>
           <div class="scenario-result-sub">margem base + savings + royalty − marketing − licenciamento</div>
+          <div class="scenario-inputs compact">
+            <div class="scenario-input-group">
+              <label>Margem base Ultragaz na venda à revenda (%)</label>
+              <input type="number" id="vmMargemBase" value="12" step="0.1">
+            </div>
+            <div class="scenario-input-group">
+              <label>Savings operacionais no digital (%)</label>
+              <input type="number" id="vmSavings" value="4" step="0.1">
+            </div>
+            <div class="scenario-input-group">
+              <label>Royalty incremental (%)</label>
+              <input type="number" id="vmRoyaltyPct" value="2" step="0.1">
+            </div>
+            <div class="scenario-input-group">
+              <label>Marketing (%)</label>
+              <input type="number" id="vmMktPct" value="6" step="0.1">
+            </div>
+            <div class="scenario-input-group">
+              <label>Licenciamento Hubii (R$/mês, fixo)</label>
+              <input type="number" id="vmLicenciamento" value="15000" step="100">
+            </div>
+          </div>
           <div class="scenario-result-row"><span>Margem base (venda à revenda)</span><b id="vm_margemBase">—</b></div>
           <div class="scenario-result-row"><span>Savings operacionais</span><b id="vm_savings">—</b></div>
           <div class="scenario-result-row"><span>Royalty incremental</span><b id="vm_royalty">—</b></div>
