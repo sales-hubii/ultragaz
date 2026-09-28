@@ -1230,7 +1230,7 @@ body{
 
     <div class="gt-box">
       <div class="gt-label">Recomendação · reunião com a Ultragaz, 21/set</div>
-      <p class="gt-text">Aprovar o piloto digital com a Hubii em Grande São Paulo. O mercado endereçável é grande (<b>~R$600mi/mês</b>, dos quais só <b>7%</b> é digital hoje) e a economia unitária fecha: a partir de <b>~R$833 mil/mês de GMV</b>, a margem do piloto já supera o canal digital próprio. O risco principal não é de margem — é de <b>volume</b>: duas premissas de captura ainda precisam ser validadas no piloto.</p>
+      <p class="gt-text">Aprovar o piloto digital com a Hubii em Grande São Paulo. O mercado endereçável é grande (<b>~R$600mi/mês</b>, dos quais só <b>7%</b> é digital hoje) e a economia unitária fecha: a partir de <b>~R$682 mil/mês de GMV</b>, a margem do piloto já supera o canal digital próprio — e a expectativa inicial simulada (R$701,8mil/mês) já passa desse ponto. O risco principal não é de margem — é de <b>volume</b>: duas premissas de captura ainda precisam ser validadas no piloto.</p>
     </div>
 
     <div class="bp-section first">
@@ -1255,7 +1255,7 @@ body{
 
     <div class="bp-section">
       <div class="scr-tag">Complicação</div>
-      <div class="action-title">O piloto começa com margem menor que o canal já consolidado (6,14% vs. 10,20%) — por causa de um custo fixo</div>
+      <div class="action-title">O piloto tem teto de margem maior (4,00% vs. 1,80% hoje) — mas o licenciamento fixo segura o resultado real até o volume escalar</div>
       <div class="scenario-results">
         <div class="scenario-result-card">
           <div class="scenario-result-title">Canal digital próprio (site + WhatsApp)</div>
@@ -1287,7 +1287,7 @@ body{
 
     <div class="bp-section">
       <div class="scr-tag">Resolução — a economia do projeto</div>
-      <div class="action-title">A partir de ~R$833 mil/mês de GMV, a margem do piloto ultrapassa o canal próprio</div>
+      <div class="action-title">A partir de ~R$682 mil/mês de GMV, a margem do piloto ultrapassa o canal próprio</div>
       <div class="panel scenario-tool">
         <p style="font-size:13px; color:var(--ink-soft); margin:0 0 16px; line-height:1.5;">As duas premissas centrais a validar no piloto: quanto do volume Hubii <b>canibaliza o offline da UG</b>, e quanto vem de <b>captura de share dos concorrentes</b>. Ajuste os campos em cada card — as informações se recalculam juntas.</p>
 
@@ -1343,7 +1343,7 @@ body{
 
         <div class="breakeven-panel">
           <div class="breakeven-header">
-            <span>Ponto de virada — volume em que a margem do projeto supera o canal próprio (<span id="vm_target_label">10,20</span>%)</span>
+            <span>Ponto de virada — volume em que a margem do projeto supera o canal próprio (<span id="vm_target_label">1,80</span>%)</span>
             <b id="vm_breakeven_value">—</b>
           </div>
           <div class="breakeven-track">
@@ -1366,7 +1366,7 @@ body{
             <li>EBITDA / lucro líquido sobre a receita domiciliar até agosto: <b>12%</b></li>
             <li>Lucro líquido por tonelada: <b>R$951</b> — métrica de go/no-go do projeto</li>
             <li>Custos variáveis que deixam de existir no modelo Hubii/marketplace (taxa de adquirência, desconto vale-gás, marketing/tecnologia/terceiros): <b>~4% da receita</b>, ~R$5.235 (~15% da receita do recorte analisado)</li>
-            <li><b>Conclusão:</b> a margem líquida com Hubii pode superar os 10,20% atuais, com ~4% de margem de erro positiva</li>
+            <li><b>Conclusão:</b> no teto estrutural, a margem com Hubii já supera a do canal próprio (4,00% vs. 1,80%) — o desafio não é a margem, é diluir o custo fixo do licenciamento até lá chegar</li>
           </ul>
         </div>
       </div>
@@ -2013,7 +2013,7 @@ body{
       document.getElementById('vm_resultado').textContent = (resultado>=0?'+':'-') + fmtR(Math.abs(resultado)) + ' (' + (resultado/total*100).toFixed(2).replace('.',',') + '% do GMV)';
 
       // Ponto de virada: volume em que a margem % do projeto (que cresce à medida
-      // que o licenciamento fixo se dilui) alcança a margem do canal próprio (10,20%).
+      // que o licenciamento fixo se dilui) alcança a margem do canal próprio (1,80%).
       // margem%(GMV) = (margemBase-backoffice+royalty-mkt) - licenciamento/GMV*100
       // Mesma fórmula da margem do canal próprio no card "Comparativo de margem"
       // acima: margem base - back office - marketing - taxa de adquirência.
