@@ -1391,6 +1391,37 @@ body{
       </div>
     </div>
 
+    <div class="bp-section">
+      <div class="exhibit-tag">Projeção de faturamento — mês a mês</div>
+      <div class="action-title">De R$100mil a <span id="proj_target_title">—</span> em 6 meses — depois, mantendo o mesmo ritmo de crescimento</div>
+      <div class="panel">
+        <div class="bp-legend">
+          <div class="bp-legend-item"><span class="bp-legend-line" style="background:var(--purple)"></span>GMV projetado/mês</div>
+          <div class="bp-legend-item"><span class="bp-legend-dot" style="background:var(--amber)"></span>Ponto de virada (margem &gt; <span id="proj_target_margin_label">1,80</span>%)</div>
+        </div>
+        <div class="bp-chart-wrap">
+          <svg id="projChart" viewBox="0 0 1000 380" width="100%" style="min-width:680px; display:block;"></svg>
+        </div>
+        <div class="bp-milestone-grid" style="margin-top:16px;">
+          <div class="bp-milestone-card">
+            <div class="bp-milestone-month">Mês 1</div>
+            <div class="bp-milestone-value">R$100mil</div>
+            <div class="bp-milestone-sub">ponto de partida</div>
+          </div>
+          <div class="bp-milestone-card">
+            <div class="bp-milestone-month">Mês 6</div>
+            <div class="bp-milestone-value" id="proj_m6">—</div>
+            <div class="bp-milestone-sub">Expectativa Hubii — GMV/mês</div>
+          </div>
+          <div class="bp-milestone-card">
+            <div class="bp-milestone-month">Mês 12</div>
+            <div class="bp-milestone-value" id="proj_m12">—</div>
+            <div class="bp-milestone-sub">mantendo o ritmo pós-mês 6</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <!-- TAREFAS -->
@@ -1845,6 +1876,7 @@ body{
       const pinLabel = document.getElementById('vm_pin_label');
       const scaleMax = document.getElementById('vm_scale_max');
 
+      let breakevenGMV = null;
       if(marginSemFixo <= targetMarginPct){
         track.textContent = 'não atinge com essas premissas';
         fillBelow.style.width = '100%';
@@ -1854,6 +1886,7 @@ body{
         scaleMax.textContent = '—';
       } else {
         const breakeven = (licenciamento*100) / (marginSemFixo - targetMarginPct);
+        breakevenGMV = breakeven;
         const maxScale = Math.max(breakeven, total) * 1.25;
         const breakevenPct = Math.min(breakeven/maxScale*100, 100);
         const currentPct = Math.min(total/maxScale*100, 100);
@@ -1869,6 +1902,102 @@ body{
         pinLabel.textContent = 'hoje: ' + fmtR(total);
         scaleMax.textContent = fmtR(maxScale);
       }
+
+      document.getElementById('proj_target_margin_label').textContent = formatBR(targetMarginPct);
+      renderProjChart(total, breakevenGMV);
+    }
+
+    // ===== Projeção de faturamento mês a mês (após a Resolução) =====
+    // Meses 1-6: curva acelerada de R$100mil até a Expectativa Hubii — GMV/mês
+    // (o mesmo "total" calculado acima). Meses 7-12: mantém o mesmo ritmo de
+    // crescimento do último passo (mês 5→6), em vez de estabilizar.
+    function renderProjChart(targetGMV, breakevenGMV){
+      const svg = document.getElementById('projChart');
+      if(!svg) return;
+      const BASE_MES1 = 100000;
+      const MESES = 12;
+
+      const gmv = [];
+      for(let t=1;t<=6;t++){
+        gmv.push(BASE_MES1 + (targetGMV-BASE_MES1)*Math.pow(t/6,2));
+      }
+      const incremento = gmv[5] - gmv[4]; // passo mês 5 -> 6, mantido dali em diante
+      for(let t=7;t<=MESES;t++){
+        gmv.push(gmv[gmv.length-1] + incremento);
+      }
+
+      document.getElementById('proj_target_title').textContent = fmtR(targetGMV) + '/mês';
+      document.getElementById('proj_m6').textContent = fmtR(gmv[5]) + '/mês';
+      document.getElementById('proj_m12').textContent = fmtR(gmv[11]) + '/mês';
+
+      // posição (mês fracionário) do ponto de virada dentro da curva
+      let breakevenMonth = null;
+      if(breakevenGMV !== null){
+        if(breakevenGMV <= gmv[0]){
+          breakevenMonth = 1;
+        } else if(breakevenGMV <= gmv[5]){
+          breakevenMonth = 6*Math.sqrt((breakevenGMV-BASE_MES1)/(targetGMV-BASE_MES1));
+        } else if(breakevenGMV <= gmv[11]){
+          breakevenMonth = 6 + (breakevenGMV-gmv[5])/incremento;
+        }
+        // se breakevenGMV > gmv[11], fica fora do período mostrado — sem marcador
+      }
+
+      const W = 1000, H = 380;
+      const padL = 70, padR = 20, padT = 24, padB = 36;
+      const plotW = W - padL - padR;
+      const plotH = H - padT - padB;
+      const yMax = Math.max(...gmv) * 1.12;
+
+      const x = (i) => padL + (i/(MESES-1)) * plotW;
+      const y = (v) => padT + plotH - (v/yMax)*plotH;
+
+      const pts = gmv.map((v,i) => ({x:x(i), y:y(v)}));
+      const path = smoothPathProj(pts);
+      const area = path + ` L ${pts[pts.length-1].x.toFixed(1)} ${padT+plotH} L ${pts[0].x.toFixed(1)} ${padT+plotH} Z`;
+
+      let html = '';
+      const yStep = Math.ceil(yMax/5/50000)*50000 || 100000;
+      for(let v=0; v<=yMax; v+=yStep){
+        const gy = y(v);
+        html += `<line x1="${padL}" y1="${gy}" x2="${W-padR}" y2="${gy}" stroke="var(--line)" stroke-width="1"/>`;
+        html += `<text x="${padL-10}" y="${gy+4}" text-anchor="end" class="bp-axis-label">${v===0?'0':'R$'+(v/1000).toFixed(0)+'mil'}</text>`;
+      }
+      for(let i=0;i<MESES;i++){
+        html += `<text x="${x(i)}" y="${H-12}" text-anchor="middle" class="bp-axis-label">M${i+1}</text>`;
+      }
+      if(breakevenMonth !== null){
+        const bx = padL + ((breakevenMonth-1)/(MESES-1))*plotW;
+        html += `<line x1="${bx}" y1="${padT}" x2="${bx}" y2="${padT+plotH}" stroke="var(--amber)" stroke-width="1.5" stroke-dasharray="4 4"/>`;
+        html += `<text x="${bx}" y="${padT-8}" text-anchor="middle" class="bp-axis-label" style="fill:var(--amber);">ponto de virada</text>`;
+      }
+      html += `<defs><linearGradient id="projGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="var(--purple)" stop-opacity="0.28"/>
+        <stop offset="100%" stop-color="var(--purple)" stop-opacity="0"/>
+      </linearGradient></defs>`;
+      html += `<path d="${area}" fill="url(#projGrad)" stroke="none"/>`;
+      html += `<path d="${path}" fill="none" stroke="var(--purple)" stroke-width="3" stroke-linecap="round"/>`;
+      pts.forEach((p,i) => {
+        const big = [0,5,11].includes(i);
+        html += `<circle cx="${p.x}" cy="${p.y}" r="${big?6:4}" fill="var(--card)" stroke="var(--purple)" stroke-width="2.5"><title>M${i+1} · ${fmtR(gmv[i])}/mês</title></circle>`;
+      });
+      svg.innerHTML = html;
+    }
+
+    function smoothPathProj(pts){
+      let d = `M ${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
+      for(let i=0;i<pts.length-1;i++){
+        const p0 = pts[i>0?i-1:i];
+        const p1 = pts[i];
+        const p2 = pts[i+1];
+        const p3 = pts[i+2>pts.length-1?i+1:i+2];
+        const cp1x = p1.x + (p2.x-p0.x)/6;
+        const cp1y = p1.y + (p2.y-p0.y)/6;
+        const cp2x = p2.x - (p3.x-p1.x)/6;
+        const cp2y = p2.y - (p3.y-p1.y)/6;
+        d += ` C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+      }
+      return d;
     }
 
     [p1,p2,mBackoffice,mRoyaltyPct,mMktPct,mLicenciamento].forEach(el => el.addEventListener('input', recalc));
