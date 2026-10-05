@@ -796,6 +796,7 @@ body{
   background: var(--purple-glow); margin: 4px -8px; padding: 8px 8px; border-radius:6px; border-bottom:none;
 }
 .scenario-result-row.highlight b{ color: var(--purple-deep); }
+.bot-sub{ display:block; font-family:'Onest', sans-serif; font-size:11px; font-weight:500; color: var(--ink-soft); text-align:right; margin-top:2px; }
 .inline-input-wrap{
   display:flex; align-items:center; gap:5px; flex:none;
   font-family:'IBM Plex Mono', monospace; font-weight:700; color: var(--ink);
@@ -1029,9 +1030,9 @@ body{
   <div class="tab-panel" id="panel-oportunidades">
 
     <div class="stat-row">
-      <div class="stat"><div class="stat-num">R$9mi</div><div class="stat-lbl">Potencial digital/mês · Mercado GSP</div></div>
+      <div class="stat"><div class="stat-num">R$9mi</div><div class="stat-lbl">Potencial digital/mês · Mercado GSP · ~70,9 mil botijões</div></div>
       <div class="stat"><div class="stat-num">~1%</div><div class="stat-lbl">Captura inicial da demanda (mês 1)</div></div>
-      <div class="stat"><div class="stat-num">R$85mil</div><div class="stat-lbl">GMV mês 1 (≈1% de R$9mi)</div></div>
+      <div class="stat"><div class="stat-num">R$85mil</div><div class="stat-lbl">GMV mês 1 (≈1% de R$9mi) · ~669 botijões</div></div>
       <div class="stat"><div class="stat-num">R$117</div><div class="stat-lbl">Ticket médio (P13)</div></div>
       <div class="stat"><div class="stat-num">R$150mil</div><div class="stat-lbl">Investimento total · 12 meses</div></div>
     </div>
@@ -1230,23 +1231,23 @@ body{
 
     <div class="gt-box">
       <div class="gt-label">Recomendação · reunião com a Ultragaz, 21/set</div>
-      <p class="gt-text">Aprovar o piloto digital com a Hubii em Grande São Paulo. O mercado endereçável é grande (<b>~R$600mi/mês</b>, dos quais só <b>7%</b> é digital hoje) e a economia unitária fecha: a partir de <b>~R$682 mil/mês de GMV</b>, a margem do piloto já supera o canal digital próprio — e a expectativa inicial simulada (R$701,8mil/mês) já passa desse ponto. O risco principal não é de margem — é de <b>volume</b>: duas premissas de captura ainda precisam ser validadas no piloto.</p>
+      <p class="gt-text">Aprovar o piloto digital com a Hubii em Grande São Paulo. O mercado endereçável é grande (<b>~R$600mi/mês</b> — ~4,7mi de botijões —, dos quais só <b>7%</b> é digital hoje) e a economia unitária fecha: a partir de <b>~R$682 mil/mês de GMV</b> (~5,4 mil botijões), a margem do piloto já supera o canal digital próprio — e a expectativa inicial simulada (R$701,8mil/mês, ~5,5 mil botijões) já passa desse ponto. O risco principal não é de margem — é de <b>volume</b>: duas premissas de captura ainda precisam ser validadas no piloto.</p>
     </div>
 
     <div class="bp-section first">
       <div class="scr-tag">Situação</div>
-      <div class="action-title">Grande São Paulo é um mercado de ~R$600mi/mês onde a Ultragaz já lidera — mas o digital é só 7% do total</div>
+      <div class="action-title">Grande São Paulo é um mercado de ~R$600mi/mês (~4,7mi de botijões) onde a Ultragaz já lidera — mas o digital é só 7% do total</div>
       <div class="stat-row">
         <div class="stat"><div class="stat-num">24%</div><div class="stat-lbl">Market share UG em GSP (domiciliar) · 22% no Brasil</div></div>
-        <div class="stat"><div class="stat-num">~R$600mi</div><div class="stat-lbl">TAM GSP/mês — online + offline, todos os players</div></div>
+        <div class="stat"><div class="stat-num">~R$600mi</div><div class="stat-lbl">TAM GSP/mês — online + offline, todos os players · ~4,7mi botijões</div></div>
         <div class="stat"><div class="stat-num">7%</div><div class="stat-lbl">Canal online sobre o total UG na praça</div></div>
         <div class="stat"><div class="stat-num">R$126–127</div><div class="stat-lbl">Ticket médio GSP online</div></div>
       </div>
       <div class="panel">
         <div class="info-block">
           <ul class="info-list">
-            <li>Volume online de referência (ago/26), sinalizado pelo time de UG digital: <b>R$9mi/mês</b> — é a base de todo o cálculo abaixo; volume offline UG implícito: <b>~R$128,6mi/mês</b></li>
-            <li>Concorrentes no offline em GSP: <b>~R$168mi/mês</b></li>
+            <li>Volume online de referência (ago/26), sinalizado pelo time de UG digital: <b>R$9mi/mês</b> (~70,9 mil botijões) — é a base de todo o cálculo abaixo; volume offline UG implícito: <b>~R$128,6mi/mês</b> (~1,01mi de botijões)</li>
+            <li>Concorrentes no offline em GSP: <b>~R$168mi/mês</b> (~1,32mi de botijões)</li>
             <li>CAC online UG: <b>R$22</b> · CAC offline (revenda arca o custo): <b>R$12</b></li>
           </ul>
         </div>
@@ -1287,7 +1288,7 @@ body{
 
     <div class="bp-section">
       <div class="scr-tag">Resolução — a economia do projeto</div>
-      <div class="action-title">A partir de ~R$682 mil/mês de GMV, a margem do piloto ultrapassa o canal próprio</div>
+      <div class="action-title">A partir de ~R$682 mil/mês de GMV (~5,4 mil botijões), a margem do piloto ultrapassa o canal próprio</div>
       <div class="panel scenario-tool">
         <p style="font-size:13px; color:var(--ink-soft); margin:0 0 16px; line-height:1.5;">As duas premissas centrais a validar no piloto: quanto do volume Hubii <b>canibaliza o offline da UG</b>, e quanto vem de <b>captura de share dos concorrentes</b>. Ajuste os campos em cada card — as informações se recalculam juntas.</p>
 
@@ -1382,7 +1383,7 @@ body{
         <div class="opp-card flag">
           <div class="opp-head"><div class="opp-icon">⚑</div><div class="opp-title">Captura de share dos concorrentes</div></div>
           <ul>
-            <li>Quanto do volume vem de fato de <b>fora da base UG</b> — de concorrentes no offline (~R$168mi/mês em GSP) — esse sim é ganho líquido de mercado</li>
+            <li>Quanto do volume vem de fato de <b>fora da base UG</b> — de concorrentes no offline (~R$168mi/mês em GSP, ~1,32mi de botijões) — esse sim é ganho líquido de mercado</li>
           </ul>
         </div>
       </div>
@@ -1393,7 +1394,7 @@ body{
 
     <div class="bp-section">
       <div class="exhibit-tag">Projeção de faturamento — mês a mês</div>
-      <div class="action-title">De R$100mil a <span id="proj_target_title">—</span> em 6 meses — depois, mantendo o mesmo ritmo de crescimento</div>
+      <div class="action-title">De R$100mil (~787 botijões) a <span id="proj_target_title">—</span> em 6 meses — depois, mantendo o mesmo ritmo de crescimento</div>
       <div class="panel">
         <div class="bp-legend">
           <div class="bp-legend-item"><span class="bp-legend-line" style="background:var(--purple)"></span>GMV projetado/mês</div>
@@ -1406,17 +1407,17 @@ body{
           <div class="bp-milestone-card">
             <div class="bp-milestone-month">Mês 1</div>
             <div class="bp-milestone-value">R$100mil</div>
-            <div class="bp-milestone-sub">ponto de partida</div>
+            <div class="bp-milestone-sub">ponto de partida · ~787 botijões</div>
           </div>
           <div class="bp-milestone-card">
             <div class="bp-milestone-month">Mês 6</div>
             <div class="bp-milestone-value" id="proj_m6">—</div>
-            <div class="bp-milestone-sub">Expectativa Hubii — GMV/mês</div>
+            <div class="bp-milestone-sub" id="proj_m6_sub">Expectativa Hubii — GMV/mês</div>
           </div>
           <div class="bp-milestone-card">
             <div class="bp-milestone-month">Mês 12</div>
             <div class="bp-milestone-value" id="proj_m12">—</div>
-            <div class="bp-milestone-sub">mantendo o ritmo pós-mês 6</div>
+            <div class="bp-milestone-sub" id="proj_m12_sub">mantendo o ritmo pós-mês 6</div>
           </div>
         </div>
       </div>
@@ -1782,6 +1783,10 @@ body{
     if(decimals === undefined) decimals = 2;
     return num.toLocaleString('pt-BR', {minimumFractionDigits:decimals, maximumFractionDigits:decimals});
   }
+  // Volumetria em botijões: 1 botijão = ticket de R$127 (premissa informada)
+  const TICKET_BOTIJAO = 127;
+  function botijoes(valorR){ return Math.round(valorR / TICKET_BOTIJAO); }
+  function fmtBot(valorR){ return botijoes(valorR).toLocaleString('pt-BR') + ' botijões'; }
   function setupBRInputs(ids){
     ids.forEach(id => {
       const el = document.getElementById(id);
@@ -1819,8 +1824,8 @@ body{
     function recalc(){
       const base1 = BASE_ONLINE_GSP / (SHARE_ON_OFF_PCT/100);
       const base2 = (BASE_ONLINE_GSP + base1) / (MARKET_SHARE_UG_PCT/100);
-      document.getElementById('vm_base1_display').textContent = fmtR(base1) + '/mês';
-      document.getElementById('vm_base2_display').textContent = fmtR(base2) + '/mês';
+      document.getElementById('vm_base1_display').innerHTML = fmtR(base1) + '/mês<span class="bot-sub">≈ ' + fmtBot(base1) + '/mês</span>';
+      document.getElementById('vm_base2_display').innerHTML = fmtR(base2) + '/mês<span class="bot-sub">≈ ' + fmtBot(base2) + '/mês</span>';
 
       const pct1 = parseBR(p1.value);
       const pct2 = parseBR(p2.value);
@@ -1839,9 +1844,9 @@ body{
       const via2 = base2 * pct2/100;
       const total = via1 + via2;
 
-      document.getElementById('vm_via1').textContent = fmtR(via1) + '/mês';
-      document.getElementById('vm_via2').textContent = fmtR(via2) + '/mês';
-      document.getElementById('vm_total').textContent = fmtR(total) + '/mês';
+      document.getElementById('vm_via1').innerHTML = fmtR(via1) + '/mês<span class="bot-sub">≈ ' + fmtBot(via1) + '/mês</span>';
+      document.getElementById('vm_via2').innerHTML = fmtR(via2) + '/mês<span class="bot-sub">≈ ' + fmtBot(via2) + '/mês</span>';
+      document.getElementById('vm_total').innerHTML = fmtR(total) + '/mês<span class="bot-sub">≈ ' + fmtBot(total) + '/mês</span>';
 
       // P&L completo: a Ultragaz continua vendendo pra revenda (margem base,
       // fixa — não se altera) — o canal Hubii não a substitui. Soma o royalty
@@ -1891,7 +1896,7 @@ body{
         const breakevenPct = Math.min(breakeven/maxScale*100, 100);
         const currentPct = Math.min(total/maxScale*100, 100);
 
-        track.textContent = fmtR(breakeven) + '/mês';
+        track.innerHTML = fmtR(breakeven) + '/mês<span class="bot-sub">≈ ' + fmtBot(breakeven) + '/mês</span>';
         fillBelow.style.width = breakevenPct + '%';
         fillAbove.style.left = breakevenPct + '%';
         fillAbove.style.width = (100-breakevenPct) + '%';
@@ -1899,8 +1904,8 @@ body{
         marker.style.left = breakevenPct + '%';
         pin.style.display = 'flex';
         pin.style.left = currentPct + '%';
-        pinLabel.textContent = 'hoje: ' + fmtR(total);
-        scaleMax.textContent = fmtR(maxScale);
+        pinLabel.textContent = 'hoje: ' + fmtR(total) + ' · ' + fmtBot(total);
+        scaleMax.textContent = fmtR(maxScale) + ' · ' + fmtBot(maxScale);
       }
 
       document.getElementById('proj_target_margin_label').textContent = formatBR(targetMarginPct);
@@ -1926,9 +1931,11 @@ body{
         gmv.push(gmv[gmv.length-1] + incremento);
       }
 
-      document.getElementById('proj_target_title').textContent = fmtR(targetGMV) + '/mês';
+      document.getElementById('proj_target_title').textContent = fmtR(targetGMV) + '/mês (~' + fmtBot(targetGMV) + '/mês)';
       document.getElementById('proj_m6').textContent = fmtR(gmv[5]) + '/mês';
+      document.getElementById('proj_m6_sub').textContent = 'Expectativa Hubii — GMV/mês · ' + fmtBot(gmv[5]) + '/mês';
       document.getElementById('proj_m12').textContent = fmtR(gmv[11]) + '/mês';
+      document.getElementById('proj_m12_sub').textContent = 'mantendo o ritmo pós-mês 6 · ' + fmtBot(gmv[11]) + '/mês';
 
       // posição (mês fracionário) do ponto de virada dentro da curva
       let breakevenMonth = null;
@@ -1944,7 +1951,7 @@ body{
       }
 
       const W = 1000, H = 380;
-      const padL = 70, padR = 20, padT = 24, padB = 36;
+      const padL = 70, padR = 76, padT = 24, padB = 36;
       const plotW = W - padL - padR;
       const plotH = H - padT - padB;
       const yMax = Math.max(...gmv) * 1.12;
@@ -1962,7 +1969,10 @@ body{
         const gy = y(v);
         html += `<line x1="${padL}" y1="${gy}" x2="${W-padR}" y2="${gy}" stroke="var(--line)" stroke-width="1"/>`;
         html += `<text x="${padL-10}" y="${gy+4}" text-anchor="end" class="bp-axis-label">${v===0?'0':'R$'+(v/1000).toFixed(0)+'mil'}</text>`;
+        html += `<text x="${W-padR+10}" y="${gy+4}" text-anchor="start" class="bp-axis-label" style="fill:var(--purple-deep);">${v===0?'0':botijoes(v).toLocaleString('pt-BR')}</text>`;
       }
+      html += `<text x="${padL-10}" y="${padT-8}" text-anchor="end" class="bp-axis-label">R$/mês</text>`;
+      html += `<text x="${W-padR+10}" y="${padT-8}" text-anchor="start" class="bp-axis-label" style="fill:var(--purple-deep);">botijões/mês</text>`;
       for(let i=0;i<MESES;i++){
         html += `<text x="${x(i)}" y="${H-12}" text-anchor="middle" class="bp-axis-label">M${i+1}</text>`;
       }
@@ -1979,7 +1989,7 @@ body{
       html += `<path d="${path}" fill="none" stroke="var(--purple)" stroke-width="3" stroke-linecap="round"/>`;
       pts.forEach((p,i) => {
         const big = [0,5,11].includes(i);
-        html += `<circle cx="${p.x}" cy="${p.y}" r="${big?6:4}" fill="var(--card)" stroke="var(--purple)" stroke-width="2.5"><title>M${i+1} · ${fmtR(gmv[i])}/mês</title></circle>`;
+        html += `<circle cx="${p.x}" cy="${p.y}" r="${big?6:4}" fill="var(--card)" stroke="var(--purple)" stroke-width="2.5"><title>M${i+1} · ${fmtR(gmv[i])}/mês · ${fmtBot(gmv[i])}/mês</title></circle>`;
       });
       svg.innerHTML = html;
     }
