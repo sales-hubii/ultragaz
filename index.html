@@ -940,6 +940,82 @@ body{
 .bp-phase-row.small{ margin-top:0; }
 .bp-phase.br{ background: var(--brasil-bg); color: var(--brasil); }
 .bp-phase.neutral{ background: var(--paper); color: var(--ink-soft); border:1px solid var(--line); }
+
+/* BUSINESS PLAN — layout minimalista (escopo: #panel-bp) */
+#panel-bp{ font-size:15px; line-height:1.6; }
+#panel-bp .bpx-eyebrow{ font-size:12px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color: var(--purple); margin-bottom:10px; }
+#panel-bp .bpx-h1{ font-size:30px; font-weight:600; line-height:1.25; letter-spacing:-.015em; max-width:760px; }
+#panel-bp .bpx-h2{ font-size:22px; font-weight:600; line-height:1.3; letter-spacing:-.01em; margin-bottom:10px; max-width:760px; }
+#panel-bp .bpx-lead{ font-size:16px; line-height:1.65; font-weight:400; color: var(--ink-soft); max-width:720px; margin:0 0 24px; }
+#panel-bp .bpx-lead b{ font-weight:600; color: var(--ink); }
+#panel-bp .bpx-section{ margin-top:64px; }
+#panel-bp .bpx-hero{ background: var(--card); border:1px solid var(--line); border-radius:20px; padding:40px 44px 36px; }
+#panel-bp .bpx-hero .bpx-lead{ margin-bottom:0; margin-top:14px; }
+#panel-bp .bpx-kpis{ display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); margin-top:32px; border-top:1px solid var(--line); }
+#panel-bp .bpx-kpi{ padding:26px 24px 0 0; }
+#panel-bp .bpx-kpi + .bpx-kpi{ padding-left:28px; border-left:1px solid var(--line); }
+#panel-bp .bpx-kpi-num{ font-size:34px; font-weight:600; letter-spacing:-.02em; line-height:1.1; color: var(--purple); }
+#panel-bp .bpx-kpi-lbl{ font-size:14px; line-height:1.5; color: var(--ink-soft); margin-top:10px; }
+#panel-bp .bpx-facts{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); column-gap:64px; margin-top:18px; max-width:960px; }
+#panel-bp .bpx-fact{ display:flex; justify-content:space-between; align-items:baseline; gap:20px; padding:16px 0; border-bottom:1px solid var(--line); }
+#panel-bp .bpx-fact > span{ color: var(--ink-soft); }
+#panel-bp .bpx-fact b{ font-weight:600; text-align:right; }
+#panel-bp .bpx-fact small{ display:block; font-weight:400; font-size:13px; color: var(--ink-soft); margin-top:2px; }
+#panel-bp .bpx-table{ width:100%; max-width:960px; border-collapse:collapse; }
+#panel-bp .bpx-table th{ text-align:right; font-weight:500; font-size:13px; color: var(--ink-soft); padding:0 0 12px; border-bottom:1px solid var(--line); }
+#panel-bp .bpx-table td{ padding:15px 0; border-bottom:1px solid var(--line); text-align:right; font-variant-numeric:tabular-nums; }
+#panel-bp .bpx-table th:first-child, #panel-bp .bpx-table td:first-child{ text-align:left; }
+#panel-bp .bpx-table td small{ display:block; font-size:13px; color: var(--ink-soft); margin-top:2px; }
+#panel-bp .bpx-table .na{ color: var(--potencial); }
+#panel-bp .bpx-table tr.total td{ border-bottom:none; font-weight:600; font-size:18px; color: var(--purple-deep); background: var(--hubii-bg); padding:18px 14px; }
+#panel-bp .bpx-table tr.total td:first-child{ border-radius:14px 0 0 14px; }
+#panel-bp .bpx-table tr.total td:last-child{ border-radius:0 14px 14px 0; }
+#panel-bp .bpx-table tr.total td small{ font-weight:400; color: var(--ink-soft); font-size:13px; }
+#panel-bp .bpx-card{ background: var(--card); border:1px solid var(--line); border-radius:18px; padding:30px 32px; }
+#panel-bp .bpx-card-title{ font-size:18px; font-weight:600; }
+#panel-bp .bpx-card-sub{ font-size:14px; color: var(--ink-soft); margin:2px 0 22px; }
+#panel-bp .bpx-grid2{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:24px; align-items:stretch; margin-top:24px; }
+#panel-bp .bpx-fields{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:18px 20px; margin-bottom:22px; padding-bottom:22px; border-bottom:1px solid var(--line); }
+#panel-bp .bpx-field{ display:flex; flex-direction:column; gap:6px; }
+#panel-bp .bpx-field label{ font-size:13.5px; font-weight:500; color: var(--ink); }
+#panel-bp .bpx-field input{ width:100%; padding:11px 13px; border:1px solid var(--line); border-radius:10px; font-family:'Onest', sans-serif; font-size:15px; font-weight:400; color: var(--ink); background:#fff; font-variant-numeric:tabular-nums; }
+#panel-bp .bpx-field input:focus{ outline:none; border-color: var(--purple); box-shadow:0 0 0 3px var(--purple-glow); }
+#panel-bp .bpx-hint{ font-size:12.5px; line-height:1.45; color: var(--ink-soft); }
+#panel-bp .bpx-row{ display:flex; justify-content:space-between; align-items:flex-start; gap:20px; padding:12px 0; border-bottom:1px solid var(--line); }
+#panel-bp .bpx-row > span{ color: var(--ink); }
+#panel-bp .bpx-row i{ display:block; font-style:normal; font-size:12.5px; color: var(--ink-soft); }
+#panel-bp .bpx-row b{ font-weight:600; text-align:right; font-variant-numeric:tabular-nums; }
+#panel-bp .bpx-row.muted > span, #panel-bp .bpx-row.muted b{ color: var(--ink-soft); font-weight:400; }
+#panel-bp .bpx-row.total{ margin-top:10px; padding:16px 18px; border-bottom:none; background: var(--hubii-bg); border-radius:14px; align-items:center; }
+#panel-bp .bpx-row.total > span, #panel-bp .bpx-row.total b{ color: var(--purple-deep); font-weight:600; font-size:17px; }
+#panel-bp .bot-sub{ font-size:12px; font-weight:400; color: var(--ink-soft); }
+#panel-bp .bpx-label{ font-size:13.5px; color: var(--ink-soft); }
+#panel-bp .bpx-be-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:56px; }
+#panel-bp .bpx-be-num{ font-size:34px; font-weight:600; letter-spacing:-.02em; color: var(--purple); line-height:1.15; text-align:right; }
+#panel-bp .bpx-be-num .bot-sub{ font-size:13.5px; letter-spacing:0; text-align:right; }
+#panel-bp .breakeven-track{ height:12px; border-radius:999px; overflow:visible; background: var(--amber-bg); border:none; }
+#panel-bp .breakeven-fill-below{ border-radius:999px 0 0 999px; }
+#panel-bp .breakeven-fill-above{ border-radius:0 999px 999px 0; }
+#panel-bp .breakeven-marker{ top:-5px; height:22px; width:3px; border-radius:2px; background: var(--ink); }
+#panel-bp .breakeven-pin{ top:-38px; }
+#panel-bp .breakeven-pin-label{ font-family:'Onest', sans-serif; font-size:12px; font-weight:500; padding:4px 10px; }
+#panel-bp .breakeven-scale{ font-family:'Onest', sans-serif; font-size:12.5px; margin-top:10px; }
+#panel-bp .bpx-foot{ font-size:13.5px; color: var(--ink-soft); margin-top:22px; max-width:760px; }
+#panel-bp .bp-legend-item{ font-family:'Onest', sans-serif; font-size:13.5px; }
+#panel-bp .bp-axis-label{ font-family:'Onest', sans-serif; font-size:11.5px; font-weight:400; }
+#panel-bp .bpx-miles{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); margin-top:26px; border-top:1px solid var(--line); }
+#panel-bp .bpx-mile{ padding:22px 24px 0 0; }
+#panel-bp .bpx-mile + .bpx-mile{ padding-left:28px; border-left:1px solid var(--line); }
+#panel-bp .bpx-mile-m{ font-size:13px; font-weight:500; color: var(--purple); }
+#panel-bp .bpx-mile-v{ font-size:24px; font-weight:600; letter-spacing:-.01em; margin-top:4px; }
+#panel-bp .bpx-mile-s{ font-size:13px; color: var(--ink-soft); margin-top:2px; }
+@media (max-width: 980px){
+  #panel-bp .bpx-kpis, #panel-bp .bpx-miles{ grid-template-columns:repeat(2, minmax(0,1fr)); }
+  #panel-bp .bpx-kpi:nth-child(odd){ border-left:none; padding-left:0; }
+  #panel-bp .bpx-kpi{ padding-bottom:22px; }
+  #panel-bp .bpx-facts, #panel-bp .bpx-grid2, #panel-bp .bpx-fields{ grid-template-columns:1fr; }
+  #panel-bp .bpx-hero{ padding:28px 24px; }
+}
 </style>
 </head>
 <body>
@@ -1243,199 +1319,161 @@ body{
   <!-- BUSINESS PLAN -->
   <div class="tab-panel" id="panel-bp">
 
-    <div class="gt-box">
-      <div class="gt-label">Recomendação · reunião com a Ultragaz, 21/set</div>
-      <p class="gt-text">Aprovar o piloto digital com a Hubii em Grande São Paulo. O mercado endereçável é grande (<b>~R$600mi/mês</b> — ~4,7mi de botijões —, dos quais só <b>7%</b> é digital hoje) e a economia unitária fecha: a partir de <b>~R$682 mil/mês de GMV</b> (~5,4 mil botijões), a margem do piloto já supera o canal digital próprio — e a expectativa inicial simulada (R$701,8mil/mês, ~5,5 mil botijões) já passa desse ponto. O risco principal não é de margem — é de <b>volume</b>: duas premissas de captura ainda precisam ser validadas no piloto.</p>
-    </div>
-
-    <div class="bp-section first">
-      <div class="scr-tag">Situação</div>
-      <div class="action-title">Grande São Paulo é um mercado de ~R$600mi/mês (~4,7mi de botijões) onde a Ultragaz já lidera — mas o digital é só 7% do total</div>
-      <div class="stat-row">
-        <div class="stat"><div class="stat-num">24%</div><div class="stat-lbl">Market share UG em GSP (domiciliar) · 22% no Brasil</div></div>
-        <div class="stat"><div class="stat-num">~R$600mi</div><div class="stat-lbl">TAM GSP/mês — online + offline, todos os players · ~4,7mi botijões</div></div>
-        <div class="stat"><div class="stat-num">7%</div><div class="stat-lbl">Canal online sobre o total UG na praça</div></div>
-        <div class="stat"><div class="stat-num">R$126–127</div><div class="stat-lbl">Ticket médio GSP online</div></div>
-      </div>
-      <div class="panel">
-        <div class="info-block">
-          <ul class="info-list">
-            <li>Volume online de referência (ago/26), sinalizado pelo time de UG digital: <b>R$9mi/mês</b> (~70,9 mil botijões) — é a base de todo o cálculo abaixo; volume offline UG implícito: <b>~R$128,6mi/mês</b> (~1,01mi de botijões)</li>
-            <li>Concorrentes no offline em GSP: <b>~R$168mi/mês</b> (~1,32mi de botijões)</li>
-            <li>CAC online UG: <b>R$22</b> · CAC offline (revenda arca o custo): <b>R$12</b></li>
-          </ul>
+    <section class="bpx-hero">
+      <div class="bpx-eyebrow">Recomendação</div>
+      <h2 class="bpx-h1">Aprovar o piloto digital com a Hubii em Grande São Paulo</h2>
+      <p class="bpx-lead">O mercado é grande e o digital da Ultragaz ainda é pequeno (7% do offline). A margem do piloto já supera a do canal próprio no teto; o que falta validar é volume.</p>
+      <div class="bpx-kpis">
+        <div class="bpx-kpi">
+          <div class="bpx-kpi-num" id="bp_k_tam">—</div>
+          <div class="bpx-kpi-lbl" id="bp_k_tam_lbl">mercado GSP por mês</div>
+        </div>
+        <div class="bpx-kpi">
+          <div class="bpx-kpi-num" id="bp_k_margem">—</div>
+          <div class="bpx-kpi-lbl" id="bp_k_margem_lbl">margem do piloto no teto</div>
+        </div>
+        <div class="bpx-kpi">
+          <div class="bpx-kpi-num" id="bp_k_breakeven">—</div>
+          <div class="bpx-kpi-lbl" id="bp_k_breakeven_lbl">GMV/mês para superar o canal próprio</div>
+        </div>
+        <div class="bpx-kpi">
+          <div class="bpx-kpi-num" id="bp_k_total">—</div>
+          <div class="bpx-kpi-lbl" id="bp_k_total_lbl">GMV/mês esperado no mês 6</div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="bp-section">
-      <div class="scr-tag">Complicação</div>
-      <div class="action-title">O piloto tem teto de margem maior (4,00% vs. 1,80% hoje) — mas o licenciamento fixo segura o resultado real até o volume escalar</div>
-      <div class="scenario-results">
-        <div class="scenario-result-card">
-          <div class="scenario-result-title">Canal digital próprio (site + WhatsApp)</div>
-          <div class="scenario-result-sub">estrutura de custo atual sobre a receita</div>
-          <div class="scenario-result-row"><span>Margem base <i style="font-weight:400; color:var(--ink-soft);">(venda à revenda)</i></span><b>12,00%</b></div>
-          <div class="scenario-result-row"><span>Back office <i style="font-weight:400; color:var(--ink-soft);">(marketing, tecnologia e back-office juntos hoje)</i></span><b>-4,0%</b></div>
-          <div class="scenario-result-row"><span>Marketing <i style="font-weight:400; color:var(--ink-soft);">(desconto com coparticipação)</i></span><b>-6,0%</b></div>
-          <div class="scenario-result-row"><span>Taxa de adquirência</span><b>-0,2%</b></div>
-          <div class="scenario-result-row"><span>Licenciamento <i style="font-weight:400; color:var(--ink-soft);">(não se aplica)</i></span><b>—</b></div>
-          <div class="scenario-result-row"><span>Royalty <i style="font-weight:400; color:var(--ink-soft);">(não se aplica)</i></span><b>—</b></div>
-          <div class="scenario-result-row highlight"><span>Margem <i style="font-weight:400; color:var(--purple-deep); opacity:.75;">(calculada)</i></span><b id="cmp_margem_propria">—</b></div>
+    <section class="bpx-section">
+      <div class="bpx-eyebrow">Mercado</div>
+      <h2 class="bpx-h2">Contexto de mercado — Grande São Paulo</h2>
+      <div class="bpx-facts">
+        <div class="bpx-fact"><span>Participação da Ultragaz em GSP</span><b>24% <small>22% no Brasil</small></b></div>
+        <div class="bpx-fact"><span>Canal online da UG hoje (ago/26)</span><b>R$9mi/mês <small>≈ 70,9 mil botijões · 7% do offline · base do cálculo</small></b></div>
+        <div class="bpx-fact"><span>Offline da UG (implícito)</span><b>~R$128,6mi/mês <small>≈ 1,01mi de botijões</small></b></div>
+        <div class="bpx-fact"><span>Concorrentes no offline</span><b>~R$168mi/mês <small>≈ 1,32mi de botijões</small></b></div>
+        <div class="bpx-fact"><span>CAC</span><b>R$22 online · R$12 offline <small>no offline, a revenda arca com o custo</small></b></div>
+        <div class="bpx-fact"><span>Ticket médio online</span><b>R$126–127 <small>1 botijão ≈ R$127</small></b></div>
+      </div>
+    </section>
+
+    <section class="bpx-section">
+      <div class="bpx-eyebrow">Margem</div>
+      <h2 class="bpx-h2">O teto de margem do piloto é maior que o do canal atual</h2>
+      <p class="bpx-lead">Mesma margem base; o canal Hubii soma um royalty de 2% e carrega um licenciamento fixo.</p>
+      <table class="bpx-table">
+        <thead><tr><th></th><th>Canal próprio hoje</th><th>Canal Hubii (piloto)</th></tr></thead>
+        <tbody>
+          <tr><td>Margem base <small>venda à revenda</small></td><td>12,00%</td><td id="cmp_margemBase_display">12,00%</td></tr>
+          <tr><td>Back office</td><td>−4,00%</td><td>−4,00%</td></tr>
+          <tr><td>Marketing</td><td>−6,00%</td><td>−6,00%</td></tr>
+          <tr><td>Taxa de adquirência</td><td>−0,20%</td><td class="na">—</td></tr>
+          <tr><td>Royalty <small>margem incremental</small></td><td class="na">—</td><td>+2,00%</td></tr>
+          <tr><td>Licenciamento Hubii <small>fixo, fora da margem % — pesa no ponto de virada</small></td><td class="na">—</td><td>R$15.000/mês</td></tr>
+          <tr class="total"><td>Margem <small>antes do licenciamento</small></td><td id="cmp_margem_propria">—</td><td id="cmp_lucro_preliminar">—</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="bpx-section">
+      <div class="bpx-eyebrow">Ponto de virada</div>
+      <h2 class="bpx-h2">Quanto volume o piloto precisa para superar o canal próprio</h2>
+      <p class="bpx-lead">Abaixo do ponto de virada o licenciamento fixo pesa mais que o ganho de margem; acima, a margem do piloto passa a do canal próprio (<span id="vm_target_label">1,80</span>%).</p>
+
+      <div class="bpx-card bpx-be">
+        <div class="bpx-be-head">
+          <div class="bpx-label">Volume do ponto de virada</div>
+          <div class="bpx-be-num" id="vm_breakeven_value">—</div>
         </div>
-        <div class="scenario-result-card">
-          <div class="scenario-result-title">Canal Hubii (piloto)</div>
-          <div class="scenario-result-sub">exercício sobre a expectativa de volume inicial</div>
-          <div class="scenario-result-row"><span>Margem base <i style="font-weight:400; color:var(--ink-soft);">(venda à revenda · mesma do Simulador abaixo)</i></span><b id="cmp_margemBase_display">12,00%</b></div>
-          <div class="scenario-result-row"><span>Back-office <i style="font-weight:400; color:var(--ink-soft);">(reduzido vs. canal próprio)</i></span><b>-4,00%</b></div>
-          <div class="scenario-result-row"><span>Marketing</span><b>-6,0%</b></div>
-          <div class="scenario-result-row"><span>Taxa de adquirência <i style="font-weight:400; color:var(--ink-soft);">(não se aplica)</i></span><b>—</b></div>
-          <div class="scenario-result-row"><span>Licenciamento Hubii <i style="font-weight:400; color:var(--ink-soft);">(tem impacto real no resultado — detalhado na Resolução, abaixo)</i></span><b>R$15.000,00/mês</b></div>
-          <div class="scenario-result-row"><span>Royalty <i style="font-weight:400; color:var(--ink-soft);">(margem incremental)</i></span><b>+2,0%</b></div>
-          <div class="scenario-result-row highlight"><span>Margem <i style="font-weight:400; color:var(--purple-deep); opacity:.75;">(calculada)</i></span><b id="cmp_lucro_preliminar">—</b></div>
+        <div class="breakeven-track">
+          <div class="breakeven-fill-below" id="vm_fill_below"></div>
+          <div class="breakeven-fill-above" id="vm_fill_above"></div>
+          <div class="breakeven-marker" id="vm_marker_line"></div>
+          <div class="breakeven-pin" id="vm_pin"><div class="breakeven-pin-label" id="vm_pin_label">hoje</div></div>
+        </div>
+        <div class="breakeven-scale">
+          <span>R$0</span>
+          <span id="vm_scale_max">—</span>
         </div>
       </div>
-      <div class="panel" style="margin-top:14px;">
-        <p style="font-size:12.5px; color:var(--ink-soft); margin:0; line-height:1.5;">A diferença é explicada pelo <b>custo fixo do licenciamento Hubii</b>, ainda não diluído pela escala. Conforme o volume cresce, esse gap se fecha — é exatamente isso que a próxima seção mostra.</p>
-      </div>
-    </div>
 
-    <div class="bp-section">
-      <div class="scr-tag">Resolução — a economia do projeto</div>
-      <div class="action-title">A partir de ~R$682 mil/mês de GMV (~5,4 mil botijões), a margem do piloto ultrapassa o canal próprio</div>
-      <div class="panel scenario-tool">
-        <p style="font-size:13px; color:var(--ink-soft); margin:0 0 16px; line-height:1.5;">As duas premissas centrais a validar no piloto: quanto do volume Hubii <b>canibaliza o offline da UG</b>, e quanto vem de <b>captura de share dos concorrentes</b>. Ajuste os campos em cada card — as informações se recalculam juntas.</p>
-
-        <div class="scenario-results">
-          <div class="scenario-result-card">
-            <div class="scenario-result-title">Expectativa de GMV Hubii</div>
-            <div class="scenario-result-sub">soma das duas alavancas de volume</div>
-            <div class="scenario-inputs compact">
-              <div class="scenario-input-group">
-                <label>% canibalização offline UG</label>
-                <input type="text" inputmode="decimal" id="vmPct1" value="0,10">
-              </div>
-              <div class="scenario-input-group">
-                <label>% captura concorrentes</label>
-                <input type="text" inputmode="decimal" id="vmPct2" value="0,10">
-              </div>
+      <div class="bpx-grid2">
+        <div class="bpx-card">
+          <div class="bpx-card-title">Volume esperado — mês 6</div>
+          <div class="bpx-card-sub">Duas premissas a validar no piloto</div>
+          <div class="bpx-fields">
+            <div class="bpx-field">
+              <label for="vmPct1">Canibalização do offline UG (%)</label>
+              <input type="text" inputmode="decimal" id="vmPct1" value="0,10">
+              <span class="bpx-hint">Clientes que já compravam offline da Ultragaz e só migram de canal — não é volume novo</span>
             </div>
-            <div class="scenario-result-row"><span>Offline UG em GSP <i>(calculado)</i></span><b id="vm_base1_display">—</b></div>
-            <div class="scenario-result-row"><span>TAM GSP c/ concorrentes <i>(calculado)</i></span><b id="vm_base2_display">—</b></div>
-            <div class="scenario-result-row"><span>Via canibalização do offline UG</span><b id="vm_via1">—</b></div>
-            <div class="scenario-result-row"><span>Via captura de concorrentes</span><b id="vm_via2">—</b></div>
-            <div class="scenario-result-row highlight"><span>Expectativa Hubii — GMV/mês</span><b id="vm_total">—</b></div>
-          </div>
-          <div class="scenario-result-card">
-            <div class="scenario-result-title">P&amp;L no volume simulado</div>
-            <div class="scenario-result-sub">margem base − back office + royalty − marketing − licenciamento <i>(back office: quanto menor, melhor)</i></div>
-            <div class="scenario-inputs compact">
-              <div class="scenario-input-group">
-                <label>Back office (%)</label>
-                <input type="text" inputmode="decimal" id="vmBackoffice" value="4,00">
-              </div>
-              <div class="scenario-input-group">
-                <label>Royalty incremental (%)</label>
-                <input type="text" inputmode="decimal" id="vmRoyaltyPct" value="2,00">
-              </div>
-              <div class="scenario-input-group">
-                <label>Marketing (%)</label>
-                <input type="text" inputmode="decimal" id="vmMktPct" value="6,00">
-              </div>
-              <div class="scenario-input-group">
-                <label>Licenciamento (R$/mês)</label>
-                <input type="text" inputmode="decimal" id="vmLicenciamento" value="15.000,00">
-              </div>
+            <div class="bpx-field">
+              <label for="vmPct2">Captura de concorrentes (%)</label>
+              <input type="text" inputmode="decimal" id="vmPct2" value="0,10">
+              <span class="bpx-hint">Volume de fora da base UG — esse sim é ganho líquido de mercado</span>
             </div>
-            <div class="scenario-result-row"><span>Margem base <i style="font-weight:400; color:var(--ink-soft);">(venda à revenda · não se altera)</i></span><b id="vm_margemBase">—</b></div>
-            <div class="scenario-result-row"><span>Back office</span><b id="vm_savings">—</b></div>
-            <div class="scenario-result-row"><span>Royalty incremental</span><b id="vm_royalty">—</b></div>
-            <div class="scenario-result-row"><span>Marketing</span><b id="vm_mkt">—</b></div>
-            <div class="scenario-result-row"><span>Licenciamento Hubii</span><b id="vm_licenciamento">—</b></div>
-            <div class="scenario-result-row highlight"><span>Resultado do mês</span><b id="vm_resultado">—</b></div>
           </div>
+          <div class="bpx-row muted"><span>Offline UG em GSP <i>calculado</i></span><b id="vm_base1_display">—</b></div>
+          <div class="bpx-row muted"><span>TAM GSP c/ concorrentes <i>calculado</i></span><b id="vm_base2_display">—</b></div>
+          <div class="bpx-row"><span>Via canibalização</span><b id="vm_via1">—</b></div>
+          <div class="bpx-row"><span>Via captura de concorrentes</span><b id="vm_via2">—</b></div>
+          <div class="bpx-row total"><span>GMV esperado por mês</span><b id="vm_total">—</b></div>
         </div>
 
-        <div class="breakeven-panel">
-          <div class="breakeven-header">
-            <span>Ponto de virada — volume em que a margem do projeto supera o canal próprio (<span id="vm_target_label">1,80</span>%)</span>
-            <b id="vm_breakeven_value">—</b>
+        <div class="bpx-card">
+          <div class="bpx-card-title">Resultado do mês</div>
+          <div class="bpx-card-sub">No volume esperado ao lado</div>
+          <div class="bpx-fields">
+            <div class="bpx-field">
+              <label for="vmBackoffice">Back office (%)</label>
+              <input type="text" inputmode="decimal" id="vmBackoffice" value="4,00">
+              <span class="bpx-hint">Custo: quanto menor, melhor</span>
+            </div>
+            <div class="bpx-field">
+              <label for="vmRoyaltyPct">Royalty (%)</label>
+              <input type="text" inputmode="decimal" id="vmRoyaltyPct" value="2,00">
+              <span class="bpx-hint">Margem incremental</span>
+            </div>
+            <div class="bpx-field">
+              <label for="vmMktPct">Marketing (%)</label>
+              <input type="text" inputmode="decimal" id="vmMktPct" value="6,00">
+            </div>
+            <div class="bpx-field">
+              <label for="vmLicenciamento">Licenciamento (R$/mês)</label>
+              <input type="text" inputmode="decimal" id="vmLicenciamento" value="15.000,00">
+              <span class="bpx-hint">Valor fixo</span>
+            </div>
           </div>
-          <div class="breakeven-track">
-            <div class="breakeven-fill-below" id="vm_fill_below"></div>
-            <div class="breakeven-fill-above" id="vm_fill_above"></div>
-            <div class="breakeven-marker" id="vm_marker_line"></div>
-            <div class="breakeven-pin" id="vm_pin"><div class="breakeven-pin-label" id="vm_pin_label">hoje</div></div>
-          </div>
-          <div class="breakeven-scale">
-            <span>R$0</span>
-            <span id="vm_scale_max">—</span>
-          </div>
+          <div class="bpx-row"><span>Margem base <i>não se altera</i></span><b id="vm_margemBase">—</b></div>
+          <div class="bpx-row"><span>Back office</span><b id="vm_savings">—</b></div>
+          <div class="bpx-row"><span>Royalty</span><b id="vm_royalty">—</b></div>
+          <div class="bpx-row"><span>Marketing</span><b id="vm_mkt">—</b></div>
+          <div class="bpx-row"><span>Licenciamento Hubii</span><b id="vm_licenciamento">—</b></div>
+          <div class="bpx-row total"><span>Resultado do mês</span><b id="vm_resultado">—</b></div>
         </div>
       </div>
 
-      <div class="exhibit-tag">Benchmark de validação</div>
-      <div class="panel">
-        <div class="info-block">
-          <ul class="info-list">
-            <li>EBITDA / lucro líquido sobre a receita domiciliar até agosto: <b>12%</b></li>
-            <li>Lucro líquido por tonelada: <b>R$951</b> — métrica de go/no-go do projeto</li>
-            <li>Custos variáveis que deixam de existir no modelo Hubii/marketplace (taxa de adquirência, desconto vale-gás, marketing/tecnologia/terceiros): <b>~4% da receita</b>, ~R$5.235 (~15% da receita do recorte analisado)</li>
-            <li><b>Conclusão:</b> no teto estrutural, a margem com Hubii já supera a do canal próprio (4,00% vs. 1,80%) — o desafio não é a margem, é diluir o custo fixo do licenciamento até lá chegar</li>
-          </ul>
-        </div>
-      </div>
+      <p class="bpx-foot">Referência interna da UG: EBITDA domiciliar de 12% e lucro líquido de R$951 por tonelada (métrica de go/no-go citada na reunião).</p>
+    </section>
 
-      <div class="exhibit-tag">Premissas — o que precisa ser verdade</div>
-      <div class="opp-grid">
-        <div class="opp-card flag">
-          <div class="opp-head"><div class="opp-icon">⚑</div><div class="opp-title">Canibalização do offline UG</div></div>
-          <ul>
-            <li>Quanto do volume do piloto vem de clientes que <b>já compravam offline</b> da própria Ultragaz, só migrando de canal — não é volume novo</li>
-          </ul>
-        </div>
-        <div class="opp-card flag">
-          <div class="opp-head"><div class="opp-icon">⚑</div><div class="opp-title">Captura de share dos concorrentes</div></div>
-          <ul>
-            <li>Quanto do volume vem de fato de <b>fora da base UG</b> — de concorrentes no offline (~R$168mi/mês em GSP, ~1,32mi de botijões) — esse sim é ganho líquido de mercado</li>
-          </ul>
-        </div>
-      </div>
-      <div class="panel" style="margin-top:14px;">
-        <p style="font-size:12.5px; color:var(--ink-soft); margin:0; line-height:1.5;">O piloto existe justamente para medir essas duas variáveis com dado real, em vez de premissa. O Simulador acima já modela as duas separadamente — os % de 0,10% usados são ponto de partida conservador, a confirmar.</p>
-      </div>
-    </div>
-
-    <div class="bp-section">
-      <div class="exhibit-tag">Projeção de faturamento — mês a mês</div>
-      <div class="action-title">De R$100mil (~787 botijões) a <span id="proj_target_title">—</span> em 6 meses — depois, mantendo o mesmo ritmo de crescimento</div>
-      <div class="panel">
+    <section class="bpx-section">
+      <div class="bpx-eyebrow">Projeção</div>
+      <h2 class="bpx-h2">Faturamento mês a mês</h2>
+      <p class="bpx-lead">De R$100mil no mês 1 (~787 botijões) a <b id="proj_target_title">—</b> no mês 6; depois, o mesmo ritmo de crescimento.</p>
+      <div class="bpx-card">
         <div class="bp-legend">
-          <div class="bp-legend-item"><span class="bp-legend-line" style="background:var(--purple)"></span>GMV projetado/mês</div>
+          <div class="bp-legend-item"><span class="bp-legend-line" style="background:var(--purple)"></span>GMV projetado por mês</div>
           <div class="bp-legend-item"><span class="bp-legend-dot" style="background:var(--amber)"></span>Ponto de virada (margem &gt; <span id="proj_target_margin_label">1,80</span>%)</div>
         </div>
         <div class="bp-chart-wrap">
           <svg id="projChart" viewBox="0 0 1000 380" width="100%" style="min-width:680px; display:block;"></svg>
         </div>
-        <div class="bp-milestone-grid" style="margin-top:16px;">
-          <div class="bp-milestone-card">
-            <div class="bp-milestone-month">Mês 1</div>
-            <div class="bp-milestone-value">R$100mil</div>
-            <div class="bp-milestone-sub">ponto de partida · ~787 botijões</div>
-          </div>
-          <div class="bp-milestone-card">
-            <div class="bp-milestone-month">Mês 6</div>
-            <div class="bp-milestone-value" id="proj_m6">—</div>
-            <div class="bp-milestone-sub" id="proj_m6_sub">Expectativa Hubii — GMV/mês</div>
-          </div>
-          <div class="bp-milestone-card">
-            <div class="bp-milestone-month">Mês 12</div>
-            <div class="bp-milestone-value" id="proj_m12">—</div>
-            <div class="bp-milestone-sub" id="proj_m12_sub">mantendo o ritmo pós-mês 6</div>
-          </div>
+        <div class="bpx-miles">
+          <div class="bpx-mile"><div class="bpx-mile-m">Mês 1</div><div class="bpx-mile-v">R$100.000</div><div class="bpx-mile-s">ponto de partida</div></div>
+          <div class="bpx-mile"><div class="bpx-mile-m">Mês 6</div><div class="bpx-mile-v" id="proj_m6">—</div><div class="bpx-mile-s" id="proj_m6_sub">—</div></div>
+          <div class="bpx-mile"><div class="bpx-mile-m">Mês 12</div><div class="bpx-mile-v" id="proj_m12">—</div><div class="bpx-mile-s" id="proj_m12_sub">—</div></div>
         </div>
       </div>
-    </div>
+    </section>
 
   </div>
 
@@ -2144,6 +2182,14 @@ body{
     // OUTPUTS derivados dessa base + os shares já informados (7% e 24%),
     // não premissas próprias — por isso não são mais campos editáveis aqui.
     let lastModel = null; // premissas atuais do P&L (alimenta o mini P&L da aba Resultados)
+    const setTxt = (id, t) => { const el = document.getElementById(id); if(el) el.textContent = t; };
+    const fmtK = (v) => v >= 100000000 ? 'R$' + Math.round(v/1000000) + 'mi'
+                      : v >= 1000000 ? 'R$' + (v/1000000).toFixed(1).replace('.', ',') + 'mi'
+                      : 'R$' + Math.round(v/1000).toLocaleString('pt-BR') + 'mil';
+    const fmtBotK = (v) => { const n = v / TICKET_BOTIJAO;
+      return n >= 1000000 ? '~' + (n/1000000).toFixed(1).replace('.', ',') + 'mi botijões'
+           : n >= 10000 ? '~' + (n/1000).toFixed(1).replace('.', ',') + ' mil botijões'
+           : '~' + Math.round(n).toLocaleString('pt-BR') + ' botijões'; };
     const BASE_ONLINE_GSP = 9000000;
     const MARGEM_BASE_PCT = 12; // margem que a Ultragaz já ganha vendendo pra revenda — não se altera
     const SHARE_ON_OFF_PCT = 7;      // online representa 7% do offline UG
@@ -2246,6 +2292,19 @@ body{
       }
 
       document.getElementById('proj_target_margin_label').textContent = formatBR(targetMarginPct);
+
+      // indicadores de destaque (topo da aba) — sempre acompanham o simulador
+      setTxt('bp_k_tam', fmtK(base2));
+      setTxt('bp_k_tam_lbl', 'mercado GSP por mês · ' + fmtBotK(base2));
+      setTxt('bp_k_total', fmtK(total));
+      setTxt('bp_k_total_lbl', 'GMV/mês esperado no mês 6 · ' + fmtBotK(total));
+      if(breakevenGMV !== null){
+        setTxt('bp_k_breakeven', fmtK(breakevenGMV));
+        setTxt('bp_k_breakeven_lbl', 'GMV/mês para o piloto superar o canal próprio · ' + fmtBotK(breakevenGMV));
+      } else {
+        setTxt('bp_k_breakeven', '—');
+        setTxt('bp_k_breakeven_lbl', 'não atinge o canal próprio com essas premissas');
+      }
       lastModel = {margemBasePct, backofficePct, royaltyPct, mktPct, licenciamento};
       renderProjChart(total, breakevenGMV);
     }
@@ -2306,7 +2365,7 @@ body{
       for(let v=0; v<=yMax; v+=yStep){
         const gy = y(v);
         html += `<line x1="${padL}" y1="${gy}" x2="${W-padR}" y2="${gy}" stroke="var(--line)" stroke-width="1"/>`;
-        html += `<text x="${padL-10}" y="${gy+4}" text-anchor="end" class="bp-axis-label">${v===0?'0':'R$'+(v/1000).toFixed(0)+'mil'}</text>`;
+        html += `<text x="${padL-10}" y="${gy+4}" text-anchor="end" class="bp-axis-label">${v===0?'0':fmtK(v)}</text>`;
         html += `<text x="${W-padR+10}" y="${gy+4}" text-anchor="start" class="bp-axis-label" style="fill:var(--purple-deep);">${v===0?'0':botijoes(v).toLocaleString('pt-BR')}</text>`;
       }
       html += `<text x="${padL-10}" y="${padT-8}" text-anchor="end" class="bp-axis-label">R$/mês</text>`;
@@ -2374,6 +2433,8 @@ body{
       // Canal Hubii: margem base + royalty(2%) - licenciamento/mkt(6%) - back-office(4%, fixo)
       const lucro = margemBasePct + 2 - 6 - COMPARATIVO_BACKOFFICE_FIXO_PCT;
       cmpLucroEstimado.textContent = (lucro>=0?'~':'-') + formatBR(Math.abs(lucro)) + '%';
+      setTxt('bp_k_margem', formatBR(lucro) + '%');
+      setTxt('bp_k_margem_lbl', 'margem do piloto no teto, vs. ' + formatBR(margemPropria) + '% do canal próprio hoje');
     }
 
     recalcComparativo();
