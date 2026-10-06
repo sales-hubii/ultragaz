@@ -585,6 +585,30 @@ body{
 .ov-col > .panel{ flex:1; }
 .ov-note{ margin-top: 4px; padding-top: 14px; border-top: 1px solid var(--line); }
 @media (max-width: 980px){ .ov-band{ grid-template-columns: 1fr; } }
+/* RESULTADOS — mockup */
+.mock-banner{ border-left: 4px solid var(--amber); margin-bottom: 28px; }
+.mock-banner-title{ font-family:'IBM Plex Mono', monospace; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color: var(--amber); margin-bottom:6px; }
+.mock-banner p{ font-size:13.5px; color: var(--ink-soft); line-height:1.6; margin:0; }
+.mock-banner p b{ color: var(--ink); }
+.mock-chip{ display:inline-block; margin-left:10px; font-family:'IBM Plex Mono', monospace; font-size:9.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color: var(--amber); background: var(--amber-bg); padding:2px 8px; border-radius:999px; vertical-align:middle; }
+.mock-note{ font-size:11.5px; color: var(--ink-soft); margin:14px 0 0; line-height:1.5; }
+.hbar{ display:flex; align-items:center; gap:12px; margin:0 0 12px; font-size:13px; }
+.hbar:last-child{ margin-bottom:0; }
+.hbar-label{ flex:0 0 170px; color: var(--ink); font-weight:600; line-height:1.25; }
+.hbar-label span{ display:block; font-weight:500; font-size:11px; color: var(--ink-soft); }
+.hbar-track{ flex:1; height:12px; background: var(--paper); border-radius:999px; overflow:hidden; border:1px solid var(--line); }
+.hbar.sum{ margin-top:14px; padding-top:12px; border-top:1px dashed var(--line); }
+.hbar.sum .hbar-track{ visibility:hidden; }
+.hbar-fill{ height:100%; border-radius:999px; background: linear-gradient(90deg, var(--purple), var(--purple-deep)); }
+.hbar-val{ flex:0 0 auto; min-width:128px; text-align:right; font-family:'IBM Plex Mono', monospace; font-size:12px; font-weight:600; color: var(--ink); }
+.region-map{ display:flex; flex-wrap:wrap; gap:10px; }
+.region-tile{ flex:0 0 calc(25% - 7.5px); box-sizing:border-box; min-height:84px; padding:12px; border-radius:12px; display:flex; flex-direction:column; justify-content:space-between; font-size:12px; }
+.region-tile b{ font-size:13px; }
+.region-tile span{ font-family:'IBM Plex Mono', monospace; font-size:11px; opacity:.92; }
+.region-tile.empty{ visibility:hidden; }
+.region-tile.off{ border:1.5px dashed var(--potencial); background:transparent; color: var(--potencial); }
+.region-legend{ display:flex; gap:18px; flex-wrap:wrap; margin-top:14px; font-size:11.5px; color: var(--ink-soft); }
+@media (max-width: 600px){ .region-tile{ flex-basis: calc(50% - 5px); } .region-tile.empty{ display:none; } .hbar{ flex-wrap:wrap; } .hbar-label{ flex-basis:100%; } }
 .ov-subgrid{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 28px 40px; }
 .panel .ov-subgrid .info-block{ margin:0; padding:0; border:none; }
 .ov-subgrid .praca-foco:last-child{ margin-bottom:0; }
@@ -931,8 +955,8 @@ body{
 
   <div class="tabs">
     <button class="tab-btn active" data-tab="escopo">Overview</button>
-    <button class="tab-btn" data-tab="resultados">Resultados</button>
     <button class="tab-btn" data-tab="bp">Business Plan</button>
+    <button class="tab-btn" data-tab="resultados">Resultados</button>
     <button class="tab-btn" data-tab="tarefas">Tarefas <span class="tab-count" id="tabCount">0/5</span></button>
   </div>
 
@@ -1216,30 +1240,6 @@ body{
     </div>
   </div>
 
-  <!-- RESULTADOS -->
-  <div class="tab-panel" id="panel-resultados">
-    <div class="panel" style="text-align:center; padding:48px 24px;">
-      <div style="font-size:32px; margin-bottom:12px;">◷</div>
-      <div style="font-weight:700; font-size:16px; color:var(--ink); margin-bottom:8px;">Piloto ainda não iniciado</div>
-      <p style="font-size:13.5px; color:var(--ink-soft); max-width:480px; margin:0 auto; line-height:1.6;">Os resultados reais — GMV realizado vs. projetado, pedidos, volume e EBITDA por mês — passam a ser exibidos aqui assim que o piloto for lançado.</p>
-    </div>
-    <div class="section-label">O que será acompanhado aqui</div>
-    <div class="opp-grid">
-      <div class="opp-card">
-        <div class="opp-head"><div class="opp-icon">$</div><div class="opp-title">GMV real vs. projetado</div></div>
-        <ul><li>Comparativo mês a mês com a curva da aba Business Plan</li></ul>
-      </div>
-      <div class="opp-card">
-        <div class="opp-head"><div class="opp-icon">▣</div><div class="opp-title">Pedidos e volume</div></div>
-        <ul><li>Pedidos/mês e volume em toneladas, por canal</li></ul>
-      </div>
-      <div class="opp-card">
-        <div class="opp-head"><div class="opp-icon">◎</div><div class="opp-title">EBITDA realizado</div></div>
-        <ul><li>EBITDA do mês e acumulado (R$/Ton), comparado à meta do P&amp;L</li></ul>
-      </div>
-    </div>
-  </div>
-
   <!-- BUSINESS PLAN -->
   <div class="tab-panel" id="panel-bp">
 
@@ -1433,6 +1433,110 @@ body{
             <div class="bp-milestone-value" id="proj_m12">—</div>
             <div class="bp-milestone-sub" id="proj_m12_sub">mantendo o ritmo pós-mês 6</div>
           </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RESULTADOS (mockup — dados ilustrativos) -->
+  <div class="tab-panel" id="panel-resultados">
+    <div class="panel mock-banner">
+      <div class="mock-banner-title">Prévia · dados ilustrativos</div>
+      <p>O piloto ainda não foi iniciado. Os gráficos abaixo são um <b>mockup</b> de como os resultados reais serão exibidos: a série "real" é <b>fictícia</b> (um pouco acima da curva projetada do Business Plan) e os números se ajustam junto com o simulador. Quando o piloto for lançado, estes painéis passam a ser alimentados com dados reais.</p>
+    </div>
+
+    <div class="ov-block">
+      <div class="section-label">Visão geral do período (M1–M6) <span class="mock-chip">exemplo</span></div>
+      <div class="stat-row" id="resKpis"></div>
+    </div>
+
+    <div class="ov-block">
+      <div class="section-label">Real × projetado — acima da curva <span class="mock-chip">exemplo</span></div>
+      <div class="panel">
+        <div class="bp-legend">
+          <div class="bp-legend-item"><span class="bp-legend-line" style="background:var(--purple)"></span>Real (exemplo)</div>
+          <div class="bp-legend-item"><span class="bp-legend-line" style="background:none; border-top:2px dashed var(--potencial); height:0;"></span>Projetado (Business Plan)</div>
+          <div class="bp-legend-item"><span class="bp-legend-dot" style="background:var(--foco); border-radius:3px;"></span>Acima da curva</div>
+        </div>
+        <svg id="resRealProj" viewBox="0 0 1000 340" width="100%" style="display:block;"></svg>
+      </div>
+    </div>
+
+    <div class="ov-band">
+      <div class="ov-col">
+        <div class="section-label">Venda mês a mês <span class="mock-chip">exemplo</span></div>
+        <div class="panel">
+          <div class="bp-legend">
+            <div class="bp-legend-item"><span class="bp-legend-dot" style="background:var(--purple); border-radius:3px;"></span>GMV real (exemplo)</div>
+            <div class="bp-legend-item"><span class="bp-legend-line" style="background:var(--ink); height:2px;"></span>Projetado</div>
+          </div>
+          <svg id="resMonthly" viewBox="0 0 520 300" width="100%" style="display:block;"></svg>
+        </div>
+      </div>
+      <div class="ov-col">
+        <div class="section-label">Venda por canal <span class="mock-chip">exemplo</span></div>
+        <div class="panel">
+          <div id="resChannel"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ov-band">
+      <div class="ov-col">
+        <div class="section-label">Venda por revendedor <span class="mock-chip">exemplo</span></div>
+        <div class="panel">
+          <div id="resReseller"></div>
+          <p class="mock-note">Nomes e bairros fictícios.</p>
+        </div>
+      </div>
+      <div class="ov-col">
+        <div class="section-label">Itens mais vendidos <span class="mock-chip">exemplo</span></div>
+        <div class="panel">
+          <div id="resItems"></div>
+          <p class="mock-note">Hoje o piloto vende apenas P13; os demais itens ilustram a visão quando o portfólio crescer.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ov-band">
+      <div class="ov-col">
+        <div class="section-label">Número de cancelamentos <span class="mock-chip">exemplo</span></div>
+        <div class="panel">
+          <div class="bp-legend">
+            <div class="bp-legend-item"><span class="bp-legend-dot" style="background:var(--amber); border-radius:3px;"></span>Nº de cancelamentos · abaixo de cada mês: % dos pedidos</div>
+          </div>
+          <svg id="resCancel" viewBox="0 0 520 300" width="100%" style="display:block;"></svg>
+        </div>
+      </div>
+      <div class="ov-col">
+        <div class="section-label">Tempo de entrega <span class="mock-chip">exemplo</span></div>
+        <div class="panel">
+          <div class="bp-legend">
+            <div class="bp-legend-item"><span class="bp-legend-line" style="background:var(--purple)"></span>Tempo médio (min)</div>
+            <div class="bp-legend-item"><span class="bp-legend-dot" style="background:var(--foco-bg); border:1px solid var(--foco); border-radius:3px;"></span>Meta: 20–25 min</div>
+          </div>
+          <svg id="resDelivery" viewBox="0 0 520 300" width="100%" style="display:block;"></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="ov-band" style="margin-bottom:0;">
+      <div class="ov-col">
+        <div class="section-label">Regiões da Grande São Paulo atendidas <span class="mock-chip">exemplo</span></div>
+        <div class="panel">
+          <div class="region-map" id="resRegions"></div>
+          <div class="region-legend">
+            <span>Quanto mais escuro, maior o GMV da região</span>
+            <span>Tracejado: fora do piloto (backlog · 2ª fase)</span>
+          </div>
+        </div>
+      </div>
+      <div class="ov-col">
+        <div class="section-label">Mini P&amp;L — EBITDA (R$/Ton) <span class="mock-chip">exemplo</span></div>
+        <div class="panel">
+          <div id="resPL"></div>
+          <p class="mock-note">Mês 6 · mesmas premissas do Business Plan (margem base, back office, royalty, marketing e licenciamento).</p>
         </div>
       </div>
     </div>
@@ -1813,6 +1917,224 @@ body{
   }
   setupBRInputs(['vmPct1','vmPct2','vmBackoffice','vmRoyaltyPct','vmMktPct','vmLicenciamento','scTicket','scMargemAtual','scIncremental','scVolume']);
 
+  // ===== Resultados — MOCKUP (dados ilustrativos) =====
+  // Monta os gráficos de exemplo da aba Resultados a partir da curva projetada do
+  // Business Plan (proj). A série "real" é FICTÍCIA, levemente acima da curva.
+  window.renderResultadosMock = function(proj, breakevenMonth, model){
+    if(!document.getElementById('resRealProj')) return;
+    const $ = (id) => document.getElementById(id);
+    const num = (v) => Math.round(v).toLocaleString('pt-BR');
+    const Rk = (v) => 'R$' + Math.round(v/1000).toLocaleString('pt-BR') + 'mil';
+    const Rm = (v) => v >= 1000000 ? 'R$' + (v/1000000).toFixed(2).replace('.', ',') + 'mi' : Rk(v);
+    const R0 = (v) => (v < 0 ? '-' : '') + 'R$' + num(Math.abs(v));
+    const dR = (v) => (v >= 0 ? '+' : '-') + 'R$' + num(Math.abs(v));
+    const pct1 = (v) => (v >= 0 ? '+' : '') + v.toFixed(1).replace('.', ',') + '%';
+    const dec1 = (v) => v.toFixed(1).replace('.', ',');
+    const sum = (a) => a.reduce((x, y) => x + y, 0);
+    const smooth = (pts) => {
+      let d = `M ${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
+      for(let i = 0; i < pts.length - 1; i++){
+        const p0 = pts[i > 0 ? i - 1 : i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2 > pts.length - 1 ? i + 1 : i + 2];
+        d += ` C ${(p1.x + (p2.x - p0.x)/6).toFixed(1)} ${(p1.y + (p2.y - p0.y)/6).toFixed(1)}, ${(p2.x - (p3.x - p1.x)/6).toFixed(1)} ${(p2.y - (p3.y - p1.y)/6).toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+      }
+      return d;
+    };
+    const hbars = (rows) => rows.map(r => `<div class="hbar${r.sum ? ' sum' : ''}"><div class="hbar-label">${r.label}${r.sub ? `<span>${r.sub}</span>` : ''}</div><div class="hbar-track"><div class="hbar-fill" style="width:${r.w.toFixed(1)}%"></div></div><div class="hbar-val">${r.val}</div></div>`).join('');
+
+    const N = 6;
+    const MESES = ['M1','M2','M3','M4','M5','M6'];
+    const FATOR = [1.15, 1.20, 1.18, 1.16, 1.14, 1.12];   // série "real" fictícia vs. projetado
+    const CANCEL = [5.8, 5.1, 4.6, 4.0, 3.5, 3.1];        // % de pedidos cancelados (fictício)
+    const ENTREGA = [31, 28, 26, 24, 23, 22];             // minutos (fictício)
+    const projN = proj.slice(0, N);
+    const real = projN.map((v, i) => v * FATOR[i]);
+    const units = real.map(v => Math.round(v / TICKET_BOTIJAO));
+    const totalReal = sum(real);
+    const acima = totalReal / sum(projN) - 1;
+    const m = model || {margemBasePct:12, backofficePct:4, royaltyPct:2, mktPct:6, licenciamento:15000};
+
+    // ---- mini P&L (mês 6) com o mesmo modelo do Business Plan ----
+    const pl = (gmv) => {
+      const mb = gmv * m.margemBasePct/100, bo = gmv * m.backofficePct/100, ro = gmv * m.royaltyPct/100, mk = gmv * m.mktPct/100;
+      const ebitda = mb - bo + ro - mk - m.licenciamento;
+      const un = Math.round(gmv / TICKET_BOTIJAO);
+      const ton = un * 13 / 1000;
+      return {gmv, mb, bo, ro, mk, lic: m.licenciamento, ebitda, un, ton, perTon: ebitda / ton};
+    };
+    const plP = pl(projN[5]), plR = pl(real[5]);
+
+    // ---- KPIs ----
+    $('resKpis').innerHTML = [
+      [Rm(totalReal), `GMV acumulado (6 meses) · ${pct1(acima * 100)} vs. projetado`],
+      [num(sum(units)), 'botijões vendidos (6 meses)'],
+      [dec1(CANCEL[5]) + '%', `cancelamentos no mês 6 · vinha de ${dec1(CANCEL[0])}% no mês 1`],
+      [ENTREGA[5] + ' min', 'tempo médio de entrega no mês 6 · meta 20–25 min'],
+      [R0(plR.perTon) + '/Ton', `EBITDA no mês 6 · projetado ${R0(plP.perTon)}/Ton`],
+    ].map(([n, l]) => `<div class="stat"><div class="stat-num">${n}</div><div class="stat-lbl">${l}</div></div>`).join('');
+
+    // ---- Real x projetado (acima da curva) ----
+    (() => {
+      const W = 1000, H = 340, padL = 70, padR = 76, padT = 36, padB = 36;
+      const plotW = W - padL - padR, plotH = H - padT - padB;
+      const yMax = Math.max(...proj) * 1.1;
+      const x = (i) => padL + (i / (proj.length - 1)) * plotW;
+      const y = (v) => padT + plotH - (v / yMax) * plotH;
+      const step = Math.ceil(yMax / 5 / 100000) * 100000 || 100000;
+      let h = '';
+      for(let v = 0; v <= yMax; v += step){
+        const gy = y(v);
+        h += `<line x1="${padL}" y1="${gy}" x2="${W - padR}" y2="${gy}" stroke="var(--line)" stroke-width="1"/>`;
+        h += `<text x="${padL - 10}" y="${gy + 4}" text-anchor="end" class="bp-axis-label">${v === 0 ? '0' : Rm(v)}</text>`;
+        h += `<text x="${W - padR + 10}" y="${gy + 4}" text-anchor="start" class="bp-axis-label" style="fill:var(--purple-deep);">${v === 0 ? '0' : botijoes(v).toLocaleString('pt-BR')}</text>`;
+      }
+      h += `<text x="${padL - 10}" y="${padT - 14}" text-anchor="end" class="bp-axis-label">R$/mês</text>`;
+      h += `<text x="${W - padR + 10}" y="${padT - 14}" text-anchor="start" class="bp-axis-label" style="fill:var(--purple-deep);">botijões</text>`;
+      for(let i = 0; i < proj.length; i++) h += `<text x="${x(i)}" y="${H - 12}" text-anchor="middle" class="bp-axis-label">M${i + 1}</text>`;
+      const pp = proj.map((v, i) => ({x: x(i), y: y(v)}));
+      const rp = real.map((v, i) => ({x: x(i), y: y(v)}));
+      const area = smooth(rp) + ' L' + smooth(pp.slice(0, N).reverse()).substring(1) + ' Z';
+      h += `<path d="${area}" fill="var(--foco)" fill-opacity="0.22" stroke="none"/>`;
+      h += `<path d="${smooth(pp)}" fill="none" stroke="var(--potencial)" stroke-width="2.4" stroke-dasharray="7 6" stroke-linecap="round"/>`;
+      h += `<path d="${smooth(rp)}" fill="none" stroke="var(--purple)" stroke-width="3.4" stroke-linecap="round"/>`;
+      pp.forEach((p, i) => { h += `<circle cx="${p.x}" cy="${p.y}" r="3.2" fill="var(--card)" stroke="var(--potencial)" stroke-width="2"><title>M${i + 1} · projetado ${R0(proj[i])}/mês</title></circle>`; });
+      rp.forEach((p, i) => { h += `<circle cx="${p.x}" cy="${p.y}" r="5" fill="var(--card)" stroke="var(--purple)" stroke-width="2.8"><title>M${i + 1} · real (exemplo) ${R0(real[i])}/mês · ${num(units[i])} botijões</title></circle>`; });
+      const px = x(N - 1), py = y(real[N - 1]) - 44;
+      h += `<line x1="${px}" y1="${py + 26}" x2="${px}" y2="${y(real[N - 1]) - 9}" stroke="var(--foco)" stroke-width="1.5"/>`;
+      h += `<rect x="${px - 118}" y="${py}" width="236" height="26" rx="13" fill="var(--foco)"/>`;
+      h += `<text x="${px}" y="${py + 17}" text-anchor="middle" style="font-family:'IBM Plex Mono', monospace; font-size:11.5px; font-weight:700; fill:#fff;">${pct1(acima * 100)} acima da curva projetada</text>`;
+      $('resRealProj').innerHTML = h;
+    })();
+
+    // ---- Venda mês a mês ----
+    (() => {
+      const W = 520, H = 300, padL = 64, padR = 12, padT = 30, padB = 56;
+      const plotW = W - padL - padR, plotH = H - padT - padB, slot = plotW / N, bw = slot * 0.56;
+      const yMax = Math.max(...real) * 1.22;
+      const y = (v) => padT + plotH - (v / yMax) * plotH;
+      const step = Math.ceil(yMax / 4 / 50000) * 50000 || 50000;
+      let h = `<defs><linearGradient id="resGradMonthly" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--purple)"/><stop offset="100%" stop-color="var(--purple-deep)"/></linearGradient></defs>`;
+      for(let v = 0; v <= yMax; v += step){
+        h += `<line x1="${padL}" y1="${y(v)}" x2="${W - padR}" y2="${y(v)}" stroke="var(--line)" stroke-width="1"/>`;
+        h += `<text x="${padL - 8}" y="${y(v) + 4}" text-anchor="end" class="bp-axis-label">${v === 0 ? '0' : Rk(v)}</text>`;
+      }
+      real.forEach((v, i) => {
+        const cx = padL + (i + 0.5) * slot, top = y(v);
+        h += `<rect x="${cx - bw/2}" y="${top}" width="${bw}" height="${padT + plotH - top}" rx="6" fill="url(#resGradMonthly)"><title>${MESES[i]} · ${R0(v)} · ${num(units[i])} botijões</title></rect>`;
+        h += `<text x="${cx}" y="${top - 8}" text-anchor="middle" class="bp-axis-label" style="font-weight:700; fill:var(--ink);">${Rk(v)}</text>`;
+        h += `<line x1="${cx - bw/2 - 4}" y1="${y(projN[i])}" x2="${cx + bw/2 + 4}" y2="${y(projN[i])}" stroke="var(--ink)" stroke-width="2" stroke-dasharray="3 2"/>`;
+        h += `<text x="${cx}" y="${H - 34}" text-anchor="middle" class="bp-axis-label">${MESES[i]}</text>`;
+        h += `<text x="${cx}" y="${H - 18}" text-anchor="middle" class="bp-axis-label" style="fill:var(--purple-deep);">${num(units[i])} bot.</text>`;
+      });
+      $('resMonthly').innerHTML = h;
+    })();
+
+    // ---- Venda por canal ----
+    (() => {
+      const canais = [['iFood', 0.54], ['99', 0.27], ['Magalu + Aiqfome (Raiz)', 0.19]];
+      $('resChannel').innerHTML = hbars(canais.map(([nome, s]) => ({
+        label: nome, sub: num(totalReal * s / TICKET_BOTIJAO) + ' botijões', w: s / 0.54 * 100,
+        val: Rm(totalReal * s) + ' · ' + Math.round(s * 100) + '%'
+      })));
+    })();
+
+    // ---- Venda por revendedor ----
+    (() => {
+      const top = [['Revenda 01', 'Mooca', 9.5], ['Revenda 02', 'Santo André', 8.2], ['Revenda 03', 'Itaquera', 7.4], ['Revenda 04', 'Santo Amaro', 6.6],
+                   ['Revenda 05', 'Lapa', 5.9], ['Revenda 06', 'São Bernardo', 5.3], ['Revenda 07', 'Tatuapé', 4.8], ['Revenda 08', 'Pinheiros', 4.2]];
+      const resto = 100 - sum(top.map(t => t[2]));
+      const rows = top.map(([n, bairro, s]) => ({label: n, sub: bairro, w: s / 9.5 * 100, val: Rm(totalReal * s / 100) + ' · ' + dec1(s) + '%'}));
+      rows.push({label: 'Demais revendas', sub: '112 ativas (exemplo)', w: 0, sum: true, val: Rm(totalReal * resto / 100) + ' · ' + dec1(resto) + '%'});
+      $('resReseller').innerHTML = hbars(rows);
+    })();
+
+    // ---- Itens mais vendidos ----
+    (() => {
+      const itens = [['P13 (13kg)', 92.4], ['P20 (20kg)', 4.6], ['P45 (45kg)', 1.8], ['Outros itens', 1.2]];
+      $('resItems').innerHTML = hbars(itens.map(([n, s]) => ({
+        label: n, sub: num(sum(units) * s / 100) + ' un.', w: s / 92.4 * 100, val: dec1(s) + '%'
+      })));
+    })();
+
+    // ---- Cancelamentos ----
+    (() => {
+      const W = 520, H = 300, padL = 44, padR = 12, padT = 30, padB = 56;
+      const plotW = W - padL - padR, plotH = H - padT - padB, slot = plotW / N, bw = slot * 0.56;
+      const cancel = units.map((u, i) => Math.round(u * CANCEL[i] / 100));
+      const yMax = Math.max(...cancel) * 1.25;
+      const y = (v) => padT + plotH - (v / yMax) * plotH;
+      const step = Math.ceil(yMax / 4 / 20) * 20 || 20;
+      let h = '';
+      for(let v = 0; v <= yMax; v += step){
+        h += `<line x1="${padL}" y1="${y(v)}" x2="${W - padR}" y2="${y(v)}" stroke="var(--line)" stroke-width="1"/>`;
+        h += `<text x="${padL - 8}" y="${y(v) + 4}" text-anchor="end" class="bp-axis-label">${v}</text>`;
+      }
+      cancel.forEach((v, i) => {
+        const cx = padL + (i + 0.5) * slot, top = y(v);
+        h += `<rect x="${cx - bw/2}" y="${top}" width="${bw}" height="${padT + plotH - top}" rx="6" fill="var(--amber)" fill-opacity="0.85"><title>${MESES[i]} · ${v} cancelamentos · ${dec1(CANCEL[i])}% dos pedidos</title></rect>`;
+        h += `<text x="${cx}" y="${top - 8}" text-anchor="middle" class="bp-axis-label" style="font-weight:700; fill:var(--ink);">${v}</text>`;
+        h += `<text x="${cx}" y="${H - 34}" text-anchor="middle" class="bp-axis-label">${MESES[i]}</text>`;
+        h += `<text x="${cx}" y="${H - 18}" text-anchor="middle" class="bp-axis-label" style="fill:var(--amber);">${dec1(CANCEL[i])}%</text>`;
+      });
+      $('resCancel').innerHTML = h;
+    })();
+
+    // ---- Tempo de entrega ----
+    (() => {
+      const W = 520, H = 300, padL = 44, padR = 12, padT = 30, padB = 40;
+      const plotW = W - padL - padR, plotH = H - padT - padB, slot = plotW / N;
+      const lo = 15, hi = 35;
+      const y = (v) => padT + plotH - ((v - lo) / (hi - lo)) * plotH;
+      let h = `<defs><linearGradient id="resGradDelivery" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--purple)" stop-opacity="0.28"/><stop offset="100%" stop-color="var(--purple)" stop-opacity="0"/></linearGradient></defs>`;
+      h += `<rect x="${padL}" y="${y(25)}" width="${plotW}" height="${y(20) - y(25)}" fill="var(--foco-bg)"/>`;
+      h += `<text x="${padL + 8}" y="${y(25) + 15}" class="bp-axis-label" style="fill:var(--foco); font-weight:700;">meta 20–25 min</text>`;
+      for(let v = lo; v <= hi; v += 5){
+        h += `<line x1="${padL}" y1="${y(v)}" x2="${W - padR}" y2="${y(v)}" stroke="var(--line)" stroke-width="1"/>`;
+        h += `<text x="${padL - 8}" y="${y(v) + 4}" text-anchor="end" class="bp-axis-label">${v}</text>`;
+      }
+      h += `<text x="${padL - 8}" y="${padT - 14}" text-anchor="end" class="bp-axis-label">min</text>`;
+      const pts = ENTREGA.map((v, i) => ({x: padL + (i + 0.5) * slot, y: y(v)}));
+      h += `<path d="${smooth(pts)} L ${pts[N - 1].x} ${padT + plotH} L ${pts[0].x} ${padT + plotH} Z" fill="url(#resGradDelivery)" stroke="none"/>`;
+      h += `<path d="${smooth(pts)}" fill="none" stroke="var(--purple)" stroke-width="3" stroke-linecap="round"/>`;
+      pts.forEach((p, i) => {
+        h += `<circle cx="${p.x}" cy="${p.y}" r="4.5" fill="var(--card)" stroke="var(--purple)" stroke-width="2.5"><title>${MESES[i]} · ${ENTREGA[i]} min</title></circle>`;
+        h += `<text x="${p.x}" y="${p.y - 11}" text-anchor="middle" class="bp-axis-label" style="font-weight:700; fill:var(--ink);">${ENTREGA[i]}</text>`;
+        h += `<text x="${p.x}" y="${H - 14}" text-anchor="middle" class="bp-axis-label">${MESES[i]}</text>`;
+      });
+      $('resDelivery').innerHTML = h;
+    })();
+
+    // ---- Regiões da Grande São Paulo atendidas ----
+    (() => {
+      const R = {leste: ['Zona Leste', 24], sul: ['Zona Sul', 21], abc: ['ABC Paulista', 18], centro: ['Centro', 14], oeste: ['Zona Oeste', 13], norte: ['Zona Norte', 10]};
+      const tile = (k) => {
+        const [nome, s] = R[k];
+        const a = 0.14 + s / 24 * 0.62;
+        const dark = a > 0.58;
+        return `<div class="region-tile" style="background:rgba(99,72,229,${a.toFixed(2)}); color:${dark ? '#fff' : 'var(--ink)'};"><b>${nome}</b><span>${Rm(totalReal * s / 100)} · ${s}%</span></div>`;
+      };
+      const vazio = '<div class="region-tile empty"></div>';
+      const off = '<div class="region-tile off"><b>Demais cidades do GSP</b><span>backlog · 2ª fase</span></div>';
+      $('resRegions').innerHTML = [vazio, tile('norte'), vazio, vazio, tile('oeste'), tile('centro'), tile('leste'), off, vazio, tile('sul'), tile('abc'), vazio].join('');
+    })();
+
+    // ---- Mini P&L ----
+    (() => {
+      const row = (label, p, r, d, hl) => `<tr${hl ? ' class="pl-highlight"' : ''}><td>${label}</td><td>${p}</td><td>${r}</td><td>${d || '—'}</td></tr>`;
+      const dPct = (a, b) => pct1((b / a - 1) * 100);
+      $('resPL').innerHTML = `<table class="pl-table"><thead><tr><th></th><th>Projetado</th><th>Real</th><th>Δ</th></tr></thead><tbody>`
+        + row('GMV do mês 6', R0(plP.gmv), R0(plR.gmv), dPct(plP.gmv, plR.gmv))
+        + row('Unidades (botijões)', num(plP.un), num(plR.un), dPct(plP.un, plR.un))
+        + row(`Margem base (${formatBR(m.margemBasePct)}%)`, '+' + R0(plP.mb), '+' + R0(plR.mb))
+        + row(`Back office (−${formatBR(m.backofficePct)}%)`, '-' + R0(plP.bo), '-' + R0(plR.bo))
+        + row(`Royalty (+${formatBR(m.royaltyPct)}%)`, '+' + R0(plP.ro), '+' + R0(plR.ro))
+        + row(`Marketing (−${formatBR(m.mktPct)}%)`, '-' + R0(plP.mk), '-' + R0(plR.mk))
+        + row('Licenciamento (fixo)', '-' + R0(plP.lic), '-' + R0(plR.lic))
+        + row('EBITDA do mês', R0(plP.ebitda), R0(plR.ebitda), dR(plR.ebitda - plP.ebitda), true)
+        + row('EBITDA (R$/Ton)', R0(plP.perTon), R0(plR.perTon), dR(plR.perTon - plP.perTon), true)
+        + `</tbody></table>`;
+    })();
+  };
+
   // ===== Simulador de volume — canibalização + captura de concorrentes =====
   (function(){
     const fmtR = (v) => 'R$' + v.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
@@ -1821,6 +2143,7 @@ body{
     // "Contexto de mercado" acima). Offline UG e TAM c/ concorrentes são
     // OUTPUTS derivados dessa base + os shares já informados (7% e 24%),
     // não premissas próprias — por isso não são mais campos editáveis aqui.
+    let lastModel = null; // premissas atuais do P&L (alimenta o mini P&L da aba Resultados)
     const BASE_ONLINE_GSP = 9000000;
     const MARGEM_BASE_PCT = 12; // margem que a Ultragaz já ganha vendendo pra revenda — não se altera
     const SHARE_ON_OFF_PCT = 7;      // online representa 7% do offline UG
@@ -1923,6 +2246,7 @@ body{
       }
 
       document.getElementById('proj_target_margin_label').textContent = formatBR(targetMarginPct);
+      lastModel = {margemBasePct, backofficePct, royaltyPct, mktPct, licenciamento};
       renderProjChart(total, breakevenGMV);
     }
 
@@ -1986,7 +2310,7 @@ body{
         html += `<text x="${W-padR+10}" y="${gy+4}" text-anchor="start" class="bp-axis-label" style="fill:var(--purple-deep);">${v===0?'0':botijoes(v).toLocaleString('pt-BR')}</text>`;
       }
       html += `<text x="${padL-10}" y="${padT-8}" text-anchor="end" class="bp-axis-label">R$/mês</text>`;
-      html += `<text x="${W-padR+10}" y="${padT-8}" text-anchor="start" class="bp-axis-label" style="fill:var(--purple-deep);">botijões/mês</text>`;
+      html += `<text x="${W-padR+10}" y="${padT-8}" text-anchor="start" class="bp-axis-label" style="fill:var(--purple-deep);">botijões</text>`;
       for(let i=0;i<MESES;i++){
         html += `<text x="${x(i)}" y="${H-12}" text-anchor="middle" class="bp-axis-label">M${i+1}</text>`;
       }
@@ -2006,6 +2330,11 @@ body{
         html += `<circle cx="${p.x}" cy="${p.y}" r="${big?6:4}" fill="var(--card)" stroke="var(--purple)" stroke-width="2.5"><title>M${i+1} · ${fmtR(gmv[i])}/mês · ${fmtBot(gmv[i])}/mês</title></circle>`;
       });
       svg.innerHTML = html;
+
+      // mockup da aba Resultados reaproveita a mesma curva projetada
+      try{
+        if(window.renderResultadosMock) window.renderResultadosMock(gmv, breakevenMonth, lastModel);
+      }catch(err){ console.error('Resultados (mockup):', err); }
     }
 
     function smoothPathProj(pts){
