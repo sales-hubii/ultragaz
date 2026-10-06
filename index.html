@@ -412,6 +412,9 @@ body{
 .praca-info{ flex:1; }
 .praca-city{ font-weight:700; font-size:15px; }
 .praca-partner{ font-family:'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink-soft); }
+.contact-line{ display:flex; flex-wrap:wrap; gap:4px 16px; margin-top:7px; font-size:12px; }
+.contact-line a{ color: var(--purple-deep); text-decoration:none; border-bottom:1px dotted var(--purple-glow); }
+.contact-line a:hover{ color: var(--purple); border-bottom-color: var(--purple); }
 .praca-tag{
   font-family:'IBM Plex Mono', monospace;
   font-size: 10px;
@@ -917,7 +920,6 @@ body{
   <div class="tab-panel active" id="panel-escopo">
     <div class="panel" style="margin-bottom:20px;">
       <p style="font-size:14px; color:var(--ink); line-height:1.6; margin:0;">Piloto de venda digital de botijão <b>P13</b> através de marketplaces (<b>iFood</b>, <b>99</b> e <b>Magalu + Aiqfome/Raiz</b>), com foco inicial no Mercado GSP (Grande São Paulo). Cada pedido é repassado a um revendedor da rede Ultragaz, que recebe o valor líquido após as comissões de canal, Hubii e Ultragaz.</p>
-      <div class="channel-chip negotiating" style="margin-top:14px; display:inline-block;">Responsável / prazo do piloto — a confirmar</div>
     </div>
 
     <div class="grid">
@@ -927,15 +929,7 @@ body{
           <div class="praca-foco">
             <div class="praca-dot"></div>
             <div class="praca-info">
-              <div class="praca-city">São Paulo (capital)</div>
-              <div class="praca-partner">Piloto — fase 1</div>
-            </div>
-            <div class="praca-tag">Confirmado</div>
-          </div>
-          <div class="praca-foco">
-            <div class="praca-dot"></div>
-            <div class="praca-info">
-              <div class="praca-city">ABC Paulista</div>
+              <div class="praca-city">São Paulo (capital) + ABC Paulista</div>
               <div class="praca-partner">Piloto — fase 1</div>
             </div>
             <div class="praca-tag">Confirmado</div>
@@ -950,15 +944,44 @@ body{
           </div>
         </div>
 
-        <div class="section-label">Responsável pelo projeto</div>
+        <div class="section-label">Time do projeto — Ultragaz</div>
         <div class="panel">
           <div class="praca-foco">
             <div class="praca-dot"></div>
             <div class="praca-info">
-              <div class="praca-city">Mateus</div>
-              <div class="praca-partner">Lidera o projeto pela Hubii</div>
+              <div class="praca-city">Mateus Brino</div>
+              <div class="praca-partner">Ultragaz · lidera o projeto</div>
+              <div class="contact-line">
+                <a href="tel:+5511991230067">+55 11 991-230-067</a>
+                <a href="mailto:mateus.brino@ultragaz.com.br">mateus.brino@ultragaz.com.br</a>
+                <a href="https://www.linkedin.com/in/mateus-cano/" target="_blank" rel="noopener">LinkedIn ↗</a>
+              </div>
             </div>
             <div class="praca-tag">Líder</div>
+          </div>
+          <div class="praca-foco">
+            <div class="praca-dot"></div>
+            <div class="praca-info">
+              <div class="praca-city">Patricia Correa</div>
+              <div class="praca-partner">Ultragaz</div>
+              <div class="contact-line">
+                <a href="tel:+5511991736010">+55 11 991-736-010</a>
+                <a href="mailto:patricia.correa@ultragaz.com.br">patricia.correa@ultragaz.com.br</a>
+                <a href="https://www.linkedin.com/in/patricia-martins-marketing/" target="_blank" rel="noopener">LinkedIn ↗</a>
+              </div>
+            </div>
+          </div>
+          <div class="praca-foco">
+            <div class="praca-dot"></div>
+            <div class="praca-info">
+              <div class="praca-city">Gustavo Silva</div>
+              <div class="praca-partner">Ultragaz</div>
+              <div class="contact-line">
+                <a href="tel:+5511991380172">+55 11 991-380-172</a>
+                <a href="mailto:gustavo.silva@ultragaz.com.br">gustavo.silva@ultragaz.com.br</a>
+                <a href="https://www.linkedin.com/in/gustavo-luiz-teixeira-da-silva/" target="_blank" rel="noopener">LinkedIn ↗</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1088,7 +1111,7 @@ body{
     <div class="section-label">Estratégia — Ultragaz</div>
     <div class="panel strategy-panel">
       <div class="strategy-list">
-        <div class="strategy-item"><b>Liderança</b> Mateus lidera o projeto pela Hubii</div>
+        <div class="strategy-item"><b>Liderança</b> Mateus Brino (Ultragaz) lidera o projeto</div>
         <div class="strategy-item"><b>Mercado</b> GSP — Grande São Paulo (SP capital + ABC Paulista)</div>
         <div class="strategy-item"><b>Canais</b> iFood, 99 e Magalu + Aiqfome (Raiz)</div>
         <div class="strategy-item"><b>Modelo</b> repasse ao revendedor + take rate incremental Ultragaz (2%) + fee Hubii (2%)</div>
@@ -1154,7 +1177,7 @@ body{
     <div class="panel" style="text-align:center; padding:48px 24px;">
       <div style="font-size:32px; margin-bottom:12px;">◷</div>
       <div style="font-weight:700; font-size:16px; color:var(--ink); margin-bottom:8px;">Piloto ainda não iniciado</div>
-      <p style="font-size:13.5px; color:var(--ink-soft); max-width:480px; margin:0 auto; line-height:1.6;">O responsável e o prazo de início do piloto ainda estão em definição (ver aba Escopo). Os resultados reais — GMV realizado vs. projetado, pedidos, volume e EBITDA por mês — passam a ser exibidos aqui assim que o piloto for lançado.</p>
+      <p style="font-size:13.5px; color:var(--ink-soft); max-width:480px; margin:0 auto; line-height:1.6;">Os resultados reais — GMV realizado vs. projetado, pedidos, volume e EBITDA por mês — passam a ser exibidos aqui assim que o piloto for lançado.</p>
     </div>
     <div class="section-label">O que será acompanhado aqui</div>
     <div class="opp-grid">
