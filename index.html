@@ -585,6 +585,12 @@ body{
 .ov-col > .panel{ flex:1; }
 .ov-note{ margin-top: 4px; padding-top: 14px; border-top: 1px solid var(--line); }
 @media (max-width: 980px){ .ov-band{ grid-template-columns: 1fr; } }
+.ov-subgrid{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 28px 40px; }
+.panel .ov-subgrid .info-block{ margin:0; padding:0; border:none; }
+.ov-subgrid .praca-foco:last-child{ margin-bottom:0; }
+.people-grid{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+.people-grid .praca-foco{ margin-bottom:0; }
+@media (max-width: 980px){ .ov-subgrid, .people-grid{ grid-template-columns: 1fr; } }
 @media (max-width: 1100px){ .opp-grid.three{ grid-template-columns: 1fr; } }
 
 .opp-card{
@@ -926,7 +932,6 @@ body{
   <div class="tabs">
     <button class="tab-btn active" data-tab="escopo">Overview</button>
     <button class="tab-btn" data-tab="resultados">Resultados</button>
-    <button class="tab-btn" data-tab="revendas">Revendas</button>
     <button class="tab-btn" data-tab="bp">Business Plan</button>
     <button class="tab-btn" data-tab="tarefas">Tarefas <span class="tab-count" id="tabCount">0/5</span></button>
   </div>
@@ -1091,53 +1096,16 @@ body{
       </div>
     </div>
 
-    <div class="ov-band" style="margin-bottom:0;">
-      <div class="ov-col">
-        <div class="section-label">Time do projeto — Ultragaz</div>
-        <div class="panel">
-          <div class="praca-foco">
-            <div class="praca-dot"></div>
-            <div class="praca-info">
-              <div class="praca-city">Mateus Brino</div>
-              <div class="praca-partner">Ultragaz · lidera o projeto</div>
-              <div class="contact-line">
-                <a href="tel:+5511991230067">+55 11 991-230-067</a>
-                <a href="mailto:mateus.brino@ultragaz.com.br">mateus.brino@ultragaz.com.br</a>
-                <a href="https://www.linkedin.com/in/mateus-cano/" target="_blank" rel="noopener">LinkedIn ↗</a>
-              </div>
-            </div>
-            <div class="praca-tag">Líder</div>
-          </div>
-          <div class="praca-foco">
-            <div class="praca-dot"></div>
-            <div class="praca-info">
-              <div class="praca-city">Patricia Correa</div>
-              <div class="praca-partner">Ultragaz</div>
-              <div class="contact-line">
-                <a href="tel:+5511991736010">+55 11 991-736-010</a>
-                <a href="mailto:patricia.correa@ultragaz.com.br">patricia.correa@ultragaz.com.br</a>
-                <a href="https://www.linkedin.com/in/patricia-martins-marketing/" target="_blank" rel="noopener">LinkedIn ↗</a>
-              </div>
-            </div>
-          </div>
-          <div class="praca-foco">
-            <div class="praca-dot"></div>
-            <div class="praca-info">
-              <div class="praca-city">Gustavo Silva</div>
-              <div class="praca-partner">Ultragaz</div>
-              <div class="contact-line">
-                <a href="tel:+5511991380172">+55 11 991-380-172</a>
-                <a href="mailto:gustavo.silva@ultragaz.com.br">gustavo.silva@ultragaz.com.br</a>
-                <a href="https://www.linkedin.com/in/gustavo-luiz-teixeira-da-silva/" target="_blank" rel="noopener">LinkedIn ↗</a>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="ov-block">
+      <div class="section-label">App Ultragaz e revendedores</div>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-num">6.000</div><div class="stat-lbl">Revendas exclusivas Ultragaz (foco do piloto)</div></div>
+        <div class="stat"><div class="stat-num">2.000</div><div class="stat-lbl">Participam do app hoje</div></div>
+        <div class="stat"><div class="stat-num">3.400</div><div class="stat-lbl">Municípios — potencial de expansão</div></div>
+        <div class="stat"><div class="stat-num">5–6mil</div><div class="stat-lbl">Revendas Ultragaz no Brasil (total)</div></div>
       </div>
-
-      <div class="ov-col">
-        <div class="section-label">App Ultragaz e revendedores — contexto</div>
-        <div class="panel">
+      <div class="panel" style="margin-top:16px;">
+        <div class="ov-subgrid">
           <div class="info-block">
             <div class="info-head">
               <div class="info-icon">▣</div>
@@ -1152,19 +1120,107 @@ body{
               <li>Necessária avaliação de <b>Segurança da Informação</b> e <b>Compatibilidade Comercial</b></li>
             </ul>
           </div>
+
           <div class="info-block">
             <div class="info-head">
               <div class="info-icon">◎</div>
               <div>
-                <div class="info-name">Revendedores</div>
-                <div class="info-sub">Base atual</div>
+                <div class="info-name">Rede de revendas</div>
+                <div class="info-sub">Escopo no piloto</div>
               </div>
             </div>
             <ul class="info-list">
-              <li><b>6 mil revendedores</b> no total, dos quais <b>2 mil participam do app</b></li>
+              <li>Foco exclusivo nas <b>6.000 revendas exclusivas Ultragaz</b> — bandeiras brancas que vendem outros produtos além do gás ficam de fora do piloto</li>
               <li>Ultragaz possui perfis de revendedores mapeados, mas poucos dados do consumidor final</li>
             </ul>
           </div>
+
+          <div class="info-block">
+            <div class="info-head">
+              <div class="info-icon">✓</div>
+              <div>
+                <div class="info-name">Onboarding das revendas</div>
+                <div class="info-sub">Modelo em avaliação</div>
+              </div>
+            </div>
+            <div class="praca-foco">
+              <div class="praca-dot pending"></div>
+              <div class="praca-info">
+                <div class="praca-city">Adesão automática</div>
+                <div class="praca-partner">Todas as revendas elegíveis entram de uma vez</div>
+              </div>
+              <div class="praca-tag pending">Em avaliação</div>
+            </div>
+            <div class="praca-foco">
+              <div class="praca-dot pending"></div>
+              <div class="praca-info">
+                <div class="praca-city">Aceite individual — painel Rubi</div>
+                <div class="praca-partner">Revenda opta por participar, uma a uma</div>
+              </div>
+              <div class="praca-tag pending">Em avaliação</div>
+            </div>
+          </div>
+
+          <div class="info-block">
+            <div class="info-head">
+              <div class="info-icon">→</div>
+              <div>
+                <div class="info-name">Logística e entrega</div>
+                <div class="info-sub">Primeiro momento</div>
+              </div>
+            </div>
+            <ul class="info-list">
+              <li>Entrega feita pelas <b>próprias revendas</b> (não por motoboy do canal)</li>
+              <li>Tempo médio atual de entrega via app/Televendas/WhatsApp: <b>17 minutos</b></li>
+              <li>Lead time sugerido para exibir no app: <b>20–25 minutos</b></li>
+              <li>Uso do LAS (last mile do iFood) é uma possibilidade futura, não prevista para a fase inicial</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ov-block" style="margin-bottom:0;">
+      <div class="section-label">Time do projeto — Ultragaz</div>
+      <div class="panel">
+        <div class="people-grid">
+        <div class="praca-foco">
+          <div class="praca-dot"></div>
+          <div class="praca-info">
+            <div class="praca-city">Mateus Brino</div>
+            <div class="praca-partner">Ultragaz · lidera o projeto</div>
+            <div class="contact-line">
+              <a href="tel:+5511991230067">+55 11 991-230-067</a>
+              <a href="mailto:mateus.brino@ultragaz.com.br">mateus.brino@ultragaz.com.br</a>
+              <a href="https://www.linkedin.com/in/mateus-cano/" target="_blank" rel="noopener">LinkedIn ↗</a>
+            </div>
+          </div>
+          <div class="praca-tag">Líder</div>
+        </div>
+        <div class="praca-foco">
+          <div class="praca-dot"></div>
+          <div class="praca-info">
+            <div class="praca-city">Patricia Correa</div>
+            <div class="praca-partner">Ultragaz</div>
+            <div class="contact-line">
+              <a href="tel:+5511991736010">+55 11 991-736-010</a>
+              <a href="mailto:patricia.correa@ultragaz.com.br">patricia.correa@ultragaz.com.br</a>
+              <a href="https://www.linkedin.com/in/patricia-martins-marketing/" target="_blank" rel="noopener">LinkedIn ↗</a>
+            </div>
+          </div>
+        </div>
+        <div class="praca-foco">
+          <div class="praca-dot"></div>
+          <div class="praca-info">
+            <div class="praca-city">Gustavo Silva</div>
+            <div class="praca-partner">Ultragaz</div>
+            <div class="contact-line">
+              <a href="tel:+5511991380172">+55 11 991-380-172</a>
+              <a href="mailto:gustavo.silva@ultragaz.com.br">gustavo.silva@ultragaz.com.br</a>
+              <a href="https://www.linkedin.com/in/gustavo-luiz-teixeira-da-silva/" target="_blank" rel="noopener">LinkedIn ↗</a>
+            </div>
+          </div>
+        </div>
         </div>
       </div>
     </div>
@@ -1190,59 +1246,6 @@ body{
       <div class="opp-card">
         <div class="opp-head"><div class="opp-icon">◎</div><div class="opp-title">EBITDA realizado</div></div>
         <ul><li>EBITDA do mês e acumulado (R$/Ton), comparado à meta do P&amp;L</li></ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- REDE DE REVENDAS -->
-  <div class="tab-panel" id="panel-revendas">
-    <div class="stat-row">
-      <div class="stat"><div class="stat-num">6.000</div><div class="stat-lbl">Revendas exclusivas Ultragaz (foco do piloto)</div></div>
-      <div class="stat"><div class="stat-num">2.000</div><div class="stat-lbl">Participam do app hoje</div></div>
-      <div class="stat"><div class="stat-num">3.400</div><div class="stat-lbl">Municípios — potencial de expansão</div></div>
-      <div class="stat"><div class="stat-num">5–6mil</div><div class="stat-lbl">Revendas Ultragaz no Brasil (total)</div></div>
-    </div>
-
-    <div class="section-label first">Escopo da rede no piloto</div>
-    <div class="panel">
-      <div class="info-block">
-        <ul class="info-list">
-          <li>Foco exclusivo nas <b>6.000 revendas exclusivas Ultragaz</b> — bandeiras brancas que vendem outros produtos além do gás ficam de fora do piloto</li>
-          <li>Das revendas totais, <b>2.000 já participam do App Ultragaz</b> (powered by VTEX)</li>
-          <li>Potencial de expansão de longo prazo: rede presente em mais de <b>3.400 municípios</b>, com 5.000 a 6.000 revendas no Brasil</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="section-label">Onboarding das revendas</div>
-    <div class="panel">
-      <div class="praca-foco">
-        <div class="praca-dot pending"></div>
-        <div class="praca-info">
-          <div class="praca-city">Adesão automática</div>
-          <div class="praca-partner">Todas as revendas elegíveis entram de uma vez</div>
-        </div>
-        <div class="praca-tag pending">Em avaliação</div>
-      </div>
-      <div class="praca-foco">
-        <div class="praca-dot pending"></div>
-        <div class="praca-info">
-          <div class="praca-city">Aceite individual — painel Rubi</div>
-          <div class="praca-partner">Revenda opta por participar, uma a uma</div>
-        </div>
-        <div class="praca-tag pending">Em avaliação</div>
-      </div>
-    </div>
-
-    <div class="section-label">Logística e entrega</div>
-    <div class="panel">
-      <div class="info-block">
-        <ul class="info-list">
-          <li>Entrega feita pelas <b>próprias revendas</b> no primeiro momento (não por motoboy do canal)</li>
-          <li>Tempo médio atual de entrega via app/Televendas/WhatsApp: <b>17 minutos</b></li>
-          <li>Lead time sugerido para exibir no app: <b>20–25 minutos</b></li>
-          <li>Uso do LAS (last mile do iFood) é uma possibilidade futura, não prevista para a fase inicial</li>
-        </ul>
       </div>
     </div>
   </div>
