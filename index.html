@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Ultragaz — Escopo, Oportunidades & Tarefas</title>
+<title>Ultragaz — Overview, Business Plan & Tarefas</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
@@ -569,6 +569,8 @@ body{
   gap: 16px;
 }
 @media (max-width: 820px){ .opp-grid{ grid-template-columns: 1fr; } }
+.opp-grid.three{ grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 1100px){ .opp-grid.three{ grid-template-columns: 1fr; } }
 
 .opp-card{
   background: var(--card);
@@ -908,7 +910,6 @@ body{
 
   <div class="tabs">
     <button class="tab-btn active" data-tab="escopo">Overview</button>
-    <button class="tab-btn" data-tab="oportunidades">Oportunidades</button>
     <button class="tab-btn" data-tab="portfolio">Portfólio</button>
     <button class="tab-btn" data-tab="resultados">Resultados</button>
     <button class="tab-btn" data-tab="revendas">Revendas</button>
@@ -920,6 +921,14 @@ body{
   <div class="tab-panel active" id="panel-escopo">
     <div class="panel" style="margin-bottom:20px;">
       <p style="font-size:14px; color:var(--ink); line-height:1.6; margin:0;">Piloto de venda digital de botijão <b>P13</b> através de marketplaces (<b>iFood</b>, <b>99</b> e <b>Magalu + Aiqfome/Raiz</b>), com foco inicial no Mercado GSP (Grande São Paulo). Cada pedido é repassado a um revendedor da rede Ultragaz, que recebe o valor líquido após as comissões de canal, Hubii e Ultragaz.</p>
+    </div>
+
+    <div class="section-label first">Números-chave do piloto</div>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-num">R$9mi</div><div class="stat-lbl">Potencial digital/mês · Mercado GSP · ~70,9 mil botijões</div></div>
+      <div class="stat"><div class="stat-num">~1%</div><div class="stat-lbl">Captura inicial da demanda (mês 1)</div></div>
+      <div class="stat"><div class="stat-num">R$85mil</div><div class="stat-lbl">GMV mês 1 (≈1% de R$9mi) · ~669 botijões</div></div>
+      <div class="stat"><div class="stat-num">R$117</div><div class="stat-lbl">Ticket médio (P13)</div></div>
     </div>
 
     <div class="grid">
@@ -1047,28 +1056,9 @@ body{
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- OPORTUNIDADES -->
-  <div class="tab-panel" id="panel-oportunidades">
-
-    <div class="stat-row">
-      <div class="stat"><div class="stat-num">R$9mi</div><div class="stat-lbl">Potencial digital/mês · Mercado GSP · ~70,9 mil botijões</div></div>
-      <div class="stat"><div class="stat-num">~1%</div><div class="stat-lbl">Captura inicial da demanda (mês 1)</div></div>
-      <div class="stat"><div class="stat-num">R$85mil</div><div class="stat-lbl">GMV mês 1 (≈1% de R$9mi) · ~669 botijões</div></div>
-      <div class="stat"><div class="stat-num">R$117</div><div class="stat-lbl">Ticket médio (P13)</div></div>
-      <div class="stat"><div class="stat-num">R$150mil</div><div class="stat-lbl">Investimento total · 12 meses</div></div>
-    </div>
-
-    <div class="opp-grid">
-      <div class="opp-card">
-        <div class="opp-head"><div class="opp-icon">▣</div><div class="opp-title">App Ultragaz</div></div>
-        <ul>
-          <li>Powered by <b>VTEX</b>; melhor NPS do Grupo Ultra</li>
-          <li>Base fiel, acostumada a entrega pontual/programada</li>
-        </ul>
-      </div>
-
+    <div class="section-label">Economia do piloto</div>
+    <div class="opp-grid three">
       <div class="opp-card">
         <div class="opp-head"><div class="opp-icon">$</div><div class="opp-title">EBITDA positivo desde o mês 1</div></div>
         <ul>
@@ -1076,46 +1066,19 @@ body{
           <li>Cresce de forma consistente até <b>R$2.784/Ton</b> no mês 12, sem recuos</li>
         </ul>
       </div>
-
       <div class="opp-card">
         <div class="opp-head"><div class="opp-icon">⚙</div><div class="opp-title">Licenciamento em rampa</div></div>
         <ul>
-          <li><b>R$10.000/mês</b> nos meses 1–6, subindo para <b>R$15.000/mês</b> a partir do mês 7</li>
+          <li><b>R$10.000/mês</b> nos meses 1–6, subindo para <b>R$15.000/mês</b> a partir do mês 7 — total de <b>R$150mil</b> em 12 meses</li>
           <li>Estrutura desenhada para proteger o Grupo Ultra durante a fase de validação</li>
         </ul>
       </div>
-
       <div class="opp-card">
         <div class="opp-head"><div class="opp-icon">⇄</div><div class="opp-title">Modelo preserva o revendedor</div></div>
         <ul>
           <li><b>90% do ticket</b> (R$105,30/pedido) continua indo para o revendedor</li>
-          <li>Ultragaz ganha <b>+2% incremental</b> (R$180/Ton) sobre a margem que já existe hoje</li>
+          <li>Ultragaz ganha <b>+2% incremental</b> (R$180/Ton) sobre a margem que já existe hoje; a Hubii cobra <b>fee de 2%</b></li>
         </ul>
-      </div>
-
-      <div class="opp-card flag">
-        <div class="opp-head"><div class="opp-icon">⚑</div><div class="opp-title">99 — estratégia em negociação</div></div>
-        <ul>
-          <li>Taxa de <b>6%</b> já está OK, mas a estratégia comercial do canal ainda está em negociação</li>
-        </ul>
-      </div>
-
-      <div class="opp-card flag">
-        <div class="opp-head"><div class="opp-icon">⚑</div><div class="opp-title">Magalu + Aiqfome — em integração</div></div>
-        <ul>
-          <li>Taxa (6%) e estratégia ainda em negociação; integração técnica (Raiz) em andamento</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="section-label">Estratégia — Ultragaz</div>
-    <div class="panel strategy-panel">
-      <div class="strategy-list">
-        <div class="strategy-item"><b>Liderança</b> Mateus Brino (Ultragaz) lidera o projeto</div>
-        <div class="strategy-item"><b>Mercado</b> GSP — Grande São Paulo (SP capital + ABC Paulista)</div>
-        <div class="strategy-item"><b>Canais</b> iFood, 99 e Magalu + Aiqfome (Raiz)</div>
-        <div class="strategy-item"><b>Modelo</b> repasse ao revendedor + take rate incremental Ultragaz (2%) + fee Hubii (2%)</div>
-        <div class="strategy-item"><b>Licenciamento</b> R$10mil/mês (m1–6) → R$15mil/mês (m7+)</div>
       </div>
     </div>
   </div>
