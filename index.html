@@ -583,6 +583,7 @@ body{
 .ov-col{ display:flex; flex-direction:column; min-width:0; }
 .ov-col > .section-label{ margin: 0 0 12px; }
 .ov-col > .panel{ flex:1; }
+.ov-stack{ flex:1; display:flex; flex-direction:column; justify-content:space-between; gap:20px; }
 .ov-note{ margin-top: 4px; padding-top: 14px; border-top: 1px solid var(--line); }
 @media (max-width: 980px){ .ov-band{ grid-template-columns: 1fr; } }
 /* RESULTADOS — mockup */
@@ -1151,7 +1152,8 @@ body{
     <div class="ov-band">
       <div class="ov-col">
         <div class="section-label">Price zones</div>
-        <div class="panel" style="display:flex; flex-direction:column; justify-content:center;">
+        <div class="ov-stack">
+        <div class="panel" style="flex:none;">
           <div class="praca-foco">
             <div class="praca-dot"></div>
             <div class="praca-info">
@@ -1174,6 +1176,22 @@ body{
               <li>Vamos <b>agrupar as price zones</b> e operar <b>múltiplas lojas</b> no iFood e no 99</li>
             </ul>
           </div>
+        </div>
+
+        <div class="opp-card" style="flex:none;">
+          <div class="opp-head"><div class="opp-icon">⇄</div><div class="opp-title">Modelo preserva o revendedor</div></div>
+          <ul>
+            <li><b>90% do ticket</b> (R$105,30/pedido) continua indo para o revendedor</li>
+            <li>Ultragaz ganha <b>+2% incremental</b> (R$180/Ton) sobre a margem que já existe hoje; a Hubii cobra <b>fee de 2%</b></li>
+          </ul>
+        </div>
+
+        <div class="stat-row" style="margin-bottom:0;">
+          <div class="stat"><div class="stat-num">6.000</div><div class="stat-lbl">Revendas exclusivas Ultragaz (foco do piloto)</div></div>
+          <div class="stat"><div class="stat-num">2.000</div><div class="stat-lbl">Participam do app hoje</div></div>
+          <div class="stat"><div class="stat-num">3.400</div><div class="stat-lbl">Municípios — potencial de expansão</div></div>
+          <div class="stat"><div class="stat-num">5–6mil</div><div class="stat-lbl">Revendas Ultragaz no Brasil (total)</div></div>
+        </div>
         </div>
       </div>
 
@@ -1247,7 +1265,7 @@ body{
 
     <div class="ov-block">
       <div class="section-label">Economia do piloto</div>
-      <div class="opp-grid three">
+      <div class="opp-grid">
         <div class="opp-card">
           <div class="opp-head"><div class="opp-icon">$</div><div class="opp-title">EBITDA positivo desde o mês 1</div></div>
           <ul>
@@ -1262,25 +1280,12 @@ body{
             <li>Estrutura desenhada para proteger o Grupo Ultra durante a fase de validação</li>
           </ul>
         </div>
-        <div class="opp-card">
-          <div class="opp-head"><div class="opp-icon">⇄</div><div class="opp-title">Modelo preserva o revendedor</div></div>
-          <ul>
-            <li><b>90% do ticket</b> (R$105,30/pedido) continua indo para o revendedor</li>
-            <li>Ultragaz ganha <b>+2% incremental</b> (R$180/Ton) sobre a margem que já existe hoje; a Hubii cobra <b>fee de 2%</b></li>
-          </ul>
-        </div>
       </div>
     </div>
 
     <div class="ov-block">
       <div class="section-label">App Ultragaz e revendedores</div>
-      <div class="stat-row">
-        <div class="stat"><div class="stat-num">6.000</div><div class="stat-lbl">Revendas exclusivas Ultragaz (foco do piloto)</div></div>
-        <div class="stat"><div class="stat-num">2.000</div><div class="stat-lbl">Participam do app hoje</div></div>
-        <div class="stat"><div class="stat-num">3.400</div><div class="stat-lbl">Municípios — potencial de expansão</div></div>
-        <div class="stat"><div class="stat-num">5–6mil</div><div class="stat-lbl">Revendas Ultragaz no Brasil (total)</div></div>
-      </div>
-      <div class="panel" style="margin-top:16px;">
+      <div class="panel">
         <div class="ov-subgrid">
           <div class="info-block">
             <div class="info-head">
@@ -1306,7 +1311,7 @@ body{
               </div>
             </div>
             <ul class="info-list">
-              <li>Foco exclusivo nas <b>6.000 revendas exclusivas Ultragaz</b> — bandeiras brancas que vendem outros produtos além do gás ficam de fora do piloto</li>
+              <li>Bandeiras brancas, que vendem outros produtos além do gás, ficam de fora do piloto</li>
               <li>Ultragaz possui perfis de revendedores mapeados, mas poucos dados do consumidor final</li>
             </ul>
           </div>
