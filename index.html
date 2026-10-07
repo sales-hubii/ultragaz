@@ -950,6 +950,7 @@ body{
 #panel-bp .bpx-lead{ font-size:16px; line-height:1.65; font-weight:400; color: var(--ink-soft); max-width:720px; margin:0 0 24px; }
 #panel-bp .bpx-lead b{ font-weight:600; color: var(--ink); }
 #panel-bp .bpx-section{ margin-top:64px; }
+#panel-bp .bpx-section:first-child{ margin-top:0; }
 #panel-bp .bpx-hero{ background: var(--card); border:1px solid var(--line); border-radius:20px; padding:40px 44px 36px; }
 #panel-bp .bpx-hero .bpx-lead{ margin-bottom:0; margin-top:14px; }
 #panel-bp .bpx-kpis{ display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); margin-top:32px; border-top:1px solid var(--line); }
@@ -1375,30 +1376,6 @@ body{
 
   <!-- BUSINESS PLAN -->
   <div class="tab-panel" id="panel-bp">
-
-    <section class="bpx-hero">
-      <div class="bpx-eyebrow">Recomendação</div>
-      <h2 class="bpx-h1">Aprovar o piloto digital com a Hubii em Grande São Paulo</h2>
-      <p class="bpx-lead">O mercado é grande e o digital da Ultragaz ainda é pequeno (7% do offline). A margem do piloto já supera a do canal próprio no teto; o que falta validar é volume.</p>
-      <div class="bpx-kpis">
-        <div class="bpx-kpi">
-          <div class="bpx-kpi-num" id="bp_k_tam">—</div>
-          <div class="bpx-kpi-lbl" id="bp_k_tam_lbl">mercado GSP por mês</div>
-        </div>
-        <div class="bpx-kpi">
-          <div class="bpx-kpi-num" id="bp_k_margem">—</div>
-          <div class="bpx-kpi-lbl" id="bp_k_margem_lbl">margem do piloto no teto</div>
-        </div>
-        <div class="bpx-kpi">
-          <div class="bpx-kpi-num" id="bp_k_breakeven">—</div>
-          <div class="bpx-kpi-lbl" id="bp_k_breakeven_lbl">GMV/mês para superar o canal próprio</div>
-        </div>
-        <div class="bpx-kpi">
-          <div class="bpx-kpi-num" id="bp_k_total">—</div>
-          <div class="bpx-kpi-lbl" id="bp_k_total_lbl">GMV/mês esperado no mês 6</div>
-        </div>
-      </div>
-    </section>
 
     <section class="bpx-section">
       <div class="bpx-eyebrow">Mercado</div>
@@ -2239,14 +2216,9 @@ body{
     // OUTPUTS derivados dessa base + os shares já informados (7% e 24%),
     // não premissas próprias — por isso não são mais campos editáveis aqui.
     let lastModel = null; // premissas atuais do P&L (alimenta o mini P&L da aba Resultados)
-    const setTxt = (id, t) => { const el = document.getElementById(id); if(el) el.textContent = t; };
     const fmtK = (v) => v >= 100000000 ? 'R$' + Math.round(v/1000000) + 'mi'
                       : v >= 1000000 ? 'R$' + (v/1000000).toFixed(1).replace('.', ',') + 'mi'
                       : 'R$' + Math.round(v/1000).toLocaleString('pt-BR') + 'mil';
-    const fmtBotK = (v) => { const n = v / TICKET_BOTIJAO;
-      return n >= 1000000 ? '~' + (n/1000000).toFixed(1).replace('.', ',') + 'mi botijões'
-           : n >= 10000 ? '~' + (n/1000).toFixed(1).replace('.', ',') + ' mil botijões'
-           : '~' + Math.round(n).toLocaleString('pt-BR') + ' botijões'; };
     const BASE_ONLINE_GSP = 9000000;
     const MARGEM_BASE_PCT = 12; // margem que a Ultragaz já ganha vendendo pra revenda — não se altera
     const SHARE_ON_OFF_PCT = 7;      // online representa 7% do offline UG
@@ -2350,18 +2322,6 @@ body{
 
       document.getElementById('proj_target_margin_label').textContent = formatBR(targetMarginPct);
 
-      // indicadores de destaque (topo da aba) — sempre acompanham o simulador
-      setTxt('bp_k_tam', fmtK(base2));
-      setTxt('bp_k_tam_lbl', 'mercado GSP por mês · ' + fmtBotK(base2));
-      setTxt('bp_k_total', fmtK(total));
-      setTxt('bp_k_total_lbl', 'GMV/mês esperado no mês 6 · ' + fmtBotK(total));
-      if(breakevenGMV !== null){
-        setTxt('bp_k_breakeven', fmtK(breakevenGMV));
-        setTxt('bp_k_breakeven_lbl', 'GMV/mês para o piloto superar o canal próprio · ' + fmtBotK(breakevenGMV));
-      } else {
-        setTxt('bp_k_breakeven', '—');
-        setTxt('bp_k_breakeven_lbl', 'não atinge o canal próprio com essas premissas');
-      }
       lastModel = {margemBasePct, backofficePct, royaltyPct, mktPct, licenciamento};
       renderProjChart(total, breakevenGMV);
     }
@@ -2490,8 +2450,6 @@ body{
       // Canal Hubii: margem base + royalty(2%) - licenciamento/mkt(6%) - back-office(4%, fixo)
       const lucro = margemBasePct + 2 - 6 - COMPARATIVO_BACKOFFICE_FIXO_PCT;
       cmpLucroEstimado.textContent = (lucro>=0?'~':'-') + formatBR(Math.abs(lucro)) + '%';
-      setTxt('bp_k_margem', formatBR(lucro) + '%');
-      setTxt('bp_k_margem_lbl', 'margem do piloto no teto, vs. ' + formatBR(margemPropria) + '% do canal próprio hoje');
     }
 
     recalcComparativo();
