@@ -1060,6 +1060,13 @@ body{
 .ph-pill{ flex:none; display:flex; align-items:center; gap:5px; border:1px solid #dcd9e8; border-radius:999px; padding:7px 10px; font-size:9px; white-space:nowrap; color:#1b1730; }
 .ph-pill b{ color: var(--purple); font-weight:600; }
 .ph-pill.alt{ background: var(--hubii-bg); border-color: var(--hubii-bg); }
+.hyp-wrap{ margin-top:22px; padding-top:18px; border-top:1px solid var(--line); }
+.hyp-h{ font-size:12px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color: var(--ink-soft); margin-bottom:8px; }
+.hyp{ display:flex; gap:14px; align-items:flex-start; padding:12px 0; }
+.hyp + .hyp{ border-top:1px dashed var(--line); }
+.hyp-n{ flex:none; width:28px; height:28px; border-radius:50%; background: var(--hubii-bg); color: var(--purple-deep); font-size:12px; font-weight:600; display:flex; align-items:center; justify-content:center; }
+.hyp b{ display:block; font-size:14px; font-weight:600; color: var(--ink); }
+.hyp p{ margin:2px 0 0; font-size:13.5px; line-height:1.55; color: var(--ink-soft); }
 .pa-t{ font:600 13px 'Onest', sans-serif; fill: var(--ink); }
 .pa-v{ font:600 20px 'Onest', sans-serif; fill: var(--ink); letter-spacing:-.01em; }
 .pa-s{ font:400 11px 'Onest', sans-serif; fill: var(--ink-soft); }
@@ -1183,7 +1190,7 @@ body{
           <div class="opp-head"><div class="opp-icon">⇄</div><div class="opp-title">Modelo preserva o revendedor</div></div>
           <ul>
             <li><b>90% do ticket</b> (R$105,30/pedido) continua indo para o revendedor</li>
-            <li>Ultragaz ganha <b>+2% incremental</b> (R$180/Ton) sobre a margem que já existe hoje; a Hubii cobra <b>fee de 2%</b></li>
+            <li>Ultragaz ganha <b>+2% incremental</b> (R$180/Ton) sobre a margem que já existe hoje; a Hubii cobra <b>take rate de 2%</b></li>
           </ul>
         </div>
 
@@ -1256,7 +1263,7 @@ body{
             </div>
           </div>
             <div class="ph-flow">
-              <svg viewBox="0 0 560 392" width="100%" style="display:block; width:100%;" role="img" aria-label="Arquitetura de preço: do preço no iFood ao repasse da revenda, fee da Hubii e royalties da Ultragaz">
+              <svg viewBox="0 0 560 392" width="100%" style="display:block; width:100%;" role="img" aria-label="Arquitetura de preço: do preço no iFood ao repasse da revenda, take rate da Hubii e royalties da Ultragaz">
                 <defs>
                   <marker id="pxHead" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 1 L9 5 L0 9 z" fill="var(--potencial)"/></marker>
                   <marker id="pxHeadUg" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 1 L9 5 L0 9 z" fill="var(--ultragaz)"/></marker>
@@ -1283,7 +1290,7 @@ body{
                 <line x1="100" y1="226" x2="100" y2="262" stroke="var(--potencial)" stroke-width="1.8" marker-end="url(#pxHead)"/>
                 <line x1="460" y1="226" x2="460" y2="262" stroke="var(--ultragaz)" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#pxHeadUg)"/>
                 <text x="110" y="248" class="pa-l">repasse</text>
-                <text x="290" y="248" class="pa-l">fee</text>
+                <text x="290" y="248" class="pa-l">take rate</text>
                 <text x="470" y="248" class="pa-l" style="fill:var(--ultragaz); font-weight:600;">royalties</text>
 
   <rect x="16" y="266" width="168" height="112" rx="14" fill="var(--card)" stroke="var(--line)"/>
@@ -1293,7 +1300,7 @@ body{
   <text x="100" y="367" text-anchor="middle" class="pa-s">last mile · 90% do ticket</text>
   <rect x="196" y="266" width="168" height="112" rx="14" fill="var(--hubii-bg)" stroke="var(--purple-glow)"/>
   <circle cx="280" cy="291" r="13" fill="var(--purple)"/><text x="280" y="295" text-anchor="middle" style="font:700 10.5px 'Onest',sans-serif; fill:#fff;">H</text>
-  <text x="280" y="325" text-anchor="middle" class="pa-t">Hubii fica com</text>
+  <text x="280" y="325" text-anchor="middle" class="pa-t">Take Rate Hubii</text>
   <text x="280" y="349" text-anchor="middle" class="pa-v" style="fill:var(--purple-deep);">R$2,58</text>
   <text x="280" y="367" text-anchor="middle" class="pa-s">2% do ticket</text>
   <rect x="376" y="266" width="168" height="112" rx="14" fill="var(--ultragaz-bg)" stroke="var(--ultragaz)" stroke-dasharray="4 3"/>
@@ -1302,6 +1309,17 @@ body{
   <text x="460" y="349" text-anchor="middle" class="pa-v" style="fill:var(--ultragaz);">R$2,58</text>
   <text x="460" y="367" text-anchor="middle" class="pa-s">2% do ticket</text>
               </svg>
+              <div class="hyp-wrap">
+                <div class="hyp-h">Hipóteses a testar</div>
+                <div class="hyp">
+                  <span class="hyp-n">H1</span>
+                  <div><b>Frete pago pelo shopper</b><p>Default: frete grátis, entrega pela revenda. Se o shopper pagar R$2,99 (~2,3% do preço), o valor entra no Royalties Ultragaz e no Take Rate Hubii.</p></div>
+                </div>
+                <div class="hyp">
+                  <span class="hyp-n">H2</span>
+                  <div><b>Preço de venda maior</b><p>Botijão a R$135 (+R$6): os R$6 entram no Royalties Ultragaz e no Take Rate Hubii, e a revenda ganha o mesmo.</p></div>
+                </div>
+              </div>
             </div>
           </div>
           <p class="ph-foot">Exemplo ilustrativo: múltiplas lojas no iFood e no 99, cada uma cobrindo um grupo de price zones (R$129 na Zona Leste, R$140 na Zona Sul), com entrega grátis.</p>
