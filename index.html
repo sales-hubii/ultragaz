@@ -1018,7 +1018,11 @@ body{
 }
 
 /* OVERVIEW — loja Ultragaz no iFood (mockup) + fluxo do pedido (flywheel) */
-.ph-panel{ display:flex; gap:40px; align-items:center; justify-content:center; flex-wrap:wrap; padding:28px; }
+.ph-panel{ display:flex; flex-direction:column; padding:28px; }
+.ph-row{ flex:1; display:flex; gap:44px; align-items:center; justify-content:center; flex-wrap:wrap; }
+.ph-flow{ flex:1; min-width:300px; max-width:520px; }
+.ph-flow-t{ font-size:12px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color: var(--ink-soft); margin-bottom:10px; }
+.ph-foot{ margin:26px 0 0; padding-top:18px; border-top:1px solid var(--line); font-size:13.5px; line-height:1.6; color: var(--ink-soft); }
 .ph{ width:236px; flex:none; background:#1b1730; border-radius:38px; padding:8px; box-shadow:0 20px 40px -22px rgba(27,23,48,.55); }
 .ph-screen{ position:relative; background:#fff; border-radius:30px; overflow:hidden; height:516px; padding:9px 12px 0; color:#1b1730; }
 .ph-island{ position:absolute; top:8px; left:50%; transform:translateX(-50%); width:70px; height:20px; background:#000; border-radius:999px; }
@@ -1055,11 +1059,6 @@ body{
 .ph-pill{ flex:none; display:flex; align-items:center; gap:5px; border:1px solid #dcd9e8; border-radius:999px; padding:7px 10px; font-size:9px; white-space:nowrap; color:#1b1730; }
 .ph-pill b{ color: var(--purple); font-weight:600; }
 .ph-pill.alt{ background: var(--hubii-bg); border-color: var(--hubii-bg); }
-.ph-badge{ position:absolute; z-index:2; width:17px; height:17px; border-radius:50%; background: var(--amber); color:#fff; font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center; }
-.ph-legend{ list-style:none; flex:1; min-width:220px; max-width:340px; display:flex; flex-direction:column; gap:20px; }
-.ph-legend li{ display:flex; gap:12px; font-size:14px; line-height:1.55; color: var(--ink-soft); }
-.ph-legend b{ color: var(--ink); font-weight:600; }
-.ph-legend .n{ flex:none; width:22px; height:22px; border-radius:50%; background: var(--amber); color:#fff; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; }
 .fw-t{ font:600 12px 'Onest', sans-serif; fill: var(--ink); }
 .fw-s{ font:400 10.5px 'Onest', sans-serif; fill: var(--ink-soft); }
 .fw-a{ font:500 10.5px 'Onest', sans-serif; fill: var(--ink-soft); }
@@ -1152,7 +1151,7 @@ body{
     <div class="ov-band">
       <div class="ov-col">
         <div class="section-label">Price zones</div>
-        <div class="panel" style="flex:none;">
+        <div class="panel" style="display:flex; flex-direction:column; justify-content:center;">
           <div class="praca-foco">
             <div class="praca-dot"></div>
             <div class="praca-info">
@@ -1176,10 +1175,54 @@ body{
             </ul>
           </div>
         </div>
+      </div>
 
-        <div class="section-label" style="margin-top:28px;">Fluxo do pedido</div>
-        <div class="panel" style="display:flex; align-items:center;">
-          <svg viewBox="0 0 440 232" width="100%" style="max-width:500px; display:block; margin:0 auto;" role="img" aria-label="Fluxo do pedido: iFood, API, Hubii, revenda Ultragaz, consumidor">
+      <div class="ov-col">
+        <div class="section-label">Loja Ultragaz no iFood e fluxo do pedido</div>
+        <div class="panel ph-panel">
+          <div class="ph-row">
+          <div class="ph">
+            <div class="ph-screen">
+              <div class="ph-island"></div>
+              <div class="ph-status"><span>14:55</span><span class="ph-icons"><i></i><i></i><i></i><i></i><em class="ph-bat"></em></span></div>
+              <div class="ph-top"><span class="ph-circle">‹</span><span class="ph-circle">⋮</span></div>
+              <div class="ph-titlerow">
+                <div>
+                  <div class="ph-title">Ultragaz – Loja Oficial</div>
+                  <div class="ph-sub">Aberta agora • Entrega pela rede de revendas Ultragaz</div>
+                </div>
+                <div class="ph-logo">UG</div>
+              </div>
+              <div class="ph-info">
+                <div><small>Hoje · 20–25 min</small><b>◆ Grátis</b></div>
+                <div class="ph-divider"></div>
+                <div><b>◆ Entrega grátis</b></div>
+              </div>
+              <div class="ph-search">⌕&nbsp; Buscar item ou marca</div>
+              <div class="ph-chips">
+                <div class="ph-chip"><span class="ph-chip-ico">◆</span><span><small>Entrega</small><b>Grátis</b><small>Sem mínimo</small></span></div>
+                <div class="ph-chip"><span class="ph-chip-ico">$</span><span><small>Preço da região</small><b>R$ 129</b><small>Zona Leste</small></span></div>
+              </div>
+              <div class="ph-h">Destaques da loja <span>Ver mais</span></div>
+              <div class="ph-cards">
+                <div class="ph-card">
+                  <div class="ph-img">
+                    <svg viewBox="0 0 64 80" width="38" height="48" aria-hidden="true"><path d="M24 14a8 8 0 0 1 16 0" fill="none" stroke="#0a6aa0" stroke-width="3"/><rect x="21" y="12" width="22" height="12" rx="4" fill="#0a6aa0"/><rect x="13" y="22" width="38" height="52" rx="13" fill="#0089cf"/><rect x="13" y="42" width="38" height="14" fill="#fff" opacity=".92"/><text x="32" y="52.5" font-size="9" font-weight="700" text-anchor="middle" fill="#0089cf">P13</text></svg>
+                    <span class="ph-plus">+</span>
+                  </div>
+                  <div class="ph-price">R$ 129,00</div>
+                  <div class="ph-pname">Botijão de Gás P13 (13kg)</div>
+                </div>
+              </div>
+              <div class="ph-pills">
+                <div class="ph-pill"><span>◆</span><span>Entrega grátis <b>permanente</b></span></div>
+                <div class="ph-pill alt"><span>✓</span><span>Entregue pela rede Ultragaz</span></div>
+              </div>
+            </div>
+          </div>
+            <div class="ph-flow">
+              <div class="ph-flow-t">Fluxo do pedido</div>
+              <svg viewBox="0 0 440 232" width="100%" style="display:block; width:100%;" role="img" aria-label="Fluxo do pedido: iFood, API, Hubii, revenda Ultragaz, consumidor">
             <defs><marker id="flowHead" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 1 L9 5 L0 9 z" fill="var(--potencial)"/></marker></defs>
             <circle cx="220" cy="125" r="78" fill="none" stroke="var(--line)" stroke-width="1.5"/>
             <path d="M 246.6 51.7 A 78 78 0 0 1 296.8 138.6" fill="none" stroke="var(--potencial)" stroke-width="1.8" marker-end="url(#flowHead)"/>
@@ -1195,58 +1238,9 @@ body{
             <text x="220" y="123" text-anchor="middle" style="font:600 17px 'Onest',sans-serif; fill:var(--purple);">P13</text>
             <text x="220" y="139" text-anchor="middle" class="fw-s">pedido digital</text>
           </svg>
-        </div>
-      </div>
-
-      <div class="ov-col">
-        <div class="section-label">Loja Ultragaz no iFood <span class="mock-chip">exemplo</span></div>
-        <div class="panel ph-panel">
-          <div class="ph">
-            <div class="ph-screen">
-              <div class="ph-island"></div>
-              <div class="ph-status"><span>14:55</span><span class="ph-icons"><i></i><i></i><i></i><i></i><em class="ph-bat"></em></span></div>
-              <div class="ph-top"><span class="ph-circle">‹</span><span class="ph-circle">⋮</span></div>
-              <div class="ph-titlerow">
-                <div>
-                  <div class="ph-title">Ultragaz – Loja Oficial</div>
-                  <div class="ph-sub">Aberta agora • Entrega pela rede de revendas Ultragaz</div>
-                </div>
-                <div class="ph-logo">UG</div>
-                <span class="ph-badge" style="right:40px; top:-9px;">1</span>
-              </div>
-              <div class="ph-info">
-                <div><small>Hoje · 20–25 min</small><b>◆ Grátis</b></div>
-                <div class="ph-divider"></div>
-                <div><b>◆ Entrega grátis</b></div>
-                <span class="ph-badge" style="right:-3px; top:-9px;">3</span>
-              </div>
-              <div class="ph-search">⌕&nbsp; Buscar item ou marca</div>
-              <div class="ph-chips">
-                <div class="ph-chip"><span class="ph-chip-ico">◆</span><span><small>Entrega</small><b>Grátis</b><small>Sem mínimo</small></span></div>
-                <div class="ph-chip"><span class="ph-chip-ico">$</span><span><small>Preço da região</small><b>R$ 129</b><small>Zona Leste</small></span></div>
-              </div>
-              <div class="ph-h">Destaques da loja <span>Ver mais</span></div>
-              <div class="ph-cards">
-                <div class="ph-card">
-                  <div class="ph-img">
-                    <svg viewBox="0 0 64 80" width="38" height="48" aria-hidden="true"><path d="M24 14a8 8 0 0 1 16 0" fill="none" stroke="#0a6aa0" stroke-width="3"/><rect x="21" y="12" width="22" height="12" rx="4" fill="#0a6aa0"/><rect x="13" y="22" width="38" height="52" rx="13" fill="#0089cf"/><rect x="13" y="42" width="38" height="14" fill="#fff" opacity=".92"/><text x="32" y="52.5" font-size="9" font-weight="700" text-anchor="middle" fill="#0089cf">P13</text></svg>
-                    <span class="ph-plus">+</span>
-                  </div>
-                  <div class="ph-price">R$ 129,00<span class="ph-badge" style="left:100%; margin-left:5px; top:0;">2</span></div>
-                  <div class="ph-pname">Botijão de Gás P13 (13kg)</div>
-                </div>
-              </div>
-              <div class="ph-pills">
-                <div class="ph-pill"><span>◆</span><span>Entrega grátis <b>permanente</b></span></div>
-                <div class="ph-pill alt"><span>✓</span><span>Entregue pela rede Ultragaz</span></div>
-              </div>
             </div>
           </div>
-          <ol class="ph-legend">
-            <li><span class="n">1</span><span><b>Loja Ultragaz</b> no iFood — vamos operar múltiplas lojas (iFood e 99), cada uma cobrindo um grupo de price zones</span></li>
-            <li><span class="n">2</span><span><b>Preço da price zone:</b> R$129 na Zona Leste e R$140 na Zona Sul</span></li>
-            <li><span class="n">3</span><span><b>Entrega grátis</b>, com lead time de 20–25 min feita pela revenda</span></li>
-          </ol>
+          <p class="ph-foot">Exemplo ilustrativo: múltiplas lojas no iFood e no 99, cada uma cobrindo um grupo de price zones (R$129 na Zona Leste, R$140 na Zona Sul), com entrega grátis em 20–25 min feita pela revenda.</p>
         </div>
       </div>
     </div>
