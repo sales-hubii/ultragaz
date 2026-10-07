@@ -1016,6 +1016,64 @@ body{
   #panel-bp .bpx-facts, #panel-bp .bpx-grid2, #panel-bp .bpx-fields{ grid-template-columns:1fr; }
   #panel-bp .bpx-hero{ padding:28px 24px; }
 }
+
+/* OVERVIEW — loja Ultragaz no iFood (mockup) + fluxo do pedido */
+.ph-panel{ display:flex; gap:36px; align-items:center; justify-content:center; flex-wrap:wrap; padding:28px; }
+.ph{ width:300px; flex:none; background:#1b1730; border-radius:46px; padding:11px; box-shadow:0 24px 50px -24px rgba(27,23,48,.55); }
+.ph-screen{ position:relative; background:#fff; border-radius:36px; overflow:hidden; height:600px; padding:12px 16px 0; color:#1b1730; }
+.ph-island{ position:absolute; top:10px; left:50%; transform:translateX(-50%); width:92px; height:26px; background:#000; border-radius:999px; }
+.ph-status{ display:flex; justify-content:space-between; align-items:center; height:30px; padding:0 8px; font-size:13px; font-weight:600; }
+.ph-icons{ display:flex; align-items:flex-end; gap:2px; }
+.ph-icons i{ display:block; width:3px; background:#1b1730; border-radius:1px; }
+.ph-icons i:nth-child(1){ height:4px; } .ph-icons i:nth-child(2){ height:6px; } .ph-icons i:nth-child(3){ height:8px; } .ph-icons i:nth-child(4){ height:10px; }
+.ph-bat{ display:block; width:22px; height:11px; margin-left:6px; border:1.5px solid #1b1730; border-radius:3px; background:linear-gradient(90deg,#1b1730 60%,transparent 60%); }
+.ph-top{ display:flex; justify-content:space-between; margin-top:14px; }
+.ph-circle{ width:34px; height:34px; border-radius:50%; background:#f1f0f5; display:flex; align-items:center; justify-content:center; font-size:20px; line-height:1; }
+.ph-titlerow{ position:relative; display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-top:14px; }
+.ph-title{ font-size:18px; font-weight:700; line-height:1.2; }
+.ph-sub{ font-size:11.5px; color:#8a869c; margin-top:4px; line-height:1.4; }
+.ph-logo{ flex:none; width:40px; height:40px; border-radius:50%; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color: var(--ultragaz); }
+.ph-info{ position:relative; margin-top:16px; background:#f4f3f8; border-radius:14px; padding:10px 8px; display:flex; align-items:center; justify-content:space-around; text-align:center; }
+.ph-info small{ display:block; font-size:10.5px; color:#8a869c; }
+.ph-info b{ display:block; font-size:12.5px; font-weight:700; color: var(--purple); }
+.ph-divider{ width:1px; height:28px; background:#dcd9e8; }
+.ph-search{ margin-top:12px; background:#f4f3f8; border-radius:999px; padding:10px 14px; font-size:12.5px; color:#8a869c; }
+.ph-h{ display:flex; justify-content:space-between; align-items:baseline; margin-top:22px; font-size:16px; font-weight:700; }
+.ph-h span{ font-size:12px; font-weight:500; color:#e53935; }
+.ph-item{ display:flex; justify-content:space-between; gap:12px; margin-top:12px; padding-top:14px; border-top:1px solid #efedf7; }
+.ph-item-txt{ min-width:0; }
+.ph-iname{ font-size:13.5px; font-weight:600; line-height:1.3; }
+.ph-idesc{ font-size:11px; color:#8a869c; line-height:1.4; margin-top:3px; }
+.ph-price{ position:relative; display:inline-block; font-size:15px; font-weight:700; margin-top:8px; }
+.ph-note{ font-size:11px; color:#8a869c; margin-top:2px; }
+.ph-img{ position:relative; flex:none; width:92px; height:92px; border-radius:14px; background:#f4f3f8; display:flex; align-items:center; justify-content:center; }
+.ph-plus{ position:absolute; right:6px; bottom:6px; width:28px; height:28px; border-radius:50%; background:#fff; box-shadow:0 1px 4px rgba(0,0,0,.18); display:flex; align-items:center; justify-content:center; font-size:18px; }
+.ph-bag{ position:absolute; left:16px; right:16px; bottom:16px; display:flex; justify-content:space-between; background: var(--purple); color:#fff; border-radius:999px; padding:12px 18px; font-size:13px; font-weight:600; }
+.ph-badge{ position:absolute; z-index:2; width:19px; height:19px; border-radius:50%; background: var(--amber); color:#fff; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.ph-legend{ list-style:none; flex:1; min-width:220px; max-width:340px; display:flex; flex-direction:column; gap:20px; }
+.ph-legend li{ display:flex; gap:12px; font-size:14px; line-height:1.55; color: var(--ink-soft); }
+.ph-legend b{ color: var(--ink); font-weight:600; }
+.ph-legend .n{ flex:none; width:22px; height:22px; border-radius:50%; background: var(--amber); color:#fff; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.flow{ display:flex; align-items:stretch; width:100%; }
+.flow-node{ flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; text-align:center; gap:6px; padding:16px 10px; background: var(--paper); border:1px solid var(--line); border-radius:14px; }
+.flow-node b{ font-size:14px; font-weight:600; color: var(--ink); }
+.flow-node small{ font-size:12px; line-height:1.4; color: var(--ink-soft); }
+.flow-ico{ width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; background: var(--card); border:1px solid var(--line); color: var(--ink); }
+.flow-ico.ifood{ background:#ea1d2c; border-color:#ea1d2c; color:#fff; }
+.flow-node.hubii{ background: var(--hubii-bg); border-color: var(--purple-glow); }
+.flow-node.hubii .flow-ico{ background: var(--purple); border-color: var(--purple); color:#fff; }
+.flow-node.ug .flow-ico{ background: var(--ultragaz); border-color: var(--ultragaz); color:#fff; }
+.flow-arrow{ flex:0 0 62px; position:relative; display:flex; align-items:center; justify-content:center; }
+.flow-arrow::before{ content:''; position:absolute; left:6px; right:10px; top:50%; height:2px; margin-top:-1px; background: var(--potencial); }
+.flow-arrow::after{ content:''; position:absolute; right:6px; top:50%; margin-top:-5px; border-left:7px solid var(--potencial); border-top:5px solid transparent; border-bottom:5px solid transparent; }
+.flow-arrow span{ position:relative; top:-14px; font-size:11px; font-weight:500; color: var(--ink-soft); background: var(--card); padding:0 4px; }
+@media (max-width: 980px){
+  .flow{ flex-direction:column; }
+  .flow-arrow{ flex:0 0 48px; }
+  .flow-arrow::before{ left:50%; right:auto; top:6px; bottom:12px; width:2px; height:auto; margin:0 0 0 -1px; }
+  .flow-arrow::after{ left:50%; right:auto; top:auto; bottom:6px; margin:0 0 0 -5px; border-left:5px solid transparent; border-right:5px solid transparent; border-top:7px solid var(--potencial); border-bottom:none; }
+  .flow-arrow span{ top:0; left:12px; position:absolute; }
+}
 </style>
 </head>
 <body>
@@ -1104,8 +1162,8 @@ body{
 
     <div class="ov-band">
       <div class="ov-col">
-        <div class="section-label">Price zones (referência iFood)</div>
-        <div class="panel">
+        <div class="section-label">Price zones</div>
+        <div class="panel" style="flex:none;">
           <div class="praca-foco">
             <div class="praca-dot"></div>
             <div class="praca-info">
@@ -1124,37 +1182,86 @@ body{
           </div>
           <div class="info-block ov-note">
             <ul class="info-list">
-              <li>O iFood opera com <b>price zones</b>: o preço do P13 varia por região dentro do próprio Mercado GSP</li>
+              <li>A Ultragaz opera com <b>price zones</b>: o preço do P13 varia por região dentro do próprio Mercado GSP</li>
+              <li>Vamos <b>agrupar as price zones</b> e operar <b>múltiplas lojas</b> no iFood e no 99</li>
             </ul>
+          </div>
+        </div>
+
+        <div class="section-label" style="margin-top:28px;">Fluxo do pedido</div>
+        <div class="panel" style="display:flex; align-items:center;">
+          <div class="flow">
+            <div class="flow-node">
+              <span class="flow-ico ifood">iF</span>
+              <b>iFood</b>
+              <small>Consumidor faz o pedido na loja Ultragaz</small>
+            </div>
+            <div class="flow-arrow"><span>API</span></div>
+            <div class="flow-node hubii">
+              <span class="flow-ico">H</span>
+              <b>Hubii</b>
+              <small>Recebe o pedido e escolhe a revenda Ultragaz</small>
+            </div>
+            <div class="flow-arrow"><span>pedido</span></div>
+            <div class="flow-node ug">
+              <span class="flow-ico">UG</span>
+              <b>Revenda Ultragaz</b>
+              <small>Recebe o pedido e faz o last mile</small>
+            </div>
+            <div class="flow-arrow"><span>entrega</span></div>
+            <div class="flow-node">
+              <span class="flow-ico cons">◉</span>
+              <b>Consumidor</b>
+              <small>Recebe o botijão em casa</small>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="ov-col">
-        <div class="section-label">Take rate iFood</div>
-        <div class="panel">
-          <div class="praca-foco">
-            <div class="praca-dot"></div>
-            <div class="praca-info">
-              <div class="praca-city">Take rate atual acordado</div>
-              <div class="praca-partner">2% reinvestidos como frete grátis permanente ao consumidor</div>
+        <div class="section-label">Loja Ultragaz no iFood <span class="mock-chip">exemplo</span></div>
+        <div class="panel ph-panel">
+          <div class="ph">
+            <div class="ph-screen">
+              <div class="ph-island"></div>
+              <div class="ph-status"><span>14:55</span><span class="ph-icons"><i></i><i></i><i></i><i></i><em class="ph-bat"></em></span></div>
+              <div class="ph-top"><span class="ph-circle">‹</span><span class="ph-circle">⋮</span></div>
+              <div class="ph-titlerow">
+                <div>
+                  <div class="ph-title">Ultragaz – Loja Oficial</div>
+                  <div class="ph-sub">Entrega pela rede de revendas Ultragaz</div>
+                </div>
+                <div class="ph-logo">UG</div>
+                <span class="ph-badge" style="right:54px; top:-12px;">1</span>
+              </div>
+              <div class="ph-info">
+                <div><small>Hoje · 20–25 min</small><b>◆ Grátis</b></div>
+                <div class="ph-divider"></div>
+                <div><b>◆ Entrega grátis</b></div>
+                <span class="ph-badge" style="right:10px; top:-10px;">3</span>
+              </div>
+              <div class="ph-search">⌕&nbsp; Buscar item ou marca</div>
+              <div class="ph-h">Destaques da loja <span>Ver mais</span></div>
+              <div class="ph-item">
+                <div class="ph-item-txt">
+                  <div class="ph-iname">Botijão de Gás P13 (13kg)</div>
+                  <div class="ph-idesc">Gás de cozinha GLP, entregue pela rede Ultragaz</div>
+                  <div class="ph-price">R$ 129,00<span class="ph-badge" style="left:100%; margin-left:6px; top:1px;">2</span></div>
+                  <div class="ph-note">Preço da Zona Leste</div>
+                </div>
+                <div class="ph-img">
+                  <svg viewBox="0 0 64 80" width="46" height="58" aria-hidden="true"><path d="M24 14a8 8 0 0 1 16 0" fill="none" stroke="#0a6aa0" stroke-width="3"/><rect x="21" y="12" width="22" height="12" rx="4" fill="#0a6aa0"/><rect x="13" y="22" width="38" height="52" rx="13" fill="#0089cf"/><rect x="13" y="42" width="38" height="14" fill="#fff" opacity=".92"/><text x="32" y="52.5" font-size="9" font-weight="700" text-anchor="middle" fill="#0089cf">P13</text></svg>
+                  <span class="ph-plus">+</span>
+                </div>
+              </div>
+              <div class="ph-bag"><span>Ver sacola</span><span>R$ 129,00</span></div>
             </div>
-            <div class="praca-tag">6%</div>
           </div>
-          <div class="praca-foco">
-            <div class="praca-dot pending"></div>
-            <div class="praca-info">
-              <div class="praca-city">Em avaliação</div>
-              <div class="praca-partner">Repassar o frete ao consumidor e reenquadrar o take rate</div>
-            </div>
-            <div class="praca-tag pending">8%</div>
-          </div>
-          <div class="info-block ov-note">
-            <ul class="info-list">
-              <li>Receita líquida do iFood hoje: <b>9,4% do GMV</b></li>
-              <li>Modelo de subsídio governamental ("gás do povo") tem margens muito apertadas e <b>não será usado como base</b> da arquitetura de precificação</li>
-            </ul>
-          </div>
+          <ol class="ph-legend">
+            <li><span class="n">1</span><span><b>Loja Ultragaz</b> no iFood — vamos operar múltiplas lojas (iFood e 99), cada uma cobrindo um grupo de price zones</span></li>
+            <li><span class="n">2</span><span><b>Preço da price zone:</b> R$129 na Zona Leste e R$140 na Zona Sul</span></li>
+            <li><span class="n">3</span><span><b>Entrega grátis</b>, com lead time de 20–25 min feita pela revenda</span></li>
+          </ol>
         </div>
       </div>
     </div>
