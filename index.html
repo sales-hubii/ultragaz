@@ -610,7 +610,7 @@ body{
 .region-tile.off{ border:1.5px dashed var(--potencial); background:transparent; color: var(--potencial); }
 .region-legend{ display:flex; gap:18px; flex-wrap:wrap; margin-top:14px; font-size:11.5px; color: var(--ink-soft); }
 @media (max-width: 600px){ .region-tile{ flex-basis: calc(50% - 5px); } .region-tile.empty{ display:none; } .hbar{ flex-wrap:wrap; } .hbar-label{ flex-basis:100%; } }
-.ov-subgrid{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 28px 40px; }
+.ov-subgrid{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 28px 40px; }
 .panel .ov-subgrid .info-block{ margin:0; padding:0; border:none; }
 .ov-subgrid .praca-foco:last-child{ margin-bottom:0; }
 .people-grid{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
@@ -1192,6 +1192,23 @@ body{
           <div class="stat"><div class="stat-num">3.400</div><div class="stat-lbl">Municípios — potencial de expansão</div></div>
           <div class="stat"><div class="stat-num">5–6mil</div><div class="stat-lbl">Revendas Ultragaz no Brasil (total)</div></div>
         </div>
+        <div class="panel" style="flex:none;">
+          <div class="info-block">
+            <div class="info-head">
+              <div class="info-icon">→</div>
+              <div>
+                <div class="info-name">Logística e entrega</div>
+                <div class="info-sub">Primeiro momento</div>
+              </div>
+            </div>
+            <ul class="info-list">
+              <li>Entrega feita pelas <b>próprias revendas</b> (não por motoboy do canal)</li>
+              <li>Tempo médio atual de entrega via app/Televendas/WhatsApp: <b>17 minutos</b></li>
+              <li>Lead time sugerido para exibir no app: <b>20–25 minutos</b></li>
+              <li>Uso do LAS (last mile do iFood) é uma possibilidade futura, não prevista para a fase inicial</li>
+            </ul>
+          </div>
+        </div>
         </div>
       </div>
 
@@ -1258,7 +1275,7 @@ body{
           </svg>
             </div>
           </div>
-          <p class="ph-foot">Exemplo ilustrativo: múltiplas lojas no iFood e no 99, cada uma cobrindo um grupo de price zones (R$129 na Zona Leste, R$140 na Zona Sul), com entrega grátis em 20–25 min feita pela revenda.</p>
+          <p class="ph-foot">Exemplo ilustrativo: múltiplas lojas no iFood e no 99, cada uma cobrindo um grupo de price zones (R$129 na Zona Leste, R$140 na Zona Sul), com entrega grátis.</p>
         </div>
       </div>
     </div>
@@ -1340,22 +1357,6 @@ body{
               </div>
               <div class="praca-tag pending">Em avaliação</div>
             </div>
-          </div>
-
-          <div class="info-block">
-            <div class="info-head">
-              <div class="info-icon">→</div>
-              <div>
-                <div class="info-name">Logística e entrega</div>
-                <div class="info-sub">Primeiro momento</div>
-              </div>
-            </div>
-            <ul class="info-list">
-              <li>Entrega feita pelas <b>próprias revendas</b> (não por motoboy do canal)</li>
-              <li>Tempo médio atual de entrega via app/Televendas/WhatsApp: <b>17 minutos</b></li>
-              <li>Lead time sugerido para exibir no app: <b>20–25 minutos</b></li>
-              <li>Uso do LAS (last mile do iFood) é uma possibilidade futura, não prevista para a fase inicial</li>
-            </ul>
           </div>
         </div>
       </div>
