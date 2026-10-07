@@ -951,6 +951,13 @@ body{
 #panel-bp .bpx-lead b{ font-weight:600; color: var(--ink); }
 #panel-bp .bpx-section{ margin-top:64px; }
 #panel-bp .bpx-section:first-child{ margin-top:0; }
+#panel-bp .bpx-duo{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:24px; align-items:stretch; }
+#panel-bp .bpx-duo > .bpx-card{ display:flex; flex-direction:column; }
+#panel-bp .bpx-duo .bpx-facts{ display:flex; flex-direction:column; justify-content:space-between; flex:1; margin-top:12px; max-width:none; }
+#panel-bp .bpx-duo .bpx-fact:last-child{ border-bottom:none; }
+#panel-bp .bpx-duo .bpx-table{ max-width:none; }
+#panel-bp .bpx-table tr.after-total td{ border-bottom:none; padding-top:18px; padding-bottom:4px; }
+@media (max-width: 980px){ #panel-bp .bpx-duo{ grid-template-columns:1fr; } }
 #panel-bp .bpx-hero{ background: var(--card); border:1px solid var(--line); border-radius:20px; padding:40px 44px 36px; }
 #panel-bp .bpx-hero .bpx-lead{ margin-bottom:0; margin-top:14px; }
 #panel-bp .bpx-kpis{ display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); margin-top:32px; border-top:1px solid var(--line); }
@@ -1378,34 +1385,38 @@ body{
   <div class="tab-panel" id="panel-bp">
 
     <section class="bpx-section">
-      <div class="bpx-eyebrow">Mercado</div>
-      <h2 class="bpx-h2">Contexto de mercado — Grande São Paulo</h2>
-      <div class="bpx-facts">
-        <div class="bpx-fact"><span>Participação da Ultragaz em GSP</span><b>24% <small>22% no Brasil</small></b></div>
-        <div class="bpx-fact"><span>Canal online da UG hoje (ago/26)</span><b>R$9mi/mês <small>≈ 70,9 mil botijões · 7% do offline · base do cálculo</small></b></div>
-        <div class="bpx-fact"><span>Offline da UG (implícito)</span><b>~R$128,6mi/mês <small>≈ 1,01mi de botijões</small></b></div>
-        <div class="bpx-fact"><span>Concorrentes no offline</span><b>~R$168mi/mês <small>≈ 1,32mi de botijões</small></b></div>
-        <div class="bpx-fact"><span>CAC</span><b>R$22 online · R$12 offline <small>no offline, a revenda arca com o custo</small></b></div>
-        <div class="bpx-fact"><span>Ticket médio online</span><b>R$126–127 <small>1 botijão ≈ R$127</small></b></div>
-      </div>
-    </section>
+      <div class="bpx-duo">
+        <div class="bpx-card">
+          <div class="bpx-eyebrow">Mercado</div>
+          <h2 class="bpx-h2">Contexto de mercado — Grande São Paulo</h2>
+          <div class="bpx-facts">
+            <div class="bpx-fact"><span>Participação da Ultragaz em GSP</span><b>24% <small>22% no Brasil</small></b></div>
+            <div class="bpx-fact"><span>Canal online da UG hoje (ago/26)</span><b>R$9mi/mês <small>≈ 70,9 mil botijões · 7% do offline · base do cálculo</small></b></div>
+            <div class="bpx-fact"><span>Offline da UG (implícito)</span><b>~R$128,6mi/mês <small>≈ 1,01mi de botijões</small></b></div>
+            <div class="bpx-fact"><span>Concorrentes no offline</span><b>~R$168mi/mês <small>≈ 1,32mi de botijões</small></b></div>
+            <div class="bpx-fact"><span>CAC</span><b>R$22 online · R$12 offline <small>no offline, a revenda arca com o custo</small></b></div>
+            <div class="bpx-fact"><span>Ticket médio online</span><b>R$126–127 <small>1 botijão ≈ R$127</small></b></div>
+          </div>
+        </div>
 
-    <section class="bpx-section">
-      <div class="bpx-eyebrow">Margem</div>
-      <h2 class="bpx-h2">O teto de margem do piloto é maior que o do canal atual</h2>
-      <p class="bpx-lead">Mesma margem base; o canal Hubii soma um royalty de 2% e carrega um licenciamento fixo.</p>
-      <table class="bpx-table">
-        <thead><tr><th></th><th>Canal próprio hoje</th><th>Canal Hubii (piloto)</th></tr></thead>
-        <tbody>
-          <tr><td>Margem base <small>venda à revenda</small></td><td>12,00%</td><td id="cmp_margemBase_display">12,00%</td></tr>
-          <tr><td>Back office</td><td>−4,00%</td><td>−4,00%</td></tr>
-          <tr><td>Marketing</td><td>−6,00%</td><td>−6,00%</td></tr>
-          <tr><td>Taxa de adquirência</td><td>−0,20%</td><td class="na">—</td></tr>
-          <tr><td>Royalty <small>margem incremental</small></td><td class="na">—</td><td>+2,00%</td></tr>
-          <tr><td>Licenciamento Hubii <small>fixo, fora da margem % — pesa no ponto de virada</small></td><td class="na">—</td><td>R$15.000/mês</td></tr>
-          <tr class="total"><td>Margem <small>antes do licenciamento</small></td><td id="cmp_margem_propria">—</td><td id="cmp_lucro_preliminar">—</td></tr>
-        </tbody>
-      </table>
+        <div class="bpx-card">
+          <div class="bpx-eyebrow">Margem</div>
+          <h2 class="bpx-h2">O teto de margem do piloto é maior que o do canal atual</h2>
+          <p class="bpx-lead">Mesma margem base; o canal Hubii soma um royalty de 2% e carrega um licenciamento fixo.</p>
+          <table class="bpx-table">
+            <thead><tr><th></th><th>Canal próprio hoje</th><th>Canal Hubii (piloto)</th></tr></thead>
+            <tbody>
+              <tr><td>Margem base <small>venda à revenda</small></td><td>12,00%</td><td id="cmp_margemBase_display">12,00%</td></tr>
+              <tr><td>Back office</td><td>−4,00%</td><td>−4,00%</td></tr>
+              <tr><td>Marketing</td><td>−6,00%</td><td>−6,00%</td></tr>
+              <tr><td>Taxa de adquirência</td><td>−0,20%</td><td class="na">—</td></tr>
+              <tr><td>Royalty <small>margem incremental</small></td><td class="na">—</td><td>+2,00%</td></tr>
+              <tr class="total"><td>Margem <small>antes do licenciamento</small></td><td id="cmp_margem_propria">—</td><td id="cmp_lucro_preliminar">—</td></tr>
+              <tr class="after-total"><td>Licenciamento Hubii <small>custo de tecnologia, fixo — fora da margem %, pesa no ponto de virada</small></td><td class="na">—</td><td>R$15.000/mês</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </section>
 
     <section class="bpx-section">
