@@ -1021,7 +1021,7 @@ body{
 /* OVERVIEW — loja Ultragaz no iFood (mockup) + fluxo do pedido (flywheel) */
 .ph-panel{ display:flex; flex-direction:column; padding:28px; }
 .ph-row{ flex:1; display:flex; gap:44px; align-items:center; justify-content:center; flex-wrap:wrap; }
-.ph-flow{ flex:1; min-width:300px; max-width:520px; }
+.ph-flow{ flex:1; min-width:420px; max-width:600px; }
 .ph-flow-t{ font-size:12px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color: var(--ink-soft); margin-bottom:10px; }
 .ph-foot{ margin:26px 0 0; padding-top:18px; border-top:1px solid var(--line); font-size:13.5px; line-height:1.6; color: var(--ink-soft); }
 .ph{ width:236px; flex:none; background:#1b1730; border-radius:38px; padding:8px; box-shadow:0 20px 40px -22px rgba(27,23,48,.55); }
@@ -1060,9 +1060,10 @@ body{
 .ph-pill{ flex:none; display:flex; align-items:center; gap:5px; border:1px solid #dcd9e8; border-radius:999px; padding:7px 10px; font-size:9px; white-space:nowrap; color:#1b1730; }
 .ph-pill b{ color: var(--purple); font-weight:600; }
 .ph-pill.alt{ background: var(--hubii-bg); border-color: var(--hubii-bg); }
-.fw-t{ font:600 12px 'Onest', sans-serif; fill: var(--ink); }
-.fw-s{ font:400 10.5px 'Onest', sans-serif; fill: var(--ink-soft); }
-.fw-a{ font:500 10.5px 'Onest', sans-serif; fill: var(--ink-soft); }
+.pa-t{ font:600 13px 'Onest', sans-serif; fill: var(--ink); }
+.pa-v{ font:600 20px 'Onest', sans-serif; fill: var(--ink); letter-spacing:-.01em; }
+.pa-s{ font:400 11px 'Onest', sans-serif; fill: var(--ink-soft); }
+.pa-l{ font:500 11.5px 'Onest', sans-serif; fill: var(--ink-soft); }
 </style>
 </head>
 <body>
@@ -1255,22 +1256,52 @@ body{
             </div>
           </div>
             <div class="ph-flow">
-              <svg viewBox="0 -24 440 256" width="100%" style="display:block; width:100%;" role="img" aria-label="Fluxo do pedido: canal, API, Hubii, revenda Ultragaz, consumidor">
-            <defs><marker id="flowHead" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 1 L9 5 L0 9 z" fill="var(--potencial)"/></marker></defs>
-            <circle cx="220" cy="125" r="78" fill="none" stroke="var(--line)" stroke-width="1.5"/>
-            <path d="M 246.6 51.7 A 78 78 0 0 1 296.8 138.6" fill="none" stroke="var(--potencial)" stroke-width="1.8" marker-end="url(#flowHead)"/>
-            <path d="M 270.2 184.7 A 78 78 0 0 1 169.8 184.7" fill="none" stroke="var(--potencial)" stroke-width="1.8" marker-end="url(#flowHead)"/>
-            <path d="M 143.2 138.6 A 78 78 0 0 1 193.4 51.7" fill="none" stroke="var(--potencial)" stroke-width="1.8" marker-end="url(#flowHead)"/>
-            <circle cx="220.0" cy="47.0" r="19" fill="#ea1d2c"/><circle cx="287.5" cy="164.0" r="19" fill="var(--purple)"/><text x="287.5" y="168.0" text-anchor="middle" style="font:700 11px 'Onest',sans-serif; fill:#fff;">H</text><circle cx="152.5" cy="164.0" r="19" fill="var(--ultragaz)"/><text x="152.5" y="168.0" text-anchor="middle" style="font:700 11px 'Onest',sans-serif; fill:#fff;">UG</text>
-            <text x="220" y="-5" text-anchor="middle" class="fw-t">Canal</text><text x="220" y="9" text-anchor="middle" class="fw-s">consumidor pede na loja Ultragaz</text>
-            <text x="312" y="160" class="fw-t">Hubii</text><text x="312" y="174" class="fw-s">recebe via API e</text><text x="312" y="187" class="fw-s">escolhe a revenda</text>
-            <text x="128" y="160" text-anchor="end" class="fw-t">Revenda Ultragaz</text><text x="128" y="174" text-anchor="end" class="fw-s">faz o last mile até</text><text x="128" y="187" text-anchor="end" class="fw-s">o consumidor</text>
-            <text x="301" y="93" class="fw-a">API</text>
-            <text x="220" y="222" text-anchor="middle" class="fw-a">pedido</text>
-            <text x="139" y="93" text-anchor="end" class="fw-a">entrega · recompra</text>
-            <text x="220" y="123" text-anchor="middle" style="font:600 17px 'Onest',sans-serif; fill:var(--purple);">P13</text>
-            <text x="220" y="139" text-anchor="middle" class="fw-s">pedido digital</text>
-          </svg>
+              <svg viewBox="0 0 560 392" width="100%" style="display:block; width:100%;" role="img" aria-label="Arquitetura de preço: do preço no iFood ao repasse da revenda, fee da Hubii e royalties da Ultragaz">
+                <defs>
+                  <marker id="pxHead" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 1 L9 5 L0 9 z" fill="var(--potencial)"/></marker>
+                  <marker id="pxHeadUg" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 1 L9 5 L0 9 z" fill="var(--ultragaz)"/></marker>
+                </defs>
+                <rect x="130" y="6" width="300" height="64" rx="14" fill="var(--card)" stroke="var(--line)"/>
+                <circle cx="158" cy="38" r="12" fill="#ea1d2c"/>
+                <text x="182" y="31" class="pa-t">Canal · preço ao consumidor</text>
+                <text x="182" y="55" class="pa-v">R$129,00</text>
+                <text x="418" y="55" text-anchor="end" class="pa-s">Zona Leste</text>
+
+                <line x1="280" y1="70" x2="280" y2="124" stroke="var(--potencial)" stroke-width="1.8" marker-end="url(#pxHead)"/>
+                <text x="294" y="94" class="pa-l">− 6,5% do Canal</text>
+                <text x="294" y="110" class="pa-l" style="font-weight:600; fill:var(--ink);">−R$8,39</text>
+
+                <rect x="130" y="128" width="300" height="64" rx="14" fill="var(--hubii-bg)" stroke="var(--purple-glow)"/>
+                <circle cx="158" cy="160" r="12" fill="var(--purple)"/><text x="158" y="164" text-anchor="middle" style="font:700 11px 'Onest',sans-serif; fill:#fff;">H</text>
+                <text x="182" y="153" class="pa-t">Hubii recebe do Canal</text>
+                <text x="182" y="177" class="pa-v" style="fill:var(--purple-deep);">R$120,61</text>
+                <text x="418" y="177" text-anchor="end" class="pa-s">via API</text>
+
+                <text x="294" y="214" class="pa-l">Hubii escolhe a revenda e distribui</text>
+                <line x1="100" y1="226" x2="460" y2="226" stroke="var(--potencial)" stroke-width="1.8"/>
+                <line x1="280" y1="192" x2="280" y2="262" stroke="var(--potencial)" stroke-width="1.8" marker-end="url(#pxHead)"/>
+                <line x1="100" y1="226" x2="100" y2="262" stroke="var(--potencial)" stroke-width="1.8" marker-end="url(#pxHead)"/>
+                <line x1="460" y1="226" x2="460" y2="262" stroke="var(--ultragaz)" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#pxHeadUg)"/>
+                <text x="110" y="248" class="pa-l">repasse</text>
+                <text x="290" y="248" class="pa-l">fee</text>
+                <text x="470" y="248" class="pa-l" style="fill:var(--ultragaz); font-weight:600;">royalties</text>
+
+  <rect x="16" y="266" width="168" height="112" rx="14" fill="var(--card)" stroke="var(--line)"/>
+  <circle cx="100" cy="291" r="13" fill="var(--ultragaz)"/><text x="100" y="295" text-anchor="middle" style="font:700 10.5px 'Onest',sans-serif; fill:#fff;">UG</text>
+  <text x="100" y="325" text-anchor="middle" class="pa-t">Revenda Ultragaz</text>
+  <text x="100" y="349" text-anchor="middle" class="pa-v" style="fill:var(--ink);">R$116,10</text>
+  <text x="100" y="367" text-anchor="middle" class="pa-s">last mile · 90% do ticket</text>
+  <rect x="196" y="266" width="168" height="112" rx="14" fill="var(--hubii-bg)" stroke="var(--purple-glow)"/>
+  <circle cx="280" cy="291" r="13" fill="var(--purple)"/><text x="280" y="295" text-anchor="middle" style="font:700 10.5px 'Onest',sans-serif; fill:#fff;">H</text>
+  <text x="280" y="325" text-anchor="middle" class="pa-t">Hubii fica com</text>
+  <text x="280" y="349" text-anchor="middle" class="pa-v" style="fill:var(--purple-deep);">R$2,58</text>
+  <text x="280" y="367" text-anchor="middle" class="pa-s">2% do ticket</text>
+  <rect x="376" y="266" width="168" height="112" rx="14" fill="var(--ultragaz-bg)" stroke="var(--ultragaz)" stroke-dasharray="4 3"/>
+  <circle cx="460" cy="291" r="13" fill="var(--ultragaz)"/><text x="460" y="295" text-anchor="middle" style="font:700 10.5px 'Onest',sans-serif; fill:#fff;">UG</text>
+  <text x="460" y="325" text-anchor="middle" class="pa-t">Royalties Ultragaz</text>
+  <text x="460" y="349" text-anchor="middle" class="pa-v" style="fill:var(--ultragaz);">R$2,58</text>
+  <text x="460" y="367" text-anchor="middle" class="pa-s">2% do ticket</text>
+              </svg>
             </div>
           </div>
           <p class="ph-foot">Exemplo ilustrativo: múltiplas lojas no iFood e no 99, cada uma cobrindo um grupo de price zones (R$129 na Zona Leste, R$140 na Zona Sul), com entrega grátis.</p>
