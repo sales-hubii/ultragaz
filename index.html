@@ -1780,25 +1780,44 @@ body{
     const MESES = ['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
     const MESES_LONG = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
 
-    // Status: os nomes são os do Notion. "Em andamento" e "Pausada" têm estilo
-    // definido, mas não aparecem nos pills porque não existem no Notion hoje.
+    // Status: nomes exatos do Notion (campo Status da base Tasks List).
     const STATUS = {
-      'Backlog':      { label:'Backlog',      cls:'st-backlog' },
-      'To-Do':        { label:'A fazer',      cls:'st-todo' },
-      'Waiting':      { label:'Aguardando',   cls:'st-waiting' },
-      'Em andamento': { label:'Em andamento', cls:'st-doing' },
-      'Pausada':      { label:'Pausada',      cls:'st-paused' },
-      'Done':         { label:'Concluída',    cls:'st-done' },
+      'Backlog':  { label:'Backlog',      cls:'st-backlog' },
+      'To-Do':    { label:'A fazer',      cls:'st-todo' },
+      'Waiting':  { label:'Aguardando',   cls:'st-waiting' },
+      'On Going': { label:'Em andamento', cls:'st-doing' },
+      'Paused':   { label:'Pausada',      cls:'st-paused' },
+      'Done':     { label:'Concluída',    cls:'st-done' },
     };
-    const STATUS_NOTION = ['Backlog','To-Do','Waiting','Done'];
+    const STATUS_NOTION = ['Backlog','To-Do','Waiting','On Going','Paused','Done'];
     const OWNERS = ['Hubii','Ambos','Parceiro'];
 
+    // Tarefas da Ultragaz (relação Task List da página Companies/Ultragaz).
+    // Dados puxados do Notion em 13/out/2026. "semana" vem do campo Week (ISO, ano 2026).
+    // "ordem" não existe no Notion: usa a ordem desta lista.
     const TASKS = [
-      { key:'t_magalu',   title:'negociação com Magalu',   owner:'Hubii',    status:'Backlog', originalStatus:'Backlog', semana:null, ordem:1, url:'https://app.notion.com/p/3dcef5854ef380a6b97fd6ad009d3f42', updates:[] },
-      { key:'t_99',       title:'negociação com 99',       owner:'Hubii',    status:'Backlog', originalStatus:'Backlog', semana:null, ordem:2, url:'https://app.notion.com/p/3dcef5854ef380de8cfcf7313f09f527', updates:[] },
-      { key:'t_contrato', title:'assinatura do contrato',  owner:'Ambos',    status:'To-Do',   originalStatus:'To-Do',   semana:null, ordem:3, url:'https://app.notion.com/p/3dcef5854ef380b6867fe416dd3ba7ca', updates:[] },
-      { key:'t_ifood',    title:'ok comercial por iFood',  owner:'Ambos',    status:'Waiting', originalStatus:'Waiting', semana:null, ordem:4, url:'https://app.notion.com/p/3dcef5854ef380d092c7e5ac44d06b57', updates:[] },
-      { key:'t_bp',       title:'aprovação do BP',         owner:'Parceiro', status:'Waiting', originalStatus:'Waiting', semana:null, ordem:5, url:'https://app.notion.com/p/3dcef5854ef38036a29ae308f77d20dd', updates:[] },
+      { key:'t_contrato', title:'assinatura do contrato', owner:'Ambos', status:'Waiting', originalStatus:'Waiting', semana:'2026-W41', ordem:1,
+        url:'https://app.notion.com/p/3dcef5854ef380b6867fe416dd3ba7ca',
+        updates:[
+          { date:'15-set', text:'teste' },
+          { date:'', text:'precisamos dar o ok nas cláusulas no contrato // enviar o texto sugestão da cláusula de multa' }
+        ] },
+      { key:'t_ifood', title:'ok comercial par iFood', owner:'Ambos', status:'Done', originalStatus:'Done', semana:'2026-W40', ordem:2,
+        url:'https://app.notion.com/p/3dcef5854ef380d092c7e5ac44d06b57',
+        updates:[
+          { date:'16-set', text:'ontem sinalizamos os iFood que devemos fazer o Go Live em no máximo 45 dias' }
+        ] },
+      { key:'t_bp', title:'aprovação do BP', owner:'Parceiro', status:'Done', originalStatus:'Done', semana:'2026-W40', ordem:3,
+        url:'https://app.notion.com/p/3dcef5854ef38036a29ae308f77d20dd',
+        updates:[
+          { date:'16-set', text:'material está com time UG para aprovação interna' }
+        ] },
+      { key:'t_setup', title:'set up loja iFood', owner:'Hubii', status:'To-Do', originalStatus:'To-Do', semana:'2026-W42', ordem:4,
+        url:'https://app.notion.com/p/3f8ef5854ef38096abe0eea4f39af02f', updates:[] },
+      { key:'t_lista', title:'lista de hubs para piloto', owner:'Parceiro', status:'To-Do', originalStatus:'To-Do', semana:'2026-W42', ordem:5,
+        url:'https://app.notion.com/p/3f8ef5854ef380bca8d8e8669e61698c', updates:[] },
+      { key:'t_deepdive', title:'deep dive hub e painel Hubii', owner:'Ambos', status:'To-Do', originalStatus:'To-Do', semana:'2026-W43', ordem:6,
+        url:'https://app.notion.com/p/3f8ef5854ef3808ab09ec6b722c63d8d', updates:[] },
     ];
 
     // Atas. Ano 2026 e tipo são premissas: a fonte atual não traz esses campos.
@@ -2003,7 +2022,7 @@ body{
 
     function buildTaskBody(t){
       const hist = t.updates.length
-        ? t.updates.slice().reverse().map(u => `<li><b>${esc(u.date)}:</b> ${esc(u.text)}</li>`).join('')
+        ? t.updates.slice().reverse().map(u => `<li>${u.date ? `<b>${esc(u.date)}:</b> ` : ''}${esc(u.text)}</li>`).join('')
         : '<li>Nenhuma atualização registrada ainda.</li>';
       return pillGroup('Status', STATUS_NOTION.map(v => ({ value: v, label: STATUS[v].label })), t.status, 'status', false)
         + pillGroup('Responsável', OWNERS.map(o => ({ value: o, label: o })), t.owner, 'owner', true)
