@@ -1087,6 +1087,69 @@ body{
 .pa-v{ font:600 20px 'Onest', sans-serif; fill: var(--ink); letter-spacing:-.01em; }
 .pa-s{ font:400 11px 'Onest', sans-serif; fill: var(--ink-soft); }
 .pa-l{ font:500 11.5px 'Onest', sans-serif; fill: var(--ink-soft); }
+/* TAREFAS — fase 1 */
+.tasks-title-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.tasks-title{font-size:20px;font-weight:800;letter-spacing:-0.01em;}
+.count-chip{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--purple-glow);color:var(--purple-deep);}
+.sec-row{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.new-task-btn{font-family:'Onest',sans-serif;font-size:12px;font-weight:600;letter-spacing:0;text-transform:none;background:var(--purple);color:#fff;border:none;border-radius:999px;padding:6px 14px;cursor:pointer;}
+.new-task-btn:hover{background:var(--purple-deep);}
+.filter-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+.fchip{font-family:'IBM Plex Mono',monospace;font-size:11.5px;padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);cursor:pointer;}
+.fchip span{opacity:.7;margin-left:4px;}
+.fchip.active{background:var(--purple);border-color:var(--purple);color:#fff;}
+.week-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:12px 4px 6px;border-bottom:1px solid var(--line);font-weight:700;font-size:13px;}
+.week-head small{font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;color:var(--ink-soft);}
+.trow{display:flex;align-items:center;gap:12px;padding:11px 4px;border-bottom:1px solid var(--line);cursor:pointer;border-radius:6px;}
+.trow:hover{background:var(--paper);}
+.trow.is-done .ttitle{color:var(--potencial);text-decoration:line-through;}
+.tchk{width:17px;height:17px;border-radius:5px;border:1.5px solid #cfc9e8;flex:none;cursor:pointer;background-color:#fff;}
+.tchk.on{background-color:var(--purple);border-color:var(--purple);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5'%3E%3Cpath d='M4 12l5 5L20 6'/%3E%3C/svg%3E");background-size:11px 11px;background-repeat:no-repeat;background-position:center;}
+.ttext{flex:1;min-width:0;font-size:14px;display:flex;align-items:center;flex-wrap:wrap;gap:6px;}
+.ttitle{color:var(--ink);}
+.tbadge{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:2px 8px;}
+.tstatus{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;flex:none;}
+.st-backlog{color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);}
+.st-todo{color:#4d6478;background:#e8eef3;}
+.st-waiting{color:var(--amber);background:var(--amber-bg);}
+.st-doing{color:var(--purple-deep);background:var(--purple-glow);}
+.st-paused{color:#b8372b;background:#fbe6e3;}
+.st-done{color:var(--foco);background:var(--foco-bg);}
+.empty{font-size:13px;color:var(--ink-soft);padding:14px 4px;}
+.done-block{margin-top:14px;}
+.done-block summary{cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);padding:8px 4px;list-style-position:inside;}
+.done-count{opacity:.7;margin-left:4px;}
+.done-block .panel{margin-top:6px;}
+.mode-select{font-family:'IBM Plex Mono',monospace;font-size:11px;border:1px solid var(--line);border-radius:8px;padding:4px 6px;background:var(--card);color:var(--ink-soft);}
+
+/* ATAS — grupos recolhidos */
+.ata-group{border-bottom:1px solid var(--line);}
+.ata-group > summary{cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);padding:10px 6px;}
+.ata-group > summary span{opacity:.7;margin-left:6px;}
+.ata-old{padding:0 6px 0 16px;}
+.ata-old > summary{cursor:pointer;font-size:13px;font-weight:600;padding:8px 0;}
+.ata-body{padding:4px 0 12px;}
+
+/* MODAL — pills, formulários */
+.mgroup{margin-bottom:16px;}
+.mlabel{font-family:'IBM Plex Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--purple-deep);font-weight:700;margin-bottom:8px;}
+.req{color:#c0392b;}
+.pills{display:flex;flex-wrap:wrap;gap:6px;}
+.pill{font-family:'Onest',sans-serif;font-size:12.5px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);cursor:pointer;}
+.pill:hover:not(:disabled){border-color:var(--purple);color:var(--purple-deep);}
+.pill.on{background:var(--purple);border-color:var(--purple);color:#fff;}
+.pill:disabled{cursor:default;opacity:.6;}
+.mnote{font-size:12px;color:var(--ink-soft);margin:-8px 0 16px;}
+.minput{width:100%;font-family:'Onest',sans-serif;font-size:14px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;color:var(--ink);}
+.minput:focus{outline:none;border-color:var(--purple);}
+.merr{color:#c0392b;font-size:12px;min-height:16px;margin-top:4px;}
+
+/* BADGE DE ATUALIZAÇÃO + TOAST */
+.upd-badge{position:fixed;right:20px;bottom:18px;z-index:50;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 6px 6px 14px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);box-shadow:0 8px 20px -12px rgba(99,72,229,.4);display:flex;align-items:center;gap:8px;}
+.upd-badge button{width:26px;height:26px;border-radius:999px;border:none;background:var(--paper);color:var(--purple-deep);cursor:pointer;font-size:14px;}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;background:var(--ink);color:#fff;font-size:13px;padding:9px 16px;border-radius:999px;transition:opacity .2s ease,transform .2s ease;pointer-events:none;z-index:200;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
 </style>
 </head>
 <body>
@@ -1639,63 +1702,31 @@ body{
 
   <!-- TAREFAS -->
   <div class="tab-panel" id="panel-tarefas">
-    <div class="section-label first">Pendências</div>
-    <div class="panel">
-
-      <div class="owner-group">
-        <div class="owner-header"><span class="owner-badge hubii">HUBII</span></div>
-        <div class="task" data-task data-status="t_magalu">
-          <div class="check" data-check><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
-          <div class="task-text">negociação com Magalu</div>
-        </div>
-        <div class="task" data-task data-status="t_99">
-          <div class="check" data-check><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
-          <div class="task-text">negociação com 99</div>
-        </div>
-      </div>
-
-      <div class="owner-group">
-        <div class="owner-header"><span class="owner-badge ambos">AMBOS</span></div>
-        <div class="task" data-task data-status="t_contrato">
-          <div class="check" data-check><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
-          <div class="task-text">assinatura do contrato</div>
-        </div>
-        <div class="task" data-task data-status="t_ifood">
-          <div class="check" data-check><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
-          <div class="task-text">ok comercial por iFood</div>
-        </div>
-      </div>
-
-      <div class="owner-group">
-        <div class="owner-header"><span class="owner-badge parceiro">PARCEIRO</span></div>
-        <div class="task" data-task data-status="t_bp">
-          <div class="check" data-check><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
-          <div class="task-text">aprovação do BP</div>
-        </div>
-      </div>
-
+    <div class="tasks-title-row">
+      <h3 class="tasks-title">Tarefas</h3><span class="count-chip" id="tasksCountChip">0/0</span>
     </div>
 
-    <div class="section-label">Atas</div>
-    <div class="panel">
-      <div class="ata-card" data-meeting="m1">
-        <div class="ata-date">10<span>AGO</span></div>
-        <div class="ata-info">
-          <div class="ata-title">Alinhamento Hubii</div>
-          <div class="ata-teaser">Reunião realizada — ata automática não registrou pauta nem decisões</div>
-        </div>
-        <div class="ata-arrow">→</div>
-      </div>
-      <div class="ata-card" data-meeting="m2">
-        <div class="ata-date">10<span>SET</span></div>
-        <div class="ata-info">
-          <div class="ata-title">iFood + Ultragaz</div>
-          <div class="ata-teaser">Reunião de parceria — modelo de negócio, price zones e go-to-market</div>
-        </div>
-        <div class="ata-arrow">→</div>
-      </div>
+    <div class="section-label first sec-row">Pendências <button type="button" class="new-task-btn" id="btnNewTask">+ Nova tarefa</button></div>
+    <div class="filter-row" id="weekFilters"></div>
+    <div class="panel" id="pendencias"></div>
+
+    <details class="done-block" id="historyBlock">
+      <summary>Histórico de concluídas <span class="done-count" id="historyCount"></span></summary>
+      <div class="panel" id="historyList"></div>
+    </details>
+
+    <div class="section-label sec-row">Atas
+      <select id="ataMode" class="mode-select" aria-label="Agrupar atas">
+        <option value="mes">Por mês</option>
+        <option value="tipo">Por tipo</option>
+      </select>
     </div>
+    <div class="panel" id="atasRecent"></div>
+    <div id="atasOld"></div>
   </div>
+
+  <div class="upd-badge" id="updBadge"><span id="updText"></span><button type="button" id="updBtn" title="Recarregar">↻</button></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <div class="footer-note">Atualizado a partir do Notion · <b>Hubii</b> × Ultragaz</div>
 
@@ -1740,243 +1771,488 @@ body{
     });
   });
 
-  // Checklist + status modal (mesma arquitetura da Iconic)
-  const tasks = document.querySelectorAll('[data-task]');
-  const total = tasks.length;
-  const tabCount = document.getElementById('tabCount');
+  // ===== Tarefas e Atas — fase 1 =====
+  // Endpoints usados: POST /api/complete-task (status) e POST /api/add-update (histórico).
+  // Ainda não existem: leitura da base, criação de tarefa e troca de responsável.
+  (function(){
+    const $ = id => document.getElementById(id);
+    const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const MESES = ['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
+    const MESES_LONG = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
 
-  function updateProgress(){
-    const done = document.querySelectorAll('[data-task].done').length;
-    tabCount.textContent = done + '/' + total;
-  }
+    // Status: os nomes são os do Notion. "Em andamento" e "Pausada" têm estilo
+    // definido, mas não aparecem nos pills porque não existem no Notion hoje.
+    const STATUS = {
+      'Backlog':      { label:'Backlog',      cls:'st-backlog' },
+      'To-Do':        { label:'A fazer',      cls:'st-todo' },
+      'Waiting':      { label:'Aguardando',   cls:'st-waiting' },
+      'Em andamento': { label:'Em andamento', cls:'st-doing' },
+      'Pausada':      { label:'Pausada',      cls:'st-paused' },
+      'Done':         { label:'Concluída',    cls:'st-done' },
+    };
+    const STATUS_NOTION = ['Backlog','To-Do','Waiting','Done'];
+    const OWNERS = ['Hubii','Ambos','Parceiro'];
 
-  function notionPageIdFromUrl(url){
-    const match = url.match(/([a-f0-9]{32})/i);
-    if(!match) return null;
-    const hex = match[1];
-    return `${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20)}`;
-  }
+    const TASKS = [
+      { key:'t_magalu',   title:'negociação com Magalu',   owner:'Hubii',    status:'Backlog', originalStatus:'Backlog', semana:null, ordem:1, url:'https://app.notion.com/p/3dcef5854ef380a6b97fd6ad009d3f42', updates:[] },
+      { key:'t_99',       title:'negociação com 99',       owner:'Hubii',    status:'Backlog', originalStatus:'Backlog', semana:null, ordem:2, url:'https://app.notion.com/p/3dcef5854ef380de8cfcf7313f09f527', updates:[] },
+      { key:'t_contrato', title:'assinatura do contrato',  owner:'Ambos',    status:'To-Do',   originalStatus:'To-Do',   semana:null, ordem:3, url:'https://app.notion.com/p/3dcef5854ef380b6867fe416dd3ba7ca', updates:[] },
+      { key:'t_ifood',    title:'ok comercial por iFood',  owner:'Ambos',    status:'Waiting', originalStatus:'Waiting', semana:null, ordem:4, url:'https://app.notion.com/p/3dcef5854ef380d092c7e5ac44d06b57', updates:[] },
+      { key:'t_bp',       title:'aprovação do BP',         owner:'Parceiro', status:'Waiting', originalStatus:'Waiting', semana:null, ordem:5, url:'https://app.notion.com/p/3dcef5854ef38036a29ae308f77d20dd', updates:[] },
+    ];
 
-  const TASKS = {
-    t_magalu: { title:"negociação com Magalu", owner:"Hubii", done:false, originalStatus:"Backlog", url:"https://app.notion.com/p/3dcef5854ef380a6b97fd6ad009d3f42", updates:[] },
-    t_99: { title:"negociação com 99", owner:"Hubii", done:false, originalStatus:"Backlog", url:"https://app.notion.com/p/3dcef5854ef380de8cfcf7313f09f527", updates:[] },
-    t_contrato: { title:"assinatura do contrato", owner:"Ambos", done:false, originalStatus:"To-Do", url:"https://app.notion.com/p/3dcef5854ef380b6867fe416dd3ba7ca", updates:[] },
-    t_ifood: { title:"ok comercial por iFood", owner:"Ambos", done:false, originalStatus:"Waiting", url:"https://app.notion.com/p/3dcef5854ef380d092c7e5ac44d06b57", updates:[] },
-    t_bp: { title:"aprovação do BP", owner:"Parceiro", done:false, originalStatus:"Waiting", url:"https://app.notion.com/p/3dcef5854ef38036a29ae308f77d20dd", updates:[] },
-  };
+    // Atas. Ano 2026 e tipo são premissas: a fonte atual não traz esses campos.
+    const ATAS = {
+      m1: {
+        ano:2026, mes:8, dia:10, tipo:'Acompanhamento',
+        title:'Alinhamento Hubii',
+        sub:'10/ago · Reunião de acompanhamento do projeto',
+        teaser:'Reunião realizada — ata automática não registrou pauta nem decisões',
+        url:'https://app.notion.com/p/3b8ef5854ef380d880fdef6cbe99c9c2',
+        sections:[
+          { label:'Registro', items:[
+            'Reunião com Matheus, Leonardo e Pat, transcrita automaticamente',
+            'A ata automática cobriu apenas os cumprimentos iniciais, sem detalhamento de pauta, decisões ou encaminhamentos'
+          ]}
+        ]
+      },
+      m2: {
+        ano:2026, mes:9, dia:10, tipo:'Parceria',
+        title:'iFood + Ultragaz',
+        sub:'10/set · Reunião de parceria — venda de gás via iFood',
+        teaser:'Reunião de parceria — modelo de negócio, price zones e go-to-market',
+        url:'https://app.notion.com/p/3d7ef5854ef380c288e6eb41f920683b',
+        sections:[
+          { label:'Contexto', items:[
+            'Encontro entre iFood Shopping (Pascucci, Luiz) e Ultragaz (Paty, Matheus) para explorar a parceria',
+            'Já existe parceria anterior no projeto Revenda do Futuro, incluindo integração de pagamento nas maquininhas',
+            'Em 2018 houve um teste em Salvador de venda de gás via iFood, com bons resultados, mas desmobilizado na época'
+          ]},
+          { label:'Modelo de negócio', items:[
+            'Take rate acordado: 6%, com 2% reinvestidos em frete grátis permanente ao consumidor',
+            'Ticket médio de R$117 com frete grátis incluso; receita líquida do iFood é 9,4% do GMV',
+            'Em discussão: repassar o frete e reenquadrar a taxa para 8%'
+          ]},
+          { label:'Go-to-market', items:[
+            'Praça inicial: São Paulo e ABC (Mercado GSP); SKU inicial apenas P13',
+            'Potencial de expansão: 3.400 municípios, 5.000–6.000 revendas no Brasil',
+            'Foco exclusivo nas 6.000 revendas exclusivas Ultragaz (bandeiras brancas ficam de fora)',
+            'Dois modelos de onboarding em avaliação: adesão automática vs. aceite individual pelo painel Rubi'
+          ]},
+          { label:'Itens de ação', items:[
+            'Consultar Matheus sobre tempo máximo tolerável de pedidos atrasados',
+            'Avaliar repasse do frete ao consumidor e reenquadramento do take rate para 8%',
+            'Paty e Matheus compartilharem volume de vendas com o time do iFood',
+            'Luizão realizar projeções de GMV e share de mercado digital vs. offline',
+            'Definir modelo de onboarding de revendas (adesão automática vs. painel Rubi)'
+          ]}
+        ]
+      },
+    };
 
-  tasks.forEach(t => {
-    const checkEl = t.querySelector('[data-check]');
-    checkEl.addEventListener('click', async (e) => {
-      e.stopPropagation();
-      const wasDone = t.classList.contains('done');
-      const nowDone = !wasDone;
-      t.classList.toggle('done', nowDone);
-      updateProgress();
+    let weekFilter = 'all';
+    let modalCtx = null;
+    let lastUpdated = new Date();
 
-      const key = t.dataset.status;
-      const taskData = TASKS[key];
-      if(taskData){
-        taskData.done = nowDone;
-        // Ao marcar, vai para "Done". Ao desmarcar, volta para o status ORIGINAL
-        // que a tarefa tinha no Notion (não um valor fixo) — To-Do ou Waiting, conforme o caso.
-        const targetStatus = nowDone ? 'Done' : taskData.originalStatus;
-        const pageId = notionPageIdFromUrl(taskData.url);
-        if(pageId){
-          try{
-            const resp = await fetch('/api/complete-task', {
-              method: 'POST',
-              credentials: 'same-origin',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ pageId, status: targetStatus }),
-            });
-            if(!resp.ok){
-              console.error('Falha ao atualizar status no Notion:', resp.status, await resp.text());
-            }
-          }catch(err){
-            console.error('Falha ao atualizar status no Notion:', err);
-          }
-        }
-      }
-    });
-    t.addEventListener('click', () => {
-      openTaskStatus(t.dataset.status);
-    });
-  });
-
-  updateProgress();
-
-  // Meeting / milestone summaries
-  const COMPANY_URL = "https://app.notion.com/p/24def5854ef38079a874d02c63bdb656";
-  const MEETINGS = {
-    m1: {
-      title: "Alinhamento Hubii",
-      sub: "10/ago · Reunião de acompanhamento do projeto",
-      url: "https://app.notion.com/p/3b8ef5854ef380d880fdef6cbe99c9c2",
-      sections: [
-        { label: "Registro", items: [
-          "Reunião com Matheus, Leonardo e Pat, transcrita automaticamente",
-          "A ata automática cobriu apenas os cumprimentos iniciais, sem detalhamento de pauta, decisões ou encaminhamentos"
-        ]}
-      ]
-    },
-    m2: {
-      title: "iFood + Ultragaz",
-      sub: "10/set · Reunião de parceria — venda de gás via iFood",
-      url: "https://app.notion.com/p/3d7ef5854ef380c288e6eb41f920683b",
-      sections: [
-        { label: "Contexto", items: [
-          "Encontro entre iFood Shopping (Pascucci, Luiz) e Ultragaz (Paty, Matheus) para explorar a parceria",
-          "Já existe parceria anterior no projeto Revenda do Futuro, incluindo integração de pagamento nas maquininhas",
-          "Em 2018 houve um teste em Salvador de venda de gás via iFood, com bons resultados, mas desmobilizado na época"
-        ]},
-        { label: "Modelo de negócio", items: [
-          "Take rate acordado: 6%, com 2% reinvestidos em frete grátis permanente ao consumidor",
-          "Ticket médio de R$117 com frete grátis incluso; receita líquida do iFood é 9,4% do GMV",
-          "Em discussão: repassar o frete e reenquadrar a taxa para 8%"
-        ]},
-        { label: "Go-to-market", items: [
-          "Praça inicial: São Paulo e ABC (Mercado GSP); SKU inicial apenas P13",
-          "Potencial de expansão: 3.400 municípios, 5.000–6.000 revendas no Brasil",
-          "Foco exclusivo nas 6.000 revendas exclusivas Ultragaz (bandeiras brancas ficam de fora)",
-          "Dois modelos de onboarding em avaliação: adesão automática vs. aceite individual pelo painel Rubi"
-        ]},
-        { label: "Itens de ação", items: [
-          "Consultar Matheus sobre tempo máximo tolerável de pedidos atrasados",
-          "Avaliar repasse do frete ao consumidor e reenquadramento do take rate para 8%",
-          "Paty e Matheus compartilharem volume de vendas com o time do iFood",
-          "Luizão realizar projeções de GMV e share de mercado digital vs. offline",
-          "Definir modelo de onboarding de revendas (adesão automática vs. painel Rubi)"
-        ]}
-      ]
-    },
-  };
-
-  const modal = document.getElementById('meetingModal');
-  const modalEyebrow = document.getElementById('modalEyebrow');
-  const modalTitle = document.getElementById('modalTitle');
-  const modalSub = document.getElementById('modalSub');
-  const modalBody = document.getElementById('modalBody');
-  const modalLink = document.getElementById('modalLink');
-  const modalAddUpdate = document.getElementById('modalAddUpdate');
-  const modalUpdateText = document.getElementById('modalUpdateText');
-  const modalUpdateSave = document.getElementById('modalUpdateSave');
-  const modalUpdateFeedback = document.getElementById('modalUpdateFeedback');
-  let currentTaskKey = null;
-
-  function todayLabel(){
-    const meses = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
-    const now = new Date();
-    return String(now.getDate()).padStart(2,'0') + '-' + meses[now.getMonth()];
-  }
-
-  function openMeeting(key){
-    const m = MEETINGS[key];
-    if(!m) return;
-    currentTaskKey = null;
-    modalAddUpdate.style.display = 'none';
-    modalEyebrow.textContent = 'Meeting Notes · Notion';
-    modalTitle.textContent = m.title;
-    modalSub.textContent = m.sub;
-    modalLink.href = m.url;
-    modalBody.innerHTML = m.sections.map(sec => `
-      <div class="modal-section">
-        <div class="modal-section-label">${sec.label}</div>
-        <ul>${sec.items.map(it => `<li>${it}</li>`).join('')}</ul>
-      </div>
-    `).join('');
-    modal.classList.add('open');
-  }
-
-  function renderTaskHistory(t){
-    if(t.updates.length === 0){
-      modalBody.innerHTML = '<div class="modal-section"><div class="modal-section-label">Histórico</div><ul><li>Nenhuma atualização registrada ainda.</li></ul></div>';
-    } else {
-      const items = t.updates.slice().reverse().map(u => `<li><b>${u.date}:</b> ${u.text}</li>`).join('');
-      modalBody.innerHTML = `<div class="modal-section"><div class="modal-section-label">Histórico</div><ul>${items}</ul></div>`;
+    // ---------- utilitários ----------
+    function notionPageIdFromUrl(url){
+      const m = url.match(/([a-f0-9]{32})/i);
+      if(!m) return null;
+      const h = m[1];
+      return `${h.slice(0,8)}-${h.slice(8,12)}-${h.slice(12,16)}-${h.slice(16,20)}-${h.slice(20)}`;
     }
-  }
-
-  function openTaskStatus(key){
-    const t = TASKS[key];
-    if(!t) return;
-    currentTaskKey = key;
-    modalEyebrow.textContent = 'Tarefa · Notion';
-    modalTitle.textContent = t.title;
-    const statusLabel = t.done ? 'Concluída' : 'Em aberto';
-    modalSub.textContent = t.owner + ' · ' + statusLabel;
-    modalLink.href = t.url;
-    renderTaskHistory(t);
-    modalAddUpdate.style.display = 'block';
-    modalUpdateText.value = '';
-    modalUpdateFeedback.textContent = '';
-    modalUpdateFeedback.className = 'modal-update-feedback';
-    modalUpdateSave.disabled = false;
-    modalUpdateSave.textContent = 'Salvar no Notion';
-    modal.classList.add('open');
-  }
-
-  modalUpdateSave.addEventListener('click', async () => {
-    const key = currentTaskKey;
-    const t = TASKS[key];
-    if(!t) return;
-    const text = modalUpdateText.value.trim();
-    if(!text){
-      modalUpdateFeedback.textContent = 'Escreva algo antes de salvar.';
-      modalUpdateFeedback.className = 'modal-update-feedback error';
-      return;
+    // Semana ISO: retorna { y, w }
+    function isoWeekInfo(d){
+      const t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+      const day = t.getUTCDay() || 7;
+      t.setUTCDate(t.getUTCDate() + 4 - day);
+      const y0 = new Date(Date.UTC(t.getUTCFullYear(), 0, 1));
+      return { y: t.getUTCFullYear(), w: Math.ceil(((t - y0) / 86400000 + 1) / 7) };
     }
-    const pageId = notionPageIdFromUrl(t.url);
-    if(!pageId){
-      modalUpdateFeedback.textContent = 'Não foi possível identificar a página no Notion.';
-      modalUpdateFeedback.className = 'modal-update-feedback error';
-      return;
+    const weekKey = i => `${i.y}-W${String(i.w).padStart(2,'0')}`;
+    const weekNum = k => Number(k.split('-W')[1]);
+    const weekLabel = k => 'S' + weekNum(k);
+    const weekNumLabel = k => 'Semana ' + weekNum(k);
+    const pad = n => String(n).padStart(2,'0');
+    const fmtStamp = d => `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()} às ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+
+    let toastTimer = null;
+    function toast(msg){
+      const el = $('toast');
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
     }
-    const date = todayLabel();
-    modalUpdateSave.disabled = true;
-    modalUpdateSave.textContent = 'Salvando...';
-    modalUpdateFeedback.textContent = '';
-    try{
-      const resp = await fetch('/api/add-update', {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ pageId, date, text }),
+
+    function updateProgress(){
+      const d = TASKS.filter(t => t.status === 'Done').length;
+      const txt = `${d}/${TASKS.length}`;
+      $('tabCount').textContent = txt;
+      $('tasksCountChip').textContent = txt;
+    }
+
+    // ---------- Pendências ----------
+    const rowHTML = t => {
+      const done = t.status === 'Done';
+      const st = STATUS[t.status] || { label: t.status, cls: 'st-backlog' };
+      return `<div class="trow ${done ? 'is-done' : ''}" data-row="${esc(t.key)}">
+        <div class="tchk ${done ? 'on' : ''}" data-chk="${esc(t.key)}" role="checkbox" aria-checked="${done}"></div>
+        <div class="ttext"><span class="ttitle">${esc(t.title)}</span><span class="tbadge">${esc(t.owner)}</span></div>
+        <span class="tstatus ${st.cls}">${esc(st.label)}</span>
+      </div>`;
+    };
+
+    function renderTasks(){
+      const weeks = [...new Set(TASKS.map(t => t.semana).filter(Boolean))].sort().reverse();
+      const chip = (f, label, n) => `<button type="button" class="fchip ${weekFilter === f ? 'active' : ''}" data-f="${esc(f)}">${esc(label)} <span>${n}</span></button>`;
+      let chips = chip('all', 'Todas', TASKS.length) + weeks.map(k => chip(k, weekLabel(k), TASKS.filter(t => t.semana === k).length)).join('');
+      const nNone = TASKS.filter(t => !t.semana).length;
+      if(nNone) chips += chip('none', 'Sem semana', nNone);
+      $('weekFilters').innerHTML = chips;
+
+      const visible = TASKS.filter(t => weekFilter === 'all' || (weekFilter === 'none' ? !t.semana : t.semana === weekFilter));
+      const active = visible.filter(t => t.status !== 'Done');
+      const doneList = visible.filter(t => t.status === 'Done').sort((a,b) => a.ordem - b.ordem);
+
+      const groupKeys = [...new Set(active.map(t => t.semana || 'none'))]
+        .sort((a,b) => a === 'none' ? 1 : b === 'none' ? -1 : b.localeCompare(a));
+      let html = '';
+      groupKeys.forEach(k => {
+        const all = TASKS.filter(t => (t.semana || 'none') === k);
+        const nd = all.filter(t => t.status === 'Done').length;
+        html += `<div class="week-head"><span>${k === 'none' ? 'Sem semana definida' : weekNumLabel(k)}</span><small>${nd}/${all.length} concluídas</small></div>`;
+        active.filter(t => (t.semana || 'none') === k).sort((a,b) => a.ordem - b.ordem).forEach(t => { html += rowHTML(t); });
       });
-      const ct = resp.headers.get('content-type') || '';
-      let data;
-      if(ct.includes('application/json')){
-        data = await resp.json();
-      } else {
-        const raw = await resp.text();
-        throw new Error(`resposta inesperada do servidor (HTTP ${resp.status}): ${raw.slice(0,150)}`);
-      }
-      if(!resp.ok){
-        throw new Error((data && data.error && (data.error.message || JSON.stringify(data.error))) || 'Erro desconhecido');
-      }
-      t.updates.push({ date, text });
-      modalUpdateFeedback.textContent = 'Salvo com sucesso!';
-      modalUpdateFeedback.className = 'modal-update-feedback success';
-      modalUpdateText.value = '';
-      renderTaskHistory(t);
-    }catch(err){
-      modalUpdateFeedback.textContent = 'Falha ao salvar: ' + err.message;
-      modalUpdateFeedback.className = 'modal-update-feedback error';
-    }finally{
-      modalUpdateSave.disabled = false;
-      modalUpdateSave.textContent = 'Salvar no Notion';
-    }
-  });
+      $('pendencias').innerHTML = active.length ? html : '<div class="empty">Nenhuma tarefa ativa nesta semana.</div>';
 
-  document.querySelectorAll('[data-meeting]').forEach(el => {
-    el.addEventListener('click', () => openMeeting(el.dataset.meeting));
-  });
-  modal.addEventListener('click', (e) => {
-    if(e.target === modal || e.target.hasAttribute('data-close')) modal.classList.remove('open');
-  });
-  document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape') modal.classList.remove('open');
-  });
+      $('historyCount').textContent = `(${doneList.length})`;
+      $('historyList').innerHTML = doneList.length ? doneList.map(rowHTML).join('') : '<div class="empty">Nenhuma tarefa concluída nesta semana.</div>';
+    }
+
+    function renderAll(){
+      renderTasks();
+      renderAtas();
+      updateProgress();
+    }
+
+    // Altera status com atualização otimista; reverte se o Notion não confirmar.
+    async function setStatus(t, next){
+      const prev = t.status;
+      t.status = next;
+      renderAll();
+      refreshTaskModal(t);
+      try{
+        const resp = await fetch('/api/complete-task', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ pageId: notionPageIdFromUrl(t.url), status: next }),
+        });
+        if(!resp.ok) throw new Error('HTTP ' + resp.status);
+      }catch(err){
+        console.error('Falha ao atualizar status no Notion:', err);
+        t.status = prev;
+        renderAll();
+        refreshTaskModal(t);
+        toast('Não foi possível salvar');
+      }
+    }
+
+    // Checkbox: marcar → Done; desmarcar → volta ao status original do Notion
+    // (mantido do comportamento atual; a spec pedia "Em andamento").
+    function toggleDone(key){
+      const t = TASKS.find(x => x.key === key);
+      if(!t) return;
+      const next = t.status === 'Done' ? t.originalStatus : 'Done';
+      setStatus(t, next);
+    }
+
+    // ---------- Modal compartilhado ----------
+    const modal = $('meetingModal');
+
+    function openModal({ eyebrow, title, sub, link, body, addUpdate }){
+      $('modalEyebrow').textContent = eyebrow;
+      $('modalTitle').textContent = title;
+      $('modalSub').textContent = sub || '';
+      const a = $('modalLink');
+      if(link){ a.href = link; a.parentElement.style.display = ''; }
+      else { a.parentElement.style.display = 'none'; }
+      $('modalBody').innerHTML = body;
+      $('modalAddUpdate').style.display = addUpdate ? 'block' : 'none';
+      resetUpdateForm();
+      modal.classList.add('open');
+    }
+    function closeModal(){
+      modal.classList.remove('open');
+      modalCtx = null;
+    }
+    function resetUpdateForm(){
+      $('modalUpdateText').value = '';
+      $('modalUpdateFeedback').textContent = '';
+      $('modalUpdateFeedback').className = 'modal-update-feedback';
+      $('modalUpdateSave').disabled = false;
+      $('modalUpdateSave').textContent = 'Salvar';
+    }
+
+    const pillGroup = (label, options, active, group, disabled) => `
+      <div class="mgroup">
+        <div class="mlabel">${esc(label)}</div>
+        <div class="pills">${options.map(o => `<button type="button" class="pill ${o.value === active ? 'on' : ''}" data-group="${esc(group)}" data-value="${esc(o.value)}" ${disabled ? 'disabled' : ''}>${esc(o.label)}</button>`).join('')}</div>
+      </div>`;
+
+    function buildTaskBody(t){
+      const hist = t.updates.length
+        ? t.updates.slice().reverse().map(u => `<li><b>${esc(u.date)}:</b> ${esc(u.text)}</li>`).join('')
+        : '<li>Nenhuma atualização registrada ainda.</li>';
+      return pillGroup('Status', STATUS_NOTION.map(v => ({ value: v, label: STATUS[v].label })), t.status, 'status', false)
+        + pillGroup('Responsável', OWNERS.map(o => ({ value: o, label: o })), t.owner, 'owner', true)
+        + '<div class="mnote">Troca de responsável ainda não está ligada: falta o endpoint.</div>'
+        + `<div class="modal-section"><div class="modal-section-label">Histórico</div><ul>${hist}</ul></div>`;
+    }
+
+    function openTask(key){
+      const t = TASKS.find(x => x.key === key);
+      if(!t) return;
+      modalCtx = { type: 'task', key };
+      openModal({
+        eyebrow: 'Tarefa · Notion',
+        title: t.title,
+        sub: `${t.owner} · ${STATUS[t.status].label}`,
+        link: t.url,
+        body: buildTaskBody(t),
+        addUpdate: true,
+      });
+    }
+
+    function refreshTaskModal(t){
+      if(!modal.classList.contains('open') || !modalCtx || modalCtx.type !== 'task' || modalCtx.key !== t.key) return;
+      $('modalSub').textContent = `${t.owner} · ${STATUS[t.status].label}`;
+      $('modalBody').innerHTML = buildTaskBody(t);
+    }
+
+    function openNewTask(){
+      modalCtx = { type: 'new' };
+      const now = new Date();
+      const curKey = weekKey(isoWeekInfo(now));
+      const weekOpts = [];
+      for(let k = -2; k <= 4; k++){
+        const info = isoWeekInfo(new Date(now.getTime() + k * 7 * 864e5));
+        weekOpts.push({ value: weekKey(info), label: 'S' + info.w });
+      }
+      weekOpts.push({ value: 'none', label: 'Sem semana' });
+      const body = `
+        <div class="mgroup">
+          <div class="mlabel">Título <span class="req">*</span></div>
+          <input id="ntTitle" class="minput" maxlength="200" placeholder="Ex.: negociação com ...">
+          <div class="merr" id="ntErr"></div>
+        </div>
+        ${pillGroup('Responsável', OWNERS.map(o => ({ value: o, label: o })), 'Hubii', 'nt-owner', false)}
+        ${pillGroup('Status', STATUS_NOTION.filter(v => v !== 'Done').map(v => ({ value: v, label: STATUS[v].label })), 'Backlog', 'nt-status', false)}
+        ${pillGroup('Semana', weekOpts, curKey, 'nt-week', false)}
+        <div class="mgroup">
+          <div class="mlabel">Primeira atualização (opcional)</div>
+          <textarea id="ntUpd" class="modal-update-input" rows="2" placeholder="Ex.: contexto inicial"></textarea>
+        </div>
+        <div class="modal-update-row">
+          <button type="button" id="ntSave" class="modal-update-btn">Criar tarefa</button>
+          <span id="ntFeedback" class="modal-update-feedback"></span>
+        </div>`;
+      openModal({ eyebrow: 'Nova tarefa', title: 'Nova tarefa', sub: 'Responsável, status e semana iniciais', link: null, body, addUpdate: false });
+    }
+
+    // Sem endpoint de criação: a tarefa não é salva e o modal permanece aberto.
+    function saveNewTask(){
+      const title = $('ntTitle').value.trim();
+      if(!title){
+        $('ntErr').textContent = 'Escreva um título para a tarefa.';
+        $('ntTitle').focus();
+        return;
+      }
+      $('ntErr').textContent = '';
+      $('ntFeedback').textContent = 'Criação não está ligada: falta o endpoint de criação no backend.';
+      $('ntFeedback').className = 'modal-update-feedback error';
+    }
+
+    // Histórico: texto do usuário vai escapado; salva via /api/add-update.
+    $('modalUpdateSave').addEventListener('click', async () => {
+      if(!modalCtx || modalCtx.type !== 'task') return;
+      const t = TASKS.find(x => x.key === modalCtx.key);
+      if(!t) return;
+      const text = $('modalUpdateText').value.trim();
+      if(!text){
+        $('modalUpdateFeedback').textContent = 'Escreva algo antes de salvar.';
+        $('modalUpdateFeedback').className = 'modal-update-feedback error';
+        return;
+      }
+      const pageId = notionPageIdFromUrl(t.url);
+      if(!pageId){
+        $('modalUpdateFeedback').textContent = 'Não foi possível identificar a página no Notion.';
+        $('modalUpdateFeedback').className = 'modal-update-feedback error';
+        return;
+      }
+      const d = new Date();
+      const date = `${pad(d.getDate())}-${MESES_LONG[d.getMonth()].slice(0,3)}`;
+      $('modalUpdateSave').disabled = true;
+      $('modalUpdateSave').textContent = 'Salvando...';
+      $('modalUpdateFeedback').textContent = '';
+      try{
+        const resp = await fetch('/api/add-update', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ pageId, date, text }),
+        });
+        const ct = resp.headers.get('content-type') || '';
+        if(!ct.includes('application/json')){
+          const raw = await resp.text();
+          throw new Error(`resposta inesperada do servidor (HTTP ${resp.status}): ${raw.slice(0,150)}`);
+        }
+        const data = await resp.json();
+        if(!resp.ok){
+          throw new Error((data && data.error && (data.error.message || JSON.stringify(data.error))) || 'Erro desconhecido');
+        }
+        t.updates.push({ date, text });
+        $('modalUpdateText').value = '';
+        $('modalUpdateFeedback').textContent = 'Salvo com sucesso!';
+        $('modalUpdateFeedback').className = 'modal-update-feedback success';
+        refreshTaskModal(t);
+      }catch(err){
+        $('modalUpdateFeedback').textContent = 'Falha ao salvar: ' + err.message;
+        $('modalUpdateFeedback').className = 'modal-update-feedback error';
+      }finally{
+        $('modalUpdateSave').disabled = false;
+        $('modalUpdateSave').textContent = 'Salvar';
+      }
+    });
+
+    // Pills e botão de criação dentro do modal (delegação)
+    $('modalBody').addEventListener('click', e => {
+      if(e.target.closest('#ntSave')) { saveNewTask(); return; }
+      const pill = e.target.closest('.pill');
+      if(!pill || pill.disabled) return;
+      pill.parentElement.querySelectorAll('.pill').forEach(p => p.classList.toggle('on', p === pill));
+      if(pill.dataset.group === 'status' && modalCtx && modalCtx.type === 'task'){
+        const t = TASKS.find(x => x.key === modalCtx.key);
+        if(t && t.status !== pill.dataset.value) setStatus(t, pill.dataset.value);
+      }
+    });
+
+    // Fechamento: ✕, clique fora e ESC
+    modal.addEventListener('click', e => {
+      if(e.target === modal || e.target.hasAttribute('data-close')) closeModal();
+    });
+    document.addEventListener('keydown', e => {
+      if(e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    });
+
+    // ---------- Atas ----------
+    const ataCard = a => `
+      <div class="ata-card" data-ata="${esc(a.id)}">
+        <div class="ata-date">${a.dia}<span>${MESES[a.mes - 1]}</span></div>
+        <div class="ata-info">
+          <div class="ata-title">${esc(a.title)}</div>
+          <div class="ata-teaser">${esc(a.teaser)}</div>
+        </div>
+        <div class="ata-arrow">→</div>
+      </div>`;
+
+    function ataBody(a){
+      if(!a.sections || !a.sections.length){
+        return `<div class="ata-teaser">${esc(a.teaser)}</div><p style="margin-top:10px;"><a class="modal-link" href="${esc(a.url)}" target="_blank" rel="noopener">Abrir no Notion ↗</a></p>`;
+      }
+      return a.sections.map(sec => `
+        <div class="modal-section">
+          <div class="modal-section-label">${esc(sec.label)}</div>
+          <ul>${sec.items.map(it => `<li>${esc(it)}</li>`).join('')}</ul>
+        </div>`).join('');
+    }
+
+    function openAta(id){
+      const a = ATAS[id];
+      if(!a) return;
+      modalCtx = { type: 'ata', id };
+      openModal({
+        eyebrow: 'Meeting Notes · Notion',
+        title: a.title,
+        sub: a.sub,
+        link: a.url,
+        body: ataBody(a),
+        addUpdate: false,
+      });
+    }
+
+    function renderAtas(){
+      const list = Object.entries(ATAS)
+        .map(([id, a]) => ({ id, ...a }))
+        .sort((a,b) => (b.ano - a.ano) || (b.mes - a.mes) || (b.dia - a.dia));
+      $('atasRecent').innerHTML = list.slice(0,5).map(ataCard).join('') || '<div class="empty">Nenhuma ata registrada.</div>';
+
+      const older = list.slice(5);
+      if(!older.length){ $('atasOld').innerHTML = ''; return; }
+      const byTipo = $('ataMode').value === 'tipo';
+      const groups = new Map();
+      older.forEach(a => {
+        const k = byTipo ? a.tipo : `${MESES_LONG[a.mes - 1]} ${a.ano}`;
+        if(!groups.has(k)) groups.set(k, []);
+        groups.get(k).push(a);
+      });
+      $('atasOld').innerHTML = [...groups].map(([k, items]) => `
+        <details class="ata-group">
+          <summary>${esc(k)} <span>${items.length} ${items.length === 1 ? 'ata' : 'atas'}</span></summary>
+          ${items.map(a => `
+            <details class="ata-old" data-ata="${esc(a.id)}">
+              <summary>${a.dia} ${MESES[a.mes - 1]} · ${esc(a.title)}</summary>
+              <div class="ata-body">Carregando...</div>
+            </details>`).join('')}
+        </details>`).join('');
+      $('atasOld').querySelectorAll('details.ata-old').forEach(d => {
+        d.addEventListener('toggle', () => {
+          if(d.open && !d.dataset.loaded){
+            d.querySelector('.ata-body').innerHTML = ataBody(ATAS[d.dataset.ata]);
+            d.dataset.loaded = '1';
+          }
+        });
+      });
+    }
+
+    // ---------- Eventos ----------
+    $('weekFilters').addEventListener('click', e => {
+      const b = e.target.closest('[data-f]');
+      if(!b) return;
+      weekFilter = b.dataset.f;
+      renderTasks();
+    });
+
+    ['pendencias', 'historyList'].forEach(id => {
+      $(id).addEventListener('click', e => {
+        const chk = e.target.closest('[data-chk]');
+        if(chk){ e.stopPropagation(); toggleDone(chk.dataset.chk); return; }
+        const row = e.target.closest('[data-row]');
+        if(row) openTask(row.dataset.row);
+      });
+    });
+
+    $('atasRecent').addEventListener('click', e => {
+      const c = e.target.closest('[data-ata]');
+      if(c) openAta(c.dataset.ata);
+    });
+    $('ataMode').addEventListener('change', renderAtas);
+    $('btnNewTask').addEventListener('click', openNewTask);
+
+    // Badge de atualização. Recarrega o estado local; sem endpoint de leitura,
+    // não busca o Notion de novo.
+    function paintBadge(){ $('updText').textContent = 'Atualizado em ' + fmtStamp(lastUpdated); }
+    $('updBtn').addEventListener('click', () => {
+      lastUpdated = new Date();
+      renderAll();
+      paintBadge();
+      toast('Atualizado');
+    });
+
+    renderAll();
+    paintBadge();
+  })();
 
   // ===== Utilitários de formatação BR (milhar com ponto, decimal com vírgula) =====
   // Interpreta tanto "15.000,00" (BR) quanto "15000" ou "0.10" (digitado sem vírgula).
