@@ -1820,50 +1820,130 @@ body{
         url:'https://app.notion.com/p/3f8ef5854ef3808ab09ec6b722c63d8d', updates:[] },
     ];
 
-    // Atas. Ano 2026 e tipo são premissas: a fonte atual não traz esses campos.
+    // Atas: conteúdo puxado do Notion (Meeting Notes da Ultragaz) em 13/out/2026.
+    // "tipo" NÃO existe no Notion: é uma classificação minha, para o modo "Por tipo".
+    // Ano 2026 vem da data da ata no Notion.
     const ATAS = {
       m1: {
         ano:2026, mes:8, dia:10, tipo:'Acompanhamento',
-        title:'Alinhamento Hubii',
+        title:'Work-Session',
         sub:'10/ago · Reunião de acompanhamento do projeto',
-        teaser:'Reunião realizada — ata automática não registrou pauta nem decisões',
+        teaser:'Reunião realizada — a transcrição automática não registrou pauta nem decisões',
         url:'https://app.notion.com/p/3b8ef5854ef380d880fdef6cbe99c9c2',
         sections:[
           { label:'Registro', items:[
-            'Reunião com Matheus, Leonardo e Pat, transcrita automaticamente',
-            'A ata automática cobriu apenas os cumprimentos iniciais, sem detalhamento de pauta, decisões ou encaminhamentos'
+            'Reunião com Matheus, Leonardo e Pat, com transcrição automática ativada',
+            'A transcrição cobre só os momentos iniciais: cumprimentos e reorganização de quem entraria na chamada',
+            'Não há registro de pauta, decisões ou encaminhamentos'
           ]}
         ]
       },
       m2: {
         ano:2026, mes:9, dia:10, tipo:'Parceria',
-        title:'iFood + Ultragaz',
-        sub:'10/set · Reunião de parceria — venda de gás via iFood',
-        teaser:'Reunião de parceria — modelo de negócio, price zones e go-to-market',
+        title:'Match Making',
+        sub:'10/set · Reunião iFood Shopping x Ultragás — parceria de venda de gás',
+        teaser:'Parceria de venda de gás via iFood: take rate de 6%, praça inicial em SP e ABC, SKU P13',
         url:'https://app.notion.com/p/3d7ef5854ef380c288e6eb41f920683b',
         sections:[
+          { label:'Itens de ação', items:[
+            'Consultar Matheus sobre o tempo máximo tolerável de pedidos atrasados',
+            'Avaliar repassar o frete ao consumidor e reenquadrar o take rate para 8%',
+            'Paty e Matheus compartilharem o volume de vendas com o time do iFood',
+            'Luizão projetar GMV e share de mercado digital vs. offline',
+            'Definir o onboarding de revendas: adesão automática ou aceite individual pelo painel Rubi'
+          ]},
           { label:'Contexto', items:[
-            'Encontro entre iFood Shopping (Pascucci, Luiz) e Ultragaz (Paty, Matheus) para explorar a parceria',
-            'Já existe parceria anterior no projeto Revenda do Futuro, incluindo integração de pagamento nas maquininhas',
-            'Em 2018 houve um teste em Salvador de venda de gás via iFood, com bons resultados, mas desmobilizado na época'
+            'Encontro entre o iFood Shopping (Pascucci e Luiz) e a Ultragás (Paty e Matheus)',
+            'Parceria anterior no projeto Revenda do Futuro, com integração de pagamento nas maquininhas',
+            'Em 2018 houve um teste em Salvador com bons resultados, mas o iFood desmobilizou a iniciativa'
+          ]},
+          { label:'Momento do iFood Shopping', items:[
+            'Vertical desprioritizada até março; a partir de abril passou a ser estratégica para os próximos 5 a 6 anos',
+            'Estrutura atual: 5 pessoas no comercial, além de growth e tecnologia dedicados'
           ]},
           { label:'Modelo de negócio', items:[
-            'Take rate acordado: 6%, com 2% reinvestidos em frete grátis permanente ao consumidor',
-            'Ticket médio de R$117 com frete grátis incluso; receita líquida do iFood é 9,4% do GMV',
-            'Em discussão: repassar o frete e reenquadrar a taxa para 8%'
+            'Take rate de 6%, com 2% reinvestidos em frete grátis permanente',
+            'Ticket médio de R$117 com frete incluso; o iFood recebe 9,4% líquido do GMV',
+            'Em discussão: repassar o frete e reenquadrar a taxa para 8%',
+            'O modelo de subsídio governamental (gás do povo) tem margem muito apertada e não será a base de precificação'
+          ]},
+          { label:'Logística e entrega', items:[
+            'Entrega inicial feita pelas próprias revendas, não por motoboy do iFood',
+            'Tempo médio atual de entrega: 17 minutos; sugestão de 20 a 25 minutos no app',
+            'O uso do LAS (last mile do iFood) fica para o futuro'
+          ]},
+          { label:'Price zones e território', items:[
+            'O iFood opera com price zones (ex.: Zona Leste R$129, Zona Sul R$140)',
+            'Será preciso criar múltiplas lojas por território, com raios distintos, para preservar valor',
+            'Definir sites e raios será complexo, mas essencial para o modelo'
           ]},
           { label:'Go-to-market', items:[
-            'Praça inicial: São Paulo e ABC (Mercado GSP); SKU inicial apenas P13',
-            'Potencial de expansão: 3.400 municípios, 5.000–6.000 revendas no Brasil',
-            'Foco exclusivo nas 6.000 revendas exclusivas Ultragaz (bandeiras brancas ficam de fora)',
-            'Dois modelos de onboarding em avaliação: adesão automática vs. aceite individual pelo painel Rubi'
+            'Praça inicial: São Paulo e ABC (Grande São Paulo)',
+            'Expansão potencial: 3.400 municípios e cerca de 5.000 a 6.000 revendas',
+            'Foco nas 6.000 revendas exclusivas Ultragás; bandeiras brancas com outros produtos ficam de fora',
+            'SKU inicial: apenas P13'
+          ]},
+          { label:'Oportunidade de mercado', items:[
+            'Vendas digitais de gás ainda têm share de um dígito; objetivo de dobrar a representatividade',
+            'Salvador é a principal praça da Ultragás, mas São Paulo também tem volume expressivo',
+            'Referência de GMV potencial citada: R$33 milhões'
+          ]}
+        ]
+      },
+      m3: {
+        ano:2026, mes:10, dia:1, tipo:'Revisão',
+        title:'BP Review',
+        sub:'01/out · Revisão do BP',
+        teaser:'Sem notas registradas: a página existe, mas não tem conteúdo',
+        url:'https://app.notion.com/p/3ecef5854ef38023ae28d59f6c835376',
+        sections:[]
+      },
+      m4: {
+        ano:2026, mes:10, dia:13, tipo:'Diagnóstico',
+        title:'Overview Hub UG',
+        sub:'13/out · Diagnóstico do hub atual da Ultragaz e avaliação da Hubii',
+        teaser:'Diagnóstico do hub atual, roadmap 2027 e POC proposta; deep dive marcado para 14/out',
+        url:'https://app.notion.com/p/3f8ef5854ef380b2b3c0d3a38ce3f483',
+        sections:[
+          { label:'Participantes', items:[
+            'Patricia Correa, gerente de canais digitais (P&L, precificação, marketing)',
+            'Ítalo, PM da squad do Hub (há 2 meses no cargo); tech lead Ramon de férias',
+            'Mateus, analista de Growth'
+          ]},
+          { label:'Hub atual (Ultragaz)', items:[
+            'Plataforma monolítica que sustenta app, site, WhatsApp e Amigoo',
+            'Painel de pedidos 360, cadastro de revendas, price zones (polígonos com preço por região), pagamentos (voucher, online e na entrega), campanhas, LGPD, fidelidade',
+            'Taxa de performance de 0 a 4%, baseada em % de canais digitais e SLA de entrega (30 min)',
+            'Infraestrutura: Oracle Cloud, Google Maps API e outros serviços de OPEX',
+            'A consultoria (software house) fornece os recursos; a tecnologia é proprietária da Ultragaz',
+            'Cerca de 3 desenvolvedores dedicados ao hub'
+          ]},
+          { label:'Roadmap e ambições da Ultragaz', items:[
+            'Roadmap 2027: o que desenvolver e o que descontinuar',
+            'Levantar uso real por logs, métricas atuais (ex.: taxa de cancelamento) e custos de App, WhatsApp e site',
+            'Evoluir de price zones fixas para precificação dinâmica por CEP ou raio de entrega (modelo marketplace)',
+            'Sobreposição de áreas entre revendas é um ponto a explorar'
+          ]},
+          { label:'Avaliação da Hubii', items:[
+            'Arquitetura de microsserviços é muito mais flexível que o monolito atual',
+            'Cerca de 90% de similaridade funcional',
+            'A aprofundar: voucher, exclusividade de território e conciliação financeira',
+            'Não é SaaS puro: exige implementação, sustentação e customização dedicada',
+            'Referência de ticket: o maior cliente atual da Hubii paga cerca de R$100 mil/mês no modelo SaaS'
+          ]},
+          { label:'POC e próximos passos', items:[
+            'Sequência sugerida: 1) lançar o iFood (meta 5/nov); 2) deep dive na Ultragaz com o painel da Hubii; 3) POC em praça menor com alta taxa de cancelamento, integrando WhatsApp e canais; 4) se validado, escalar para a transição completa',
+            'A transição total do sistema é uma decisão que exige convicção de todos'
+          ]},
+          { label:'Próxima reunião', items:[
+            'Deep dive: quarta-feira, 14/out, das 10h ao meio-dia, na Ultragaz',
+            'Leonardo envia o convite; Patricia reserva a sala; incluir Ítalo, Pires e quem a Patricia indicar'
           ]},
           { label:'Itens de ação', items:[
-            'Consultar Matheus sobre tempo máximo tolerável de pedidos atrasados',
-            'Avaliar repasse do frete ao consumidor e reenquadramento do take rate para 8%',
-            'Paty e Matheus compartilharem volume de vendas com o time do iFood',
-            'Luizão realizar projeções de GMV e share de mercado digital vs. offline',
-            'Definir modelo de onboarding de revendas (adesão automática vs. painel Rubi)'
+            'Leonardo: enviar o convite do deep dive',
+            'Gabriel Pires: preparar o roteiro do deep dive (o que a Hubii tem, o que não tem e gaps vs. necessidades da Ultragaz)',
+            'Patricia: detalhar custos de Hub, App, WhatsApp, site e OPEX (hoje tem só o total)',
+            'Consultar os logs de uso para separar funcionalidades ativas e descontinuadas, base para o MVP'
           ]}
         ]
       },
