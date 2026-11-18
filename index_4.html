@@ -1,0 +1,2876 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Ultragaz — Overview, Business Plan & Tarefas</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root{
+  --purple: #6348e5;
+  --purple-deep: #4a34b8;
+  --purple-glow: rgba(99,72,229,0.16);
+  --ink: #1b1730;
+  --ink-soft: #565170;
+  --paper: #f6f5fb;
+  --card: #ffffff;
+  --line: #e7e4f5;
+  --foco: #17a673;
+  --foco-bg: #e6f7f0;
+  --potencial: #9a94b8;
+  --potencial-bg: #efedf9;
+  --ultragaz: #0089cf;
+  --ultragaz-bg: #e5f3fb;
+  --hubii: #6348e5;
+  --hubii-bg: #efeafd;
+  --amber: #c9820f;
+  --amber-bg: #fdf3e0;
+  --brasil: #128a76;
+  --brasil-bg: #e3f5f1;
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+
+body{
+  font-family:'Onest', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 40px 48px 80px;
+  line-height: 1.4;
+}
+
+.wrap{
+  margin: 0 auto;
+}
+
+/* HEADER */
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap: 24px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.eyebrow{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--purple);
+  font-weight: 600;
+  margin-bottom: 6px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.eyebrow::before{
+  content:'';
+  width:7px; height:7px;
+  border-radius:50%;
+  background: var(--purple);
+  display:inline-block;
+  box-shadow: 0 0 0 4px var(--purple-glow);
+}
+
+.title{
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.title span{ color: var(--purple); }
+
+.subtitle{
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-top: 6px;
+}
+
+.cadence-card{
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  min-width: 190px;
+  text-align:center;
+  box-shadow: 0 8px 24px -14px rgba(99,72,229,0.35);
+}
+.header-cards{ display:flex; gap:12px; flex-wrap:wrap; }
+.cadence-label{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 10px;
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+}
+.cadence-value{
+  font-size: 15px;
+  font-weight:700;
+  color: var(--purple-deep);
+}
+.meeting-dates{
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  display:grid;
+  grid-template-columns: auto auto;
+  row-gap: 6px;
+  column-gap: 14px;
+}
+.meeting-row{ display:contents; }
+.meeting-row span{ color: var(--ink-soft); text-align:left; font-family:'IBM Plex Mono', monospace; font-size: 12px; }
+.meeting-row b{ color: var(--ink); font-weight:600; text-align:right; font-family:'IBM Plex Mono', monospace; font-size: 12px; }
+.meeting-link{
+  cursor: pointer;
+  color: var(--purple-deep) !important;
+  text-decoration: underline;
+  text-decoration-color: var(--purple-glow);
+  text-underline-offset: 3px;
+  transition: color .15s ease;
+}
+.meeting-link:hover{ color: var(--purple) !important; }
+
+/* MODAL */
+.modal-overlay{
+  display:none;
+  position: fixed;
+  inset: 0;
+  background: rgba(27,23,48,0.45);
+  backdrop-filter: blur(2px);
+  align-items:center;
+  justify-content:center;
+  z-index: 100;
+  padding: 24px;
+}
+.modal-overlay.open{ display:flex; }
+.modal-box{
+  background: var(--card);
+  border-radius: 20px;
+  max-width: 560px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 28px 30px;
+  box-shadow: 0 24px 60px -20px rgba(27,23,48,0.4);
+  animation: modalIn .2s ease;
+}
+@keyframes modalIn{ from{ opacity:0; transform: translateY(8px) scale(.98);} to{ opacity:1; transform:none; } }
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap: 16px;
+  margin-bottom: 6px;
+}
+.modal-eyebrow{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 11px;
+  text-transform:uppercase;
+  letter-spacing: 0.1em;
+  color: var(--purple);
+  font-weight:600;
+}
+.modal-title{
+  font-size: 19px;
+  font-weight: 800;
+  margin-top: 4px;
+  color: var(--ink);
+}
+.modal-close{
+  background: var(--paper);
+  border: none;
+  width: 28px; height:28px;
+  border-radius: 8px;
+  font-size: 15px;
+  color: var(--ink-soft);
+  cursor:pointer;
+  flex:none;
+}
+.modal-close:hover{ background: var(--line); color: var(--ink); }
+.modal-sub{
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+.modal-section{ margin-bottom: 16px; }
+.modal-section:last-of-type{ margin-bottom: 0; }
+.modal-section-label{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 10.5px;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  color: var(--purple-deep);
+  font-weight:700;
+  margin-bottom: 8px;
+}
+.modal-section ul{ list-style:none; }
+.modal-section li{
+  font-size: 13.5px;
+  color: var(--ink);
+  padding-left: 14px;
+  position:relative;
+  margin-bottom: 6px;
+  line-height: 1.45;
+}
+.modal-section li:last-child{ margin-bottom:0; }
+.modal-section li::before{ content:'—'; position:absolute; left:0; color: var(--purple); }
+.modal-footer{
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  display:flex;
+  justify-content:flex-end;
+}
+.modal-link{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight:600;
+  color: var(--purple);
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.modal-link:hover{ text-decoration:underline; }
+
+.modal-add-update{
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.modal-update-input{
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-family: 'Onest', sans-serif;
+  font-size: 13.5px;
+  color: var(--ink);
+  background: var(--paper);
+  resize: vertical;
+  box-sizing: border-box;
+}
+.modal-update-input:focus{ outline: none; border-color: var(--purple); }
+.modal-update-row{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  margin-top: 10px;
+}
+.modal-update-btn{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--purple);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .15s ease;
+}
+.modal-update-btn:hover{ background: var(--purple-deep); }
+.modal-update-btn:disabled{ background: var(--potencial); cursor: default; }
+.modal-update-feedback{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 11.5px;
+  color: var(--ink-soft);
+}
+.modal-update-feedback.error{ color: #c0392b; }
+.modal-update-feedback.success{ color: var(--foco); }
+
+.progress-block{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  background: var(--card);
+  border:1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 20px;
+  box-shadow: 0 8px 24px -14px rgba(99,72,229,0.35);
+}
+.ring-wrap{ position:relative; width:56px; height:56px; flex:none; }
+.ring-wrap svg{ transform: rotate(-90deg); }
+.ring-bg{ stroke: var(--line); }
+.ring-fg{ stroke: var(--purple); stroke-linecap: round; transition: stroke-dashoffset 0.4s ease; }
+.ring-text{
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'IBM Plex Mono', monospace;
+  font-weight:600;
+  font-size: 13px;
+  color: var(--purple-deep);
+}
+.progress-copy .num{ font-size:13px; font-weight:700; color: var(--ink); }
+.progress-copy .lbl{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 10px;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  color: var(--ink-soft);
+}
+
+/* TABS */
+.tabs{
+  display:flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 24px;
+}
+.tab-btn{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  color: var(--ink-soft);
+  padding: 12px 18px;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease;
+}
+.tab-btn:hover{ color: var(--purple-deep); }
+.tab-btn.active{ color: var(--purple); }
+.tab-btn.active::after{
+  content:'';
+  position:absolute;
+  left:0; right:0; bottom:-1px;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: var(--purple);
+}
+.tab-count{
+  font-size: 10px;
+  background: var(--purple-glow);
+  color: var(--purple-deep);
+  padding: 1px 7px;
+  border-radius: 999px;
+  margin-left: 6px;
+}
+
+.tab-panel{ display:none; animation: fade 0.25s ease; }
+.tab-panel.active{ display:block; }
+@keyframes fade{ from{ opacity:0; transform: translateY(4px);} to{ opacity:1; transform:none; } }
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 820px){
+  .grid{ grid-template-columns: 1fr; }
+  .header{ align-items:flex-start; }
+}
+
+.section-label{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 600;
+  margin: 28px 0 12px;
+}
+.section-label.first{ margin-top:0; }
+
+.panel{
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px;
+}
+
+/* ESCOPO: PRAÇAS */
+.praca-foco{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  margin-bottom: 10px;
+}
+.praca-foco:last-child{ margin-bottom:0; }
+.praca-dot{
+  width:10px; height:10px; border-radius:50%;
+  background: var(--foco);
+  flex:none;
+  box-shadow: 0 0 0 4px var(--foco-bg);
+}
+.praca-dot.pending{ background: var(--amber); box-shadow: 0 0 0 4px var(--amber-bg); }
+.praca-info{ flex:1; }
+.praca-city{ font-weight:700; font-size:15px; }
+.praca-partner{ font-family:'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink-soft); }
+.contact-line{ display:flex; flex-wrap:wrap; gap:4px 16px; margin-top:7px; font-size:12px; }
+.contact-line a{ color: var(--purple-deep); text-decoration:none; border-bottom:1px dotted var(--purple-glow); }
+.contact-line a:hover{ color: var(--purple); border-bottom-color: var(--purple); }
+.praca-tag{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight:600;
+  letter-spacing:0.05em;
+  text-transform:uppercase;
+  color: var(--foco);
+  background: var(--foco-bg);
+  padding: 4px 10px;
+  border-radius: 999px;
+  flex:none;
+}
+.praca-tag.pending{ color: var(--amber); background: var(--amber-bg); }
+.potencial-list{ display:flex; flex-wrap:wrap; gap:8px; }
+.potencial-chip{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight:500;
+  color: var(--potencial);
+  background: var(--potencial-bg);
+  border: 1px solid var(--line);
+  padding: 7px 12px;
+  border-radius: 999px;
+}
+.potencial-chip b{ color: var(--ink-soft); font-weight:600; }
+
+.channel-chip{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight:600;
+  color: var(--purple-deep);
+  background: var(--hubii-bg);
+  border: 1px solid var(--purple-glow);
+  padding: 7px 12px;
+  border-radius: 999px;
+}
+.channel-chip.negotiating{
+  color: var(--potencial);
+  background: var(--potencial-bg);
+  border-color: var(--line);
+  font-weight:500;
+}
+
+/* INFO PANEL (App / contexto) */
+.info-block:not(:last-child){ padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
+.info-head{ display:flex; align-items:center; gap:12px; margin-bottom: 10px; }
+.info-icon{
+  width: 34px; height:34px;
+  border-radius: 10px;
+  background: var(--ultragaz-bg);
+  color: var(--ultragaz);
+  display:flex; align-items:center; justify-content:center;
+  font-size:15px; font-weight:700; flex:none;
+}
+.info-name{ font-weight:700; font-size: 14.5px; }
+.info-sub{ font-family:'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-soft); }
+.info-list{ list-style:none; }
+.info-list li{
+  font-size: 13px;
+  color: var(--ink-soft);
+  padding-left: 14px;
+  position: relative;
+  margin-bottom: 6px;
+  line-height: 1.45;
+}
+.info-list li:last-child{ margin-bottom:0; }
+.info-list li::before{ content:'—'; position:absolute; left:0; color: var(--purple); }
+.info-list b{ color: var(--ink); font-weight:600; }
+
+/* TAREFAS */
+.owner-group{ margin-bottom: 18px; }
+.owner-group:last-child{ margin-bottom:0; }
+.owner-header{ display:flex; align-items:center; gap:8px; margin-bottom: 10px; }
+.owner-badge{
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight:700;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+.owner-badge.ultragaz{ color: var(--ultragaz); background: var(--ultragaz-bg); }
+.owner-badge.hubii{ color: var(--hubii); background: var(--hubii-bg); }
+.owner-badge.ambos{ color: var(--purple-deep); background: var(--purple-glow); }
+.owner-badge.parceiro{ color: var(--ultragaz); background: var(--ultragaz-bg); }
+
+.task-row{ display:flex; align-items:center; justify-content:space-between; gap: 10px; padding: 12px 4px; border-bottom: 1px solid var(--line); }
+.task-row:last-child{ border-bottom:none; }
+.status-badge{
+  font-family:'IBM Plex Mono', monospace; font-size: 11px; font-weight:600;
+  padding: 4px 10px; border-radius: 999px; flex:none;
+}
+.status-badge.todo{ color: var(--ink-soft); background: var(--paper); border:1px solid var(--line); }
+.status-badge.waiting{ color: var(--amber); background: var(--amber-bg); }
+.status-badge.done{ color: var(--foco); background: var(--foco-bg); }
+
+.task-row2{ display:flex; align-items:center; gap: 12px; padding: 11px 4px; border-bottom: 1px solid var(--line); }
+.owner-group:last-child .task-row2:last-child{ border-bottom:none; }
+.task-check{
+  width:17px; height:17px; border-radius:5px; border:1.5px solid #cfc9e8;
+  flex:none; margin-top:1px;
+}
+.task-row2.done .task-check{
+  background: var(--purple); border-color: var(--purple);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5'%3E%3Cpath d='M4 12l5 5L20 6'/%3E%3C/svg%3E");
+  background-size: 11px 11px; background-repeat:no-repeat; background-position:center;
+}
+.task-content{ font-size: 14px; }
+.task-text2{ color: var(--ink); }
+.task-row2.done .task-text2{ color: var(--ink-soft); text-decoration: line-through; }
+.task-sep{ color: var(--line); margin: 0 6px; }
+.task-history{
+  font-family:'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--ink-soft);
+  text-decoration: none; border-bottom: 1px dotted var(--ink-soft);
+}
+.task-history:hover{ color: var(--purple); border-color: var(--purple); }
+.task-row2.done .task-history{ color: var(--potencial); }
+
+
+.task{ display:flex; align-items:flex-start; gap: 10px; padding: 10px 4px; border-bottom: 1px solid var(--line); cursor:pointer; }
+.task:last-child{ border-bottom:none; }
+.check{
+  width:18px; height:18px;
+  border-radius: 5px;
+  border: 1.5px solid #cfc9e8;
+  flex:none;
+  margin-top: 2px;
+  display:flex; align-items:center; justify-content:center;
+  transition: all .15s ease;
+}
+.check svg{ opacity:0; width:12px; height:12px; }
+.task.done .check{ background: var(--purple); border-color: var(--purple); }
+.task.done .check svg{ opacity:1; }
+.task.done .task-text{ color: var(--ink-soft); text-decoration: line-through; }
+.task-text{ font-size: 14px; color: var(--ink); }
+.task-text::after{
+  content: '· ver histórico';
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--purple);
+  margin-left: 8px;
+  opacity: 0.7;
+  display: inline-block;
+}
+.task.done .task-text::after{ color: var(--potencial); }
+.task-note{ display:block; font-family:'IBM Plex Mono', monospace; font-size: 11px; color: var(--purple); margin-top: 3px; }
+
+/* OPORTUNIDADES */
+.opp-grid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+@media (max-width: 820px){ .opp-grid{ grid-template-columns: 1fr; } }
+.opp-grid.three{ grid-template-columns: repeat(3, 1fr); }
+
+/* OVERVIEW — padrão em faixas: cada faixa tem 2 (ou 3) colunas de mesma altura,
+   rótulos alinhados no topo e painéis esticados até o fim da faixa */
+.ov-block{ margin-bottom: 32px; }
+.ov-block > .section-label{ margin-top: 0; }
+.ov-block .stat-row{ margin-bottom: 0; }
+.ov-band{
+  display:grid; grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 20px; align-items: stretch; margin-bottom: 32px;
+}
+.ov-col{ display:flex; flex-direction:column; min-width:0; }
+.ov-col > .section-label{ margin: 0 0 12px; }
+.ov-col > .panel{ flex:1; }
+.ov-stack{ flex:1; display:flex; flex-direction:column; justify-content:space-between; gap:20px; }
+.ov-note{ margin-top: 4px; padding-top: 14px; border-top: 1px solid var(--line); }
+@media (max-width: 980px){ .ov-band{ grid-template-columns: 1fr; } }
+/* RESULTADOS — mockup */
+.mock-banner{ border-left: 4px solid var(--amber); margin-bottom: 28px; }
+.mock-banner-title{ font-family:'IBM Plex Mono', monospace; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color: var(--amber); margin-bottom:6px; }
+.mock-banner p{ font-size:13.5px; color: var(--ink-soft); line-height:1.6; margin:0; }
+.mock-banner p b{ color: var(--ink); }
+.mock-chip{ display:inline-block; margin-left:10px; font-family:'IBM Plex Mono', monospace; font-size:9.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color: var(--amber); background: var(--amber-bg); padding:2px 8px; border-radius:999px; vertical-align:middle; }
+.mock-note{ font-size:11.5px; color: var(--ink-soft); margin:14px 0 0; line-height:1.5; }
+.hbar{ display:flex; align-items:center; gap:12px; margin:0 0 12px; font-size:13px; }
+.hbar:last-child{ margin-bottom:0; }
+.hbar-label{ flex:0 0 170px; color: var(--ink); font-weight:600; line-height:1.25; }
+.hbar-label span{ display:block; font-weight:500; font-size:11px; color: var(--ink-soft); }
+.hbar-track{ flex:1; height:12px; background: var(--paper); border-radius:999px; overflow:hidden; border:1px solid var(--line); }
+.hbar.sum{ margin-top:14px; padding-top:12px; border-top:1px dashed var(--line); }
+.hbar.sum .hbar-track{ visibility:hidden; }
+.hbar-fill{ height:100%; border-radius:999px; background: linear-gradient(90deg, var(--purple), var(--purple-deep)); }
+.hbar-val{ flex:0 0 auto; min-width:128px; text-align:right; font-family:'IBM Plex Mono', monospace; font-size:12px; font-weight:600; color: var(--ink); }
+.region-map{ display:flex; flex-wrap:wrap; gap:10px; }
+.region-tile{ flex:0 0 calc(25% - 7.5px); box-sizing:border-box; min-height:84px; padding:12px; border-radius:12px; display:flex; flex-direction:column; justify-content:space-between; font-size:12px; }
+.region-tile b{ font-size:13px; }
+.region-tile span{ font-family:'IBM Plex Mono', monospace; font-size:11px; opacity:.92; }
+.region-tile.empty{ visibility:hidden; }
+.region-tile.off{ border:1.5px dashed var(--potencial); background:transparent; color: var(--potencial); }
+.region-legend{ display:flex; gap:18px; flex-wrap:wrap; margin-top:14px; font-size:11.5px; color: var(--ink-soft); }
+@media (max-width: 600px){ .region-tile{ flex-basis: calc(50% - 5px); } .region-tile.empty{ display:none; } .hbar{ flex-wrap:wrap; } .hbar-label{ flex-basis:100%; } }
+.ov-subgrid{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 28px 40px; }
+.panel .ov-subgrid .info-block{ margin:0; padding:0; border:none; }
+.ov-subgrid .praca-foco:last-child{ margin-bottom:0; }
+.people-grid{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+.people-grid .praca-foco{ margin-bottom:0; }
+@media (max-width: 980px){ .ov-subgrid, .people-grid{ grid-template-columns: 1fr; } }
+@media (max-width: 1100px){ .opp-grid.three{ grid-template-columns: 1fr; } }
+
+.opp-card{
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+}
+.opp-card.flag{ border-color: #f0d9a6; background: linear-gradient(180deg, var(--amber-bg), var(--card) 60%); }
+.opp-head{ display:flex; align-items:center; gap:10px; margin-bottom: 10px; }
+.opp-icon{
+  width:30px; height:30px;
+  border-radius:9px;
+  background: var(--hubii-bg);
+  color: var(--purple);
+  display:flex; align-items:center; justify-content:center;
+  font-size:15px; flex:none;
+}
+.opp-card.flag .opp-icon{ background: var(--amber-bg); color: var(--amber); }
+.opp-title{ font-weight:700; font-size:14.5px; }
+.opp-card ul{ list-style:none; }
+.opp-card li{
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  padding-left: 14px;
+  position: relative;
+  margin-bottom: 6px;
+}
+.opp-card li:last-child{ margin-bottom:0; }
+.opp-card li::before{
+  content:'—';
+  position:absolute; left:0;
+  color: var(--purple);
+}
+.opp-card b{ color: var(--ink); font-weight:600; }
+
+.stat-row{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 18px; }
+.stat{
+  flex:1;
+  min-width: 150px;
+  background: var(--card);
+  border:1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+}
+.stat-num{ font-size: 20px; font-weight:800; color: var(--purple-deep); font-family:'IBM Plex Mono', monospace; }
+.stat-lbl{ font-size: 11.5px; color: var(--ink-soft); margin-top:2px; }
+
+/* ESTRATEGIA */
+.strategy-panel{ margin-top: 20px; }
+.strategy-list{ display:grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+@media (max-width: 600px){ .strategy-list{ grid-template-columns: 1fr; } }
+.strategy-item{
+  display:flex; align-items:center; gap:10px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 13.5px;
+}
+.strategy-item b{ color: var(--purple-deep); }
+
+/* ATAS */
+.ata-card{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding: 14px 6px;
+  border-bottom: 1px solid var(--line);
+  cursor:pointer;
+  transition: background .15s ease;
+}
+.ata-card:last-child{ border-bottom:none; }
+.ata-card:hover{ background: var(--paper); }
+.ata-date{
+  font-family:'IBM Plex Mono', monospace;
+  font-weight:700;
+  font-size: 18px;
+  color: var(--purple-deep);
+  text-align:center;
+  min-width: 46px;
+  line-height:1.1;
+}
+.ata-date span{
+  display:block;
+  font-size: 10px;
+  font-weight:600;
+  letter-spacing:0.05em;
+  color: var(--ink-soft);
+  text-transform:uppercase;
+}
+.ata-info{ flex:1; }
+.ata-title{ font-weight:700; font-size:14px; }
+.ata-teaser{ font-size:12.5px; color: var(--ink-soft); margin-top:2px; }
+.ata-arrow{ color: var(--purple); font-size:16px; flex:none; }
+
+.footer-note{
+  margin-top: 40px;
+  text-align:center;
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--potencial);
+}
+
+/* BUSINESS PLAN */
+.bp-legend{ display:flex; gap:22px; flex-wrap:wrap; margin-bottom: 18px; }
+.bp-legend-item{ display:flex; align-items:center; gap:8px; font-family:'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink-soft); }
+.bp-legend-dot{ width:10px; height:10px; border-radius:50%; flex:none; }
+.bp-legend-line{ width:16px; height:2px; border-radius:2px; flex:none; }
+.bp-chart-wrap{ width:100%; overflow-x:auto; }
+.bp-axis-label{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; fill: var(--ink-soft); }
+.bp-value-label{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; font-weight:600; }
+.bp-phase-row{ display:flex; gap:10px; margin-top: 18px; }
+.bp-phase{
+  flex:1; padding: 10px 14px; border-radius: var(--radius-sm);
+  font-family:'IBM Plex Mono', monospace; font-size: 12px; text-align:center;
+}
+.bp-phase.pilot{ background: var(--amber-bg); color: var(--amber); }
+.bp-phase.official{ background: var(--hubii-bg); color: var(--purple-deep); }
+.bp-milestone-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+@media (max-width: 820px){ .bp-milestone-grid{ grid-template-columns: 1fr; } }
+.bp-milestone-card{
+  background: var(--card); border:1px solid var(--line); border-radius: var(--radius-sm);
+  padding: 16px 18px;
+}
+.bp-milestone-month{
+  font-family:'IBM Plex Mono', monospace; font-size: 11px; color: var(--purple);
+  text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; font-weight:700;
+}
+.bp-milestone-value{ font-size: 21px; font-weight:800; color: var(--ink); font-family:'IBM Plex Mono', monospace; }
+.bp-milestone-sub{ font-size: 12px; color: var(--ink-soft); margin-top: 3px; }
+.bp-note-list{ margin-top: 18px; }
+
+/* STORYTELLING ESTILO CONSULTORIA */
+.gt-box{
+  background: linear-gradient(135deg, var(--purple) 0%, var(--purple-deep) 100%);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 26px 28px;
+  margin-bottom: 30px;
+  box-shadow: 0 16px 40px -20px rgba(74,52,184,0.55);
+}
+.gt-label{
+  font-family:'IBM Plex Mono', monospace; font-size: 11px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.1em; opacity:.85; margin-bottom: 10px;
+}
+.gt-text{ font-size: 15px; line-height:1.65; font-weight:500; margin:0; }
+.gt-text b{ font-weight:800; }
+
+.scr-tag{
+  display:inline-block; font-family:'IBM Plex Mono', monospace; font-size:10.5px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.08em; color: var(--purple);
+  background: var(--purple-glow); padding:4px 11px; border-radius:999px; margin-bottom:10px;
+}
+.bp-section{ margin-top: 40px; }
+.bp-section.first{ margin-top:0; }
+.action-title{
+  font-size: 17px; font-weight: 800; color: var(--ink); line-height:1.4;
+  margin: 0 0 16px; max-width: 760px;
+}
+.exhibit-tag{
+  font-family:'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--ink-soft);
+  text-transform:uppercase; letter-spacing:.06em; margin: 20px 0 8px;
+}
+
+.recommendation-box{
+  background: var(--card); border: 2px solid var(--foco);
+  border-radius: var(--radius); padding: 24px 26px; margin-top:16px;
+}
+.recommendation-tag{
+  display:inline-flex; align-items:center; gap:6px;
+  font-family:'IBM Plex Mono', monospace; font-size:11px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.08em; color: var(--foco);
+  background: var(--foco-bg); padding:4px 11px; border-radius:999px; margin-bottom:12px;
+}
+.recommendation-box .action-title{ margin-bottom:10px; }
+.next-steps-grid{ display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+.next-step-item{
+  flex:1 1 260px; background: var(--paper); border:1px solid var(--line);
+  border-radius: var(--radius-sm); padding:12px 14px; font-size:13px; color:var(--ink);
+}
+.next-step-owner{
+  display:block; font-family:'IBM Plex Mono', monospace; font-size:10px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.05em; color: var(--purple); margin-bottom:5px;
+}
+
+/* SCENARIO TOOL */
+.scenario-inputs{
+  display:flex; flex-wrap:wrap; gap: 16px; margin-bottom: 20px;
+}
+.scenario-inputs.compact{
+  gap: 12px 10px; margin: 0 0 16px; padding-bottom: 16px; border-bottom: 1px dashed var(--line);
+  align-items: flex-end;
+}
+.scenario-inputs.compact .scenario-input-group{
+  flex: 1 1 130px; display:flex; flex-direction:column; justify-content:flex-end;
+}
+.scenario-inputs.compact label{
+  font-size: 9.5px; margin-bottom: 4px; line-height:1.35; min-height: 2.7em;
+  display:flex; align-items:flex-end;
+}
+.scenario-inputs.compact input{ padding: 7px 9px; font-size: 12.5px; }
+.scenario-input-group{ flex: 1 1 200px; }
+.scenario-input-group label{
+  display:block; font-family:'IBM Plex Mono', monospace; font-size: 10.5px;
+  text-transform:uppercase; letter-spacing:.06em; color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+.scenario-input-group input{
+  width:100%; padding: 9px 12px; border:1px solid var(--line); border-radius: var(--radius-sm);
+  font-family:'IBM Plex Mono', monospace; font-size: 14px; color: var(--ink);
+  background: var(--paper); box-sizing:border-box;
+}
+.scenario-input-group input:focus{ outline:none; border-color: var(--purple); }
+.scenario-results{ display:flex; flex-wrap:wrap; gap: 16px; }
+.scenario-result-card{
+  flex: 1 1 320px; background: var(--paper); border:1px solid var(--line);
+  border-radius: var(--radius-sm); padding: 16px 18px;
+}
+.scenario-result-title{ font-weight:700; font-size: 14px; color: var(--ink); margin-bottom:2px; }
+.scenario-result-sub{ font-size: 11.5px; color: var(--ink-soft); margin-bottom: 12px; }
+.scenario-result-row{
+  display:flex; justify-content:space-between; align-items:center;
+  padding: 7px 0; border-bottom: 1px solid var(--line); font-size: 13px; color: var(--ink);
+}
+.scenario-result-row:last-child{ border-bottom:none; }
+.scenario-result-row b{ font-family:'IBM Plex Mono', monospace; }
+.scenario-result-row.highlight{
+  background: var(--purple-glow); margin: 4px -8px; padding: 8px 8px; border-radius:6px; border-bottom:none;
+}
+.scenario-result-row.highlight b{ color: var(--purple-deep); }
+.bot-sub{ display:block; font-family:'Onest', sans-serif; font-size:11px; font-weight:500; color: var(--ink-soft); text-align:right; margin-top:2px; }
+.inline-input-wrap{
+  display:flex; align-items:center; gap:5px; flex:none;
+  font-family:'IBM Plex Mono', monospace; font-weight:700; color: var(--ink);
+}
+.inline-input{
+  width: 56px; text-align:right; border:1px solid var(--line); border-radius:6px;
+  padding: 5px 7px; font-family:'IBM Plex Mono', monospace; font-size: 13px;
+  color: var(--ink); background: var(--paper);
+}
+.inline-input:focus{ outline:none; border-color: var(--purple); }
+
+.breakeven-panel{ margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
+.breakeven-header{
+  display:flex; justify-content:space-between; align-items:baseline; gap:12px;
+  font-size: 13px; color: var(--ink); margin-bottom: 10px;
+}
+.breakeven-header b{ font-family:'IBM Plex Mono', monospace; color: var(--purple-deep); font-size:14px; white-space:nowrap; }
+.breakeven-track{
+  position: relative; height: 30px; border-radius: 8px; overflow: hidden;
+  background: var(--paper); border: 1px solid var(--line);
+}
+.breakeven-fill-below{
+  position:absolute; left:0; top:0; height:100%; background: var(--amber-bg);
+}
+.breakeven-fill-above{
+  position:absolute; top:0; height:100%; background: var(--foco-bg);
+}
+.breakeven-marker{
+  position:absolute; top:0; height:100%; width:2px; background: var(--ink);
+}
+.breakeven-pin{
+  position:absolute; top:-22px; transform: translateX(-50%);
+  display:flex; flex-direction:column; align-items:center;
+}
+.breakeven-pin::after{
+  content:''; width:0; height:0; margin-top:1px;
+  border-left:5px solid transparent; border-right:5px solid transparent;
+  border-top:6px solid var(--purple);
+}
+.breakeven-pin-label{
+  font-family:'IBM Plex Mono', monospace; font-size:10px; font-weight:700;
+  color:#fff; background: var(--purple); padding:2px 7px; border-radius:999px; white-space:nowrap;
+}
+.breakeven-scale{
+  display:flex; justify-content:space-between; margin-top:6px;
+  font-family:'IBM Plex Mono', monospace; font-size:10.5px; color: var(--ink-soft);
+}
+
+/* TICKET BAR + P&L TABLE */
+.ticket-bar{
+  display:flex; width:100%; height:28px; border-radius:8px; overflow:hidden;
+  border:1px solid var(--line);
+}
+.ticket-seg{ height:100%; }
+.ticket-legend{ margin-top:14px; display:flex; flex-direction:column; gap:8px; }
+.ticket-legend-item{
+  font-size:13px; color:var(--ink); display:flex; align-items:center; gap:8px;
+}
+.ticket-legend-item .dot{ width:10px; height:10px; border-radius:50%; flex:none; }
+.ticket-legend-item b{ color:var(--purple-deep); }
+
+.pl-table{ width:100%; border-collapse:collapse; font-size:13px; }
+.pl-table th, .pl-table td{
+  padding:10px 12px; text-align:right; border-bottom:1px solid var(--line);
+}
+.pl-table th:first-child, .pl-table td:first-child{ text-align:left; color:var(--ink-soft); }
+.pl-table th{
+  font-family:'IBM Plex Mono', monospace; font-size:11px; text-transform:uppercase;
+  letter-spacing:.06em; color:var(--purple-deep); font-weight:700;
+}
+.pl-table td{ font-family:'IBM Plex Mono', monospace; color:var(--ink); }
+.pl-table tr:last-child td{ border-bottom:none; }
+.pl-highlight td{ background:var(--purple-glow); font-weight:700; color:var(--purple-deep); }
+.bp-callout{
+  background: var(--paper);
+  border: 1px dashed var(--purple-glow);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 13.5px;
+  color: var(--ink);
+}
+.bp-callout b{ color: var(--purple-deep); }
+.bp-callout .ph{ color: var(--ink-soft); }
+.bp-point{ cursor: pointer; }
+.bp-track-row{ margin-top: 14px; }
+.bp-track-label{
+  font-family:'IBM Plex Mono', monospace; font-size: 10.5px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.06em; color: var(--ink-soft); margin-bottom:6px;
+}
+.bp-phase-row.small{ margin-top:0; }
+.bp-phase.br{ background: var(--brasil-bg); color: var(--brasil); }
+.bp-phase.neutral{ background: var(--paper); color: var(--ink-soft); border:1px solid var(--line); }
+
+/* BUSINESS PLAN — layout minimalista (escopo: #panel-bp) */
+#panel-bp{ font-size:15px; line-height:1.6; }
+#panel-bp .bpx-eyebrow{ font-size:12px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color: var(--purple); margin-bottom:10px; }
+#panel-bp .bpx-h1{ font-size:30px; font-weight:600; line-height:1.25; letter-spacing:-.015em; max-width:760px; }
+#panel-bp .bpx-h2{ font-size:22px; font-weight:600; line-height:1.3; letter-spacing:-.01em; margin-bottom:10px; max-width:760px; }
+#panel-bp .bpx-lead{ font-size:16px; line-height:1.65; font-weight:400; color: var(--ink-soft); max-width:720px; margin:0 0 24px; }
+#panel-bp .bpx-lead b{ font-weight:600; color: var(--ink); }
+#panel-bp .bpx-section{ margin-top:64px; }
+#panel-bp .bpx-section:first-child{ margin-top:0; }
+#panel-bp .bpx-duo{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:24px; align-items:stretch; }
+#panel-bp .bpx-duo > .bpx-card{ display:flex; flex-direction:column; }
+#panel-bp .bpx-duo .bpx-facts{ display:flex; flex-direction:column; justify-content:space-between; flex:1; margin-top:12px; max-width:none; }
+#panel-bp .bpx-duo .bpx-fact:last-child{ border-bottom:none; }
+#panel-bp .bpx-duo .bpx-facts{ flex:0 0 auto; justify-content:flex-start; }
+#panel-bp .bpx-fact.main{ padding:30px 0; }
+#panel-bp .bpx-fact.main > span{ color: var(--ink); font-size:16px; }
+#panel-bp .bpx-fact.main b{ font-size:21px; letter-spacing:-.01em; }
+#panel-bp .bpx-notes{ margin-top:auto; padding-top:18px; border-top:1px solid var(--line); display:flex; flex-direction:column; gap:10px; }
+#panel-bp .bpx-note{ display:flex; justify-content:space-between; align-items:baseline; gap:16px; font-size:13px; color: var(--ink-soft); }
+#panel-bp .bpx-note b{ flex:none; white-space:nowrap; font-weight:600; color: var(--ink); text-align:right; }
+#panel-bp .bpx-note i{ font-style:normal; font-weight:400; color: var(--ink-soft); }
+#panel-bp .bpx-duo .bpx-table{ max-width:none; }
+#panel-bp .bpx-table tr.after-total td{ border-bottom:none; padding-top:18px; padding-bottom:4px; }
+@media (max-width: 980px){ #panel-bp .bpx-duo{ grid-template-columns:1fr; } }
+#panel-bp .bpx-hero{ background: var(--card); border:1px solid var(--line); border-radius:20px; padding:40px 44px 36px; }
+#panel-bp .bpx-hero .bpx-lead{ margin-bottom:0; margin-top:14px; }
+#panel-bp .bpx-kpis{ display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); margin-top:32px; border-top:1px solid var(--line); }
+#panel-bp .bpx-kpi{ padding:26px 24px 0 0; }
+#panel-bp .bpx-kpi + .bpx-kpi{ padding-left:28px; border-left:1px solid var(--line); }
+#panel-bp .bpx-kpi-num{ font-size:34px; font-weight:600; letter-spacing:-.02em; line-height:1.1; color: var(--purple); }
+#panel-bp .bpx-kpi-lbl{ font-size:14px; line-height:1.5; color: var(--ink-soft); margin-top:10px; }
+#panel-bp .bpx-facts{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); column-gap:64px; margin-top:18px; max-width:960px; }
+#panel-bp .bpx-fact{ display:flex; justify-content:space-between; align-items:baseline; gap:20px; padding:16px 0; border-bottom:1px solid var(--line); }
+#panel-bp .bpx-fact > span{ color: var(--ink-soft); }
+#panel-bp .bpx-fact b{ font-weight:600; text-align:right; }
+#panel-bp .bpx-fact small{ display:block; font-weight:400; font-size:13px; color: var(--ink-soft); margin-top:2px; }
+#panel-bp .bpx-table{ width:100%; max-width:960px; border-collapse:collapse; }
+#panel-bp .bpx-table th{ text-align:right; font-weight:500; font-size:13px; color: var(--ink-soft); padding:0 0 12px; border-bottom:1px solid var(--line); }
+#panel-bp .bpx-table td{ padding:15px 0; border-bottom:1px solid var(--line); text-align:right; font-variant-numeric:tabular-nums; }
+#panel-bp .bpx-table th:first-child, #panel-bp .bpx-table td:first-child{ text-align:left; }
+#panel-bp .bpx-table td small{ display:block; font-size:13px; color: var(--ink-soft); margin-top:2px; }
+#panel-bp .bpx-table .na{ color: var(--potencial); }
+#panel-bp .bpx-table tr.total td{ border-bottom:none; font-weight:600; font-size:18px; color: var(--purple-deep); background: var(--hubii-bg); padding:18px 14px; }
+#panel-bp .bpx-table tr.total td:first-child{ border-radius:14px 0 0 14px; }
+#panel-bp .bpx-table tr.total td:last-child{ border-radius:0 14px 14px 0; }
+#panel-bp .bpx-table tr.total td small{ font-weight:400; color: var(--ink-soft); font-size:13px; }
+#panel-bp .bpx-card{ background: var(--card); border:1px solid var(--line); border-radius:18px; padding:30px 32px; }
+#panel-bp .bpx-card-title{ font-size:18px; font-weight:600; }
+#panel-bp .bpx-card-sub{ font-size:14px; color: var(--ink-soft); margin:2px 0 22px; }
+#panel-bp .bpx-grid2{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:24px; align-items:stretch; margin-top:24px; }
+#panel-bp .bpx-fields{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:18px 20px; margin-bottom:22px; padding-bottom:22px; border-bottom:1px solid var(--line); }
+#panel-bp .bpx-field{ display:flex; flex-direction:column; gap:6px; }
+#panel-bp .bpx-field label{ font-size:13.5px; font-weight:500; color: var(--ink); }
+#panel-bp .bpx-field input{ width:100%; padding:11px 13px; border:1px solid var(--line); border-radius:10px; font-family:'Onest', sans-serif; font-size:15px; font-weight:400; color: var(--ink); background:#fff; font-variant-numeric:tabular-nums; }
+#panel-bp .bpx-field input:focus{ outline:none; border-color: var(--purple); box-shadow:0 0 0 3px var(--purple-glow); }
+#panel-bp .bpx-hint{ font-size:12.5px; line-height:1.45; color: var(--ink-soft); }
+#panel-bp .bpx-row{ display:flex; justify-content:space-between; align-items:flex-start; gap:20px; padding:12px 0; border-bottom:1px solid var(--line); }
+#panel-bp .bpx-row > span{ color: var(--ink); }
+#panel-bp .bpx-row i{ display:block; font-style:normal; font-size:12.5px; color: var(--ink-soft); }
+#panel-bp .bpx-row b{ font-weight:600; text-align:right; font-variant-numeric:tabular-nums; }
+#panel-bp .bpx-row.muted > span, #panel-bp .bpx-row.muted b{ color: var(--ink-soft); font-weight:400; }
+#panel-bp .bpx-row.total{ margin-top:10px; padding:16px 18px; border-bottom:none; background: var(--hubii-bg); border-radius:14px; align-items:center; }
+#panel-bp .bpx-row.total > span, #panel-bp .bpx-row.total b{ color: var(--purple-deep); font-weight:600; font-size:17px; }
+#panel-bp .bot-sub{ font-size:12px; font-weight:400; color: var(--ink-soft); }
+#panel-bp .bpx-label{ font-size:13.5px; color: var(--ink-soft); }
+#panel-bp .bpx-be-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:56px; }
+#panel-bp .bpx-be-num{ font-size:34px; font-weight:600; letter-spacing:-.02em; color: var(--purple); line-height:1.15; text-align:right; }
+#panel-bp .bpx-be-num .bot-sub{ font-size:13.5px; letter-spacing:0; text-align:right; }
+#panel-bp .breakeven-track{ height:12px; border-radius:999px; overflow:visible; background: var(--amber-bg); border:none; }
+#panel-bp .breakeven-fill-below{ border-radius:999px 0 0 999px; }
+#panel-bp .breakeven-fill-above{ border-radius:0 999px 999px 0; }
+#panel-bp .breakeven-marker{ top:-5px; height:22px; width:3px; border-radius:2px; background: var(--ink); }
+#panel-bp .breakeven-pin{ top:-38px; }
+#panel-bp .breakeven-pin-label{ font-family:'Onest', sans-serif; font-size:12px; font-weight:500; padding:4px 10px; }
+#panel-bp .breakeven-scale{ font-family:'Onest', sans-serif; font-size:12.5px; margin-top:10px; }
+#panel-bp .bpx-foot{ font-size:13.5px; color: var(--ink-soft); margin-top:22px; max-width:760px; }
+#panel-bp .bp-legend-item{ font-family:'Onest', sans-serif; font-size:13.5px; }
+#panel-bp .bp-axis-label{ font-family:'Onest', sans-serif; font-size:11.5px; font-weight:400; }
+#panel-bp .bpx-miles{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); margin-top:26px; border-top:1px solid var(--line); }
+#panel-bp .bpx-mile{ padding:22px 24px 0 0; }
+#panel-bp .bpx-mile + .bpx-mile{ padding-left:28px; border-left:1px solid var(--line); }
+#panel-bp .bpx-mile-m{ font-size:13px; font-weight:500; color: var(--purple); }
+#panel-bp .bpx-mile-v{ font-size:24px; font-weight:600; letter-spacing:-.01em; margin-top:4px; }
+#panel-bp .bpx-mile-s{ font-size:13px; color: var(--ink-soft); margin-top:2px; }
+@media (max-width: 980px){
+  #panel-bp .bpx-kpis, #panel-bp .bpx-miles{ grid-template-columns:repeat(2, minmax(0,1fr)); }
+  #panel-bp .bpx-kpi:nth-child(odd){ border-left:none; padding-left:0; }
+  #panel-bp .bpx-kpi{ padding-bottom:22px; }
+  #panel-bp .bpx-facts, #panel-bp .bpx-grid2, #panel-bp .bpx-fields{ grid-template-columns:1fr; }
+  #panel-bp .bpx-hero{ padding:28px 24px; }
+}
+
+/* OVERVIEW — loja Ultragaz no iFood (mockup) + fluxo do pedido (flywheel) */
+.ph-panel{ display:flex; flex-direction:column; padding:28px; }
+.ph-row{ flex:1; display:flex; gap:44px; align-items:center; justify-content:center; flex-wrap:wrap; }
+.ph-flow{ flex:1; min-width:420px; max-width:500px; }
+.ph-flow-t{ font-size:12px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color: var(--ink-soft); margin-bottom:10px; }
+.ph-foot{ margin:26px 0 0; padding-top:18px; border-top:1px solid var(--line); font-size:13.5px; line-height:1.6; color: var(--ink-soft); }
+.ph{ width:236px; flex:none; background:#1b1730; border-radius:38px; padding:8px; box-shadow:0 20px 40px -22px rgba(27,23,48,.55); }
+.ph-screen{ position:relative; background:#fff; border-radius:30px; overflow:hidden; height:516px; padding:9px 12px 0; color:#1b1730; }
+.ph-island{ position:absolute; top:8px; left:50%; transform:translateX(-50%); width:70px; height:20px; background:#000; border-radius:999px; }
+.ph-status{ display:flex; justify-content:space-between; align-items:center; height:24px; padding:0 4px; font-size:10.5px; font-weight:600; }
+.ph-icons{ display:flex; align-items:flex-end; gap:1.5px; }
+.ph-icons i{ display:block; width:2.5px; background:#1b1730; border-radius:1px; }
+.ph-icons i:nth-child(1){ height:3px; } .ph-icons i:nth-child(2){ height:5px; } .ph-icons i:nth-child(3){ height:7px; } .ph-icons i:nth-child(4){ height:9px; }
+.ph-bat{ display:block; width:17px; height:9px; margin-left:5px; border:1.2px solid #1b1730; border-radius:2.5px; background:linear-gradient(90deg,#1b1730 60%,transparent 60%); }
+.ph-top{ display:flex; justify-content:space-between; margin-top:10px; }
+.ph-circle{ width:26px; height:26px; border-radius:50%; background:#f1f0f5; display:flex; align-items:center; justify-content:center; font-size:15px; line-height:1; }
+.ph-titlerow{ position:relative; display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-top:10px; }
+.ph-title{ font-size:14.5px; font-weight:700; line-height:1.2; }
+.ph-sub{ font-size:9px; color:#8a869c; margin-top:3px; line-height:1.4; }
+.ph-logo{ flex:none; width:30px; height:30px; border-radius:50%; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:9.5px; font-weight:700; color: var(--ultragaz); }
+.ph-info{ position:relative; margin-top:11px; background:#f4f3f8; border-radius:10px; padding:7px 4px; display:flex; align-items:center; justify-content:space-around; text-align:center; }
+.ph-info small{ display:block; font-size:8px; color:#8a869c; }
+.ph-info b{ display:block; font-size:9.5px; font-weight:700; color: var(--purple); }
+.ph-divider{ width:1px; height:22px; background:#dcd9e8; }
+.ph-search{ margin-top:8px; background:#f4f3f8; border-radius:999px; padding:7px 11px; font-size:9.5px; color:#8a869c; }
+.ph-chips{ display:flex; gap:6px; margin-top:8px; }
+.ph-chip{ flex:1; min-width:0; display:flex; align-items:center; gap:6px; border:1px solid var(--line); border-radius:10px; padding:5px 6px; }
+.ph-chip-ico{ flex:none; width:20px; height:20px; border-radius:6px; background: var(--hubii-bg); color: var(--purple); font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.ph-chip small{ display:block; font-size:7.5px; line-height:1.25; color:#8a869c; }
+.ph-chip b{ display:block; font-size:10.5px; line-height:1.2; }
+.ph-h{ display:flex; justify-content:space-between; align-items:baseline; margin-top:13px; font-size:12px; font-weight:700; }
+.ph-h span{ font-size:9px; font-weight:500; color:#e53935; }
+.ph-cards{ display:flex; gap:8px; margin-top:8px; }
+.ph-card{ flex:none; width:98px; }
+.ph-img{ position:relative; height:84px; border-radius:10px; background:#f4f3f8; display:flex; align-items:center; justify-content:center; }
+.ph-plus{ position:absolute; right:5px; bottom:5px; width:22px; height:22px; border-radius:50%; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.18); display:flex; align-items:center; justify-content:center; font-size:14px; }
+.ph-price{ position:relative; display:inline-block; font-size:11.5px; font-weight:700; margin-top:6px; }
+.ph-pname{ font-size:9.5px; color:#4a4660; line-height:1.3; margin-top:1px; }
+.ph-pills{ position:absolute; left:12px; right:0; bottom:12px; display:flex; gap:6px; }
+.ph-pill{ flex:none; display:flex; align-items:center; gap:5px; border:1px solid #dcd9e8; border-radius:999px; padding:7px 10px; font-size:9px; white-space:nowrap; color:#1b1730; }
+.ph-pill b{ color: var(--purple); font-weight:600; }
+.ph-pill.alt{ background: var(--hubii-bg); border-color: var(--hubii-bg); }
+.hyp-wrap{ margin-top:14px; padding-top:12px; border-top:1px solid var(--line); }
+.hyp-h{ font-size:11px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color: var(--ink-soft); margin-bottom:2px; }
+.hyp{ display:flex; gap:10px; align-items:flex-start; padding:7px 0; }
+.hyp + .hyp{ border-top:1px dashed var(--line); }
+.hyp-n{ flex:none; width:24px; height:24px; border-radius:50%; background: var(--hubii-bg); color: var(--purple-deep); font-size:11px; font-weight:600; display:flex; align-items:center; justify-content:center; }
+.hyp b{ display:block; font-size:12.5px; font-weight:600; color: var(--ink); }
+.hyp p{ margin:1px 0 0; font-size:11.5px; line-height:1.45; color: var(--ink-soft); }
+.pa-t{ font:600 13px 'Onest', sans-serif; fill: var(--ink); }
+.pa-v{ font:600 20px 'Onest', sans-serif; fill: var(--ink); letter-spacing:-.01em; }
+.pa-s{ font:400 11px 'Onest', sans-serif; fill: var(--ink-soft); }
+.pa-l{ font:500 11.5px 'Onest', sans-serif; fill: var(--ink-soft); }
+/* TAREFAS — fase 1 */
+.tasks-title-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.tasks-title{font-size:20px;font-weight:800;letter-spacing:-0.01em;}
+.count-chip{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--purple-glow);color:var(--purple-deep);}
+.sec-row{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.new-task-btn{font-family:'Onest',sans-serif;font-size:12px;font-weight:600;letter-spacing:0;text-transform:none;background:var(--purple);color:#fff;border:none;border-radius:999px;padding:6px 14px;cursor:pointer;}
+.new-task-btn:hover{background:var(--purple-deep);}
+.filter-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+.fchip{font-family:'IBM Plex Mono',monospace;font-size:11.5px;padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);cursor:pointer;}
+.fchip span{opacity:.7;margin-left:4px;}
+.fchip.active{background:var(--purple);border-color:var(--purple);color:#fff;}
+.week-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:12px 4px 6px;border-bottom:1px solid var(--line);font-weight:700;font-size:13px;}
+.week-head small{font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;color:var(--ink-soft);}
+.trow{display:flex;align-items:center;gap:12px;padding:11px 4px;border-bottom:1px solid var(--line);cursor:pointer;border-radius:6px;}
+.trow:hover{background:var(--paper);}
+.trow.is-done .ttitle{color:var(--potencial);text-decoration:line-through;}
+.tchk{width:17px;height:17px;border-radius:5px;border:1.5px solid #cfc9e8;flex:none;cursor:pointer;background-color:#fff;}
+.tchk.on{background-color:var(--purple);border-color:var(--purple);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5'%3E%3Cpath d='M4 12l5 5L20 6'/%3E%3C/svg%3E");background-size:11px 11px;background-repeat:no-repeat;background-position:center;}
+.ttext{flex:1;min-width:0;font-size:14px;display:flex;align-items:center;flex-wrap:wrap;gap:6px;}
+.ttitle{color:var(--ink);}
+.tbadge{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:2px 8px;}
+.tstatus{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;flex:none;}
+.st-backlog{color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);}
+.st-todo{color:#4d6478;background:#e8eef3;}
+.st-waiting{color:var(--amber);background:var(--amber-bg);}
+.st-doing{color:var(--purple-deep);background:var(--purple-glow);}
+.st-paused{color:#b8372b;background:#fbe6e3;}
+.st-done{color:var(--foco);background:var(--foco-bg);}
+.empty{font-size:13px;color:var(--ink-soft);padding:14px 4px;}
+.done-block{margin-top:14px;}
+.done-block summary{cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);padding:8px 4px;list-style-position:inside;}
+.done-count{opacity:.7;margin-left:4px;}
+.done-block .panel{margin-top:6px;}
+.mode-select{font-family:'IBM Plex Mono',monospace;font-size:11px;border:1px solid var(--line);border-radius:8px;padding:4px 6px;background:var(--card);color:var(--ink-soft);}
+
+/* ATAS — grupos recolhidos */
+.ata-group{border-bottom:1px solid var(--line);}
+.ata-group > summary{cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);padding:10px 6px;}
+.ata-group > summary span{opacity:.7;margin-left:6px;}
+.ata-old{padding:0 6px 0 16px;}
+.ata-old > summary{cursor:pointer;font-size:13px;font-weight:600;padding:8px 0;}
+.ata-body{padding:4px 0 12px;}
+
+/* MODAL — pills, formulários */
+.mgroup{margin-bottom:16px;}
+.mlabel{font-family:'IBM Plex Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--purple-deep);font-weight:700;margin-bottom:8px;}
+.req{color:#c0392b;}
+.pills{display:flex;flex-wrap:wrap;gap:6px;}
+.pill{font-family:'Onest',sans-serif;font-size:12.5px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);cursor:pointer;}
+.pill:hover:not(:disabled){border-color:var(--purple);color:var(--purple-deep);}
+.pill.on{background:var(--purple);border-color:var(--purple);color:#fff;}
+.pill:disabled{cursor:default;opacity:.6;}
+.mnote{font-size:12px;color:var(--ink-soft);margin:-8px 0 16px;}
+.minput{width:100%;font-family:'Onest',sans-serif;font-size:14px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;color:var(--ink);}
+.minput:focus{outline:none;border-color:var(--purple);}
+.merr{color:#c0392b;font-size:12px;min-height:16px;margin-top:4px;}
+
+/* BADGE DE ATUALIZAÇÃO + TOAST */
+.upd-badge{position:fixed;right:20px;bottom:18px;z-index:50;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 6px 6px 14px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);box-shadow:0 8px 20px -12px rgba(99,72,229,.4);display:flex;align-items:center;gap:8px;}
+.upd-badge button{width:26px;height:26px;border-radius:999px;border:none;background:var(--paper);color:var(--purple-deep);cursor:pointer;font-size:14px;}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;background:var(--ink);color:#fff;font-size:13px;padding:9px 16px;border-radius:999px;transition:opacity .2s ease,transform .2s ease;pointer-events:none;z-index:200;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <div>
+      <div class="eyebrow">Hubii · Comercial</div>
+      <div class="title">Projeto <span>Ultragaz</span></div>
+      <div class="subtitle">Resumo executivo e acompanhamento das atividades e conversas entre Ultragaz e Hubii.</div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="escopo">Overview</button>
+    <button class="tab-btn" data-tab="bp">Business Plan</button>
+    <button class="tab-btn" data-tab="resultados">Resultados</button>
+    <button class="tab-btn" data-tab="tarefas">Tarefas <span class="tab-count" id="tabCount">0/5</span></button>
+  </div>
+
+  <!-- OVERVIEW (absorve Oportunidades e Portfólio) -->
+  <div class="tab-panel active" id="panel-escopo">
+    <div class="panel" style="margin-bottom:32px;">
+      <p style="font-size:14px; color:var(--ink); line-height:1.6; margin:0;">Piloto de venda digital de botijão <b>P13</b> (13kg — SKU único, por ora) através de marketplaces (<b>iFood</b>, <b>99</b> e <b>Magalu + Aiqfome/Raiz</b>), com foco inicial no Mercado GSP (Grande São Paulo). Cada pedido é repassado a um revendedor da rede Ultragaz, que recebe o valor líquido após as comissões de canal, Hubii e Ultragaz.</p>
+    </div>
+
+    <div class="ov-band">
+      <div class="ov-col">
+        <div class="section-label">Mercado GSP — Grande São Paulo</div>
+        <div class="panel">
+          <div class="praca-foco">
+            <div class="praca-dot"></div>
+            <div class="praca-info">
+              <div class="praca-city">São Paulo (capital) + ABC Paulista</div>
+              <div class="praca-partner">Piloto — fase 1</div>
+            </div>
+            <div class="praca-tag">Confirmado</div>
+          </div>
+          <div class="praca-foco">
+            <div class="praca-dot pending"></div>
+            <div class="praca-info">
+              <div class="praca-city">Demais cidades do GSP</div>
+              <div class="praca-partner">Expansão — a selecionar em uma 2ª fase</div>
+            </div>
+            <div class="praca-tag pending">Backlog</div>
+          </div>
+          <div class="info-block ov-note">
+            <ul class="info-list">
+              <li>Será necessário criar <b>múltiplas lojas por território</b>, com raios distintos de atuação, para preservar o valor agregado</li>
+              <li>Definição dos sites e raios de cada loja ainda em desenho — etapa considerada complexa, mas essencial para o modelo funcionar</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="ov-col">
+        <div class="section-label">Canais (marketplaces)</div>
+        <div class="panel">
+          <div class="praca-foco">
+            <div class="praca-dot"></div>
+            <div class="praca-info">
+              <div class="praca-city">iFood <span style="color:var(--ink-soft); font-weight:500;">· 6,5%</span></div>
+              <div class="praca-partner">Taxa negociada · integrado na Hubii</div>
+            </div>
+            <div class="praca-tag">Integrado</div>
+          </div>
+          <div class="praca-foco">
+            <div class="praca-dot"></div>
+            <div class="praca-info">
+              <div class="praca-city">99 <span style="color:var(--ink-soft); font-weight:500;">· 7%</span></div>
+              <div class="praca-partner">Taxa OK · estratégia em negociação</div>
+            </div>
+            <div class="praca-tag">Integrado</div>
+          </div>
+          <div class="praca-foco">
+            <div class="praca-dot pending"></div>
+            <div class="praca-info">
+              <div class="praca-city">Magalu + Aiqfome (Raiz) <span style="color:var(--ink-soft); font-weight:500;">· 6%</span></div>
+              <div class="praca-partner">Taxa e estratégia em negociação</div>
+            </div>
+            <div class="praca-tag pending">Em integração</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ov-band">
+      <div class="ov-col">
+        <div class="section-label">Price zones</div>
+        <div class="ov-stack">
+        <div class="panel" style="flex:none;">
+          <div class="praca-foco">
+            <div class="praca-dot"></div>
+            <div class="praca-info">
+              <div class="praca-city">Zona Leste</div>
+              <div class="praca-partner">Preço de referência do território</div>
+            </div>
+            <div class="praca-tag">R$ 129</div>
+          </div>
+          <div class="praca-foco">
+            <div class="praca-dot"></div>
+            <div class="praca-info">
+              <div class="praca-city">Zona Sul</div>
+              <div class="praca-partner">Preço de referência do território</div>
+            </div>
+            <div class="praca-tag">R$ 140</div>
+          </div>
+          <div class="info-block ov-note">
+            <ul class="info-list">
+              <li>A Ultragaz opera com <b>price zones</b>: o preço do P13 varia por região dentro do próprio Mercado GSP</li>
+              <li>Vamos <b>agrupar as price zones</b> e operar <b>múltiplas lojas</b> no iFood e no 99</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="opp-card" style="flex:none;">
+          <div class="opp-head"><div class="opp-icon">⇄</div><div class="opp-title">Modelo preserva o revendedor</div></div>
+          <ul>
+            <li><b>90% do ticket</b> (R$105,30/pedido) continua indo para o revendedor</li>
+            <li>Ultragaz ganha <b>+2% incremental</b> (R$180/Ton) sobre a margem que já existe hoje; a Hubii cobra <b>take rate de 2%</b></li>
+          </ul>
+        </div>
+
+        <div class="stat-row" style="margin-bottom:0;">
+          <div class="stat"><div class="stat-num">6.000</div><div class="stat-lbl">Revendas exclusivas Ultragaz (foco do piloto)</div></div>
+          <div class="stat"><div class="stat-num">2.000</div><div class="stat-lbl">Participam do app hoje</div></div>
+          <div class="stat"><div class="stat-num">3.400</div><div class="stat-lbl">Municípios — potencial de expansão</div></div>
+        </div>
+        <div class="panel" style="flex:none;">
+          <div class="info-block">
+            <div class="info-head">
+              <div class="info-icon">→</div>
+              <div>
+                <div class="info-name">Logística e entrega</div>
+                <div class="info-sub">Primeiro momento</div>
+              </div>
+            </div>
+            <ul class="info-list">
+              <li>Entrega feita pelas <b>próprias revendas</b> (não por motoboy do canal)</li>
+              <li>Tempo médio atual de entrega via app/Televendas/WhatsApp: <b>17 minutos</b></li>
+              <li>Lead time sugerido para exibir no app: <b>20–25 minutos</b></li>
+              <li>Uso do LAS (last mile do iFood) é uma possibilidade futura, não prevista para a fase inicial</li>
+            </ul>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="ov-col">
+        <div class="section-label">Fluxo do Pedido</div>
+        <div class="panel ph-panel">
+          <div class="ph-row">
+          <div class="ph">
+            <div class="ph-screen">
+              <div class="ph-island"></div>
+              <div class="ph-status"><span>14:55</span><span class="ph-icons"><i></i><i></i><i></i><i></i><em class="ph-bat"></em></span></div>
+              <div class="ph-top"><span class="ph-circle">‹</span><span class="ph-circle">⋮</span></div>
+              <div class="ph-titlerow">
+                <div>
+                  <div class="ph-title">Ultragaz – Loja Oficial</div>
+                  <div class="ph-sub">Aberta agora • Entrega pela rede de revendas Ultragaz</div>
+                </div>
+                <div class="ph-logo">UG</div>
+              </div>
+              <div class="ph-info">
+                <div><small>Hoje · 20–25 min</small><b>◆ Grátis</b></div>
+                <div class="ph-divider"></div>
+                <div><b>◆ Entrega grátis</b></div>
+              </div>
+              <div class="ph-search">⌕&nbsp; Buscar item ou marca</div>
+              <div class="ph-chips">
+                <div class="ph-chip"><span class="ph-chip-ico">◆</span><span><small>Entrega</small><b>Grátis</b><small>Sem mínimo</small></span></div>
+                <div class="ph-chip"><span class="ph-chip-ico">$</span><span><small>Preço da região</small><b>R$ 129</b><small>Zona Leste</small></span></div>
+              </div>
+              <div class="ph-h">Destaques da loja <span>Ver mais</span></div>
+              <div class="ph-cards">
+                <div class="ph-card">
+                  <div class="ph-img">
+                    <svg viewBox="0 0 64 80" width="38" height="48" aria-hidden="true"><path d="M24 14a8 8 0 0 1 16 0" fill="none" stroke="#0a6aa0" stroke-width="3"/><rect x="21" y="12" width="22" height="12" rx="4" fill="#0a6aa0"/><rect x="13" y="22" width="38" height="52" rx="13" fill="#0089cf"/><rect x="13" y="42" width="38" height="14" fill="#fff" opacity=".92"/><text x="32" y="52.5" font-size="9" font-weight="700" text-anchor="middle" fill="#0089cf">P13</text></svg>
+                    <span class="ph-plus">+</span>
+                  </div>
+                  <div class="ph-price">R$ 129,00</div>
+                  <div class="ph-pname">Botijão de Gás P13 (13kg)</div>
+                </div>
+              </div>
+              <div class="ph-pills">
+                <div class="ph-pill"><span>◆</span><span>Entrega grátis <b>permanente</b></span></div>
+                <div class="ph-pill alt"><span>✓</span><span>Entregue pela rede Ultragaz</span></div>
+              </div>
+            </div>
+          </div>
+            <div class="ph-flow">
+              <svg viewBox="0 0 560 392" width="100%" style="display:block; width:100%;" role="img" aria-label="Arquitetura de preço: do preço no iFood ao repasse da revenda, take rate da Hubii e royalties da Ultragaz">
+                <defs>
+                  <marker id="pxHead" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 1 L9 5 L0 9 z" fill="var(--potencial)"/></marker>
+                  <marker id="pxHeadUg" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 1 L9 5 L0 9 z" fill="var(--ultragaz)"/></marker>
+                </defs>
+                <rect x="130" y="6" width="300" height="64" rx="14" fill="var(--card)" stroke="var(--line)"/>
+                <circle cx="158" cy="38" r="12" fill="#ea1d2c"/>
+                <text x="182" y="31" class="pa-t">Canal · preço ao consumidor</text>
+                <text x="182" y="55" class="pa-v">R$129,00</text>
+                <text x="418" y="55" text-anchor="end" class="pa-s">Zona Leste</text>
+
+                <line x1="280" y1="70" x2="280" y2="124" stroke="var(--potencial)" stroke-width="1.8" marker-end="url(#pxHead)"/>
+                <text x="294" y="94" class="pa-l">− 6,5% do Canal</text>
+                <text x="294" y="110" class="pa-l" style="font-weight:600; fill:var(--ink);">−R$8,39</text>
+
+                <rect x="130" y="128" width="300" height="64" rx="14" fill="var(--hubii-bg)" stroke="var(--purple-glow)"/>
+                <circle cx="158" cy="160" r="12" fill="var(--purple)"/><text x="158" y="164" text-anchor="middle" style="font:700 11px 'Onest',sans-serif; fill:#fff;">H</text>
+                <text x="182" y="153" class="pa-t">Hubii recebe do Canal</text>
+                <text x="182" y="177" class="pa-v" style="fill:var(--purple-deep);">R$120,61</text>
+                <text x="418" y="177" text-anchor="end" class="pa-s">via API</text>
+
+                <text x="294" y="214" class="pa-l">Hubii escolhe a revenda e distribui</text>
+                <line x1="100" y1="226" x2="460" y2="226" stroke="var(--potencial)" stroke-width="1.8"/>
+                <line x1="280" y1="192" x2="280" y2="262" stroke="var(--potencial)" stroke-width="1.8" marker-end="url(#pxHead)"/>
+                <line x1="100" y1="226" x2="100" y2="262" stroke="var(--potencial)" stroke-width="1.8" marker-end="url(#pxHead)"/>
+                <line x1="460" y1="226" x2="460" y2="262" stroke="var(--ultragaz)" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#pxHeadUg)"/>
+                <text x="110" y="248" class="pa-l">repasse</text>
+                <text x="290" y="248" class="pa-l">take rate</text>
+                <text x="470" y="248" class="pa-l" style="fill:var(--ultragaz); font-weight:600;">royalties</text>
+
+  <rect x="16" y="266" width="168" height="112" rx="14" fill="var(--card)" stroke="var(--line)"/>
+  <circle cx="100" cy="291" r="13" fill="var(--ultragaz)"/><text x="100" y="295" text-anchor="middle" style="font:700 10.5px 'Onest',sans-serif; fill:#fff;">UG</text>
+  <text x="100" y="325" text-anchor="middle" class="pa-t">Revenda Ultragaz</text>
+  <text x="100" y="349" text-anchor="middle" class="pa-v" style="fill:var(--ink);">R$116,10</text>
+  <text x="100" y="367" text-anchor="middle" class="pa-s">last mile · 90% do ticket</text>
+  <rect x="196" y="266" width="168" height="112" rx="14" fill="var(--hubii-bg)" stroke="var(--purple-glow)"/>
+  <circle cx="280" cy="291" r="13" fill="var(--purple)"/><text x="280" y="295" text-anchor="middle" style="font:700 10.5px 'Onest',sans-serif; fill:#fff;">H</text>
+  <text x="280" y="325" text-anchor="middle" class="pa-t">Take Rate Hubii</text>
+  <text x="280" y="349" text-anchor="middle" class="pa-v" style="fill:var(--purple-deep);">R$2,58</text>
+  <text x="280" y="367" text-anchor="middle" class="pa-s">2% do ticket</text>
+  <rect x="376" y="266" width="168" height="112" rx="14" fill="var(--ultragaz-bg)" stroke="var(--ultragaz)" stroke-dasharray="4 3"/>
+  <circle cx="460" cy="291" r="13" fill="var(--ultragaz)"/><text x="460" y="295" text-anchor="middle" style="font:700 10.5px 'Onest',sans-serif; fill:#fff;">UG</text>
+  <text x="460" y="325" text-anchor="middle" class="pa-t">Royalties Ultragaz</text>
+  <text x="460" y="349" text-anchor="middle" class="pa-v" style="fill:var(--ultragaz);">R$2,58</text>
+  <text x="460" y="367" text-anchor="middle" class="pa-s">2% do ticket</text>
+              </svg>
+              <div class="hyp-wrap">
+                <div class="hyp-h">Hipóteses a testar</div>
+                <div class="hyp">
+                  <span class="hyp-n">H1</span>
+                  <div><b>Frete pago pelo shopper</b><p>Default: frete grátis, entrega pela revenda. Se o shopper pagar R$2,99 (~2,3% do preço), o valor entra no Royalties Ultragaz e no Take Rate Hubii.</p></div>
+                </div>
+                <div class="hyp">
+                  <span class="hyp-n">H2</span>
+                  <div><b>Preço de venda maior</b><p>Botijão a R$135 (+R$6): os R$6 entram no Royalties Ultragaz e no Take Rate Hubii, e a revenda ganha o mesmo.</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="ph-foot">Exemplo ilustrativo: múltiplas lojas no iFood e no 99, cada uma cobrindo um grupo de price zones (R$129 na Zona Leste, R$140 na Zona Sul), com entrega grátis.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ov-block" style="margin-bottom:0;">
+      <div class="section-label">Time do projeto — Ultragaz</div>
+      <div class="panel">
+        <div class="people-grid">
+        <div class="praca-foco">
+          <div class="praca-dot"></div>
+          <div class="praca-info">
+            <div class="praca-city">Mateus Brino</div>
+            <div class="praca-partner">Ultragaz · lidera o projeto</div>
+            <div class="contact-line">
+              <a href="tel:+5511991230067">+55 11 991-230-067</a>
+              <a href="mailto:mateus.brino@ultragaz.com.br">mateus.brino@ultragaz.com.br</a>
+              <a href="https://www.linkedin.com/in/mateus-cano/" target="_blank" rel="noopener">LinkedIn ↗</a>
+            </div>
+          </div>
+          <div class="praca-tag">Líder</div>
+        </div>
+        <div class="praca-foco">
+          <div class="praca-dot"></div>
+          <div class="praca-info">
+            <div class="praca-city">Patricia Correa</div>
+            <div class="praca-partner">Ultragaz</div>
+            <div class="contact-line">
+              <a href="tel:+5511991736010">+55 11 991-736-010</a>
+              <a href="mailto:patricia.correa@ultragaz.com.br">patricia.correa@ultragaz.com.br</a>
+              <a href="https://www.linkedin.com/in/patricia-martins-marketing/" target="_blank" rel="noopener">LinkedIn ↗</a>
+            </div>
+          </div>
+        </div>
+        <div class="praca-foco">
+          <div class="praca-dot"></div>
+          <div class="praca-info">
+            <div class="praca-city">Gustavo Silva</div>
+            <div class="praca-partner">Ultragaz</div>
+            <div class="contact-line">
+              <a href="tel:+5511991380172">+55 11 991-380-172</a>
+              <a href="mailto:gustavo.silva@ultragaz.com.br">gustavo.silva@ultragaz.com.br</a>
+              <a href="https://www.linkedin.com/in/gustavo-luiz-teixeira-da-silva/" target="_blank" rel="noopener">LinkedIn ↗</a>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUSINESS PLAN -->
+  <div class="tab-panel" id="panel-bp">
+
+    <section class="bpx-section">
+      <div class="bpx-duo">
+        <div class="bpx-card">
+          <div class="bpx-eyebrow">Mercado</div>
+          <h2 class="bpx-h2">Contexto de mercado — Grande São Paulo</h2>
+          <div class="bpx-facts">
+            <div class="bpx-fact main"><span>Online UG GSP<small>dado primário · ago/26</small></span><b>R$9mi/mês<small>≈ 70,9 mil botijões</small></b></div>
+            <div class="bpx-fact main"><span>Offline UG GSP<small>premissa 1</small></span><b>~R$128,6mi/mês<small>≈ 1,01mi de botijões</small></b></div>
+            <div class="bpx-fact main"><span>Offline concorrentes<small>premissa 2</small></span><b>~R$168mi/mês<small>≈ 1,32mi de botijões</small></b></div>
+          </div>
+          <div class="bpx-notes">
+            <div class="bpx-note"><span>Premissa 1 · online sobre o offline da UG</span><b>7%</b></div>
+            <div class="bpx-note"><span>Premissa 2 · market share da UG em GSP</span><b>24% <i>(22% no Brasil)</i></b></div>
+            <div class="bpx-note"><span>CAC <i>· no offline, a revenda arca o custo</i></span><b>R$22 online · R$12 offline</b></div>
+            <div class="bpx-note"><span>Ticket médio online</span><b>R$126–127 <i>(1 botijão ≈ R$127)</i></b></div>
+          </div>
+        </div>
+
+        <div class="bpx-card">
+          <div class="bpx-eyebrow">Margem</div>
+          <h2 class="bpx-h2">O teto de margem do piloto é maior que o do canal atual</h2>
+          <p class="bpx-lead">Mesma margem base; o canal Hubii soma um royalty de 2% e carrega um licenciamento fixo.</p>
+          <table class="bpx-table">
+            <thead><tr><th></th><th>Canal próprio hoje</th><th>Canal Hubii (piloto)</th></tr></thead>
+            <tbody>
+              <tr><td>Margem base <small>venda à revenda</small></td><td>12,00%</td><td id="cmp_margemBase_display">12,00%</td></tr>
+              <tr><td>Back office</td><td>−4,00%</td><td>−4,00%</td></tr>
+              <tr><td>Marketing</td><td>−6,00%</td><td>−6,00%</td></tr>
+              <tr><td>Taxa de adquirência</td><td>−0,20%</td><td class="na">—</td></tr>
+              <tr><td>Royalty <small>margem incremental</small></td><td class="na">—</td><td>+2,00%</td></tr>
+              <tr class="total"><td>Margem <small>antes do licenciamento</small></td><td id="cmp_margem_propria">—</td><td id="cmp_lucro_preliminar">—</td></tr>
+              <tr class="after-total"><td>Licenciamento Hubii <small>custo de tecnologia, fixo — fora da margem %, pesa no ponto de virada</small></td><td class="na">—</td><td>R$15.000/mês</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="bpx-section">
+      <div class="bpx-eyebrow">Ponto de virada</div>
+      <h2 class="bpx-h2">Quanto volume o piloto precisa para superar o canal próprio</h2>
+      <p class="bpx-lead">Abaixo do ponto de virada o licenciamento fixo pesa mais que o ganho de margem; acima, a margem do piloto passa a do canal próprio (<span id="vm_target_label">1,80</span>%).</p>
+
+      <div class="bpx-card bpx-be">
+        <div class="bpx-be-head">
+          <div class="bpx-label">Volume do ponto de virada</div>
+          <div class="bpx-be-num" id="vm_breakeven_value">—</div>
+        </div>
+        <div class="breakeven-track">
+          <div class="breakeven-fill-below" id="vm_fill_below"></div>
+          <div class="breakeven-fill-above" id="vm_fill_above"></div>
+          <div class="breakeven-marker" id="vm_marker_line"></div>
+          <div class="breakeven-pin" id="vm_pin"><div class="breakeven-pin-label" id="vm_pin_label">hoje</div></div>
+        </div>
+        <div class="breakeven-scale">
+          <span>R$0</span>
+          <span id="vm_scale_max">—</span>
+        </div>
+      </div>
+
+      <div class="bpx-grid2">
+        <div class="bpx-card">
+          <div class="bpx-card-title">Volume esperado — mês 6</div>
+          <div class="bpx-card-sub">Duas premissas a validar no piloto</div>
+          <div class="bpx-fields">
+            <div class="bpx-field">
+              <label for="vmPct1">Canibalização do offline UG (%)</label>
+              <input type="text" inputmode="decimal" id="vmPct1" value="0,10">
+              <span class="bpx-hint">Clientes que já compravam offline da Ultragaz e só migram de canal — não é volume novo</span>
+            </div>
+            <div class="bpx-field">
+              <label for="vmPct2">Captura de concorrentes (%)</label>
+              <input type="text" inputmode="decimal" id="vmPct2" value="0,10">
+              <span class="bpx-hint">Volume de fora da base UG — esse sim é ganho líquido de mercado</span>
+            </div>
+          </div>
+          <div class="bpx-row muted"><span>Offline UG em GSP <i>calculado</i></span><b id="vm_base1_display">—</b></div>
+          <div class="bpx-row muted"><span>TAM GSP c/ concorrentes <i>calculado</i></span><b id="vm_base2_display">—</b></div>
+          <div class="bpx-row"><span>Via canibalização</span><b id="vm_via1">—</b></div>
+          <div class="bpx-row"><span>Via captura de concorrentes</span><b id="vm_via2">—</b></div>
+          <div class="bpx-row total"><span>GMV esperado por mês</span><b id="vm_total">—</b></div>
+        </div>
+
+        <div class="bpx-card">
+          <div class="bpx-card-title">Resultado do mês</div>
+          <div class="bpx-card-sub">No volume esperado ao lado</div>
+          <div class="bpx-fields">
+            <div class="bpx-field">
+              <label for="vmBackoffice">Back office (%)</label>
+              <input type="text" inputmode="decimal" id="vmBackoffice" value="4,00">
+              <span class="bpx-hint">Custo: quanto menor, melhor</span>
+            </div>
+            <div class="bpx-field">
+              <label for="vmRoyaltyPct">Royalty (%)</label>
+              <input type="text" inputmode="decimal" id="vmRoyaltyPct" value="2,00">
+              <span class="bpx-hint">Margem incremental</span>
+            </div>
+            <div class="bpx-field">
+              <label for="vmMktPct">Marketing (%)</label>
+              <input type="text" inputmode="decimal" id="vmMktPct" value="6,00">
+            </div>
+            <div class="bpx-field">
+              <label for="vmLicenciamento">Licenciamento (R$/mês)</label>
+              <input type="text" inputmode="decimal" id="vmLicenciamento" value="15.000,00">
+              <span class="bpx-hint">Valor fixo</span>
+            </div>
+          </div>
+          <div class="bpx-row"><span>Margem base <i>não se altera</i></span><b id="vm_margemBase">—</b></div>
+          <div class="bpx-row"><span>Back office</span><b id="vm_savings">—</b></div>
+          <div class="bpx-row"><span>Royalty</span><b id="vm_royalty">—</b></div>
+          <div class="bpx-row"><span>Marketing</span><b id="vm_mkt">—</b></div>
+          <div class="bpx-row"><span>Licenciamento Hubii</span><b id="vm_licenciamento">—</b></div>
+          <div class="bpx-row total"><span>Resultado do mês</span><b id="vm_resultado">—</b></div>
+        </div>
+      </div>
+
+      <p class="bpx-foot">Referência interna da UG: EBITDA domiciliar de 12% e lucro líquido de R$951 por tonelada (métrica de go/no-go citada na reunião).</p>
+    </section>
+
+    <section class="bpx-section">
+      <div class="bpx-eyebrow">Projeção</div>
+      <h2 class="bpx-h2">Faturamento mês a mês</h2>
+      <p class="bpx-lead">De R$100mil no mês 1 (~787 botijões) a <b id="proj_target_title">—</b> no mês 6; depois, o mesmo ritmo de crescimento.</p>
+      <div class="bpx-card">
+        <div class="bp-legend">
+          <div class="bp-legend-item"><span class="bp-legend-line" style="background:var(--purple)"></span>GMV projetado por mês</div>
+          <div class="bp-legend-item"><span class="bp-legend-dot" style="background:var(--amber)"></span>Ponto de virada (margem &gt; <span id="proj_target_margin_label">1,80</span>%)</div>
+        </div>
+        <div class="bp-chart-wrap">
+          <svg id="projChart" viewBox="0 0 1000 380" width="100%" style="min-width:680px; display:block;"></svg>
+        </div>
+        <div class="bpx-miles">
+          <div class="bpx-mile"><div class="bpx-mile-m">Mês 1</div><div class="bpx-mile-v">R$100.000</div><div class="bpx-mile-s">ponto de partida</div></div>
+          <div class="bpx-mile"><div class="bpx-mile-m">Mês 6</div><div class="bpx-mile-v" id="proj_m6">—</div><div class="bpx-mile-s" id="proj_m6_sub">—</div></div>
+          <div class="bpx-mile"><div class="bpx-mile-m">Mês 12</div><div class="bpx-mile-v" id="proj_m12">—</div><div class="bpx-mile-s" id="proj_m12_sub">—</div></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- RESULTADOS (mockup — dados ilustrativos) -->
+  <div class="tab-panel" id="panel-resultados">
+    <div class="panel mock-banner">
+      <div class="mock-banner-title">Prévia · dados ilustrativos</div>
+      <p>O piloto ainda não foi iniciado. Os gráficos abaixo são um <b>mockup</b> de como os resultados reais serão exibidos: a série "real" é <b>fictícia</b> (um pouco acima da curva projetada do Business Plan) e os números se ajustam junto com o simulador. Quando o piloto for lançado, estes painéis passam a ser alimentados com dados reais.</p>
+    </div>
+
+    <div class="ov-block">
+      <div class="section-label">Visão geral do período (M1–M6) <span class="mock-chip">exemplo</span></div>
+      <div class="stat-row" id="resKpis"></div>
+    </div>
+
+    <div class="ov-block">
+      <div class="section-label">Real × projetado — acima da curva <span class="mock-chip">exemplo</span></div>
+      <div class="panel">
+        <div class="bp-legend">
+          <div class="bp-legend-item"><span class="bp-legend-line" style="background:var(--purple)"></span>Real (exemplo)</div>
+          <div class="bp-legend-item"><span class="bp-legend-line" style="background:none; border-top:2px dashed var(--potencial); height:0;"></span>Projetado (Business Plan)</div>
+          <div class="bp-legend-item"><span class="bp-legend-dot" style="background:var(--foco); border-radius:3px;"></span>Acima da curva</div>
+        </div>
+        <svg id="resRealProj" viewBox="0 0 1000 340" width="100%" style="display:block;"></svg>
+      </div>
+    </div>
+
+    <div class="ov-band">
+      <div class="ov-col">
+        <div class="section-label">Venda mês a mês <span class="mock-chip">exemplo</span></div>
+        <div class="panel">
+          <div class="bp-legend">
+            <div class="bp-legend-item"><span class="bp-legend-dot" style="background:var(--purple); border-radius:3px;"></span>GMV real (exemplo)</div>
+            <div class="bp-legend-item"><span class="bp-legend-line" style="background:var(--ink); height:2px;"></span>Projetado</div>
+          </div>
+          <svg id="resMonthly" viewBox="0 0 520 300" width="100%" style="display:block;"></svg>
+        </div>
+      </div>
+      <div class="ov-col">
+        <div class="section-label">Venda por canal <span class="mock-chip">exemplo</span></div>
+        <div class="panel">
+          <div id="resChannel"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ov-band">
+      <div class="ov-col">
+        <div class="section-label">Venda por revendedor <span class="mock-chip">exemplo</span></div>
+        <div class="panel">
+          <div id="resReseller"></div>
+          <p class="mock-note">Nomes e bairros fictícios.</p>
+        </div>
+      </div>
+      <div class="ov-col">
+        <div class="section-label">Itens mais vendidos <span class="mock-chip">exemplo</span></div>
+        <div class="panel">
+          <div id="resItems"></div>
+          <p class="mock-note">Hoje o piloto vende apenas P13; os demais itens ilustram a visão quando o portfólio crescer.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ov-band">
+      <div class="ov-col">
+        <div class="section-label">Número de cancelamentos <span class="mock-chip">exemplo</span></div>
+        <div class="panel">
+          <div class="bp-legend">
+            <div class="bp-legend-item"><span class="bp-legend-dot" style="background:var(--amber); border-radius:3px;"></span>Nº de cancelamentos · abaixo de cada mês: % dos pedidos</div>
+          </div>
+          <svg id="resCancel" viewBox="0 0 520 300" width="100%" style="display:block;"></svg>
+        </div>
+      </div>
+      <div class="ov-col">
+        <div class="section-label">Tempo de entrega <span class="mock-chip">exemplo</span></div>
+        <div class="panel">
+          <div class="bp-legend">
+            <div class="bp-legend-item"><span class="bp-legend-line" style="background:var(--purple)"></span>Tempo médio (min)</div>
+            <div class="bp-legend-item"><span class="bp-legend-dot" style="background:var(--foco-bg); border:1px solid var(--foco); border-radius:3px;"></span>Meta: 20–25 min</div>
+          </div>
+          <svg id="resDelivery" viewBox="0 0 520 300" width="100%" style="display:block;"></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="ov-band" style="margin-bottom:0;">
+      <div class="ov-col">
+        <div class="section-label">Regiões da Grande São Paulo atendidas <span class="mock-chip">exemplo</span></div>
+        <div class="panel">
+          <div class="region-map" id="resRegions"></div>
+          <div class="region-legend">
+            <span>Quanto mais escuro, maior o GMV da região</span>
+            <span>Tracejado: fora do piloto (backlog · 2ª fase)</span>
+          </div>
+        </div>
+      </div>
+      <div class="ov-col">
+        <div class="section-label">Mini P&amp;L — EBITDA (R$/Ton) <span class="mock-chip">exemplo</span></div>
+        <div class="panel">
+          <div id="resPL"></div>
+          <p class="mock-note">Mês 6 · mesmas premissas do Business Plan (margem base, back office, royalty, marketing e licenciamento).</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TAREFAS -->
+  <div class="tab-panel" id="panel-tarefas">
+    <div class="tasks-title-row">
+      <h3 class="tasks-title">Tarefas</h3><span class="count-chip" id="tasksCountChip">0/0</span>
+    </div>
+
+    <div class="section-label first sec-row">Pendências <button type="button" class="new-task-btn" id="btnNewTask">+ Nova tarefa</button></div>
+    <div class="filter-row" id="weekFilters"></div>
+    <div class="panel" id="pendencias"></div>
+
+    <details class="done-block" id="historyBlock">
+      <summary>Histórico de concluídas <span class="done-count" id="historyCount"></span></summary>
+      <div class="panel" id="historyList"></div>
+    </details>
+
+    <div class="section-label sec-row">Atas
+      <select id="ataMode" class="mode-select" aria-label="Agrupar atas">
+        <option value="mes">Por mês</option>
+        <option value="tipo">Por tipo</option>
+      </select>
+    </div>
+    <div class="panel" id="atasRecent"></div>
+    <div id="atasOld"></div>
+  </div>
+
+  <div class="upd-badge" id="updBadge"><span id="updText"></span><button type="button" id="updBtn" title="Recarregar">↻</button></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="footer-note">Atualizado a partir do Notion · <b>Hubii</b> × Ultragaz</div>
+
+</div>
+
+<!-- MODAL: RESUMO DA REUNIÃO -->
+<div class="modal-overlay" id="meetingModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <div class="modal-eyebrow" id="modalEyebrow">Notion · Companies</div>
+        <div class="modal-title" id="modalTitle">—</div>
+      </div>
+      <button class="modal-close" data-close>✕</button>
+    </div>
+    <div class="modal-sub" id="modalSub">—</div>
+    <div id="modalBody"></div>
+    <div class="modal-add-update" id="modalAddUpdate" style="display:none;">
+      <div class="modal-section-label">Adicionar atualização</div>
+      <textarea id="modalUpdateText" class="modal-update-input" rows="2" placeholder="Ex: cliente confirmou reunião para sexta-feira"></textarea>
+      <div class="modal-update-row">
+        <button id="modalUpdateSave" class="modal-update-btn">Salvar no Notion</button>
+        <span id="modalUpdateFeedback" class="modal-update-feedback"></span>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-link" id="modalLink" href="#" target="_blank" rel="noopener">Abrir no Notion ↗</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Tabs
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.tab-panel');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  // ===== Tarefas e Atas — fase 1 =====
+  // Endpoints usados: POST /api/complete-task (status) e POST /api/add-update (histórico).
+  // Ainda não existem: leitura da base, criação de tarefa e troca de responsável.
+  (function(){
+    const $ = id => document.getElementById(id);
+    const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const MESES = ['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
+    const MESES_LONG = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+
+    // Status: nomes exatos do Notion (campo Status da base Tasks List).
+    const STATUS = {
+      'Backlog':  { label:'Backlog',      cls:'st-backlog' },
+      'To-Do':    { label:'A fazer',      cls:'st-todo' },
+      'Waiting':  { label:'Aguardando',   cls:'st-waiting' },
+      'On Going': { label:'Em andamento', cls:'st-doing' },
+      'Paused':   { label:'Pausada',      cls:'st-paused' },
+      'Done':     { label:'Concluída',    cls:'st-done' },
+    };
+    const STATUS_NOTION = ['Backlog','To-Do','Waiting','On Going','Paused','Done'];
+    const OWNERS = ['Hubii','Ambos','Parceiro'];
+
+    // Tarefas da Ultragaz (relação Task List da página Companies/Ultragaz).
+    // Dados puxados do Notion em 13/out/2026. "semana" vem do campo Week (ISO, ano 2026).
+    // "ordem" não existe no Notion: usa a ordem desta lista.
+    // Fallback: usado só se /api/tasks falhar. A fonte de verdade é o Notion.
+    let TASKS = [
+      { key:'t_contrato', title:'assinatura do contrato', owner:'Ambos', status:'Waiting', originalStatus:'Waiting', semana:'2026-W41', ordem:1,
+        url:'https://app.notion.com/p/3dcef5854ef380b6867fe416dd3ba7ca',
+        updates:[
+          { date:'15-set', text:'teste' },
+          { date:'', text:'precisamos dar o ok nas cláusulas no contrato // enviar o texto sugestão da cláusula de multa' }
+        ] },
+      { key:'t_ifood', title:'ok comercial par iFood', owner:'Ambos', status:'Done', originalStatus:'Done', semana:'2026-W40', ordem:2,
+        url:'https://app.notion.com/p/3dcef5854ef380d092c7e5ac44d06b57',
+        updates:[
+          { date:'16-set', text:'ontem sinalizamos os iFood que devemos fazer o Go Live em no máximo 45 dias' }
+        ] },
+      { key:'t_bp', title:'aprovação do BP', owner:'Parceiro', status:'Done', originalStatus:'Done', semana:'2026-W40', ordem:3,
+        url:'https://app.notion.com/p/3dcef5854ef38036a29ae308f77d20dd',
+        updates:[
+          { date:'16-set', text:'material está com time UG para aprovação interna' }
+        ] },
+      { key:'t_setup', title:'set up loja iFood', owner:'Hubii', status:'To-Do', originalStatus:'To-Do', semana:'2026-W42', ordem:4,
+        url:'https://app.notion.com/p/3f8ef5854ef38096abe0eea4f39af02f', updates:[] },
+      { key:'t_lista', title:'lista de hubs para piloto', owner:'Parceiro', status:'To-Do', originalStatus:'To-Do', semana:'2026-W42', ordem:5,
+        url:'https://app.notion.com/p/3f8ef5854ef380bca8d8e8669e61698c', updates:[] },
+      { key:'t_deepdive', title:'deep dive hub e painel Hubii', owner:'Ambos', status:'To-Do', originalStatus:'To-Do', semana:'2026-W43', ordem:6,
+        url:'https://app.notion.com/p/3f8ef5854ef3808ab09ec6b722c63d8d', updates:[] },
+    ];
+
+    // Atas: conteúdo puxado do Notion (Meeting Notes da Ultragaz) em 13/out/2026.
+    // "tipo" NÃO existe no Notion: é uma classificação minha, para o modo "Por tipo".
+    // Ano 2026 vem da data da ata no Notion.
+    const ATAS = {
+      m1: {
+        ano:2026, mes:8, dia:10, tipo:'Acompanhamento',
+        title:'Work-Session',
+        sub:'10/ago · Reunião de acompanhamento do projeto',
+        teaser:'Reunião realizada — a transcrição automática não registrou pauta nem decisões',
+        url:'https://app.notion.com/p/3b8ef5854ef380d880fdef6cbe99c9c2',
+        sections:[
+          { label:'Registro', items:[
+            'Reunião com Matheus, Leonardo e Pat, com transcrição automática ativada',
+            'A transcrição cobre só os momentos iniciais: cumprimentos e reorganização de quem entraria na chamada',
+            'Não há registro de pauta, decisões ou encaminhamentos'
+          ]}
+        ]
+      },
+      m2: {
+        ano:2026, mes:9, dia:10, tipo:'Parceria',
+        title:'Match Making',
+        sub:'10/set · Reunião iFood Shopping x Ultragás — parceria de venda de gás',
+        teaser:'Parceria de venda de gás via iFood: take rate de 6%, praça inicial em SP e ABC, SKU P13',
+        url:'https://app.notion.com/p/3d7ef5854ef380c288e6eb41f920683b',
+        sections:[
+          { label:'Itens de ação', items:[
+            'Consultar Matheus sobre o tempo máximo tolerável de pedidos atrasados',
+            'Avaliar repassar o frete ao consumidor e reenquadrar o take rate para 8%',
+            'Paty e Matheus compartilharem o volume de vendas com o time do iFood',
+            'Luizão projetar GMV e share de mercado digital vs. offline',
+            'Definir o onboarding de revendas: adesão automática ou aceite individual pelo painel Rubi'
+          ]},
+          { label:'Contexto', items:[
+            'Encontro entre o iFood Shopping (Pascucci e Luiz) e a Ultragás (Paty e Matheus)',
+            'Parceria anterior no projeto Revenda do Futuro, com integração de pagamento nas maquininhas',
+            'Em 2018 houve um teste em Salvador com bons resultados, mas o iFood desmobilizou a iniciativa'
+          ]},
+          { label:'Momento do iFood Shopping', items:[
+            'Vertical desprioritizada até março; a partir de abril passou a ser estratégica para os próximos 5 a 6 anos',
+            'Estrutura atual: 5 pessoas no comercial, além de growth e tecnologia dedicados'
+          ]},
+          { label:'Modelo de negócio', items:[
+            'Take rate de 6%, com 2% reinvestidos em frete grátis permanente',
+            'Ticket médio de R$117 com frete incluso; o iFood recebe 9,4% líquido do GMV',
+            'Em discussão: repassar o frete e reenquadrar a taxa para 8%',
+            'O modelo de subsídio governamental (gás do povo) tem margem muito apertada e não será a base de precificação'
+          ]},
+          { label:'Logística e entrega', items:[
+            'Entrega inicial feita pelas próprias revendas, não por motoboy do iFood',
+            'Tempo médio atual de entrega: 17 minutos; sugestão de 20 a 25 minutos no app',
+            'O uso do LAS (last mile do iFood) fica para o futuro'
+          ]},
+          { label:'Price zones e território', items:[
+            'O iFood opera com price zones (ex.: Zona Leste R$129, Zona Sul R$140)',
+            'Será preciso criar múltiplas lojas por território, com raios distintos, para preservar valor',
+            'Definir sites e raios será complexo, mas essencial para o modelo'
+          ]},
+          { label:'Go-to-market', items:[
+            'Praça inicial: São Paulo e ABC (Grande São Paulo)',
+            'Expansão potencial: 3.400 municípios e cerca de 5.000 a 6.000 revendas',
+            'Foco nas 6.000 revendas exclusivas Ultragás; bandeiras brancas com outros produtos ficam de fora',
+            'SKU inicial: apenas P13'
+          ]},
+          { label:'Oportunidade de mercado', items:[
+            'Vendas digitais de gás ainda têm share de um dígito; objetivo de dobrar a representatividade',
+            'Salvador é a principal praça da Ultragás, mas São Paulo também tem volume expressivo',
+            'Referência de GMV potencial citada: R$33 milhões'
+          ]}
+        ]
+      },
+      m3: {
+        ano:2026, mes:10, dia:1, tipo:'Revisão',
+        title:'BP Review',
+        sub:'01/out · Revisão do BP',
+        teaser:'Sem notas registradas: a página existe, mas não tem conteúdo',
+        url:'https://app.notion.com/p/3ecef5854ef38023ae28d59f6c835376',
+        sections:[]
+      },
+      m4: {
+        ano:2026, mes:10, dia:13, tipo:'Diagnóstico',
+        title:'Overview Hub UG',
+        sub:'13/out · Diagnóstico do hub atual da Ultragaz e avaliação da Hubii',
+        teaser:'Diagnóstico do hub atual, roadmap 2027 e POC proposta; deep dive marcado para 14/out',
+        url:'https://app.notion.com/p/3f8ef5854ef380b2b3c0d3a38ce3f483',
+        sections:[
+          { label:'Participantes', items:[
+            'Patricia Correa, gerente de canais digitais (P&L, precificação, marketing)',
+            'Ítalo, PM da squad do Hub (há 2 meses no cargo); tech lead Ramon de férias',
+            'Mateus, analista de Growth'
+          ]},
+          { label:'Hub atual (Ultragaz)', items:[
+            'Plataforma monolítica que sustenta app, site, WhatsApp e Amigoo',
+            'Painel de pedidos 360, cadastro de revendas, price zones (polígonos com preço por região), pagamentos (voucher, online e na entrega), campanhas, LGPD, fidelidade',
+            'Taxa de performance de 0 a 4%, baseada em % de canais digitais e SLA de entrega (30 min)',
+            'Infraestrutura: Oracle Cloud, Google Maps API e outros serviços de OPEX',
+            'A consultoria (software house) fornece os recursos; a tecnologia é proprietária da Ultragaz',
+            'Cerca de 3 desenvolvedores dedicados ao hub'
+          ]},
+          { label:'Roadmap e ambições da Ultragaz', items:[
+            'Roadmap 2027: o que desenvolver e o que descontinuar',
+            'Levantar uso real por logs, métricas atuais (ex.: taxa de cancelamento) e custos de App, WhatsApp e site',
+            'Evoluir de price zones fixas para precificação dinâmica por CEP ou raio de entrega (modelo marketplace)',
+            'Sobreposição de áreas entre revendas é um ponto a explorar'
+          ]},
+          { label:'Avaliação da Hubii', items:[
+            'Arquitetura de microsserviços é muito mais flexível que o monolito atual',
+            'Cerca de 90% de similaridade funcional',
+            'A aprofundar: voucher, exclusividade de território e conciliação financeira',
+            'Não é SaaS puro: exige implementação, sustentação e customização dedicada',
+            'Referência de ticket: o maior cliente atual da Hubii paga cerca de R$100 mil/mês no modelo SaaS'
+          ]},
+          { label:'POC e próximos passos', items:[
+            'Sequência sugerida: 1) lançar o iFood (meta 5/nov); 2) deep dive na Ultragaz com o painel da Hubii; 3) POC em praça menor com alta taxa de cancelamento, integrando WhatsApp e canais; 4) se validado, escalar para a transição completa',
+            'A transição total do sistema é uma decisão que exige convicção de todos'
+          ]},
+          { label:'Próxima reunião', items:[
+            'Deep dive: quarta-feira, 14/out, das 10h ao meio-dia, na Ultragaz',
+            'Leonardo envia o convite; Patricia reserva a sala; incluir Ítalo, Pires e quem a Patricia indicar'
+          ]},
+          { label:'Itens de ação', items:[
+            'Leonardo: enviar o convite do deep dive',
+            'Gabriel Pires: preparar o roteiro do deep dive (o que a Hubii tem, o que não tem e gaps vs. necessidades da Ultragaz)',
+            'Patricia: detalhar custos de Hub, App, WhatsApp, site e OPEX (hoje tem só o total)',
+            'Consultar os logs de uso para separar funcionalidades ativas e descontinuadas, base para o MVP'
+          ]}
+        ]
+      },
+    };
+
+    let weekFilter = 'all';
+    let modalCtx = null;
+    let lastUpdated = new Date();
+
+    // ---------- utilitários ----------
+    function notionPageIdFromUrl(url){
+      const m = url.match(/([a-f0-9]{32})/i);
+      if(!m) return null;
+      const h = m[1];
+      return `${h.slice(0,8)}-${h.slice(8,12)}-${h.slice(12,16)}-${h.slice(16,20)}-${h.slice(20)}`;
+    }
+    // Semana ISO: retorna { y, w }
+    function isoWeekInfo(d){
+      const t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+      const day = t.getUTCDay() || 7;
+      t.setUTCDate(t.getUTCDate() + 4 - day);
+      const y0 = new Date(Date.UTC(t.getUTCFullYear(), 0, 1));
+      return { y: t.getUTCFullYear(), w: Math.ceil(((t - y0) / 86400000 + 1) / 7) };
+    }
+    const weekKey = i => `${i.y}-W${String(i.w).padStart(2,'0')}`;
+    const weekNum = k => Number(k.split('-W')[1]);
+    const weekLabel = k => 'S' + weekNum(k);
+    const weekNumLabel = k => 'Semana ' + weekNum(k);
+    const pad = n => String(n).padStart(2,'0');
+    const fmtStamp = d => `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()} às ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+
+    let toastTimer = null;
+    function toast(msg){
+      const el = $('toast');
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
+    }
+
+    function updateProgress(){
+      const d = TASKS.filter(t => t.status === 'Done').length;
+      const txt = `${d}/${TASKS.length}`;
+      $('tabCount').textContent = txt;
+      $('tasksCountChip').textContent = txt;
+    }
+
+    // ---------- Pendências ----------
+    const rowHTML = t => {
+      const done = t.status === 'Done';
+      const st = STATUS[t.status] || { label: t.status, cls: 'st-backlog' };
+      return `<div class="trow ${done ? 'is-done' : ''}" data-row="${esc(t.key)}">
+        <div class="tchk ${done ? 'on' : ''}" data-chk="${esc(t.key)}" role="checkbox" aria-checked="${done}"></div>
+        <div class="ttext"><span class="ttitle">${esc(t.title)}</span><span class="tbadge">${esc(t.owner)}</span></div>
+        <span class="tstatus ${st.cls}">${esc(st.label)}</span>
+      </div>`;
+    };
+
+    function renderTasks(){
+      const weeks = [...new Set(TASKS.map(t => t.semana).filter(Boolean))].sort().reverse();
+      const chip = (f, label, n) => `<button type="button" class="fchip ${weekFilter === f ? 'active' : ''}" data-f="${esc(f)}">${esc(label)} <span>${n}</span></button>`;
+      let chips = chip('all', 'Todas', TASKS.length) + weeks.map(k => chip(k, weekLabel(k), TASKS.filter(t => t.semana === k).length)).join('');
+      const nNone = TASKS.filter(t => !t.semana).length;
+      if(nNone) chips += chip('none', 'Sem semana', nNone);
+      $('weekFilters').innerHTML = chips;
+
+      const visible = TASKS.filter(t => weekFilter === 'all' || (weekFilter === 'none' ? !t.semana : t.semana === weekFilter));
+      const active = visible.filter(t => t.status !== 'Done');
+      const doneList = visible.filter(t => t.status === 'Done').sort((a,b) => a.ordem - b.ordem);
+
+      const groupKeys = [...new Set(active.map(t => t.semana || 'none'))]
+        .sort((a,b) => a === 'none' ? 1 : b === 'none' ? -1 : b.localeCompare(a));
+      let html = '';
+      groupKeys.forEach(k => {
+        const all = TASKS.filter(t => (t.semana || 'none') === k);
+        const nd = all.filter(t => t.status === 'Done').length;
+        html += `<div class="week-head"><span>${k === 'none' ? 'Sem semana definida' : weekNumLabel(k)}</span><small>${nd}/${all.length} concluídas</small></div>`;
+        active.filter(t => (t.semana || 'none') === k).sort((a,b) => a.ordem - b.ordem).forEach(t => { html += rowHTML(t); });
+      });
+      $('pendencias').innerHTML = active.length ? html : '<div class="empty">Nenhuma tarefa ativa nesta semana.</div>';
+
+      $('historyCount').textContent = `(${doneList.length})`;
+      $('historyList').innerHTML = doneList.length ? doneList.map(rowHTML).join('') : '<div class="empty">Nenhuma tarefa concluída nesta semana.</div>';
+    }
+
+    function renderAll(){
+      renderTasks();
+      renderAtas();
+      updateProgress();
+    }
+
+    // Lê as tarefas da Company Ultragaz direto do Notion (/api/tasks).
+    async function loadTasks(){
+      try{
+        const resp = await fetch('/api/tasks', { credentials: 'same-origin', cache: 'no-store' });
+        if(!resp.ok) throw new Error('HTTP ' + resp.status);
+        const data = await resp.json();
+        if(!Array.isArray(data.tasks)) throw new Error('resposta inválida');
+        TASKS = data.tasks;
+        return true;
+      }catch(err){
+        console.warn('Falha ao ler tarefas do Notion; mantendo dados locais:', err);
+        return false;
+      }
+    }
+
+    // Altera status com atualização otimista; reverte se o Notion não confirmar.
+    async function setStatus(t, next){
+      const prev = t.status;
+      t.status = next;
+      renderAll();
+      refreshTaskModal(t);
+      try{
+        const resp = await fetch('/api/complete-task', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ pageId: notionPageIdFromUrl(t.url), status: next }),
+        });
+        if(!resp.ok) throw new Error('HTTP ' + resp.status);
+      }catch(err){
+        console.error('Falha ao atualizar status no Notion:', err);
+        t.status = prev;
+        renderAll();
+        refreshTaskModal(t);
+        toast('Não foi possível salvar');
+      }
+    }
+
+    // Checkbox: marcar → Done; desmarcar → volta ao status original do Notion
+    // (mantido do comportamento atual; a spec pedia "Em andamento").
+    function toggleDone(key){
+      const t = TASKS.find(x => x.key === key);
+      if(!t) return;
+      const next = t.status === 'Done' ? t.originalStatus : 'Done';
+      setStatus(t, next);
+    }
+
+    // ---------- Modal compartilhado ----------
+    const modal = $('meetingModal');
+
+    function openModal({ eyebrow, title, sub, link, body, addUpdate }){
+      $('modalEyebrow').textContent = eyebrow;
+      $('modalTitle').textContent = title;
+      $('modalSub').textContent = sub || '';
+      const a = $('modalLink');
+      if(link){ a.href = link; a.parentElement.style.display = ''; }
+      else { a.parentElement.style.display = 'none'; }
+      $('modalBody').innerHTML = body;
+      $('modalAddUpdate').style.display = addUpdate ? 'block' : 'none';
+      resetUpdateForm();
+      modal.classList.add('open');
+    }
+    function closeModal(){
+      modal.classList.remove('open');
+      modalCtx = null;
+    }
+    function resetUpdateForm(){
+      $('modalUpdateText').value = '';
+      $('modalUpdateFeedback').textContent = '';
+      $('modalUpdateFeedback').className = 'modal-update-feedback';
+      $('modalUpdateSave').disabled = false;
+      $('modalUpdateSave').textContent = 'Salvar';
+    }
+
+    const pillGroup = (label, options, active, group, disabled) => `
+      <div class="mgroup">
+        <div class="mlabel">${esc(label)}</div>
+        <div class="pills">${options.map(o => `<button type="button" class="pill ${o.value === active ? 'on' : ''}" data-group="${esc(group)}" data-value="${esc(o.value)}" ${disabled ? 'disabled' : ''}>${esc(o.label)}</button>`).join('')}</div>
+      </div>`;
+
+    function buildTaskBody(t){
+      const hist = t.updates.length
+        ? t.updates.slice().reverse().map(u => `<li>${u.date ? `<b>${esc(u.date)}:</b> ` : ''}${esc(u.text)}</li>`).join('')
+        : '<li>Nenhuma atualização registrada ainda.</li>';
+      return pillGroup('Status', STATUS_NOTION.map(v => ({ value: v, label: STATUS[v].label })), t.status, 'status', false)
+        + pillGroup('Responsável', OWNERS.map(o => ({ value: o, label: o })), t.owner, 'owner', true)
+        + '<div class="mnote">Troca de responsável ainda não está ligada: falta o endpoint.</div>'
+        + `<div class="modal-section"><div class="modal-section-label">Histórico</div><ul>${hist}</ul></div>`;
+    }
+
+    function openTask(key){
+      const t = TASKS.find(x => x.key === key);
+      if(!t) return;
+      modalCtx = { type: 'task', key };
+      openModal({
+        eyebrow: 'Tarefa · Notion',
+        title: t.title,
+        sub: `${t.owner} · ${STATUS[t.status].label}`,
+        link: t.url,
+        body: buildTaskBody(t),
+        addUpdate: true,
+      });
+    }
+
+    function refreshTaskModal(t){
+      if(!modal.classList.contains('open') || !modalCtx || modalCtx.type !== 'task' || modalCtx.key !== t.key) return;
+      $('modalSub').textContent = `${t.owner} · ${STATUS[t.status].label}`;
+      $('modalBody').innerHTML = buildTaskBody(t);
+    }
+
+    function openNewTask(){
+      modalCtx = { type: 'new' };
+      const now = new Date();
+      const curKey = weekKey(isoWeekInfo(now));
+      const weekOpts = [];
+      for(let k = -2; k <= 4; k++){
+        const info = isoWeekInfo(new Date(now.getTime() + k * 7 * 864e5));
+        weekOpts.push({ value: weekKey(info), label: 'S' + info.w });
+      }
+      weekOpts.push({ value: 'none', label: 'Sem semana' });
+      const body = `
+        <div class="mgroup">
+          <div class="mlabel">Título <span class="req">*</span></div>
+          <input id="ntTitle" class="minput" maxlength="200" placeholder="Ex.: negociação com ...">
+          <div class="merr" id="ntErr"></div>
+        </div>
+        ${pillGroup('Responsável', OWNERS.map(o => ({ value: o, label: o })), 'Hubii', 'nt-owner', false)}
+        ${pillGroup('Status', STATUS_NOTION.filter(v => v !== 'Done').map(v => ({ value: v, label: STATUS[v].label })), 'Backlog', 'nt-status', false)}
+        ${pillGroup('Semana', weekOpts, curKey, 'nt-week', false)}
+        <div class="mgroup">
+          <div class="mlabel">Primeira atualização (opcional)</div>
+          <textarea id="ntUpd" class="modal-update-input" rows="2" placeholder="Ex.: contexto inicial"></textarea>
+        </div>
+        <div class="modal-update-row">
+          <button type="button" id="ntSave" class="modal-update-btn">Criar tarefa</button>
+          <span id="ntFeedback" class="modal-update-feedback"></span>
+        </div>`;
+      openModal({ eyebrow: 'Nova tarefa', title: 'Nova tarefa', sub: 'Responsável, status e semana iniciais', link: null, body, addUpdate: false });
+    }
+
+    // Sem endpoint de criação: a tarefa não é salva e o modal permanece aberto.
+    function saveNewTask(){
+      const title = $('ntTitle').value.trim();
+      if(!title){
+        $('ntErr').textContent = 'Escreva um título para a tarefa.';
+        $('ntTitle').focus();
+        return;
+      }
+      $('ntErr').textContent = '';
+      $('ntFeedback').textContent = 'Criação não está ligada: falta o endpoint de criação no backend.';
+      $('ntFeedback').className = 'modal-update-feedback error';
+    }
+
+    // Histórico: texto do usuário vai escapado; salva via /api/add-update.
+    $('modalUpdateSave').addEventListener('click', async () => {
+      if(!modalCtx || modalCtx.type !== 'task') return;
+      const t = TASKS.find(x => x.key === modalCtx.key);
+      if(!t) return;
+      const text = $('modalUpdateText').value.trim();
+      if(!text){
+        $('modalUpdateFeedback').textContent = 'Escreva algo antes de salvar.';
+        $('modalUpdateFeedback').className = 'modal-update-feedback error';
+        return;
+      }
+      const pageId = notionPageIdFromUrl(t.url);
+      if(!pageId){
+        $('modalUpdateFeedback').textContent = 'Não foi possível identificar a página no Notion.';
+        $('modalUpdateFeedback').className = 'modal-update-feedback error';
+        return;
+      }
+      const d = new Date();
+      const date = `${pad(d.getDate())}-${MESES_LONG[d.getMonth()].slice(0,3)}`;
+      $('modalUpdateSave').disabled = true;
+      $('modalUpdateSave').textContent = 'Salvando...';
+      $('modalUpdateFeedback').textContent = '';
+      try{
+        const resp = await fetch('/api/add-update', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ pageId, date, text }),
+        });
+        const ct = resp.headers.get('content-type') || '';
+        if(!ct.includes('application/json')){
+          const raw = await resp.text();
+          throw new Error(`resposta inesperada do servidor (HTTP ${resp.status}): ${raw.slice(0,150)}`);
+        }
+        const data = await resp.json();
+        if(!resp.ok){
+          throw new Error((data && data.error && (data.error.message || JSON.stringify(data.error))) || 'Erro desconhecido');
+        }
+        t.updates.push({ date, text });
+        $('modalUpdateText').value = '';
+        $('modalUpdateFeedback').textContent = 'Salvo com sucesso!';
+        $('modalUpdateFeedback').className = 'modal-update-feedback success';
+        refreshTaskModal(t);
+      }catch(err){
+        $('modalUpdateFeedback').textContent = 'Falha ao salvar: ' + err.message;
+        $('modalUpdateFeedback').className = 'modal-update-feedback error';
+      }finally{
+        $('modalUpdateSave').disabled = false;
+        $('modalUpdateSave').textContent = 'Salvar';
+      }
+    });
+
+    // Pills e botão de criação dentro do modal (delegação)
+    $('modalBody').addEventListener('click', e => {
+      if(e.target.closest('#ntSave')) { saveNewTask(); return; }
+      const pill = e.target.closest('.pill');
+      if(!pill || pill.disabled) return;
+      pill.parentElement.querySelectorAll('.pill').forEach(p => p.classList.toggle('on', p === pill));
+      if(pill.dataset.group === 'status' && modalCtx && modalCtx.type === 'task'){
+        const t = TASKS.find(x => x.key === modalCtx.key);
+        if(t && t.status !== pill.dataset.value) setStatus(t, pill.dataset.value);
+      }
+    });
+
+    // Fechamento: ✕, clique fora e ESC
+    modal.addEventListener('click', e => {
+      if(e.target === modal || e.target.hasAttribute('data-close')) closeModal();
+    });
+    document.addEventListener('keydown', e => {
+      if(e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    });
+
+    // ---------- Atas ----------
+    const ataCard = a => `
+      <div class="ata-card" data-ata="${esc(a.id)}">
+        <div class="ata-date">${a.dia}<span>${MESES[a.mes - 1]}</span></div>
+        <div class="ata-info">
+          <div class="ata-title">${esc(a.title)}</div>
+          <div class="ata-teaser">${esc(a.teaser)}</div>
+        </div>
+        <div class="ata-arrow">→</div>
+      </div>`;
+
+    function ataBody(a){
+      if(!a.sections || !a.sections.length){
+        return `<div class="ata-teaser">${esc(a.teaser)}</div><p style="margin-top:10px;"><a class="modal-link" href="${esc(a.url)}" target="_blank" rel="noopener">Abrir no Notion ↗</a></p>`;
+      }
+      return a.sections.map(sec => `
+        <div class="modal-section">
+          <div class="modal-section-label">${esc(sec.label)}</div>
+          <ul>${sec.items.map(it => `<li>${esc(it)}</li>`).join('')}</ul>
+        </div>`).join('');
+    }
+
+    function openAta(id){
+      const a = ATAS[id];
+      if(!a) return;
+      modalCtx = { type: 'ata', id };
+      openModal({
+        eyebrow: 'Meeting Notes · Notion',
+        title: a.title,
+        sub: a.sub,
+        link: a.url,
+        body: ataBody(a),
+        addUpdate: false,
+      });
+    }
+
+    function renderAtas(){
+      const list = Object.entries(ATAS)
+        .map(([id, a]) => ({ id, ...a }))
+        .sort((a,b) => (b.ano - a.ano) || (b.mes - a.mes) || (b.dia - a.dia));
+      $('atasRecent').innerHTML = list.slice(0,5).map(ataCard).join('') || '<div class="empty">Nenhuma ata registrada.</div>';
+
+      const older = list.slice(5);
+      if(!older.length){ $('atasOld').innerHTML = ''; return; }
+      const byTipo = $('ataMode').value === 'tipo';
+      const groups = new Map();
+      older.forEach(a => {
+        const k = byTipo ? a.tipo : `${MESES_LONG[a.mes - 1]} ${a.ano}`;
+        if(!groups.has(k)) groups.set(k, []);
+        groups.get(k).push(a);
+      });
+      $('atasOld').innerHTML = [...groups].map(([k, items]) => `
+        <details class="ata-group">
+          <summary>${esc(k)} <span>${items.length} ${items.length === 1 ? 'ata' : 'atas'}</span></summary>
+          ${items.map(a => `
+            <details class="ata-old" data-ata="${esc(a.id)}">
+              <summary>${a.dia} ${MESES[a.mes - 1]} · ${esc(a.title)}</summary>
+              <div class="ata-body">Carregando...</div>
+            </details>`).join('')}
+        </details>`).join('');
+      $('atasOld').querySelectorAll('details.ata-old').forEach(d => {
+        d.addEventListener('toggle', () => {
+          if(d.open && !d.dataset.loaded){
+            d.querySelector('.ata-body').innerHTML = ataBody(ATAS[d.dataset.ata]);
+            d.dataset.loaded = '1';
+          }
+        });
+      });
+    }
+
+    // ---------- Eventos ----------
+    $('weekFilters').addEventListener('click', e => {
+      const b = e.target.closest('[data-f]');
+      if(!b) return;
+      weekFilter = b.dataset.f;
+      renderTasks();
+    });
+
+    ['pendencias', 'historyList'].forEach(id => {
+      $(id).addEventListener('click', e => {
+        const chk = e.target.closest('[data-chk]');
+        if(chk){ e.stopPropagation(); toggleDone(chk.dataset.chk); return; }
+        const row = e.target.closest('[data-row]');
+        if(row) openTask(row.dataset.row);
+      });
+    });
+
+    $('atasRecent').addEventListener('click', e => {
+      const c = e.target.closest('[data-ata]');
+      if(c) openAta(c.dataset.ata);
+    });
+    $('ataMode').addEventListener('change', renderAtas);
+    $('btnNewTask').addEventListener('click', openNewTask);
+
+    // Badge de atualização. Recarrega o estado local; sem endpoint de leitura,
+    // não busca o Notion de novo.
+    function paintBadge(){ $('updText').textContent = 'Atualizado em ' + fmtStamp(lastUpdated); }
+    $('updBtn').addEventListener('click', async () => {
+      const ok = await loadTasks();
+      lastUpdated = new Date();
+      renderAll();
+      paintBadge();
+      toast(ok ? 'Atualizado a partir do Notion' : 'Não foi possível ler o Notion');
+    });
+
+    renderAll();
+    paintBadge();
+    loadTasks().then(ok => { if(ok){ lastUpdated = new Date(); renderAll(); paintBadge(); } });
+  })();
+
+  // ===== Utilitários de formatação BR (milhar com ponto, decimal com vírgula) =====
+  // Interpreta tanto "15.000,00" (BR) quanto "15000" ou "0.10" (digitado sem vírgula).
+  function parseBR(str){
+    if(str === null || str === undefined) return NaN;
+    str = String(str).trim();
+    if(str === '') return NaN;
+    if(str.includes(',')){
+      str = str.replace(/\./g, '').replace(',', '.');
+    } else if(!/\.\d{1,2}$/.test(str)){
+      str = str.replace(/\./g, '');
+    }
+    return parseFloat(str);
+  }
+  function formatBR(num, decimals){
+    if(decimals === undefined) decimals = 2;
+    return num.toLocaleString('pt-BR', {minimumFractionDigits:decimals, maximumFractionDigits:decimals});
+  }
+  // Volumetria em botijões: 1 botijão = ticket de R$127 (premissa informada)
+  const TICKET_BOTIJAO = 127;
+  function botijoes(valorR){ return Math.round(valorR / TICKET_BOTIJAO); }
+  function fmtBot(valorR){ return botijoes(valorR).toLocaleString('pt-BR') + ' botijões'; }
+  function setupBRInputs(ids){
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.addEventListener('blur', () => {
+        const v = parseBR(el.value);
+        if(!isNaN(v)) el.value = formatBR(v);
+      });
+    });
+  }
+  setupBRInputs(['vmPct1','vmPct2','vmBackoffice','vmRoyaltyPct','vmMktPct','vmLicenciamento','scTicket','scMargemAtual','scIncremental','scVolume']);
+
+  // ===== Resultados — MOCKUP (dados ilustrativos) =====
+  // Monta os gráficos de exemplo da aba Resultados a partir da curva projetada do
+  // Business Plan (proj). A série "real" é FICTÍCIA, levemente acima da curva.
+  window.renderResultadosMock = function(proj, breakevenMonth, model){
+    if(!document.getElementById('resRealProj')) return;
+    const $ = (id) => document.getElementById(id);
+    const num = (v) => Math.round(v).toLocaleString('pt-BR');
+    const Rk = (v) => 'R$' + Math.round(v/1000).toLocaleString('pt-BR') + 'mil';
+    const Rm = (v) => v >= 1000000 ? 'R$' + (v/1000000).toFixed(2).replace('.', ',') + 'mi' : Rk(v);
+    const R0 = (v) => (v < 0 ? '-' : '') + 'R$' + num(Math.abs(v));
+    const dR = (v) => (v >= 0 ? '+' : '-') + 'R$' + num(Math.abs(v));
+    const pct1 = (v) => (v >= 0 ? '+' : '') + v.toFixed(1).replace('.', ',') + '%';
+    const dec1 = (v) => v.toFixed(1).replace('.', ',');
+    const sum = (a) => a.reduce((x, y) => x + y, 0);
+    const smooth = (pts) => {
+      let d = `M ${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
+      for(let i = 0; i < pts.length - 1; i++){
+        const p0 = pts[i > 0 ? i - 1 : i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2 > pts.length - 1 ? i + 1 : i + 2];
+        d += ` C ${(p1.x + (p2.x - p0.x)/6).toFixed(1)} ${(p1.y + (p2.y - p0.y)/6).toFixed(1)}, ${(p2.x - (p3.x - p1.x)/6).toFixed(1)} ${(p2.y - (p3.y - p1.y)/6).toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+      }
+      return d;
+    };
+    const hbars = (rows) => rows.map(r => `<div class="hbar${r.sum ? ' sum' : ''}"><div class="hbar-label">${r.label}${r.sub ? `<span>${r.sub}</span>` : ''}</div><div class="hbar-track"><div class="hbar-fill" style="width:${r.w.toFixed(1)}%"></div></div><div class="hbar-val">${r.val}</div></div>`).join('');
+
+    const N = 6;
+    const MESES = ['M1','M2','M3','M4','M5','M6'];
+    const FATOR = [1.15, 1.20, 1.18, 1.16, 1.14, 1.12];   // série "real" fictícia vs. projetado
+    const CANCEL = [5.8, 5.1, 4.6, 4.0, 3.5, 3.1];        // % de pedidos cancelados (fictício)
+    const ENTREGA = [31, 28, 26, 24, 23, 22];             // minutos (fictício)
+    const projN = proj.slice(0, N);
+    const real = projN.map((v, i) => v * FATOR[i]);
+    const units = real.map(v => Math.round(v / TICKET_BOTIJAO));
+    const totalReal = sum(real);
+    const acima = totalReal / sum(projN) - 1;
+    const m = model || {margemBasePct:12, backofficePct:4, royaltyPct:2, mktPct:6, licenciamento:15000};
+
+    // ---- mini P&L (mês 6) com o mesmo modelo do Business Plan ----
+    const pl = (gmv) => {
+      const mb = gmv * m.margemBasePct/100, bo = gmv * m.backofficePct/100, ro = gmv * m.royaltyPct/100, mk = gmv * m.mktPct/100;
+      const ebitda = mb - bo + ro - mk - m.licenciamento;
+      const un = Math.round(gmv / TICKET_BOTIJAO);
+      const ton = un * 13 / 1000;
+      return {gmv, mb, bo, ro, mk, lic: m.licenciamento, ebitda, un, ton, perTon: ebitda / ton};
+    };
+    const plP = pl(projN[5]), plR = pl(real[5]);
+
+    // ---- KPIs ----
+    $('resKpis').innerHTML = [
+      [Rm(totalReal), `GMV acumulado (6 meses) · ${pct1(acima * 100)} vs. projetado`],
+      [num(sum(units)), 'botijões vendidos (6 meses)'],
+      [dec1(CANCEL[5]) + '%', `cancelamentos no mês 6 · vinha de ${dec1(CANCEL[0])}% no mês 1`],
+      [ENTREGA[5] + ' min', 'tempo médio de entrega no mês 6 · meta 20–25 min'],
+      [R0(plR.perTon) + '/Ton', `EBITDA no mês 6 · projetado ${R0(plP.perTon)}/Ton`],
+    ].map(([n, l]) => `<div class="stat"><div class="stat-num">${n}</div><div class="stat-lbl">${l}</div></div>`).join('');
+
+    // ---- Real x projetado (acima da curva) ----
+    (() => {
+      const W = 1000, H = 340, padL = 70, padR = 76, padT = 36, padB = 36;
+      const plotW = W - padL - padR, plotH = H - padT - padB;
+      const yMax = Math.max(...proj) * 1.1;
+      const x = (i) => padL + (i / (proj.length - 1)) * plotW;
+      const y = (v) => padT + plotH - (v / yMax) * plotH;
+      const step = Math.ceil(yMax / 5 / 100000) * 100000 || 100000;
+      let h = '';
+      for(let v = 0; v <= yMax; v += step){
+        const gy = y(v);
+        h += `<line x1="${padL}" y1="${gy}" x2="${W - padR}" y2="${gy}" stroke="var(--line)" stroke-width="1"/>`;
+        h += `<text x="${padL - 10}" y="${gy + 4}" text-anchor="end" class="bp-axis-label">${v === 0 ? '0' : Rm(v)}</text>`;
+        h += `<text x="${W - padR + 10}" y="${gy + 4}" text-anchor="start" class="bp-axis-label" style="fill:var(--purple-deep);">${v === 0 ? '0' : botijoes(v).toLocaleString('pt-BR')}</text>`;
+      }
+      h += `<text x="${padL - 10}" y="${padT - 14}" text-anchor="end" class="bp-axis-label">R$/mês</text>`;
+      h += `<text x="${W - padR + 10}" y="${padT - 14}" text-anchor="start" class="bp-axis-label" style="fill:var(--purple-deep);">botijões</text>`;
+      for(let i = 0; i < proj.length; i++) h += `<text x="${x(i)}" y="${H - 12}" text-anchor="middle" class="bp-axis-label">M${i + 1}</text>`;
+      const pp = proj.map((v, i) => ({x: x(i), y: y(v)}));
+      const rp = real.map((v, i) => ({x: x(i), y: y(v)}));
+      const area = smooth(rp) + ' L' + smooth(pp.slice(0, N).reverse()).substring(1) + ' Z';
+      h += `<path d="${area}" fill="var(--foco)" fill-opacity="0.22" stroke="none"/>`;
+      h += `<path d="${smooth(pp)}" fill="none" stroke="var(--potencial)" stroke-width="2.4" stroke-dasharray="7 6" stroke-linecap="round"/>`;
+      h += `<path d="${smooth(rp)}" fill="none" stroke="var(--purple)" stroke-width="3.4" stroke-linecap="round"/>`;
+      pp.forEach((p, i) => { h += `<circle cx="${p.x}" cy="${p.y}" r="3.2" fill="var(--card)" stroke="var(--potencial)" stroke-width="2"><title>M${i + 1} · projetado ${R0(proj[i])}/mês</title></circle>`; });
+      rp.forEach((p, i) => { h += `<circle cx="${p.x}" cy="${p.y}" r="5" fill="var(--card)" stroke="var(--purple)" stroke-width="2.8"><title>M${i + 1} · real (exemplo) ${R0(real[i])}/mês · ${num(units[i])} botijões</title></circle>`; });
+      const px = x(N - 1), py = y(real[N - 1]) - 44;
+      h += `<line x1="${px}" y1="${py + 26}" x2="${px}" y2="${y(real[N - 1]) - 9}" stroke="var(--foco)" stroke-width="1.5"/>`;
+      h += `<rect x="${px - 118}" y="${py}" width="236" height="26" rx="13" fill="var(--foco)"/>`;
+      h += `<text x="${px}" y="${py + 17}" text-anchor="middle" style="font-family:'IBM Plex Mono', monospace; font-size:11.5px; font-weight:700; fill:#fff;">${pct1(acima * 100)} acima da curva projetada</text>`;
+      $('resRealProj').innerHTML = h;
+    })();
+
+    // ---- Venda mês a mês ----
+    (() => {
+      const W = 520, H = 300, padL = 64, padR = 12, padT = 30, padB = 56;
+      const plotW = W - padL - padR, plotH = H - padT - padB, slot = plotW / N, bw = slot * 0.56;
+      const yMax = Math.max(...real) * 1.22;
+      const y = (v) => padT + plotH - (v / yMax) * plotH;
+      const step = Math.ceil(yMax / 4 / 50000) * 50000 || 50000;
+      let h = `<defs><linearGradient id="resGradMonthly" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--purple)"/><stop offset="100%" stop-color="var(--purple-deep)"/></linearGradient></defs>`;
+      for(let v = 0; v <= yMax; v += step){
+        h += `<line x1="${padL}" y1="${y(v)}" x2="${W - padR}" y2="${y(v)}" stroke="var(--line)" stroke-width="1"/>`;
+        h += `<text x="${padL - 8}" y="${y(v) + 4}" text-anchor="end" class="bp-axis-label">${v === 0 ? '0' : Rk(v)}</text>`;
+      }
+      real.forEach((v, i) => {
+        const cx = padL + (i + 0.5) * slot, top = y(v);
+        h += `<rect x="${cx - bw/2}" y="${top}" width="${bw}" height="${padT + plotH - top}" rx="6" fill="url(#resGradMonthly)"><title>${MESES[i]} · ${R0(v)} · ${num(units[i])} botijões</title></rect>`;
+        h += `<text x="${cx}" y="${top - 8}" text-anchor="middle" class="bp-axis-label" style="font-weight:700; fill:var(--ink);">${Rk(v)}</text>`;
+        h += `<line x1="${cx - bw/2 - 4}" y1="${y(projN[i])}" x2="${cx + bw/2 + 4}" y2="${y(projN[i])}" stroke="var(--ink)" stroke-width="2" stroke-dasharray="3 2"/>`;
+        h += `<text x="${cx}" y="${H - 34}" text-anchor="middle" class="bp-axis-label">${MESES[i]}</text>`;
+        h += `<text x="${cx}" y="${H - 18}" text-anchor="middle" class="bp-axis-label" style="fill:var(--purple-deep);">${num(units[i])} bot.</text>`;
+      });
+      $('resMonthly').innerHTML = h;
+    })();
+
+    // ---- Venda por canal ----
+    (() => {
+      const canais = [['iFood', 0.54], ['99', 0.27], ['Magalu + Aiqfome (Raiz)', 0.19]];
+      $('resChannel').innerHTML = hbars(canais.map(([nome, s]) => ({
+        label: nome, sub: num(totalReal * s / TICKET_BOTIJAO) + ' botijões', w: s / 0.54 * 100,
+        val: Rm(totalReal * s) + ' · ' + Math.round(s * 100) + '%'
+      })));
+    })();
+
+    // ---- Venda por revendedor ----
+    (() => {
+      const top = [['Revenda 01', 'Mooca', 9.5], ['Revenda 02', 'Santo André', 8.2], ['Revenda 03', 'Itaquera', 7.4], ['Revenda 04', 'Santo Amaro', 6.6],
+                   ['Revenda 05', 'Lapa', 5.9], ['Revenda 06', 'São Bernardo', 5.3], ['Revenda 07', 'Tatuapé', 4.8], ['Revenda 08', 'Pinheiros', 4.2]];
+      const resto = 100 - sum(top.map(t => t[2]));
+      const rows = top.map(([n, bairro, s]) => ({label: n, sub: bairro, w: s / 9.5 * 100, val: Rm(totalReal * s / 100) + ' · ' + dec1(s) + '%'}));
+      rows.push({label: 'Demais revendas', sub: '112 ativas (exemplo)', w: 0, sum: true, val: Rm(totalReal * resto / 100) + ' · ' + dec1(resto) + '%'});
+      $('resReseller').innerHTML = hbars(rows);
+    })();
+
+    // ---- Itens mais vendidos ----
+    (() => {
+      const itens = [['P13 (13kg)', 92.4], ['P20 (20kg)', 4.6], ['P45 (45kg)', 1.8], ['Outros itens', 1.2]];
+      $('resItems').innerHTML = hbars(itens.map(([n, s]) => ({
+        label: n, sub: num(sum(units) * s / 100) + ' un.', w: s / 92.4 * 100, val: dec1(s) + '%'
+      })));
+    })();
+
+    // ---- Cancelamentos ----
+    (() => {
+      const W = 520, H = 300, padL = 44, padR = 12, padT = 30, padB = 56;
+      const plotW = W - padL - padR, plotH = H - padT - padB, slot = plotW / N, bw = slot * 0.56;
+      const cancel = units.map((u, i) => Math.round(u * CANCEL[i] / 100));
+      const yMax = Math.max(...cancel) * 1.25;
+      const y = (v) => padT + plotH - (v / yMax) * plotH;
+      const step = Math.ceil(yMax / 4 / 20) * 20 || 20;
+      let h = '';
+      for(let v = 0; v <= yMax; v += step){
+        h += `<line x1="${padL}" y1="${y(v)}" x2="${W - padR}" y2="${y(v)}" stroke="var(--line)" stroke-width="1"/>`;
+        h += `<text x="${padL - 8}" y="${y(v) + 4}" text-anchor="end" class="bp-axis-label">${v}</text>`;
+      }
+      cancel.forEach((v, i) => {
+        const cx = padL + (i + 0.5) * slot, top = y(v);
+        h += `<rect x="${cx - bw/2}" y="${top}" width="${bw}" height="${padT + plotH - top}" rx="6" fill="var(--amber)" fill-opacity="0.85"><title>${MESES[i]} · ${v} cancelamentos · ${dec1(CANCEL[i])}% dos pedidos</title></rect>`;
+        h += `<text x="${cx}" y="${top - 8}" text-anchor="middle" class="bp-axis-label" style="font-weight:700; fill:var(--ink);">${v}</text>`;
+        h += `<text x="${cx}" y="${H - 34}" text-anchor="middle" class="bp-axis-label">${MESES[i]}</text>`;
+        h += `<text x="${cx}" y="${H - 18}" text-anchor="middle" class="bp-axis-label" style="fill:var(--amber);">${dec1(CANCEL[i])}%</text>`;
+      });
+      $('resCancel').innerHTML = h;
+    })();
+
+    // ---- Tempo de entrega ----
+    (() => {
+      const W = 520, H = 300, padL = 44, padR = 12, padT = 30, padB = 40;
+      const plotW = W - padL - padR, plotH = H - padT - padB, slot = plotW / N;
+      const lo = 15, hi = 35;
+      const y = (v) => padT + plotH - ((v - lo) / (hi - lo)) * plotH;
+      let h = `<defs><linearGradient id="resGradDelivery" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--purple)" stop-opacity="0.28"/><stop offset="100%" stop-color="var(--purple)" stop-opacity="0"/></linearGradient></defs>`;
+      h += `<rect x="${padL}" y="${y(25)}" width="${plotW}" height="${y(20) - y(25)}" fill="var(--foco-bg)"/>`;
+      h += `<text x="${padL + 8}" y="${y(25) + 15}" class="bp-axis-label" style="fill:var(--foco); font-weight:700;">meta 20–25 min</text>`;
+      for(let v = lo; v <= hi; v += 5){
+        h += `<line x1="${padL}" y1="${y(v)}" x2="${W - padR}" y2="${y(v)}" stroke="var(--line)" stroke-width="1"/>`;
+        h += `<text x="${padL - 8}" y="${y(v) + 4}" text-anchor="end" class="bp-axis-label">${v}</text>`;
+      }
+      h += `<text x="${padL - 8}" y="${padT - 14}" text-anchor="end" class="bp-axis-label">min</text>`;
+      const pts = ENTREGA.map((v, i) => ({x: padL + (i + 0.5) * slot, y: y(v)}));
+      h += `<path d="${smooth(pts)} L ${pts[N - 1].x} ${padT + plotH} L ${pts[0].x} ${padT + plotH} Z" fill="url(#resGradDelivery)" stroke="none"/>`;
+      h += `<path d="${smooth(pts)}" fill="none" stroke="var(--purple)" stroke-width="3" stroke-linecap="round"/>`;
+      pts.forEach((p, i) => {
+        h += `<circle cx="${p.x}" cy="${p.y}" r="4.5" fill="var(--card)" stroke="var(--purple)" stroke-width="2.5"><title>${MESES[i]} · ${ENTREGA[i]} min</title></circle>`;
+        h += `<text x="${p.x}" y="${p.y - 11}" text-anchor="middle" class="bp-axis-label" style="font-weight:700; fill:var(--ink);">${ENTREGA[i]}</text>`;
+        h += `<text x="${p.x}" y="${H - 14}" text-anchor="middle" class="bp-axis-label">${MESES[i]}</text>`;
+      });
+      $('resDelivery').innerHTML = h;
+    })();
+
+    // ---- Regiões da Grande São Paulo atendidas ----
+    (() => {
+      const R = {leste: ['Zona Leste', 24], sul: ['Zona Sul', 21], abc: ['ABC Paulista', 18], centro: ['Centro', 14], oeste: ['Zona Oeste', 13], norte: ['Zona Norte', 10]};
+      const tile = (k) => {
+        const [nome, s] = R[k];
+        const a = 0.14 + s / 24 * 0.62;
+        const dark = a > 0.58;
+        return `<div class="region-tile" style="background:rgba(99,72,229,${a.toFixed(2)}); color:${dark ? '#fff' : 'var(--ink)'};"><b>${nome}</b><span>${Rm(totalReal * s / 100)} · ${s}%</span></div>`;
+      };
+      const vazio = '<div class="region-tile empty"></div>';
+      const off = '<div class="region-tile off"><b>Demais cidades do GSP</b><span>backlog · 2ª fase</span></div>';
+      $('resRegions').innerHTML = [vazio, tile('norte'), vazio, vazio, tile('oeste'), tile('centro'), tile('leste'), off, vazio, tile('sul'), tile('abc'), vazio].join('');
+    })();
+
+    // ---- Mini P&L ----
+    (() => {
+      const row = (label, p, r, d, hl) => `<tr${hl ? ' class="pl-highlight"' : ''}><td>${label}</td><td>${p}</td><td>${r}</td><td>${d || '—'}</td></tr>`;
+      const dPct = (a, b) => pct1((b / a - 1) * 100);
+      $('resPL').innerHTML = `<table class="pl-table"><thead><tr><th></th><th>Projetado</th><th>Real</th><th>Δ</th></tr></thead><tbody>`
+        + row('GMV do mês 6', R0(plP.gmv), R0(plR.gmv), dPct(plP.gmv, plR.gmv))
+        + row('Unidades (botijões)', num(plP.un), num(plR.un), dPct(plP.un, plR.un))
+        + row(`Margem base (${formatBR(m.margemBasePct)}%)`, '+' + R0(plP.mb), '+' + R0(plR.mb))
+        + row(`Back office (−${formatBR(m.backofficePct)}%)`, '-' + R0(plP.bo), '-' + R0(plR.bo))
+        + row(`Royalty (+${formatBR(m.royaltyPct)}%)`, '+' + R0(plP.ro), '+' + R0(plR.ro))
+        + row(`Marketing (−${formatBR(m.mktPct)}%)`, '-' + R0(plP.mk), '-' + R0(plR.mk))
+        + row('Licenciamento (fixo)', '-' + R0(plP.lic), '-' + R0(plR.lic))
+        + row('EBITDA do mês', R0(plP.ebitda), R0(plR.ebitda), dR(plR.ebitda - plP.ebitda), true)
+        + row('EBITDA (R$/Ton)', R0(plP.perTon), R0(plR.perTon), dR(plR.perTon - plP.perTon), true)
+        + `</tbody></table>`;
+    })();
+  };
+
+  // ===== Simulador de volume — canibalização + captura de concorrentes =====
+  (function(){
+    const fmtR = (v) => 'R$' + v.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+
+    // Referência base: R$9mi/mês sinalizados pelo time de UG digital (seção
+    // "Contexto de mercado" acima). Offline UG e TAM c/ concorrentes são
+    // OUTPUTS derivados dessa base + os shares já informados (7% e 24%),
+    // não premissas próprias — por isso não são mais campos editáveis aqui.
+    let lastModel = null; // premissas atuais do P&L (alimenta o mini P&L da aba Resultados)
+    const fmtK = (v) => v >= 100000000 ? 'R$' + Math.round(v/1000000) + 'mi'
+                      : v >= 1000000 ? 'R$' + (v/1000000).toFixed(1).replace('.', ',') + 'mi'
+                      : 'R$' + Math.round(v/1000).toLocaleString('pt-BR') + 'mil';
+    const BASE_ONLINE_GSP = 9000000;
+    const MARGEM_BASE_PCT = 12; // margem que a Ultragaz já ganha vendendo pra revenda — não se altera
+    const SHARE_ON_OFF_PCT = 7;      // online representa 7% do offline UG
+    const MARKET_SHARE_UG_PCT = 24;  // UG detém 24% do TAM GSP (on+off, todos os players)
+
+    const p1 = document.getElementById('vmPct1');
+    const p2 = document.getElementById('vmPct2');
+    const mBackoffice = document.getElementById('vmBackoffice');
+    const mRoyaltyPct = document.getElementById('vmRoyaltyPct');
+    const mMktPct = document.getElementById('vmMktPct');
+    const mLicenciamento = document.getElementById('vmLicenciamento');
+
+    const allIds = ['vm_via1','vm_via2','vm_total','vm_margemBase','vm_savings','vm_royalty','vm_mkt','vm_licenciamento','vm_resultado'];
+
+    function recalc(){
+      const base1 = BASE_ONLINE_GSP / (SHARE_ON_OFF_PCT/100);
+      const base2 = (BASE_ONLINE_GSP + base1) / (MARKET_SHARE_UG_PCT/100);
+      document.getElementById('vm_base1_display').innerHTML = fmtR(base1) + '/mês<span class="bot-sub">≈ ' + fmtBot(base1) + '/mês</span>';
+      document.getElementById('vm_base2_display').innerHTML = fmtR(base2) + '/mês<span class="bot-sub">≈ ' + fmtBot(base2) + '/mês</span>';
+
+      const pct1 = parseBR(p1.value);
+      const pct2 = parseBR(p2.value);
+      const margemBasePct = MARGEM_BASE_PCT;
+      const backofficePct = parseBR(mBackoffice.value);
+      const royaltyPct = parseBR(mRoyaltyPct.value);
+      const mktPct = parseBR(mMktPct.value);
+      const licenciamento = parseBR(mLicenciamento.value);
+
+      if([pct1,pct2,backofficePct,royaltyPct,mktPct,licenciamento].some(v => isNaN(v))){
+        allIds.forEach(id => { document.getElementById(id).textContent = '—'; });
+        return;
+      }
+
+      const via1 = base1 * pct1/100;
+      const via2 = base2 * pct2/100;
+      const total = via1 + via2;
+
+      document.getElementById('vm_via1').innerHTML = fmtR(via1) + '/mês<span class="bot-sub">≈ ' + fmtBot(via1) + '/mês</span>';
+      document.getElementById('vm_via2').innerHTML = fmtR(via2) + '/mês<span class="bot-sub">≈ ' + fmtBot(via2) + '/mês</span>';
+      document.getElementById('vm_total').innerHTML = fmtR(total) + '/mês<span class="bot-sub">≈ ' + fmtBot(total) + '/mês</span>';
+
+      // P&L completo: a Ultragaz continua vendendo pra revenda (margem base,
+      // fixa — não se altera) — o canal Hubii não a substitui. Soma o royalty
+      // incremental, desconta o back office (custo real do canal digital:
+      // quanto MENOR, MAIOR a margem), o marketing e o licenciamento fixo da Hubii.
+      const margemBase = total * margemBasePct/100;
+      const backoffice = total * backofficePct/100;
+      const royalty = total * royaltyPct/100;
+      const mkt = total * mktPct/100;
+      const resultado = margemBase - backoffice + royalty - mkt - licenciamento;
+
+      document.getElementById('vm_margemBase').textContent = '+' + fmtR(margemBase);
+      document.getElementById('vm_savings').textContent = '-' + fmtR(backoffice);
+      document.getElementById('vm_royalty').textContent = '+' + fmtR(royalty);
+      document.getElementById('vm_mkt').textContent = '-' + fmtR(mkt);
+      document.getElementById('vm_licenciamento').textContent = '-' + fmtR(licenciamento);
+      document.getElementById('vm_resultado').textContent = (resultado>=0?'+':'-') + fmtR(Math.abs(resultado)) + ' (' + (resultado/total*100).toFixed(2).replace('.',',') + '% do GMV)';
+
+      // Ponto de virada: volume em que a margem % do projeto (que cresce à medida
+      // que o licenciamento fixo se dilui) alcança a margem do canal próprio (1,80%).
+      // margem%(GMV) = (margemBase-backoffice+royalty-mkt) - licenciamento/GMV*100
+      // Mesma fórmula da margem do canal próprio no card "Comparativo de margem"
+      // acima: margem base - back office - marketing - taxa de adquirência.
+      const targetMarginPct = MARGEM_BASE_PCT - COMPARATIVO_BACKOFFICE_FIXO_PCT - 6 - 0.2;
+      document.getElementById('vm_target_label').textContent = formatBR(targetMarginPct);
+      const marginSemFixo = margemBasePct - backofficePct + royaltyPct - mktPct;
+      const track = document.getElementById('vm_breakeven_value');
+      const fillBelow = document.getElementById('vm_fill_below');
+      const fillAbove = document.getElementById('vm_fill_above');
+      const marker = document.getElementById('vm_marker_line');
+      const pin = document.getElementById('vm_pin');
+      const pinLabel = document.getElementById('vm_pin_label');
+      const scaleMax = document.getElementById('vm_scale_max');
+
+      let breakevenGMV = null;
+      if(marginSemFixo <= targetMarginPct){
+        track.textContent = 'não atinge com essas premissas';
+        fillBelow.style.width = '100%';
+        fillAbove.style.width = '0%';
+        marker.style.display = 'none';
+        pin.style.display = 'none';
+        scaleMax.textContent = '—';
+      } else {
+        const breakeven = (licenciamento*100) / (marginSemFixo - targetMarginPct);
+        breakevenGMV = breakeven;
+        const maxScale = Math.max(breakeven, total) * 1.25;
+        const breakevenPct = Math.min(breakeven/maxScale*100, 100);
+        const currentPct = Math.min(total/maxScale*100, 100);
+
+        track.innerHTML = fmtR(breakeven) + '/mês<span class="bot-sub">≈ ' + fmtBot(breakeven) + '/mês</span>';
+        fillBelow.style.width = breakevenPct + '%';
+        fillAbove.style.left = breakevenPct + '%';
+        fillAbove.style.width = (100-breakevenPct) + '%';
+        marker.style.display = 'block';
+        marker.style.left = breakevenPct + '%';
+        pin.style.display = 'flex';
+        pin.style.left = currentPct + '%';
+        pinLabel.textContent = 'hoje: ' + fmtR(total) + ' · ' + fmtBot(total);
+        scaleMax.textContent = fmtR(maxScale) + ' · ' + fmtBot(maxScale);
+      }
+
+      document.getElementById('proj_target_margin_label').textContent = formatBR(targetMarginPct);
+
+      lastModel = {margemBasePct, backofficePct, royaltyPct, mktPct, licenciamento};
+      renderProjChart(total, breakevenGMV);
+    }
+
+    // ===== Projeção de faturamento mês a mês (após a Resolução) =====
+    // Meses 1-6: curva acelerada de R$100mil até a Expectativa Hubii — GMV/mês
+    // (o mesmo "total" calculado acima). Meses 7-12: mantém o mesmo ritmo de
+    // crescimento do último passo (mês 5→6), em vez de estabilizar.
+    function renderProjChart(targetGMV, breakevenGMV){
+      const svg = document.getElementById('projChart');
+      if(!svg) return;
+      const BASE_MES1 = 100000;
+      const MESES = 12;
+
+      const gmv = [];
+      for(let t=1;t<=6;t++){
+        gmv.push(BASE_MES1 + (targetGMV-BASE_MES1)*Math.pow(t/6,2));
+      }
+      const incremento = gmv[5] - gmv[4]; // passo mês 5 -> 6, mantido dali em diante
+      for(let t=7;t<=MESES;t++){
+        gmv.push(gmv[gmv.length-1] + incremento);
+      }
+
+      document.getElementById('proj_target_title').textContent = fmtR(targetGMV) + '/mês (~' + fmtBot(targetGMV) + '/mês)';
+      document.getElementById('proj_m6').textContent = fmtR(gmv[5]) + '/mês';
+      document.getElementById('proj_m6_sub').textContent = 'Expectativa Hubii — GMV/mês · ' + fmtBot(gmv[5]) + '/mês';
+      document.getElementById('proj_m12').textContent = fmtR(gmv[11]) + '/mês';
+      document.getElementById('proj_m12_sub').textContent = 'mantendo o ritmo pós-mês 6 · ' + fmtBot(gmv[11]) + '/mês';
+
+      // posição (mês fracionário) do ponto de virada dentro da curva
+      let breakevenMonth = null;
+      if(breakevenGMV !== null){
+        if(breakevenGMV <= gmv[0]){
+          breakevenMonth = 1;
+        } else if(breakevenGMV <= gmv[5]){
+          breakevenMonth = 6*Math.sqrt((breakevenGMV-BASE_MES1)/(targetGMV-BASE_MES1));
+        } else if(breakevenGMV <= gmv[11]){
+          breakevenMonth = 6 + (breakevenGMV-gmv[5])/incremento;
+        }
+        // se breakevenGMV > gmv[11], fica fora do período mostrado — sem marcador
+      }
+
+      const W = 1000, H = 380;
+      const padL = 70, padR = 76, padT = 24, padB = 36;
+      const plotW = W - padL - padR;
+      const plotH = H - padT - padB;
+      const yMax = Math.max(...gmv) * 1.12;
+
+      const x = (i) => padL + (i/(MESES-1)) * plotW;
+      const y = (v) => padT + plotH - (v/yMax)*plotH;
+
+      const pts = gmv.map((v,i) => ({x:x(i), y:y(v)}));
+      const path = smoothPathProj(pts);
+      const area = path + ` L ${pts[pts.length-1].x.toFixed(1)} ${padT+plotH} L ${pts[0].x.toFixed(1)} ${padT+plotH} Z`;
+
+      let html = '';
+      const yStep = Math.ceil(yMax/5/50000)*50000 || 100000;
+      for(let v=0; v<=yMax; v+=yStep){
+        const gy = y(v);
+        html += `<line x1="${padL}" y1="${gy}" x2="${W-padR}" y2="${gy}" stroke="var(--line)" stroke-width="1"/>`;
+        html += `<text x="${padL-10}" y="${gy+4}" text-anchor="end" class="bp-axis-label">${v===0?'0':fmtK(v)}</text>`;
+        html += `<text x="${W-padR+10}" y="${gy+4}" text-anchor="start" class="bp-axis-label" style="fill:var(--purple-deep);">${v===0?'0':botijoes(v).toLocaleString('pt-BR')}</text>`;
+      }
+      html += `<text x="${padL-10}" y="${padT-8}" text-anchor="end" class="bp-axis-label">R$/mês</text>`;
+      html += `<text x="${W-padR+10}" y="${padT-8}" text-anchor="start" class="bp-axis-label" style="fill:var(--purple-deep);">botijões</text>`;
+      for(let i=0;i<MESES;i++){
+        html += `<text x="${x(i)}" y="${H-12}" text-anchor="middle" class="bp-axis-label">M${i+1}</text>`;
+      }
+      if(breakevenMonth !== null){
+        const bx = padL + ((breakevenMonth-1)/(MESES-1))*plotW;
+        html += `<line x1="${bx}" y1="${padT}" x2="${bx}" y2="${padT+plotH}" stroke="var(--amber)" stroke-width="1.5" stroke-dasharray="4 4"/>`;
+        html += `<text x="${bx}" y="${padT-8}" text-anchor="middle" class="bp-axis-label" style="fill:var(--amber);">ponto de virada</text>`;
+      }
+      html += `<defs><linearGradient id="projGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="var(--purple)" stop-opacity="0.28"/>
+        <stop offset="100%" stop-color="var(--purple)" stop-opacity="0"/>
+      </linearGradient></defs>`;
+      html += `<path d="${area}" fill="url(#projGrad)" stroke="none"/>`;
+      html += `<path d="${path}" fill="none" stroke="var(--purple)" stroke-width="3" stroke-linecap="round"/>`;
+      pts.forEach((p,i) => {
+        const big = [0,5,11].includes(i);
+        html += `<circle cx="${p.x}" cy="${p.y}" r="${big?6:4}" fill="var(--card)" stroke="var(--purple)" stroke-width="2.5"><title>M${i+1} · ${fmtR(gmv[i])}/mês · ${fmtBot(gmv[i])}/mês</title></circle>`;
+      });
+      svg.innerHTML = html;
+
+      // mockup da aba Resultados reaproveita a mesma curva projetada
+      try{
+        if(window.renderResultadosMock) window.renderResultadosMock(gmv, breakevenMonth, lastModel);
+      }catch(err){ console.error('Resultados (mockup):', err); }
+    }
+
+    function smoothPathProj(pts){
+      let d = `M ${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
+      for(let i=0;i<pts.length-1;i++){
+        const p0 = pts[i>0?i-1:i];
+        const p1 = pts[i];
+        const p2 = pts[i+1];
+        const p3 = pts[i+2>pts.length-1?i+1:i+2];
+        const cp1x = p1.x + (p2.x-p0.x)/6;
+        const cp1y = p1.y + (p2.y-p0.y)/6;
+        const cp2x = p2.x - (p3.x-p1.x)/6;
+        const cp2y = p2.y - (p3.y-p1.y)/6;
+        d += ` C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+      }
+      return d;
+    }
+
+    [p1,p2,mBackoffice,mRoyaltyPct,mMktPct,mLicenciamento].forEach(el => el.addEventListener('input', recalc));
+
+    // Card "Comparativo de margem": margem base e back-office fixos (não são
+    // os mesmos inputs editáveis do Simulador de volume acima — lá o back
+    // office pode ser testado; aqui é a referência estática de contexto).
+    const COMPARATIVO_BACKOFFICE_FIXO_PCT = 4;
+    const cmpMargemBaseDisplay = document.getElementById('cmp_margemBase_display');
+    const cmpLucroEstimado = document.getElementById('cmp_lucro_preliminar');
+    const cmpMargemPropria = document.getElementById('cmp_margem_propria');
+
+    function recalcComparativo(){
+      const margemBasePct = MARGEM_BASE_PCT;
+      cmpMargemBaseDisplay.textContent = formatBR(margemBasePct) + '%';
+
+      // Canal próprio: margem base - back office(4%) - marketing(6%) - taxa adquirência(0,2%)
+      const margemPropria = margemBasePct - COMPARATIVO_BACKOFFICE_FIXO_PCT - 6 - 0.2;
+      cmpMargemPropria.textContent = (margemPropria>=0?'~':'-') + formatBR(Math.abs(margemPropria)) + '%';
+
+      // Canal Hubii: margem base + royalty(2%) - licenciamento/mkt(6%) - back-office(4%, fixo)
+      const lucro = margemBasePct + 2 - 6 - COMPARATIVO_BACKOFFICE_FIXO_PCT;
+      cmpLucroEstimado.textContent = (lucro>=0?'~':'-') + formatBR(Math.abs(lucro)) + '%';
+    }
+
+    recalcComparativo();
+    recalc();
+  })();
+</script>
+
+</body>
+</html>
